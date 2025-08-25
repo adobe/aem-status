@@ -6,7 +6,8 @@
   "scripts": {
     "lint:js": "eslint .",
     "lint:css": "stylelint 'blocks/**/*.css' 'styles/*.css'",
-    "lint": "npm run lint:js && npm run lint:css"
+    "lint": "npm run lint:js && npm run lint:css",
+    "update-incidents": "node scripts/update-incidents-index.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,9 @@
     "url": "https://github.com/adobe/aem-block-collection/issues"
   },
   "homepage": "https://github.com/adobe/aem-block-collection#readme",
+  "dependencies": {
+    "jsdom": "^24.0.0"
+  },
   "devDependencies": {
     "@babel/core": "7.23.7",
     "@babel/eslint-parser": "7.23.3",
