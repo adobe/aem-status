@@ -108,7 +108,14 @@ function parseIncidentHTML(filePath, incidentCode) {
         // Convert to index.json format: "Feb <var data-var='date'>7</var>, <var data-var='time'>15:10</var> UTC"
         const parts = dateMatch[0].match(/(\w+)\s+(\d{1,2}),\s+(\d{4})\s+-\s+(\d{2}:\d{2})\s+UTC/);
         if (parts) {
-          timestamp = `${parts[1]} <var data-var='date'>${parts[2]}</var>, <var data-var='time'>${parts[4]}</var> UTC`;
+          // Include year when it's not the current year
+          const year = parseInt(parts[3]);
+          const currentYear = new Date().getFullYear();
+          if (year !== currentYear) {
+            timestamp = `${parts[1]} <var data-var='date'>${parts[2]}</var>, <var data-var='year'>${parts[3]}</var> - <var data-var='time'>${parts[4]}</var> UTC`;
+          } else {
+            timestamp = `${parts[1]} <var data-var='date'>${parts[2]}</var>, <var data-var='time'>${parts[4]}</var> UTC`;
+          }
         }
       }
     }
