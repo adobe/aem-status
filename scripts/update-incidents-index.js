@@ -142,10 +142,32 @@ function parseIncidentHTML(filePath, incidentCode) {
       }
     }
     
-    // For simple format, we need to manually construct timestamp
-    // This will be filled in by the existing index data
-    // For now, just mark it as needing manual review
-    timestamp = 'NEEDS_MANUAL_UPDATE';
+    // For simple format, check for <time> element with ISO timestamp
+    const timeEl = doc.querySelector('time');
+    if (timeEl && timeEl.textContent) {
+      const isoTimestamp = timeEl.textContent.trim();
+      // Parse ISO timestamp and convert to index format
+      const date = new Date(isoTimestamp);
+      if (!isNaN(date.getTime())) {
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const month = monthNames[date.getUTCMonth()];
+        const day = date.getUTCDate();
+        const year = date.getUTCFullYear();
+        const hours = String(date.getUTCHours()).padStart(2, '0');
+        const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+        const currentYear = new Date().getFullYear();
+        
+        if (year !== currentYear) {
+          timestamp = `${month} <var data-var='date'>${day}</var>, <var data-var='year'>${year}</var> - <var data-var='time'>${hours}:${minutes}</var> UTC`;
+        } else {
+          timestamp = `${month} <var data-var='date'>${day}</var>, <var data-var='time'>${hours}:${minutes}</var> UTC`;
+        }
+      } else {
+        timestamp = 'NEEDS_MANUAL_UPDATE';
+      }
+    } else {
+      timestamp = 'NEEDS_MANUAL_UPDATE';
+    }
     
     // Try to get message from article
     const article = doc.querySelector('article');
