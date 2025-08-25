@@ -4,16 +4,25 @@ on:
   push:
     branches:
       - main
+    # Prevent workflow from running on automated commits to avoid infinite loops
+    paths-ignore:
+      - 'incidents/index.json'
 
 jobs:
   build_and_deploy_job:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+    # Add write permissions for contents to allow committing
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
           lfs: false
+          # Use a PAT or GitHub App token to allow the commit to trigger other workflows if needed
+          token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -26,6 +35,26 @@ jobs:
       
       - name: Update incidents index
         run: npm run update-incidents
+      
+      - name: Check for changes in index.json
+        id: check_changes
+        run: |
+          if git diff --quiet incidents/index.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes detected in incidents/index.json"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in incidents/index.json"
+          fi
+      
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add incidents/index.json
+          git commit -m "chore: update incidents index [skip ci]"
+          git push origin main
       
       - name: Build And Deploy
         uses: Azure/static-web-apps-deploy@v1
