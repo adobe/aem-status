@@ -1,10 +1,18 @@
-[
+ [
   {
     "name": "September",
     "year": 2025,
     "starts_on": 1,
     "days": 30,
-    "incidents": []
+    "incidents": [
+      {
+        "code": "AEM-l4127tvy",
+        "name": "Increased error rate on delivery due to external vendor workers incident",
+        "message": "<h1 class=\"none\">Increased error rate on delivery due to external vendor workers incident</h1>\n<article>\n    <h2>Postmortem</h2>\n    <p>\n        On 09.09.2025 18:35 UTC we noticed a slight increase (<0.01%) in Edge Delivery Service errors.\n        Upon investigation, we found that an external vendor had already opened a major incident related\n        to worker delivery, confirmed status, and implemented a fix within 30 minutes. There were no\n        reports of customer impact.\n    </p>\n    <p>\n        The vendor's fix was deployed by 09.09.2025 19:02 UTC. \n    </p>\n    <time>2025-09-09T19:26:17.694Z</time>    \n</article>\n",
+        "impact": "none",
+        "timestamp": "2025-09-09T20:30:20.470Z"
+      }
+    ]
   },
   {
     "name": "August",
