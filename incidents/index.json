@@ -7,17 +7,10 @@
     "incidents": [
       {
         "code": "AEM-l4127tvy",
-        "name": "Increased error rate on delivery due to external vendor workers incident",
-        "message": "On 09.09.2025 18:35 UTC we noticed a slight increase (<0.1%) in Edge Delivery Service errors.\n        Upon investigation, we found that an external vendor had already opened a major incident related\n        to worker delivery, confirmed status, and implemented a fix within 30 minutes. There were no\n        reports of customer impact.",
+        "name": "Increased error rate on delivery via workers",
+        "message": "On 09.09.2025 18:35 UTC we noticed a slight increase (<0.1%) in Edge Delivery Service errors.\n        Upon investigation, we found that one of our suppliers had already opened a major incident related\n        to worker delivery, confirmed status, and implemented a fix within 30 minutes. There were no\n        reports of customer impact.",
         "impact": "none",
         "timestamp": "Sep <var data-var='date'>9</var>, <var data-var='time'>19:26</var> UTC"
-      },
-      {
-        "code": "AEM-u5ni9f8k",
-        "name": "Increased error rate of image delivery",
-        "message": "<h1 class=\"none\">Increased error rate with images in delivery</h1>\n<article>\n    <h2>Postmortem</h2>\n    <p>\n        On 02.09.2025 16:24 UTC we noticed that there was a slight (<0.1%) increase in errors being \n        served by Edge Delivery Services. Upon investigation, we found that the errors were limited to\n        media requests and caused by a degradation of a service dependency.\n    </p>\n    <p>\n        The supplier acknowledged and fixed the issue within 4 hours.\n    </p>\n    <time>2025-09-10T16:52:49.406Z</time>    \n</article>\n\n<ul class=\"updates\">\n    <li>\n      <h2>investigating</h2>\n      <p>Investigating increased error rate with images in delivery</p>\n      <time>2025-09-02T16:24:55.049Z</time>\n    </li>\n\n    <li>\n      <h2>monitoring</h2>\n      <p>Recovering from image delivery issue</p>\n      <time>2025-09-02T22:58:14.041Z</time>\n    </li>\n\n    <li>\n      <h2>resolved</h2>\n      <p>Image delivery issue has been resolved</p>\n      <time>2025-09-03T01:36:01.654Z</time>\n    </li>\n</ul>\n\n",
-        "impact": "none",
-        "timestamp": "Sep <var data-var='date'>2</var>, <var data-var='time'>16:24</var> UTC"
       }
     ]
   },
