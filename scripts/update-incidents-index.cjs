@@ -6,7 +6,8 @@ const { JSDOM } = require('jsdom');
 
 // Helper function to parse date from timestamp string
 function parseTimestamp(timestampStr) {
-  // Example: "Feb <var data-var='date'>6</var>, <var data-var='time'>08:36</var> - <var data-var='time'>09:48</var> UTC"
+  // Example: "Feb <var data-var='date'>6</var>, <var data-var='time'>08:36</var> -
+  // <var data-var='time'>09:48</var> UTC"
   // or "Feb <var data-var='date'>6</var>, <var data-var='time'>08:36</var> UTC"
   // or "Feb 07, 2025 - 15:10 UTC" (from HTML)
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -24,15 +25,15 @@ function parseTimestamp(timestampStr) {
   // Try format with var tags
   const dateVarMatch = timestampStr.match(/data-var='date'>(\d+)</);
   if (dateVarMatch) {
-    date = parseInt(dateVarMatch[1]);
+    date = parseInt(dateVarMatch[1], 10);
     const yearVarMatch = timestampStr.match(/data-var='year'>(\d{4})</);
-    year = yearVarMatch ? parseInt(yearVarMatch[1]) : null;
+    year = yearVarMatch ? parseInt(yearVarMatch[1], 10) : null;
   } else {
     // Try plain format "Feb 07, 2025"
     const plainMatch = timestampStr.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2}),\s+(\d{4})/);
     if (plainMatch) {
-      date = parseInt(plainMatch[2]);
-      year = parseInt(plainMatch[3]);
+      date = parseInt(plainMatch[2], 10);
+      year = parseInt(plainMatch[3], 10);
     }
   }
 
@@ -43,7 +44,7 @@ function parseTimestamp(timestampStr) {
     // Look for year in format "Jul 30, 2024" or similar
     const yearMatch = timestampStr.match(/, (\d{4})/);
     if (yearMatch) {
-      year = parseInt(yearMatch[1]);
+      year = parseInt(yearMatch[1], 10);
     } else {
       // Default to current year
       year = new Date().getFullYear();
@@ -105,11 +106,12 @@ function parseIncidentHTML(filePath, incidentCode) {
       // Format is like: "Feb 07, 2025 - 15:10 UTC"
       const dateMatch = timestampText.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},\s+\d{4}\s+-\s+\d{2}:\d{2}\s+UTC/);
       if (dateMatch) {
-        // Convert to index.json format: "Feb <var data-var='date'>7</var>, <var data-var='time'>15:10</var> UTC"
+        // Convert to index.json format:
+        // "Feb <var data-var='date'>7</var>, <var data-var='time'>15:10</var> UTC"
         const parts = dateMatch[0].match(/(\w+)\s+(\d{1,2}),\s+(\d{4})\s+-\s+(\d{2}:\d{2})\s+UTC/);
         if (parts) {
           // Include year when it's not the current year
-          const year = parseInt(parts[3]);
+          const year = parseInt(parts[3], 10);
           const currentYear = new Date().getFullYear();
           if (year !== currentYear) {
             timestamp = `${parts[1]} <var data-var='date'>${parts[2]}</var>, <var data-var='year'>${parts[3]}</var> - <var data-var='time'>${parts[4]}</var> UTC`;
@@ -138,7 +140,7 @@ function parseIncidentHTML(filePath, incidentCode) {
       // Check for impact class directly on h1
       if (h1.className) {
         const classMatch = h1.className.match(/(minor|major|critical|maintenance|none)/);
-        if (classMatch) impact = classMatch[1];
+        if (classMatch) [, impact] = classMatch;
       }
     }
 
@@ -148,7 +150,7 @@ function parseIncidentHTML(filePath, incidentCode) {
       const isoTimestamp = timeEl.textContent.trim();
       // Parse ISO timestamp and convert to index format
       const date = new Date(isoTimestamp);
-      if (!isNaN(date.getTime())) {
+      if (!Number.isNaN(date.getTime())) {
         const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         const month = monthNames[date.getUTCMonth()];
         const day = date.getUTCDate();
@@ -180,7 +182,7 @@ function parseIncidentHTML(filePath, incidentCode) {
   }
 
   if (!name) {
-    console.warn(`Could not parse incident name for ${incidentCode}`);
+    // Could not parse incident name
     return null;
   }
 
@@ -205,13 +207,13 @@ function updateIncidentsIndex() {
   try {
     existingIndex = JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
     // Build map of existing incidents for lookup
-    for (const month of existingIndex) {
-      for (const incident of month.incidents) {
+    existingIndex.forEach((month) => {
+      month.incidents.forEach((incident) => {
         existingIncidentsMap.set(incident.code, incident);
-      }
-    }
+      });
+    });
   } catch (e) {
-    console.log('No existing index.json found or could not parse, creating new one');
+    // No existing index.json found or could not parse, creating new one
   }
 
   // Read all HTML files
@@ -225,7 +227,7 @@ function updateIncidentsIndex() {
 
   // Parse all incidents
   const incidents = [];
-  for (const file of htmlFiles) {
+  htmlFiles.forEach((file) => {
     const incident = parseIncidentHTML(file.path, file.code);
     if (incident) {
       // If timestamp needs update and we have existing data, use it
@@ -237,19 +239,19 @@ function updateIncidentsIndex() {
       if (incident.timestamp && incident.timestamp !== 'NEEDS_MANUAL_UPDATE') {
         incidents.push(incident);
       } else {
-        console.warn(`Skipping incident ${incident.code} - no valid timestamp`);
+        // Skipping incident - no valid timestamp
       }
     }
-  }
+  });
 
   // Group incidents by month/year
   const monthsMap = new Map();
 
-  for (const incident of incidents) {
+  incidents.forEach((incident) => {
     const dateInfo = parseTimestamp(incident.timestamp);
     if (!dateInfo) {
-      console.warn(`Could not parse timestamp for ${incident.code}: ${incident.timestamp}`);
-      continue;
+      // Could not parse timestamp
+      return;
     }
 
     const key = `${dateInfo.year}-${dateInfo.month}`;
@@ -258,7 +260,7 @@ function updateIncidentsIndex() {
     }
 
     monthsMap.get(key).incidents.push(incident);
-  }
+  });
 
   // Convert to sorted array (newest months first)
   const months = Array.from(monthsMap.values());
@@ -273,20 +275,20 @@ function updateIncidentsIndex() {
     let oldestYear = currentYear;
     let newestYear = 2022; // Start from 2022 as minimum
 
-    for (const month of months) {
+    months.forEach((month) => {
       if (month.year < oldestYear) oldestYear = month.year;
       if (month.year > newestYear) newestYear = month.year;
-    }
+    });
 
     // Ensure we go to current month
     newestYear = Math.max(newestYear, currentYear);
 
     // Fill all months from oldest to newest
-    for (let year = newestYear; year >= oldestYear; year--) {
+    for (let year = newestYear; year >= oldestYear; year -= 1) {
       const startMonth = (year === currentYear) ? currentMonth : 11;
       const endMonth = 0;
 
-      for (let month = startMonth; month >= endMonth; month--) {
+      for (let month = startMonth; month >= endMonth; month -= 1) {
         const key = `${year}-${month}`;
         if (!monthsMap.has(key)) {
           const monthInfo = getMonthInfo(year, month);
@@ -306,7 +308,7 @@ function updateIncidentsIndex() {
 
   // Write to index.json
   fs.writeFileSync(indexPath, `${JSON.stringify(months, null, 2)}\n`);
-  console.log(`Updated ${indexPath} with ${incidents.length} incidents across ${months.length} months`);
+  // Updated index with incidents
 }
 
 // Run if called directly
@@ -314,7 +316,7 @@ if (require.main === module) {
   try {
     updateIncidentsIndex();
   } catch (error) {
-    console.error('Error updating incidents index:', error);
+    // Error updating incidents index
     process.exit(1);
   }
 }

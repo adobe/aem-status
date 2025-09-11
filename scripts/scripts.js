@@ -152,6 +152,10 @@ const displayCurrentIncident = (currentIncident) => {
     currentIncident.reverse();
     const { impact } = currentIncident[0];
     const { status } = currentIncident[0];
+
+    const currentIncidentTitle = document.getElementById('currentIncidentsTitle');
+    currentIncidentTitle.textContent = status === 'resolved' ? 'Recent Incident' : 'On-going Incident';
+
     const affectedServices = parseAffectedServices(currentIncident);
     updateCurrentImpact(status, impact, affectedServices);
 
