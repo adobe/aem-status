@@ -4,11 +4,9 @@ module.exports = {
   env: {
     browser: true,
   },
-  parser: '@babel/eslint-parser',
   parserOptions: {
-    allowImportExportEverywhere: true,
+    ecmaVersion: 'latest',
     sourceType: 'module',
-    requireConfigFile: false,
   },
   rules: {
     'import/extensions': ['error', { js: 'always' }], // require js file extensions in imports
