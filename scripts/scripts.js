@@ -81,15 +81,143 @@ const timeAgo = (date) => {
   return `${prefix}${years} year${years === 1 ? '' : 's'}${suffix}`;
 };
 
-const displayIncidentHistory = (history) => {
-  const incidentHistory = document.getElementById('incidentHistory');
-  incidentHistory.innerHTML = '';
-  incidentHistory.classList.add('incidents');
+// Helper function to get month index from month name
+const getMonthIndex = (monthName) => {
+  const months = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'];
+  return months.indexOf(monthName);
+};
+
+// Helper function to parse custom timestamp format
+const parseIncidentTimestamp = (timestamp, monthName, year) => {
+  const matchWithYear = timestamp.match(/(\w{3})\s*<var[^>]*>(\d+)<\/var>,\s*<var[^>]*>(\d{4})<\/var>\s*-\s*<var[^>]*>(\d+):(\d+)<\/var>\s*UTC/);
+  if (matchWithYear) {
+    const [, month, day, yearFromTimestamp, hour, minute] = matchWithYear;
+    const monthIndex = getMonthIndex(month);
+    return new Date(
+      parseInt(yearFromTimestamp, 10),
+      monthIndex,
+      parseInt(day, 10),
+      parseInt(hour, 10),
+      parseInt(minute, 10),
+    );
+  }
+
+  // Handle format like "Sep <var data-var='date'>9</var>, <var data-var='time'>19:26</var> UTC"
+  const matchWithoutYear = timestamp.match(/(\w{3})\s*<var[^>]*>(\d+)<\/var>,\s*<var[^>]*>(\d+):(\d+)<\/var>\s*UTC/);
+  if (matchWithoutYear) {
+    const [, , day, hour, minute] = matchWithoutYear;
+    const monthIndex = getMonthIndex(monthName);
+    return new Date(year, monthIndex, parseInt(day, 10), parseInt(hour, 10), parseInt(minute, 10));
+  }
+
+  // Fallback to standard date parsing
+  return new Date(timestamp);
+};
+
+const displayLast30Days = (history) => {
+  const last30DaysContainer = document.getElementById('last30Days');
+  last30DaysContainer.innerHTML = '';
+  last30DaysContainer.classList.add('incidents');
+
+  const now = new Date();
+  const thirtyDaysAgo = new Date(now.getTime() - (30 * 24 * 60 * 60 * 1000));
+
+  // Get all incidents from the last 30 days
+  const recentIncidents = [];
+  history.forEach((month) => {
+    const monthDate = new Date(month.year, getMonthIndex(month.name));
+
+    if (monthDate >= thirtyDaysAgo) {
+      month.incidents.forEach((incident) => {
+        const incidentDate = parseIncidentTimestamp(
+          incident.timestamp,
+          month.name,
+          month.year,
+        );
+
+        if (incidentDate >= thirtyDaysAgo) {
+          recentIncidents.push({
+            ...incident,
+            monthName: month.name,
+            monthYear: month.year,
+          });
+        }
+      });
+    }
+  });
+
+  // Group incidents by day
+  const incidentsByDay = {};
+  recentIncidents.forEach((incident) => {
+    const incidentDate = parseIncidentTimestamp(
+      incident.timestamp,
+      incident.monthName,
+      incident.monthYear,
+    );
+    const dayKey = incidentDate.toDateString();
+    if (!incidentsByDay[dayKey]) {
+      incidentsByDay[dayKey] = [];
+    }
+    incidentsByDay[dayKey].push(incident);
+  });
+
+  // Generate all 30 days and sort in descending order (most recent first)
+  const allDays = [];
+  for (let i = 0; i < 30; i += 1) {
+    const day = new Date(now.getTime() - (i * 24 * 60 * 60 * 1000));
+    allDays.push(day);
+  }
+
+  allDays.forEach((day) => {
+    const dayKey = day.toDateString();
+    const dayElement = document.createElement('div');
+    const dayTitle = day.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+    dayElement.innerHTML = `<h3>${dayTitle}</h3>`;
+    dayElement.setAttribute('role', 'listitem');
+    last30DaysContainer.appendChild(dayElement);
+
+    const dayIncidents = incidentsByDay[dayKey] || [];
+
+    if (dayIncidents.length === 0) {
+      const metaElement = document.createElement('p');
+      metaElement.classList.add('meta');
+      metaElement.textContent = '(No incidents reported)';
+      dayElement.appendChild(metaElement);
+    } else {
+      dayIncidents.forEach((incident) => {
+        const incidentElement = document.createElement('div');
+        incidentElement.classList.add('incident', incident.impact);
+        const incidentDate = parseIncidentTimestamp(
+          incident.timestamp,
+          incident.monthName,
+          incident.monthYear,
+        );
+
+        incidentElement.innerHTML = `<h4><a href="/details.html?incident=${incident.code}">${incident.name}</a><span class="pill ${incident.impact}">${incident.impact}</span></h4>
+            <p>${incident.message}</p>
+            <time class="meta" datetime="${incidentDate.toISOString()}">${incident.timestamp}</time>`;
+        dayElement.appendChild(incidentElement);
+      });
+    }
+  });
+};
+
+const displayIncidentArchive = (history) => {
+  const incidentArchive = document.getElementById('incidentArchive');
+  incidentArchive.innerHTML = '';
+  incidentArchive.classList.add('incidents');
+
   history.forEach((month) => {
     const monthElement = document.createElement('div');
     monthElement.innerHTML = `<h3>${month.name} ${month.year}</h3>`;
     monthElement.setAttribute('role', 'listitem');
-    incidentHistory.appendChild(monthElement);
+    incidentArchive.appendChild(monthElement);
     if (month.incidents.length === 0) {
       const metaElement = document.createElement('p');
       metaElement.classList.add('meta');
@@ -99,9 +227,10 @@ const displayIncidentHistory = (history) => {
     month.incidents.forEach((incident) => {
       const incidentElement = document.createElement('div');
       incidentElement.classList.add('incident', incident.impact);
+      const incidentDate = parseIncidentTimestamp(incident.timestamp, month.name, month.year);
       incidentElement.innerHTML = `<h4><a href="/details.html?incident=${incident.code}">${incident.name}</a><span class="pill ${incident.impact}">${incident.impact}</span></h4>
           <p>${incident.message}</p>
-          <time class="meta" datetime="${incident.timestamp}">${incident.timestamp}</time>`;
+          <time class="meta" datetime="${incidentDate.toISOString()}">${incident.timestamp}</time>`;
       monthElement.appendChild(incidentElement);
     });
   });
@@ -181,11 +310,36 @@ const updateCurrentIncident = async () => {
   displayCurrentIncident(currentIncident);
 };
 
+const initArchiveToggle = () => {
+  const toggleButton = document.getElementById('archiveToggle');
+  const archiveContent = document.getElementById('incidentArchive');
+
+  if (toggleButton && archiveContent) {
+    toggleButton.addEventListener('click', () => {
+      const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+
+      if (isExpanded) {
+        // Hide archive
+        archiveContent.style.display = 'none';
+        toggleButton.setAttribute('aria-expanded', 'false');
+        toggleButton.querySelector('.toggle-text').textContent = 'Show archive';
+      } else {
+        // Show archive
+        archiveContent.style.display = 'block';
+        toggleButton.setAttribute('aria-expanded', 'true');
+        toggleButton.querySelector('.toggle-text').textContent = 'Hide';
+      }
+    });
+  }
+};
+
 const initIncidents = async () => {
   updateCurrentIncident();
   setInterval(updateCurrentIncident, 30000);
   const history = await getHistory();
-  displayIncidentHistory(history);
+  displayLast30Days(history);
+  displayIncidentArchive(history);
+  initArchiveToggle();
 };
 
 const download = (string, filename, type) => {

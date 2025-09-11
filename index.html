@@ -55,12 +55,25 @@
             </div>
         </section>
 
-        <!-- Incident history -->
-        <section class="section" aria-labelledby="historyTitle">
+        <!-- Last 30 days -->
+        <section class="section" aria-labelledby="last30DaysTitle">
             <div class="section-head">
-                <h2 id="historyTitle">Incident history</h2>
+                <h2 id="last30DaysTitle">Last 30 days</h2>
             </div>
-            <div class="incidents" role="list" id="incidentHistory">
+            <div class="incidents" role="list" id="last30Days">
+            </div>
+        </section>
+
+        <!-- Incident archive -->
+        <section class="section" aria-labelledby="archiveTitle">
+            <div class="section-head">
+                <h2 id="archiveTitle">Incident archive</h2>
+                <button type="button" class="toggle-button" id="archiveToggle" aria-expanded="false" aria-controls="incidentArchive">
+                    <span class="toggle-text">Show archive</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+            </div>
+            <div class="incidents archive-content" role="list" id="incidentArchive" style="display: none;">
             </div>
         </section>
 
