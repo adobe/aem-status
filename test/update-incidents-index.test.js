@@ -1,13 +1,13 @@
-import { describe, it, mock, beforeEach, afterEach } from 'node:test';
+import {
+  describe, it, beforeEach, afterEach,
+} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createRequire } from 'node:module';
 import { JSDOM } from 'jsdom';
 
-const require = createRequire(import.meta.url);
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const testDir = path.dirname(fileURLToPath(import.meta.url));
 
 describe('update-incidents-index', () => {
   describe('parseIncidentFile', () => {
@@ -29,12 +29,12 @@ describe('update-incidents-index', () => {
 
       const dom = new JSDOM(modernHTML);
       const doc = dom.window.document;
-      
+
       const h1 = doc.querySelector('h1');
       const article = doc.querySelector('article');
       const time = doc.querySelector('time');
       const impact = article?.className.match(/incident\s+(\w+)/)?.[1] || 'none';
-      
+
       assert.equal(h1?.textContent, 'Test Incident 1');
       assert.equal(impact, 'minor');
       assert.ok(time?.textContent.includes('Feb 07, 2025'));
@@ -60,11 +60,11 @@ describe('update-incidents-index', () => {
 
       const dom = new JSDOM(legacyHTML);
       const doc = dom.window.document;
-      
+
       const h1 = doc.querySelector('h1');
       const impactClass = h1?.className.match(/impact-(\w+)/)?.[1];
       const timestamp = doc.querySelector('.update-timestamp');
-      
+
       assert.equal(h1?.textContent, 'Legacy Test Incident');
       assert.equal(impactClass, 'major');
       assert.ok(timestamp?.textContent.includes('Jan 15, 2025'));
@@ -80,21 +80,23 @@ describe('update-incidents-index', () => {
         'Mar 01, 2025 - 00:00 UTC',
       ];
 
-      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
-                         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const monthNames = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      ];
 
-      for (const ts of timestamps) {
+      timestamps.forEach((ts) => {
         const monthMatch = ts.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/);
         const dateMatch = ts.match(/(\d{1,2}),/);
         const yearMatch = ts.match(/(\d{4})/);
-        
+
         assert.ok(monthMatch, `Should find month in "${ts}"`);
         assert.ok(dateMatch, `Should find date in "${ts}"`);
         assert.ok(yearMatch, `Should find year in "${ts}"`);
-        
+
         const monthIndex = monthNames.indexOf(monthMatch[1]);
         assert.ok(monthIndex >= 0, `Should have valid month index for "${monthMatch[1]}"`);
-      }
+      });
     });
   });
 
@@ -109,47 +111,56 @@ describe('update-incidents-index', () => {
         { html: '<article class="incident">No impact</article>', expected: 'none' },
       ];
 
-      for (const testCase of testCases) {
+      testCases.forEach((testCase) => {
         const dom = new JSDOM(testCase.html);
         const doc = dom.window.document;
-        
+
         let impact = 'none';
-        
+
         // Check article class
         const article = doc.querySelector('article');
         if (article) {
           const match = article.className.match(/incident\s+(\w+)/);
-          if (match) impact = match[1];
+          if (match) {
+            const impactValue = match[1];
+            impact = impactValue;
+          }
         }
-        
+
         // Check h1 class for legacy format
         if (impact === 'none') {
           const h1 = doc.querySelector('h1');
           if (h1) {
             const match = h1.className.match(/impact-(\w+)/);
-            if (match) impact = match[1];
+            if (match) {
+              const impactValue = match[1];
+              impact = impactValue;
+            }
           }
         }
-        
-        assert.equal(impact, testCase.expected, 
-          `Impact for "${testCase.html}" should be "${testCase.expected}"`);
-      }
+
+        assert.equal(
+          impact,
+          testCase.expected,
+          `Impact for "${testCase.html}" should be "${testCase.expected}"`,
+        );
+      });
     });
   });
 
   describe('file operations', () => {
     let tempDir;
-    
+
     beforeEach(() => {
-      tempDir = fs.mkdtempSync(path.join(__dirname, 'test-'));
+      tempDir = fs.mkdtempSync(path.join(testDir, 'test-'));
     });
-    
+
     afterEach(() => {
       if (tempDir && fs.existsSync(tempDir)) {
         fs.rmSync(tempDir, { recursive: true, force: true });
       }
     });
-    
+
     it('should read and write JSON files correctly', () => {
       const testData = [
         {
@@ -166,28 +177,28 @@ describe('update-incidents-index', () => {
           ],
         },
       ];
-      
+
       const jsonPath = path.join(tempDir, 'test.json');
-      fs.writeFileSync(jsonPath, JSON.stringify(testData, null, 2) + '\n');
-      
+      fs.writeFileSync(jsonPath, `${JSON.stringify(testData, null, 2)}\n`);
+
       assert.ok(fs.existsSync(jsonPath), 'JSON file should exist');
-      
+
       const content = fs.readFileSync(jsonPath, 'utf-8');
       const parsed = JSON.parse(content);
-      
+
       assert.deepEqual(parsed, testData, 'Parsed JSON should match original data');
     });
-    
+
     it('should handle file listing and filtering', () => {
       // Create test HTML files
       fs.writeFileSync(path.join(tempDir, 'test1.html'), '<h1>Test 1</h1>');
       fs.writeFileSync(path.join(tempDir, 'test2.html'), '<h1>Test 2</h1>');
       fs.writeFileSync(path.join(tempDir, 'test.txt'), 'Not HTML');
       fs.writeFileSync(path.join(tempDir, 'README.md'), '# Readme');
-      
+
       const files = fs.readdirSync(tempDir);
       const htmlFiles = files.filter((f) => f.endsWith('.html'));
-      
+
       assert.equal(htmlFiles.length, 2, 'Should find 2 HTML files');
       assert.ok(htmlFiles.includes('test1.html'), 'Should include test1.html');
       assert.ok(htmlFiles.includes('test2.html'), 'Should include test2.html');
