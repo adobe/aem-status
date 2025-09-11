@@ -1,5 +1,6 @@
 .hlx/*
 coverage/*
+coverage.lcov
 logs/*
 node_modules/*
 
