@@ -343,7 +343,7 @@ main {
 }
 
 #current-incident.ok .section-head h2::after {
-  content: ' (No Impact)';
+  content: ' (No Significant Impact, Error rate < 0.1%)';
 }
 
 #current-incident .status-update {
