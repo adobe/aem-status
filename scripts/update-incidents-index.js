@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const { JSDOM } = require('jsdom');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { JSDOM } from 'jsdom';
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 // Helper function to parse date from timestamp string
 function parseTimestamp(timestampStr) {
@@ -197,7 +201,7 @@ function parseIncidentHTML(filePath, incidentCode) {
 
 // Main function
 function updateIncidentsIndex() {
-  const incidentsDir = path.join(__dirname, '..', 'incidents');
+  const incidentsDir = path.join(dirname, '..', 'incidents');
   const htmlDir = path.join(incidentsDir, 'html');
   const indexPath = path.join(incidentsDir, 'index.json');
 
@@ -312,7 +316,7 @@ function updateIncidentsIndex() {
 }
 
 // Run if called directly
-if (require.main === module) {
+if (fileURLToPath(import.meta.url) === process.argv[1]) {
   try {
     updateIncidentsIndex();
   } catch (error) {
@@ -321,4 +325,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { updateIncidentsIndex };
+export default updateIncidentsIndex;
