@@ -13,7 +13,8 @@
         "timestamp": "Sep <var data-var='date'>9</var>, <var data-var='time'>19:26</var> UTC",
         "startTime": "2025-09-09T18:25:03.343Z",
         "endTime": "2025-09-09T19:26:17.694Z",
-        "errorRate": "0.001"
+        "errorRate": "0.001",
+        "impactedServices": "delivery"
       },
       {
         "code": "AEM-u5ni9f8k",
