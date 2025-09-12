@@ -88,27 +88,12 @@ const getMonthIndex = (monthName) => {
   return months.indexOf(monthName);
 };
 
-// Helper function to parse custom timestamp format
+// Helper function to parse ISO 8601 timestamp format
 const parseIncidentTimestamp = (timestamp, monthName, year) => {
-  const matchWithYear = timestamp.match(/(\w{3})\s*<var[^>]*>(\d+)<\/var>,\s*<var[^>]*>(\d{4})<\/var>\s*-\s*<var[^>]*>(\d+):(\d+)<\/var>\s*UTC/);
-  if (matchWithYear) {
-    const [, month, day, yearFromTimestamp, hour, minute] = matchWithYear;
-    const monthIndex = getMonthIndex(month);
-    return new Date(
-      parseInt(yearFromTimestamp, 10),
-      monthIndex,
-      parseInt(day, 10),
-      parseInt(hour, 10),
-      parseInt(minute, 10),
-    );
-  }
-
-  // Handle format like "Sep <var data-var='date'>9</var>, <var data-var='time'>19:26</var> UTC"
-  const matchWithoutYear = timestamp.match(/(\w{3})\s*<var[^>]*>(\d+)<\/var>,\s*<var[^>]*>(\d+):(\d+)<\/var>\s*UTC/);
-  if (matchWithoutYear) {
-    const [, , day, hour, minute] = matchWithoutYear;
-    const monthIndex = getMonthIndex(monthName);
-    return new Date(year, monthIndex, parseInt(day, 10), parseInt(hour, 10), parseInt(minute, 10));
+  // Handle ISO 8601 format: "2024-12-10T02:26:00.000Z"
+  const date = new Date(timestamp);
+  if (!Number.isNaN(date.getTime())) {
+    return date;
   }
 
   // Fallback to standard date parsing
@@ -201,7 +186,7 @@ const displayLast30Days = (history) => {
 
         incidentElement.innerHTML = `<h4><a href="/details.html?incident=${incident.code}">${incident.name}</a><span class="pill ${incident.impact}">${incident.impact}</span></h4>
             <p>${incident.message}</p>
-            <time class="meta" datetime="${incidentDate.toISOString()}">${incident.timestamp}</time>`;
+            <time class="meta" datetime="${incidentDate.toISOString()}">${incidentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} at ${incidentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' })}</time>`;
         dayElement.appendChild(incidentElement);
       });
     }
@@ -230,7 +215,7 @@ const displayIncidentArchive = (history) => {
       const incidentDate = parseIncidentTimestamp(incident.timestamp, month.name, month.year);
       incidentElement.innerHTML = `<h4><a href="/details.html?incident=${incident.code}">${incident.name}</a><span class="pill ${incident.impact}">${incident.impact}</span></h4>
           <p>${incident.message}</p>
-          <time class="meta" datetime="${incidentDate.toISOString()}">${incident.timestamp}</time>`;
+          <time class="meta" datetime="${incidentDate.toISOString()}">${incidentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} at ${incidentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' })}</time>`;
       monthElement.appendChild(incidentElement);
     });
   });

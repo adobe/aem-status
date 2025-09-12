@@ -8,54 +8,19 @@ import { JSDOM } from 'jsdom';
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
-// Helper function to parse date from timestamp string
+// Helper function to parse date from ISO 8601 timestamp string
 function parseTimestamp(timestampStr) {
-  // Example: "Feb <var data-var='date'>6</var>, <var data-var='time'>08:36</var> -
-  // <var data-var='time'>09:48</var> UTC"
-  // or "Feb <var data-var='date'>6</var>, <var data-var='time'>08:36</var> UTC"
-  // or "Feb 07, 2025 - 15:10 UTC" (from HTML)
-  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-  // Extract month
-  const monthMatch = timestampStr.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/);
-  if (!monthMatch) return null;
-
-  const month = monthNames.indexOf(monthMatch[1]);
-
-  // Extract date - try both formats
-  let date = null;
-  let year = null;
-
-  // Try format with var tags
-  const dateVarMatch = timestampStr.match(/data-var='date'>(\d+)</);
-  if (dateVarMatch) {
-    date = parseInt(dateVarMatch[1], 10);
-    const yearVarMatch = timestampStr.match(/data-var='year'>(\d{4})</);
-    year = yearVarMatch ? parseInt(yearVarMatch[1], 10) : null;
-  } else {
-    // Try plain format "Feb 07, 2025"
-    const plainMatch = timestampStr.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2}),\s+(\d{4})/);
-    if (plainMatch) {
-      date = parseInt(plainMatch[2], 10);
-      year = parseInt(plainMatch[3], 10);
-    }
+  // Handle ISO 8601 format: "2024-12-10T02:26:00.000Z"
+  const date = new Date(timestampStr);
+  if (Number.isNaN(date.getTime())) {
+    return null;
   }
 
-  if (!date) return null;
-
-  // If no year found, try to infer from context or use current year
-  if (!year) {
-    // Look for year in format "Jul 30, 2024" or similar
-    const yearMatch = timestampStr.match(/, (\d{4})/);
-    if (yearMatch) {
-      year = parseInt(yearMatch[1], 10);
-    } else {
-      // Default to current year
-      year = new Date().getFullYear();
-    }
-  }
-
-  return { month, year, date };
+  return {
+    month: date.getUTCMonth(),
+    year: date.getUTCFullYear(),
+    date: date.getUTCDate(),
+  };
 }
 
 // Helper function to get month info
@@ -110,18 +75,18 @@ function parseIncidentHTML(filePath, incidentCode) {
       // Format is like: "Feb 07, 2025 - 15:10 UTC"
       const dateMatch = timestampText.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},\s+\d{4}\s+-\s+\d{2}:\d{2}\s+UTC/);
       if (dateMatch) {
-        // Convert to index.json format:
-        // "Feb <var data-var='date'>7</var>, <var data-var='time'>15:10</var> UTC"
-        const parts = dateMatch[0].match(/(\w+)\s+(\d{1,2}),\s+(\d{4})\s+-\s+(\d{2}:\d{2})\s+UTC/);
+        // Convert to ISO 8601 format
+        const parts = dateMatch[0].match(/(\w+)\s+(\d{1,2}),\s+(\d{4})\s+-\s+(\d{2}):(\d{2})\s+UTC/);
         if (parts) {
-          // Include year when it's not the current year
+          const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+          const month = monthNames.indexOf(parts[1]);
+          const day = parseInt(parts[2], 10);
           const year = parseInt(parts[3], 10);
-          const currentYear = new Date().getFullYear();
-          if (year !== currentYear) {
-            timestamp = `${parts[1]} <var data-var='date'>${parts[2]}</var>, <var data-var='year'>${parts[3]}</var> - <var data-var='time'>${parts[4]}</var> UTC`;
-          } else {
-            timestamp = `${parts[1]} <var data-var='date'>${parts[2]}</var>, <var data-var='time'>${parts[4]}</var> UTC`;
-          }
+          const hour = parseInt(parts[4], 10);
+          const minute = parseInt(parts[5], 10);
+
+          const date = new Date(year, month, day, hour, minute);
+          timestamp = date.toISOString();
         }
       }
     }
@@ -152,22 +117,10 @@ function parseIncidentHTML(filePath, incidentCode) {
     const timeEl = doc.querySelector('time');
     if (timeEl && timeEl.textContent) {
       const isoTimestamp = timeEl.textContent.trim();
-      // Parse ISO timestamp and convert to index format
+      // Parse ISO timestamp and use it directly
       const date = new Date(isoTimestamp);
       if (!Number.isNaN(date.getTime())) {
-        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const month = monthNames[date.getUTCMonth()];
-        const day = date.getUTCDate();
-        const year = date.getUTCFullYear();
-        const hours = String(date.getUTCHours()).padStart(2, '0');
-        const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-        const currentYear = new Date().getFullYear();
-
-        if (year !== currentYear) {
-          timestamp = `${month} <var data-var='date'>${day}</var>, <var data-var='year'>${year}</var> - <var data-var='time'>${hours}:${minutes}</var> UTC`;
-        } else {
-          timestamp = `${month} <var data-var='date'>${day}</var>, <var data-var='time'>${hours}:${minutes}</var> UTC`;
-        }
+        timestamp = date.toISOString();
       } else {
         timestamp = 'NEEDS_MANUAL_UPDATE';
       }
