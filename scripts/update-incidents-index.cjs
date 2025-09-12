@@ -186,13 +186,38 @@ function parseIncidentHTML(filePath, incidentCode) {
     return null;
   }
 
-  return {
+  const result = {
     code: incidentCode,
     name,
     message: message || 'This incident has been resolved.',
     impact,
     timestamp: timestamp || 'NEEDS_MANUAL_UPDATE',
   };
+
+  // Extract data attributes for AEM-prefixed incidents
+  if (incidentCode.startsWith('AEM-')) {
+    const article = doc.querySelector('article');
+    if (article) {
+      // List of data attributes to extract
+      const dataAttrNames = [
+        'data-incident-start-time',
+        'data-incident-end-time',
+        'data-incident-error-rate',
+        'data-incident-impacted-services',
+      ];
+
+      dataAttrNames.forEach((attrName) => {
+        const value = article.getAttribute(attrName);
+        if (value) {
+          // Convert attribute name to camelCase for JSON and add to result
+          const camelCaseName = attrName.replace(/^data-incident-/, '').replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
+          result[camelCaseName] = value;
+        }
+      });
+    }
+  }
+
+  return result;
 }
 
 // Main function

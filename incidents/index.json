@@ -10,14 +10,21 @@
         "name": "Increased error rate on delivery via workers",
         "message": "On 09.09.2025 18:35 UTC we noticed a slight increase (<0.1%) in Edge Delivery Service errors.\n        Upon investigation, we found that one of our suppliers had already opened a major incident related\n        to worker delivery, confirmed status, and implemented a fix within 30 minutes. There were no\n        reports of customer impact.",
         "impact": "none",
-        "timestamp": "Sep <var data-var='date'>9</var>, <var data-var='time'>19:26</var> UTC"
+        "timestamp": "Sep <var data-var='date'>9</var>, <var data-var='time'>19:26</var> UTC",
+        "startTime": "2025-09-09T18:25:03.343Z",
+        "endTime": "2025-09-09T19:26:17.694Z",
+        "errorRate": "0.001"
       },
       {
         "code": "AEM-u5ni9f8k",
         "name": "Increased error rate with images in delivery",
         "message": "On 02.09.2025 16:24 UTC we noticed that there was a slight (<0.1%) increase in errors being served by Edge\n    Delivery\n    Services. Upon investigation, we found that the errors were limited to media requests and caused by a degradation\n    of a service dependency.",
         "impact": "none",
-        "timestamp": "Sep <var data-var='date'>2</var>, <var data-var='time'>16:24</var> UTC"
+        "timestamp": "Sep <var data-var='date'>2</var>, <var data-var='time'>16:24</var> UTC",
+        "startTime": "2025-09-02T16:24:55.049Z",
+        "endTime": "2025-09-02T20:26:04.212Z",
+        "errorRate": "0.001",
+        "impactedServices": "delivery"
       }
     ]
   },
