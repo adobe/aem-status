@@ -316,7 +316,7 @@ function updateIncidentsIndex() {
 }
 
 // Run if called directly
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (fileURLToPath(import.meta.url) === process.argv[1]) {
   try {
     updateIncidentsIndex();
   } catch (error) {
