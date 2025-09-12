@@ -23,23 +23,6 @@ function parseTimestamp(timestampStr) {
   };
 }
 
-// Helper function to get month info
-function getMonthInfo(year, month) {
-  const firstDay = new Date(year, month, 1);
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const startsOn = firstDay.getDay();
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'];
-
-  return {
-    name: monthNames[month],
-    year,
-    starts_on: startsOn,
-    days: daysInMonth,
-    incidents: [],
-  };
-}
-
 // Parse incident HTML file
 function parseIncidentHTML(filePath, incidentCode) {
   const html = fs.readFileSync(filePath, 'utf-8');
@@ -160,7 +143,7 @@ function parseIncidentHTML(filePath, incidentCode) {
         'data-incident-start-time',
         'data-incident-end-time',
         'data-incident-error-rate',
-        'data-incident-impacted-services',
+        'data-incident-impacted-service',
       ];
 
       dataAttrNames.forEach((attrName) => {
@@ -226,70 +209,16 @@ function updateIncidentsIndex() {
     }
   });
 
-  // Group incidents by month/year
-  const monthsMap = new Map();
-
-  incidents.forEach((incident) => {
-    const dateInfo = parseTimestamp(incident.timestamp);
-    if (!dateInfo) {
-      // Could not parse timestamp
-      return;
-    }
-
-    const key = `${dateInfo.year}-${dateInfo.month}`;
-    if (!monthsMap.has(key)) {
-      monthsMap.set(key, getMonthInfo(dateInfo.year, dateInfo.month));
-    }
-
-    monthsMap.get(key).incidents.push(incident);
-  });
-
-  // Convert to sorted array (newest months first)
-  const months = Array.from(monthsMap.values());
-
-  // Add empty months to fill gaps if needed
-  if (months.length > 0) {
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const currentMonth = now.getMonth();
-
-    // Find oldest and newest years
-    let oldestYear = currentYear;
-    let newestYear = 2022; // Start from 2022 as minimum
-
-    months.forEach((month) => {
-      if (month.year < oldestYear) oldestYear = month.year;
-      if (month.year > newestYear) newestYear = month.year;
-    });
-
-    // Ensure we go to current month
-    newestYear = Math.max(newestYear, currentYear);
-
-    // Fill all months from oldest to newest
-    for (let year = newestYear; year >= oldestYear; year -= 1) {
-      const startMonth = (year === currentYear) ? currentMonth : 11;
-      const endMonth = 0;
-
-      for (let month = startMonth; month >= endMonth; month -= 1) {
-        const key = `${year}-${month}`;
-        if (!monthsMap.has(key)) {
-          const monthInfo = getMonthInfo(year, month);
-          months.push(monthInfo);
-        }
-      }
-    }
-  }
-
-  // Sort months (newest first)
-  months.sort((a, b) => {
-    if (a.year !== b.year) return b.year - a.year;
-    const monthOrder = ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'];
-    return monthOrder.indexOf(b.name) - monthOrder.indexOf(a.name);
-  });
+  // Filter out incidents without valid timestamps and sort by timestamp
+  const validIncidents = incidents
+    .filter((incident) => {
+      const dateInfo = parseTimestamp(incident.timestamp);
+      return dateInfo !== null;
+    })
+    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); // Sort newest first
 
   // Write to index.json
-  fs.writeFileSync(indexPath, `${JSON.stringify(months, null, 2)}\n`);
+  fs.writeFileSync(indexPath, `${JSON.stringify(validIncidents, null, 2)}\n`);
   // Updated index with incidents
 }
 

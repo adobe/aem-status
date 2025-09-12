@@ -25,24 +25,9 @@ const fetchCurrentIncident = async () => {
 };
 
 async function getHistory() {
-  /*
-  const incidentHistory = [];
-  let i = 1;
-  let status = 200;
-  do {
-    // eslint-disable-next-line no-await-in-loop
-    const response = await fetch(`/incidents/json/history-${i}.json`);
-    status = response.status;
-    if (status === 200) {
-      const data = await response.json();
-      incidentHistory.push(...data.months);
-    }
-    i++;
-  } while (status === 200);
-   */
   const response = await fetch('/incidents/index.json');
-  const incidentHistory = await response.json();
-  return incidentHistory;
+  const incidents = await response.json();
+  return incidents;
 }
 
 const timeAgo = (date) => {
@@ -81,13 +66,6 @@ const timeAgo = (date) => {
   return `${prefix}${years} year${years === 1 ? '' : 's'}${suffix}`;
 };
 
-// Helper function to get month index from month name
-const getMonthIndex = (monthName) => {
-  const months = ['January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'];
-  return months.indexOf(monthName);
-};
-
 // Helper function to parse ISO 8601 timestamp format
 const parseIncidentTimestamp = (timestamp) => {
   // Handle ISO 8601 format: "2024-12-10T02:26:00.000Z"
@@ -100,7 +78,7 @@ const parseIncidentTimestamp = (timestamp) => {
   return new Date(timestamp);
 };
 
-const displayLast30Days = (history) => {
+const displayLast30Days = (incidents) => {
   const last30DaysContainer = document.getElementById('last30Days');
   last30DaysContainer.innerHTML = '';
   last30DaysContainer.classList.add('incidents');
@@ -109,27 +87,9 @@ const displayLast30Days = (history) => {
   const thirtyDaysAgo = new Date(now.getTime() - (30 * 24 * 60 * 60 * 1000));
 
   // Get all incidents from the last 30 days
-  const recentIncidents = [];
-  history.forEach((month) => {
-    const monthDate = new Date(month.year, getMonthIndex(month.name));
-
-    if (monthDate >= thirtyDaysAgo) {
-      month.incidents.forEach((incident) => {
-        const incidentDate = parseIncidentTimestamp(
-          incident.timestamp,
-          month.name,
-          month.year,
-        );
-
-        if (incidentDate >= thirtyDaysAgo) {
-          recentIncidents.push({
-            ...incident,
-            monthName: month.name,
-            monthYear: month.year,
-          });
-        }
-      });
-    }
+  const recentIncidents = incidents.filter((incident) => {
+    const incidentDate = parseIncidentTimestamp(incident.timestamp);
+    return incidentDate >= thirtyDaysAgo;
   });
 
   // Group incidents by day
@@ -185,14 +145,40 @@ const displayLast30Days = (history) => {
   });
 };
 
-const displayIncidentArchive = (history) => {
+const displayIncidentArchive = (incidents) => {
   const incidentArchive = document.getElementById('incidentArchive');
   incidentArchive.innerHTML = '';
   incidentArchive.classList.add('incidents');
 
-  history.forEach((month) => {
+  // Group incidents by month/year based on timestamp
+  const incidentsByMonth = {};
+  incidents.forEach((incident) => {
+    const incidentDate = parseIncidentTimestamp(incident.timestamp);
+    const month = incidentDate.toLocaleDateString('en-US', { month: 'long' });
+    const year = incidentDate.getFullYear();
+    const key = `${year}-${month}`;
+
+    if (!incidentsByMonth[key]) {
+      incidentsByMonth[key] = {
+        month,
+        year,
+        incidents: [],
+      };
+    }
+    incidentsByMonth[key].incidents.push(incident);
+  });
+
+  // Sort months (newest first)
+  const sortedMonths = Object.values(incidentsByMonth).sort((a, b) => {
+    if (a.year !== b.year) return b.year - a.year;
+    const monthOrder = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'];
+    return monthOrder.indexOf(b.month) - monthOrder.indexOf(a.month);
+  });
+
+  sortedMonths.forEach((month) => {
     const monthElement = document.createElement('div');
-    monthElement.innerHTML = `<h3>${month.name} ${month.year}</h3>`;
+    monthElement.innerHTML = `<h3>${month.month} ${month.year}</h3>`;
     monthElement.setAttribute('role', 'listitem');
     incidentArchive.appendChild(monthElement);
     if (month.incidents.length === 0) {
@@ -313,9 +299,9 @@ const initArchiveToggle = () => {
 const initIncidents = async () => {
   updateCurrentIncident();
   setInterval(updateCurrentIncident, 30000);
-  const history = await getHistory();
-  displayLast30Days(history);
-  displayIncidentArchive(history);
+  const incidents = await getHistory();
+  displayLast30Days(incidents);
+  displayIncidentArchive(incidents);
   initArchiveToggle();
 };
 
@@ -334,27 +320,18 @@ const savePostmortem = async () => {
 
 const saveIndex = async () => {
   /* create index */
-  const index = await getHistory();
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const now = new Date();
-  const currentMonth = months[now.getMonth()];
-  let month = index.find((i) => i.name === currentMonth && i.year === now.getFullYear());
-  if (!month) {
-    month = {
-      name: currentMonth,
-      year: now.getFullYear(),
-      incidents: [],
-    };
-    index.unshift(month);
-  }
-  month.incidents.unshift({
+  const incidents = await getHistory();
+
+  const newIncident = {
     code: document.getElementById('incidentid').textContent,
     name: document.getElementById('incidentName').value,
     message: document.getElementById('incidentText').value,
     impact: document.getElementById('incidentImpact').value,
     timestamp: new Date().toISOString(),
-  });
-  const indexJson = JSON.stringify(index, null, 2);
+  };
+
+  incidents.unshift(newIncident);
+  const indexJson = JSON.stringify(incidents, null, 2);
   download(indexJson, 'index.json', 'application/json');
 };
 
