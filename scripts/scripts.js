@@ -89,7 +89,7 @@ const getMonthIndex = (monthName) => {
 };
 
 // Helper function to parse ISO 8601 timestamp format
-const parseIncidentTimestamp = (timestamp, monthName, year) => {
+const parseIncidentTimestamp = (timestamp) => {
   // Handle ISO 8601 format: "2024-12-10T02:26:00.000Z"
   const date = new Date(timestamp);
   if (!Number.isNaN(date.getTime())) {
@@ -135,11 +135,7 @@ const displayLast30Days = (history) => {
   // Group incidents by day
   const incidentsByDay = {};
   recentIncidents.forEach((incident) => {
-    const incidentDate = parseIncidentTimestamp(
-      incident.timestamp,
-      incident.monthName,
-      incident.monthYear,
-    );
+    const incidentDate = parseIncidentTimestamp(incident.timestamp);
     const dayKey = incidentDate.toDateString();
     if (!incidentsByDay[dayKey]) {
       incidentsByDay[dayKey] = [];
@@ -178,11 +174,7 @@ const displayLast30Days = (history) => {
       dayIncidents.forEach((incident) => {
         const incidentElement = document.createElement('div');
         incidentElement.classList.add('incident', incident.impact);
-        const incidentDate = parseIncidentTimestamp(
-          incident.timestamp,
-          incident.monthName,
-          incident.monthYear,
-        );
+        const incidentDate = parseIncidentTimestamp(incident.timestamp);
 
         incidentElement.innerHTML = `<h4><a href="/details.html?incident=${incident.code}">${incident.name}</a><span class="pill ${incident.impact}">${incident.impact}</span></h4>
             <p>${incident.message}</p>
@@ -212,7 +204,7 @@ const displayIncidentArchive = (history) => {
     month.incidents.forEach((incident) => {
       const incidentElement = document.createElement('div');
       incidentElement.classList.add('incident', incident.impact);
-      const incidentDate = parseIncidentTimestamp(incident.timestamp, month.name, month.year);
+      const incidentDate = parseIncidentTimestamp(incident.timestamp);
       incidentElement.innerHTML = `<h4><a href="/details.html?incident=${incident.code}">${incident.name}</a><span class="pill ${incident.impact}">${incident.impact}</span></h4>
           <p>${incident.message}</p>
           <time class="meta" datetime="${incidentDate.toISOString()}">${incidentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} at ${incidentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' })}</time>`;
