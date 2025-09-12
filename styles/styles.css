@@ -58,6 +58,60 @@ main {
   color: #334155;
 }
 
+/* Toggle button for archive */
+.toggle-button {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.toggle-button:hover {
+  background: #4338ca;
+  transform: translateY(-1px);
+}
+
+.toggle-button:active {
+  transform: translateY(0);
+}
+
+.toggle-icon {
+  transition: transform 0.2s ease;
+  font-size: 12px;
+}
+
+.toggle-button[aria-expanded="true"] .toggle-text::after {
+  content: " archive";
+}
+
+.toggle-button[aria-expanded="true"] .toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* Archive content */
+.archive-content {
+  transition: all 0.3s ease;
+}
+
+.archive-content[style*="display: none"] {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.archive-content:not([style*="display: none"]) {
+  max-height: none;
+  opacity: 1;
+}
+
 /* Overall status */
 .status-overview {
   background: #fff;
@@ -191,11 +245,6 @@ main {
   }
 }
 
-.incidents {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
 .incident {
   padding: 18px 0;
   border-top: 1px solid #f1f5f9;
@@ -207,6 +256,12 @@ main {
 
 .incident p {
   margin: 4px 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2; /* Limits the text to 2 lines */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis; /* Optional: adds ellipsis for single line overflow as well */
 }
 
 .incident:first-child {
