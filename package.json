@@ -1,9 +1,9 @@
 {
-  "name": "@adobe/aem-block-collection",
+  "name": "@adobe/aem-status",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Block collection for AEM",
+  "description": "Status page and incident tracking for AEM Edge Delivery Services",
   "scripts": {
     "test": "node --test",
     "test:watch": "node --test --watch",
@@ -19,21 +19,19 @@
     "url": "git+https://github.com/adobe/aem-block-collection.git"
   },
   "author": "Adobe",
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/adobe/aem-block-collection/issues"
   },
-  "homepage": "https://github.com/adobe/aem-block-collection#readme",
+  "homepage": "https://www.aemstatus.net",
   "dependencies": {
-    "jsdom": "^24.0.0"
+    "jsdom": "^26.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.23.7",
-    "@babel/eslint-parser": "7.23.3",
     "eslint": "8.57.1",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.32.0",
     "stylelint": "16.24.0",
-    "stylelint-config-standard": "36.0.1"
+    "stylelint-config-standard": "39.0.0"
   }
 }
