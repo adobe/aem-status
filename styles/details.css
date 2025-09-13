@@ -1,0 +1,87 @@
+/* Details Page Specific Styles */
+
+.error {
+    padding: var(--spectrum-spacing-400) var(--spectrum-spacing-500);
+    color: var(--spectrum-red-700);
+    background: rgba(227, 72, 80, 0.1);
+    border-radius: var(--spectrum-border-radius-200);
+    border: 1px solid rgba(227, 72, 80, 0.2);
+}
+
+/* Details page spacing */
+#incidentContainer .incident {
+    padding: var(--spectrum-spacing-600);
+}
+
+#incidentContainer .incident .meta {
+    display: block;
+    margin: var(--spectrum-spacing-100) 0 var(--spectrum-spacing-300);
+}
+
+#incidentContainer .updates .u {
+    padding: var(--spectrum-spacing-300) 0;
+    margin: 0;
+    border-bottom: 1px solid var(--spectrum-gray-100);
+}
+
+#incidentContainer .updates .u:last-child {
+    border-bottom: none;
+}
+
+#incidentContainer .updates time {
+    margin-bottom: var(--spectrum-spacing-200);
+}
+
+#incidentContainer .updates p {
+    line-height: 1.5;
+}
+
+/* Markdown content inside updates */
+#incidentContainer .updates h2 {
+    font-size: var(--spectrum-font-size-xlarge);
+    margin: var(--spectrum-spacing-600) 0 var(--spectrum-spacing-200);
+    color: var(--spectrum-gray-800);
+}
+
+#incidentContainer .updates h3 {
+    font-size: var(--spectrum-font-size-large);
+    margin: var(--spectrum-spacing-300) 0 var(--spectrum-spacing-200);
+    color: var(--spectrum-gray-800);
+}
+
+#incidentContainer .updates p {
+    margin: var(--spectrum-spacing-200) 0 0 0;
+    color: var(--spectrum-gray-700);
+}
+
+#incidentContainer .updates ul {
+    margin: var(--spectrum-spacing-200) 0 0 var(--spectrum-spacing-400);
+}
+
+#incidentContainer .updates li {
+    margin: var(--spectrum-spacing-100) 0;
+}
+
+#incidentContainer article {
+    padding: var(--spectrum-spacing-400) var(--spectrum-spacing-500);
+}
+
+#incidentContainer ul.updates {
+    list-style-type: none;
+    padding: var(--spectrum-spacing-400) var(--spectrum-spacing-500);
+}
+
+#incidentContainer ul.updates li {
+    border-top: 1px solid var(--spectrum-gray-100);
+    padding: var(--spectrum-spacing-400) 0;
+}
+
+#incidentContainer ul.updates h2 {
+    margin: 0;
+}
+
+#incidentContainer time {
+    font-style: italic;
+    color: var(--spectrum-gray-600);
+    font-size: var(--spectrum-font-size-small);
+}

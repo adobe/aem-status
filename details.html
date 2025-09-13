@@ -5,46 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Incident details</title>
     <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/styles/details.css">
     <script src="/scripts/details.js" type="module"></script>
-    <style>
-        .back-link { display: inline-block; margin: 12px 0 0; color: white; text-decoration: none; }
-        .back-link:hover { text-decoration: underline; }
-        .iframe-wrap { width: 100%; }
-        .error { padding: 18px 20px; color: #991b1b; background: #fef2f2; border-radius: 8px; }
-
-        /* Details page spacing (scoped) */
-        #incidentContainer .incident { padding: 24px; }
-        #incidentContainer .incident .meta { display: block; margin: 2px 0 14px; }
-        #incidentContainer .updates .u { padding: 12px 0; margin: 0; border-bottom: 1px solid #f1f5f9; }
-        #incidentContainer .updates .u:last-child { border-bottom: none; }
-        #incidentContainer .updates time { margin-bottom: 6px; }
-        #incidentContainer .updates p { line-height: 1.5; }
-
-        /* Markdown content inside updates */
-        #incidentContainer .updates h2 { font-size: 18px; margin: 24px 0 8px; color: #111827; }
-        #incidentContainer .updates h3 { font-size: 16px; margin: 12px 0 6px; color: #111827; }
-        #incidentContainer .updates p { margin: 6px 0 0 0; color: #334155; }
-        #incidentContainer .updates ul { margin: 6px 0 0 18px; }
-        #incidentContainer .updates li { margin: 4px 0; }
-
-        #incidentContainer article { padding: 16px 20px; }
-
-        #incidentContainer ul.updates { list-style-type: none; padding: 16px 20px; }
-        #incidentContainer ul.updates li { border-top: 1px solid #e2e8f0; padding: 16px 0; }
-        #incidentContainer ul.updates h2 { margin: 0; }
-        #incidentContainer time { font-style: italic; color: #6b7280; font-size: 14px; }
-    </style>
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>AEM Status</h1>
-            <p>Incident details</p>
-            <a class="back-link" href="/">← Back to status</a>
+        <div class="container header-content">
+            <div>
+                <h1>AEM Edge Delivery Services</h1>
+                <p>Current system status and incident history</p>
+            </div>
+            <!-- Overall status -->
+            <div class="status-overview">
+                <span class="status-badge ok"><span class="status-indicator"></span></span>
+            </div>
         </div>
     </header>
 
     <main class="container">
+        <p><a class="back-link" href="/">← Back to status</a></p>
         <section class="section" aria-labelledby="incidentHeading">
             <div class="section-head">
                 <h2 id="incidentHeading">Incident details</h2>
