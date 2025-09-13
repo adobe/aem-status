@@ -502,7 +502,7 @@ main {
 /* Responsive */
 @media (width >= 900px) {
   .service {
-    grid-template-columns: 1fr 1fr auto;
+    grid-template-columns: 40% 1fr auto;
     align-items: center;
   }
 }
