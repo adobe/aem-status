@@ -441,9 +441,42 @@ main {
 }
 
 .service p {
-  margin: var(--spectrum-spacing-100) 0 0;
+  margin: 0;
   color: var(--spectrum-gray-600);
   font-size: var(--spectrum-font-size-normal);
+}
+
+.service .uptime {
+  display: flex;
+  width: fit-content;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+}
+
+.service .uptime h4 {
+  margin: 0;
+  font-size: var(--spectrum-font-size-normal);
+}
+
+.service .uptime.ok h4 {
+  color: var(--spectrum-green-700);
+  font-weight: 600;
+}
+
+.service .uptime.warn h4 {
+  color: var(--spectrum-orange-700);
+}
+
+.service .uptime.err h4 {
+  color: var(--spectrum-red-700);
+}
+
+.service .uptime p {
+  margin: 0;
+  color: var(--spectrum-gray-600);
+  font-size: var(--spectrum-font-size-small);
 }
 
 .service .state {
@@ -469,7 +502,7 @@ main {
 /* Responsive */
 @media (width >= 900px) {
   .service {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 1fr auto;
     align-items: center;
   }
 }
@@ -688,7 +721,7 @@ main {
 /* Responsive Design */
 @media (min-width: 900px) {
   .service {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 40% 1fr auto;
     align-items: center;
   }
 

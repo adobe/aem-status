@@ -78,6 +78,73 @@ const parseIncidentTimestamp = (timestamp) => {
   return new Date(timestamp);
 };
 
+const calculateUptime = (incidents) => {
+  const status = {};
+  [
+    ['delivery', .9999],
+    ['publishing', .999],
+  ].forEach(([service, sla]) => {
+    status[service] = {
+      sla,
+      uptime: 1,
+      numIncidents: 0,
+      disruptionMins: 0,
+    };
+  });
+
+  const ninetyDaysMins = 90 * 24 * 60;
+  const ninetyDaysMillies = ninetyDaysMins * 60 * 1000;
+
+  incidents
+    .map((incident) => ({
+      startTime: parseIncidentTimestamp(incident.startTime),
+      endTime: parseIncidentTimestamp(incident.endTime),
+      impactedService: incident.impactedService,
+      errorRate: parseFloat(incident.errorRate) || 0,
+    }))
+    .filter(({ startTime, endTime, impactedService }) => startTime && endTime && impactedService)
+    .filter(({ startTime }) => startTime > new Date(Date.now() - ninetyDaysMillies))
+    .forEach(({
+      startTime, endTime, impactedService, errorRate,
+    }) => {
+      const disruptionMins = Math.round((endTime.getTime() - startTime.getTime()) / 60000);
+      const downtimeMins = disruptionMins * errorRate;
+      const uptimeMins = ninetyDaysMins - downtimeMins;
+      const uptime = uptimeMins / ninetyDaysMins;
+
+      status[impactedService].uptime = uptime;
+      status[impactedService].numIncidents += 1;
+      status[impactedService].disruptionMins += disruptionMins;
+    });
+
+  Object.entries(status).forEach(([service, status]) => {
+    // format uptime percentage to 2 decimal places
+    status.uptimePercentage = `${(status.uptime * 100)}`.slice(0, 6);
+
+    // format disruption minutes in hours and minutes if needed
+    if (status.disruptionMins > 60) {
+      status.disruptionMins = `${Math.round(status.disruptionMins / 60)}h ${status.disruptionMins % 60}`;
+    }
+
+    // display uptime details
+    const serviceElement = document.querySelector(`.service.${service}`);
+    if (!serviceElement) return;
+    const uptimeElement = serviceElement.querySelector('.uptime');
+    uptimeElement.innerHTML = `
+      <h4>90 Days Uptime: ${status.uptimePercentage}%</h4>
+      <p>${status.numIncidents} incidents, ${status.disruptionMins}m of potential disruptions</p>
+    `;
+    // color coding based on uptime
+    if (status.uptime >= status.sla) {
+      uptimeElement.classList.add('ok');
+    } else if (status.uptime >= status.sla - (1 - status.sla)) {
+      uptimeElement.classList.add('warn');
+    } else {
+      uptimeElement.classList.add('err');
+    }
+  });
+};
+
 const displayLast30Days = (incidents) => {
   const last30DaysContainer = document.getElementById('last30Days');
   last30DaysContainer.innerHTML = '';
@@ -315,6 +382,7 @@ const initIncidents = async () => {
   updateCurrentIncident();
   setInterval(updateCurrentIncident, 30000);
   const incidents = await getHistory();
+  calculateUptime(incidents);
   displayLast30Days(incidents);
   displayIncidentArchive(incidents);
   initArchiveToggle();
