@@ -128,7 +128,7 @@ const displayLast30Days = (incidents) => {
     if (dayIncidents.length === 0) {
       const metaElement = document.createElement('p');
       metaElement.classList.add('meta');
-      metaElement.textContent = '(No incidents reported)';
+      metaElement.textContent = 'No incidents reported';
       dayElement.appendChild(metaElement);
     } else {
       dayIncidents.forEach((incident) => {
@@ -197,6 +197,10 @@ const displayIncidentArchive = (incidents) => {
       monthElement.appendChild(incidentElement);
     });
   });
+
+  const backToTop = document.createElement('p');
+  backToTop.innerHTML = '<a class="back-link" href="/">↑ Back to top</a>';
+  incidentArchive.appendChild(backToTop);
 };
 
 const displayCurrentIncident = (currentIncident) => {
@@ -286,15 +290,26 @@ const initArchiveToggle = () => {
         archiveContent.style.display = 'none';
         toggleButton.setAttribute('aria-expanded', 'false');
         toggleButton.querySelector('.toggle-text').textContent = 'Show archive';
+        history.pushState({}, '', window.location.pathname);
       } else {
         // Show archive
         archiveContent.style.display = 'block';
         toggleButton.setAttribute('aria-expanded', 'true');
         toggleButton.querySelector('.toggle-text').textContent = 'Hide';
+        toggleButton.closest('.section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.pushState({}, '', `${window.location.pathname}#archive`);
       }
     });
   }
-};
+
+  const archiveHashChecker = () => {
+    if (window.location.hash === '#archive') {
+      toggleButton.click();
+    }
+  };
+  window.addEventListener('hashchange', archiveHashChecker);
+  archiveHashChecker();
+}
 
 const initIncidents = async () => {
   updateCurrentIncident();
@@ -393,3 +408,6 @@ const initPostmortem = async () => {
 
 if (window.location.pathname === '/postmortem.html') initPostmortem();
 if (window.location.pathname === '/' || window.location.pathname === '/index.html') initIncidents();
+
+const copyright = document.querySelector('footer .copyright');
+copyright.textContent = copyright.textContent.replace('{year}', new Date().getFullYear());

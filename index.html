@@ -10,17 +10,18 @@
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>AEM Edge Delivery Status</h1>
-            <p>Current system status and incident history</p>
+        <div class="container header-content">
+            <div>
+                <h1>AEM Edge Delivery Services</h1>
+                <p>Current system status and incident history</p>
+            </div>
+            <!-- Overall status -->
+            <div class="status-overview">
+                <span class="status-badge ok"><span class="status-indicator"></span></span>
+            </div>
         </div>
     </header>
     <main class="container">
-        <!-- Overall status -->
-        <section class="status-overview" aria-live="polite">
-            <span class="status-badge ok"><span class="status-indicator"></span></span>
-        </section>
-
         <!-- Services -->
         <section class="section" aria-labelledby="servicesTitle">
             <div class="section-head">
@@ -29,15 +30,15 @@
             <div class="services" role="list">
                 <div class="service delivery" role="listitem">
                     <div>
-                        <h3>AEM Delivery</h3>
-                        <p>Customer-facing delivery tier</p>
+                        <h3>Delivery</h3>
+                        <p>Rendering and delivery tier</p>
                     </div>
                     <div class="state ok"><span class="status-indicator"></span></div>
                 </div>
                 <div class="service publishing" role="listitem">
                     <div>
-                        <h3>AEM Authoring and Publishing</h3>
-                        <p>Authoring and Publishing services</p>
+                        <h3>Authoring and Publishing</h3>
+                        <p>Authoring tooling and APIs</p>
                     </div>
                     <div class="state ok"><span class="status-indicator"></span></div>
                 </div>
@@ -68,7 +69,7 @@
         <section class="section" aria-labelledby="archiveTitle">
             <div class="section-head">
                 <h2 id="archiveTitle">Incident archive</h2>
-                <button type="button" class="toggle-button" id="archiveToggle" aria-expanded="false" aria-controls="incidentArchive">
+                <button type="button" class="button button--quiet" id="archiveToggle" aria-expanded="false" aria-controls="incidentArchive">
                     <span class="toggle-text">Show archive</span>
                     <span class="toggle-icon">▼</span>
                 </button>
@@ -264,5 +265,10 @@
         </section>
     -->
     </main>
+    <footer>
+        <div class="container copyright">
+            Copyright &copy; {year} Adobe. All rights reserved.
+        </div>
+    </footer>
 </body>
 </html>
