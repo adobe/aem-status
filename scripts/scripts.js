@@ -119,11 +119,16 @@ const calculateUptime = (incidents) => {
 
   Object.entries(status).forEach(([service, status]) => {
     // format uptime percentage to 2 decimal places
+    // toFixed(2) rounds 99.99 up to 100.00, fall back to string slicing
     status.uptimePercentage = `${(status.uptime * 100)}`.slice(0, 6);
 
     // format disruption minutes in hours and minutes if needed
     if (status.disruptionMins > 60) {
-      status.disruptionMins = `${Math.round(status.disruptionMins / 60)}h ${status.disruptionMins % 60}`;
+      const hours = Math.floor(status.disruptionMins / 60);
+      const mins = status.disruptionMins - hours * 60;
+      status.disruptionTime = `${hours}h ${mins ? `${mins}m` : ''}`;
+    } else {
+      status.disruptionTime = `${status.disruptionMins}m`;
     }
 
     // display uptime details
@@ -131,8 +136,8 @@ const calculateUptime = (incidents) => {
     if (!serviceElement) return;
     const uptimeElement = serviceElement.querySelector('.uptime');
     uptimeElement.innerHTML = `
-      <h4>90 Days Uptime: ${status.uptimePercentage}%</h4>
-      <p>${status.numIncidents} incidents, ${status.disruptionMins}m of potential disruptions</p>
+      <h4>90-Day Uptime: ${status.uptimePercentage}%</h4>
+      <p>${status.numIncidents} incidents, ${status.disruptionTime} of potential disruptions</p>
     `;
     // color coding based on uptime
     if (status.uptime >= status.sla) {
