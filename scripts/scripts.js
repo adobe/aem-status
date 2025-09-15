@@ -391,6 +391,7 @@ const initIncidents = async () => {
   displayLast30Days(incidents);
   displayIncidentArchive(incidents);
   initArchiveToggle();
+  document.body.classList.add('ready');
 };
 
 const download = (string, filename, type) => {
