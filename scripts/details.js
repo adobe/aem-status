@@ -124,6 +124,9 @@ const init = async () => {
   } catch (e) {
     container.innerHTML = '<div class="error">Incident not found. It may have been removed or the incident id is incorrect.</div>';
   }
+
+  const copyright = document.getElementById('year');
+  copyright.textContent = new Date().getFullYear();
 };
 
 init();
