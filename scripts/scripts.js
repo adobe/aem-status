@@ -137,7 +137,7 @@ const calculateUptime = (incidents) => {
     const uptimeElement = serviceElement.querySelector('.uptime');
     uptimeElement.innerHTML = `
       <h4>90-Day Uptime: ${status.uptimePercentage}%</h4>
-      <p>${status.numIncidents} incidents, ${status.disruptionTime} of potential disruptions</p>
+      <p>${status.numIncidents} incidents${status.disruptionMins ? `, ${status.disruptionTime} of potential disruptions` : ''}</p>
     `;
     // color coding based on uptime
     if (status.uptime >= status.sla) {
