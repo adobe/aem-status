@@ -16,7 +16,7 @@ describe('Details Script Tests', () => {
         <body>
           <h1 id="incidentHeading"></h1>
           <div class="section-head"></div>
-          <div id="incidentContainer"></div>
+          <div id="incident-container"></div>
         </body>
       </html>
     `, {

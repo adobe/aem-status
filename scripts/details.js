@@ -96,7 +96,7 @@ const init = async () => {
   const incident = params.get('incident');
   const heading = document.getElementById('incidentHeading');
   const sectionHead = document.querySelector('.section-head');
-  const container = document.getElementById('incidentContainer');
+  const container = document.getElementById('incident-container');
 
   if (!incident) {
     heading.textContent = 'Incident not specified';

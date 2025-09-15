@@ -290,14 +290,14 @@ const initArchiveToggle = () => {
         archiveContent.style.display = 'none';
         toggleButton.setAttribute('aria-expanded', 'false');
         toggleButton.querySelector('.toggle-text').textContent = 'Show archive';
-        history.pushState({}, '', window.location.pathname);
+        window.history.pushState({}, '', window.location.pathname);
       } else {
         // Show archive
         archiveContent.style.display = 'block';
         toggleButton.setAttribute('aria-expanded', 'true');
         toggleButton.querySelector('.toggle-text').textContent = 'Hide';
         toggleButton.closest('.section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        history.pushState({}, '', `${window.location.pathname}#archive`);
+        window.history.pushState({}, '', `${window.location.pathname}#archive`);
       }
     });
   }
@@ -309,7 +309,7 @@ const initArchiveToggle = () => {
   };
   window.addEventListener('hashchange', archiveHashChecker);
   archiveHashChecker();
-}
+};
 
 const initIncidents = async () => {
   updateCurrentIncident();
@@ -409,5 +409,5 @@ const initPostmortem = async () => {
 if (window.location.pathname === '/postmortem.html') initPostmortem();
 if (window.location.pathname === '/' || window.location.pathname === '/index.html') initIncidents();
 
-const copyright = document.querySelector('footer .copyright');
-copyright.textContent = copyright.textContent.replace('{year}', new Date().getFullYear());
+const copyright = document.getElementById('year');
+copyright.textContent = new Date().getFullYear();
