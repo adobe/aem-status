@@ -22,11 +22,14 @@
   --spectrum-blue-800: #1f66e5;
   --spectrum-green-600: #33ab84;
   --spectrum-green-700: #2d9d78;
+  --spectrum-green-900: #007a4d;
   --spectrum-orange-600: #f29423;
   --spectrum-orange-700: #e68619;
+  --spectrum-orange-900: #b14c00;
   --spectrum-red-500: #ef5350;
   --spectrum-red-600: #e34850;
   --spectrum-red-700: #d7373f;
+  --spectrum-red-900: #d31510;
 
   /* Spectrum Typography */
   --spectrum-font-family: "Adobe Clean", "Source Sans Pro", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
@@ -77,6 +80,11 @@ body {
   color: var(--spectrum-gray-900);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: none;
+}
+
+body.ready {
+  display: block;
 }
 
 .container {
@@ -479,16 +487,16 @@ footer a:any-link:hover {
 }
 
 .service .uptime.ok h4 {
-  color: var(--spectrum-green-700);
+  color: var(--spectrum-green-900);
   font-weight: 600;
 }
 
 .service .uptime.warn h4 {
-  color: var(--spectrum-orange-700);
+  color: var(--spectrum-orange-900);
 }
 
 .service .uptime.err h4 {
-  color: var(--spectrum-red-700);
+  color: var(--spectrum-red-900);
 }
 
 .incident p {
@@ -520,15 +528,15 @@ footer a:any-link:hover {
 }
 
 .service .state.ok {
-  color: var(--spectrum-green-700);
+  color: var(--spectrum-green-900);
 }
 
 .service .state.warn {
-  color: var(--spectrum-orange-700);
+  color: var(--spectrum-orange-900);
 }
 
 .service .state.err {
-  color: var(--spectrum-red-700);
+  color: var(--spectrum-red-900);
 }
 
 /* Incidents */
@@ -585,7 +593,7 @@ footer a:any-link:hover {
 
 .pill.resolved {
   background: rgb(51 171 132 / 10%);
-  color: var(--spectrum-green-700);
+  color: var(--spectrum-green-900);
 }
 
 .pill.investigating {

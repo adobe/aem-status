@@ -386,6 +386,7 @@ const initIncidents = async () => {
 
   const copyright = document.getElementById('year');
   copyright.textContent = new Date().getFullYear();
+  document.body.classList.add('ready');
 };
 
 const download = (string, filename, type) => {
