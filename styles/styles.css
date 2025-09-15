@@ -218,9 +218,9 @@ footer a:any-link:hover {
   letter-spacing: 0;
 
   /* Colors - Primary */
-  background-color: var(--spectrum-blue-600);
+  background-color: var(--spectrum-blue-800);
   color: white;
-  border: 1px solid var(--spectrum-blue-600);
+  border: 1px solid var(--spectrum-blue-800);
 
   /* Interaction */
   transition: background-color 130ms ease-in-out, border-color 130ms ease-in-out, box-shadow 130ms ease-in-out, color 130ms ease-in-out;
@@ -293,8 +293,8 @@ footer a:any-link:hover {
 /* Spectrum Button Variants */
 .button-secondary {
   background-color: transparent;
-  color: var(--spectrum-blue-600);
-  border-color: var(--spectrum-blue-600);
+  color: var(--spectrum-blue-800);
+  border-color: var(--spectrum-blue-800);
 }
 
 .button-secondary:hover {
