@@ -102,7 +102,9 @@ const calculateUptime = (incidents) => {
       impactedService: incident.impactedService,
       errorRate: parseFloat(incident.errorRate) || 0,
     }))
-    .filter(({ startTime, endTime, impactedService }) => startTime && endTime && impactedService)
+    .filter(({
+      startTime, endTime, impactedService, errorRate,
+    }) => startTime && endTime && impactedService && errorRate)
     .filter(({ startTime }) => startTime > new Date(Date.now() - ninetyDaysMillies))
     .forEach(({
       startTime, endTime, impactedService, errorRate,
@@ -114,7 +116,6 @@ const calculateUptime = (incidents) => {
 
       status[impactedService].uptime = uptime;
       status[impactedService].numIncidents += 1;
-      status[impactedService].disruptionMins += disruptionMins;
     });
 
   Object.entries(status).forEach(([service, serviceStatus]) => {
@@ -122,22 +123,13 @@ const calculateUptime = (incidents) => {
     // toFixed(2) rounds 99.99 up to 100.00, fall back to string slicing
     serviceStatus.uptimePercentage = `${(serviceStatus.uptime * 100)}`.slice(0, 6);
 
-    // format disruption minutes in hours and minutes if needed
-    if (serviceStatus.disruptionMins > 60) {
-      const hours = Math.floor(serviceStatus.disruptionMins / 60);
-      const mins = serviceStatus.disruptionMins - hours * 60;
-      serviceStatus.disruptionTime = `${hours}h ${mins ? `${mins}m` : ''}`;
-    } else {
-      serviceStatus.disruptionTime = `${serviceStatus.disruptionMins}m`;
-    }
-
     // display uptime details
     const serviceElement = document.querySelector(`.service.${service}`);
     if (!serviceElement) return;
     const uptimeElement = serviceElement.querySelector('.uptime');
     uptimeElement.innerHTML = `
       <h4>90-Day Uptime: ${serviceStatus.uptimePercentage}%</h4>
-      <p>${serviceStatus.numIncidents} incidents${serviceStatus.disruptionMins ? `, ${serviceStatus.disruptionTime} of potential disruptions` : ''}</p>
+      <p>${serviceStatus.numIncidents} incident${serviceStatus.numIncidents === 1 ? '' : 's'}</p>
     `;
     // color coding based on uptime
     if (serviceStatus.uptime >= serviceStatus.sla) {
@@ -391,6 +383,9 @@ const initIncidents = async () => {
   displayLast30Days(incidents);
   displayIncidentArchive(incidents);
   initArchiveToggle();
+
+  const copyright = document.getElementById('year');
+  copyright.textContent = new Date().getFullYear();
 };
 
 const download = (string, filename, type) => {
@@ -481,6 +476,3 @@ const initPostmortem = async () => {
 
 if (window.location.pathname === '/postmortem.html') initPostmortem();
 if (window.location.pathname === '/' || window.location.pathname === '/index.html') initIncidents();
-
-const copyright = document.getElementById('year');
-copyright.textContent = new Date().getFullYear();
