@@ -81,8 +81,8 @@ const parseIncidentTimestamp = (timestamp) => {
 const calculateUptime = (incidents) => {
   const status = {};
   [
-    ['delivery', .9999],
-    ['publishing', .999],
+    ['delivery', 0.9999],
+    ['publishing', 0.999],
   ].forEach(([service, sla]) => {
     status[service] = {
       sla,
@@ -117,18 +117,18 @@ const calculateUptime = (incidents) => {
       status[impactedService].disruptionMins += disruptionMins;
     });
 
-  Object.entries(status).forEach(([service, status]) => {
+  Object.entries(status).forEach(([service, serviceStatus]) => {
     // format uptime percentage to 2 decimal places
     // toFixed(2) rounds 99.99 up to 100.00, fall back to string slicing
-    status.uptimePercentage = `${(status.uptime * 100)}`.slice(0, 6);
+    serviceStatus.uptimePercentage = `${(serviceStatus.uptime * 100)}`.slice(0, 6);
 
     // format disruption minutes in hours and minutes if needed
-    if (status.disruptionMins > 60) {
-      const hours = Math.floor(status.disruptionMins / 60);
-      const mins = status.disruptionMins - hours * 60;
-      status.disruptionTime = `${hours}h ${mins ? `${mins}m` : ''}`;
+    if (serviceStatus.disruptionMins > 60) {
+      const hours = Math.floor(serviceStatus.disruptionMins / 60);
+      const mins = serviceStatus.disruptionMins - hours * 60;
+      serviceStatus.disruptionTime = `${hours}h ${mins ? `${mins}m` : ''}`;
     } else {
-      status.disruptionTime = `${status.disruptionMins}m`;
+      serviceStatus.disruptionTime = `${serviceStatus.disruptionMins}m`;
     }
 
     // display uptime details
@@ -136,13 +136,13 @@ const calculateUptime = (incidents) => {
     if (!serviceElement) return;
     const uptimeElement = serviceElement.querySelector('.uptime');
     uptimeElement.innerHTML = `
-      <h4>90-Day Uptime: ${status.uptimePercentage}%</h4>
-      <p>${status.numIncidents} incidents${status.disruptionMins ? `, ${status.disruptionTime} of potential disruptions` : ''}</p>
+      <h4>90-Day Uptime: ${serviceStatus.uptimePercentage}%</h4>
+      <p>${serviceStatus.numIncidents} incidents${serviceStatus.disruptionMins ? `, ${serviceStatus.disruptionTime} of potential disruptions` : ''}</p>
     `;
     // color coding based on uptime
-    if (status.uptime >= status.sla) {
+    if (serviceStatus.uptime >= serviceStatus.sla) {
       uptimeElement.classList.add('ok');
-    } else if (status.uptime >= status.sla - (1 - status.sla)) {
+    } else if (serviceStatus.uptime >= serviceStatus.sla - (1 - serviceStatus.sla)) {
       uptimeElement.classList.add('warn');
     } else {
       uptimeElement.classList.add('err');
