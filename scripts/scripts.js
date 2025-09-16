@@ -432,23 +432,30 @@ const updatePostmortem = async () => {
   doc.querySelector('h1').className = incidentImpact;
   const updates = doc.querySelector('.updates');
   let updatesHTML = '';
-  window.currentIncident.forEach((incident) => {
-    updatesHTML += `
-    <li>
-      <h2>${incident.status}</h2>
-      <p>${incident.comment}</p>
-      <time>${incident.timestamp}</time>
-    </li>
-`;
-  });
-  updates.innerHTML = updatesHTML;
-
+  if (window.currentIncident.length > 0) {
+    const lastUpdate = window.currentIncident[window.currentIncident.length - 1];
+    const firstUpdate = window.currentIncident[0];
+    window.currentIncident.forEach((update) => {
+      updatesHTML += `
+      <li>
+        <h2>${update.status}</h2>
+        <p>${update.comment}</p>
+        <time>${update.timestamp}</time>
+      </li>
+  `;
+    });
+    updates.innerHTML = updatesHTML;
+    const article = doc.querySelector('article');
+    article.setAttribute('data-incident-start-time', firstUpdate.timestamp);
+    article.setAttribute('data-incident-end-time', lastUpdate.timestamp);
+  }
   doc.querySelector('article time').textContent = new Date().toISOString();
 
   incidentTextArea.value = doc.body.innerHTML;
 };
 
 const initPostmortem = async () => {
+  document.body.classList.add('ready');
   window.currentIncident = await fetchCurrentIncident();
   document.querySelector('fieldset').disabled = false;
   const randomString = (length) => Math.random().toString(36).substring(2, 2 + length);
