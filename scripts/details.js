@@ -127,6 +127,7 @@ const init = async () => {
 
   const copyright = document.getElementById('year');
   copyright.textContent = new Date().getFullYear();
+  document.body.classList.add('ready');
 };
 
 init();
