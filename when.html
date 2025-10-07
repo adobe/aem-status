@@ -53,28 +53,48 @@
             margin-left: 2px;
             display: inline-block;
             position: relative;
-            width: 20px;
-            height: 16px;
-            overflow: hidden;
+            width: 22px;
+            height: 18px;
         }
 
         .shift-indicator .flag {
             position: absolute;
-            animation: fadeInOut 12s infinite;
+            left: 0;
+            top: 0;
             opacity: 0;
+        }
+
+        /* EU shift - 3 flags, 12s total (4s each) */
+        .shift-indicator.eu .flag {
+            animation: fadeInOutEU 12s infinite;
         }
 
         .shift-indicator.eu .flag:nth-child(1) { animation-delay: 0s; }
         .shift-indicator.eu .flag:nth-child(2) { animation-delay: 4s; }
         .shift-indicator.eu .flag:nth-child(3) { animation-delay: 8s; }
 
-        .shift-indicator.us .flag:nth-child(1) { animation-delay: 0s; }
-        .shift-indicator.us .flag:nth-child(2) { animation-delay: 6s; }
-
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0; }
-            8%, 25% { opacity: 1; }
+        @keyframes fadeInOutEU {
+            0% { opacity: 0; }
+            2% { opacity: 1; }
+            31% { opacity: 1; }
             33% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* US shift - 2 flags, 8s total (4s each) */
+        .shift-indicator.us .flag {
+            animation: fadeInOutUS 8s infinite;
+        }
+
+        .shift-indicator.us .flag:nth-child(1) { animation-delay: 0s; }
+        .shift-indicator.us .flag:nth-child(2) { animation-delay: 4s; }
+
+        @keyframes fadeInOutUS {
+            0% { opacity: 0; }
+            2% { opacity: 1; }
+            48% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 0; }
         }
 
         .heatmap-cell.row-label {
