@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On-Call Load Analysis - AEM Edge Delivery Status</title>
+    <meta name="description" content="Heatmap showing likelihood of getting paged by hour and day of week">
+    <link rel="stylesheet" href="styles/styles.css">
+    <style>
+        .heatmap-container {
+            background: white;
+            padding: var(--spectrum-spacing-600);
+            border-radius: var(--spectrum-border-radius-200);
+            box-shadow: var(--spectrum-shadow-200);
+            margin-bottom: var(--spectrum-spacing-600);
+            overflow-x: auto;
+        }
+
+        .heatmap {
+            display: table;
+            border-collapse: separate;
+            border-spacing: 2px;
+            margin: var(--spectrum-spacing-600) auto;
+            font-size: var(--spectrum-font-size-small);
+        }
+
+        .heatmap-row {
+            display: table-row;
+        }
+
+        .heatmap-cell {
+            display: table-cell;
+            min-width: 32px;
+            height: 32px;
+            text-align: center;
+            vertical-align: middle;
+            border-radius: var(--spectrum-border-radius-100);
+            font-weight: 600;
+            transition: all 0.2s ease;
+            position: relative;
+            padding: 4px;
+        }
+
+        .heatmap-cell.header {
+            background: transparent;
+            font-weight: 800;
+            color: var(--spectrum-gray-700);
+            border: none;
+        }
+
+        .heatmap-cell.row-label {
+            text-align: right;
+            padding-right: var(--spectrum-spacing-300);
+            font-weight: 800;
+            color: var(--spectrum-gray-700);
+            background: transparent;
+        }
+
+        .heatmap-cell.data {
+            cursor: pointer;
+            font-size: 11px;
+            color: white;
+        }
+
+        .heatmap-cell.data:hover {
+            transform: scale(1.1);
+            box-shadow: var(--spectrum-shadow-300);
+            z-index: 10;
+        }
+
+        /* Color scale from green (low) to red (high) */
+        .heatmap-cell.level-0 { background-color: #f0f0f0; color: var(--spectrum-gray-700); }
+        .heatmap-cell.level-1 { background-color: #d4edda; color: var(--spectrum-gray-900); }
+        .heatmap-cell.level-2 { background-color: #a8e6cf; }
+        .heatmap-cell.level-3 { background-color: #78d4a8; }
+        .heatmap-cell.level-4 { background-color: #56c596; }
+        .heatmap-cell.level-5 { background-color: #ffd166; }
+        .heatmap-cell.level-6 { background-color: #ffb84d; }
+        .heatmap-cell.level-7 { background-color: #ff9f33; }
+        .heatmap-cell.level-8 { background-color: #ff8619; }
+        .heatmap-cell.level-9 { background-color: #ff6b00; }
+        .heatmap-cell.level-10 { background-color: #e63946; }
+
+        .legend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spectrum-spacing-300);
+            margin-top: var(--spectrum-spacing-600);
+            font-size: var(--spectrum-font-size-small);
+            color: var(--spectrum-gray-700);
+        }
+
+        .legend-scale {
+            display: flex;
+            gap: 2px;
+            margin: 0 var(--spectrum-spacing-300);
+        }
+
+        .legend-box {
+            width: 24px;
+            height: 24px;
+            border-radius: var(--spectrum-border-radius-100);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spectrum-spacing-400);
+            margin-top: var(--spectrum-spacing-600);
+        }
+
+        .stat-card {
+            background: var(--spectrum-blue-50);
+            padding: var(--spectrum-spacing-400);
+            border-radius: var(--spectrum-border-radius-200);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: var(--spectrum-font-size-xxlarge);
+            font-weight: 800;
+            color: var(--spectrum-blue-700);
+        }
+
+        .stat-label {
+            font-size: var(--spectrum-font-size-small);
+            color: var(--spectrum-gray-700);
+            margin-top: var(--spectrum-spacing-100);
+        }
+
+        .tooltip {
+            position: fixed;
+            background: var(--spectrum-gray-900);
+            color: white;
+            padding: var(--spectrum-spacing-200) var(--spectrum-spacing-300);
+            border-radius: var(--spectrum-border-radius-100);
+            font-size: var(--spectrum-font-size-small);
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+            box-shadow: var(--spectrum-shadow-400);
+        }
+
+        .tooltip.visible {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .heatmap-cell {
+                min-width: 24px;
+                height: 24px;
+                font-size: 10px;
+            }
+
+            .heatmap-cell.header,
+            .heatmap-cell.row-label {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div>
+                <h1>On-Call Load Analysis</h1>
+                <p>Incident likelihood by hour and day of week (UTC)</p>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <section class="section">
+            <div class="section-head">
+                <h2>Incident Heatmap</h2>
+            </div>
+            <div class="heatmap-container">
+                <div id="heatmap"></div>
+                <div class="legend">
+                    <span>Less likely</span>
+                    <div class="legend-scale" id="legend-scale"></div>
+                    <span>More likely</span>
+                </div>
+                <div class="stats" id="stats"></div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container copyright">
+            Copyright &copy; <span id="year"></span> Adobe. All rights reserved /
+            <a href="adobe.com/privacy.html">Privacy</a> /
+            <a href="https://www.adobe.com/legal/terms.html">Terms of Use</a> /
+            <a href="https://www.adobe.com/privacy/ca-rights.html">Do not sell my personal information</a>
+        </div>
+    </footer>
+    <div class="tooltip" id="tooltip"></div>
+    <script type="module">
+        // Parse ISO 8601 timestamp
+        const parseTimestamp = (timestamp) => {
+            const date = new Date(timestamp);
+            if (!isNaN(date.getTime())) {
+                return date;
+            }
+            return new Date(timestamp);
+        };
+
+        // Fetch incident data
+        const getIncidents = async () => {
+            const response = await fetch('/incidents/index.json');
+            const incidents = await response.json();
+            return incidents;
+        };
+
+        // Calculate incidents per hour/day grid
+        const calculateHeatmapData = (incidents) => {
+            const grid = {};
+            const totalHours = {};
+
+            // Initialize grid: 7 days x 24 hours
+            for (let day = 0; day < 7; day++) {
+                grid[day] = {};
+                for (let hour = 0; hour < 24; hour++) {
+                    grid[day][hour] = 0;
+                    const key = `${day}-${hour}`;
+                    totalHours[key] = 0;
+                }
+            }
+
+            // Count incidents by day of week and hour (UTC)
+            incidents.forEach(incident => {
+                const date = parseTimestamp(incident.timestamp);
+                if (!isNaN(date.getTime())) {
+                    const dayOfWeek = date.getUTCDay(); // 0 = Sunday, 1 = Monday, etc.
+                    const hour = date.getUTCHours();
+                    grid[dayOfWeek][hour]++;
+                }
+            });
+
+            // Calculate total possible hours for each slot
+            // (total number of that day/hour combination in the data range)
+            const now = new Date();
+            const oldestIncident = incidents.reduce((oldest, incident) => {
+                const date = parseTimestamp(incident.timestamp);
+                return date < oldest ? date : oldest;
+            }, now);
+
+            const daysDiff = Math.floor((now - oldestIncident) / (1000 * 60 * 60 * 24));
+            const weeksCount = Math.floor(daysDiff / 7);
+
+            // Each day/hour slot appears approximately weeksCount times
+            for (let day = 0; day < 7; day++) {
+                for (let hour = 0; hour < 24; hour++) {
+                    const key = `${day}-${hour}`;
+                    totalHours[key] = weeksCount > 0 ? weeksCount : 1;
+                }
+            }
+
+            // Calculate rate (incidents per time slot)
+            const rates = {};
+            for (let day = 0; day < 7; day++) {
+                rates[day] = {};
+                for (let hour = 0; hour < 24; hour++) {
+                    const key = `${day}-${hour}`;
+                    rates[day][hour] = grid[day][hour] / totalHours[key];
+                }
+            }
+
+            return { grid, rates, totalHours, weeksCount };
+        };
+
+        // Get max value for color scaling
+        const getMaxRate = (rates) => {
+            let max = 0;
+            for (let day = 0; day < 7; day++) {
+                for (let hour = 0; hour < 24; hour++) {
+                    if (rates[day][hour] > max) {
+                        max = rates[day][hour];
+                    }
+                }
+            }
+            return max;
+        };
+
+        // Map rate to color level (0-10)
+        const getColorLevel = (rate, maxRate) => {
+            if (rate === 0) return 0;
+            const normalized = rate / maxRate;
+            return Math.min(Math.ceil(normalized * 10), 10);
+        };
+
+        // Render heatmap
+        const renderHeatmap = (grid, rates) => {
+            const container = document.getElementById('heatmap');
+            const heatmap = document.createElement('div');
+            heatmap.className = 'heatmap';
+
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const maxRate = getMaxRate(rates);
+
+            // Header row (hours)
+            const headerRow = document.createElement('div');
+            headerRow.className = 'heatmap-row';
+
+            // Empty cell for top-left corner
+            const cornerCell = document.createElement('div');
+            cornerCell.className = 'heatmap-cell header';
+            headerRow.appendChild(cornerCell);
+
+            // Hour headers
+            for (let hour = 0; hour < 24; hour++) {
+                const cell = document.createElement('div');
+                cell.className = 'heatmap-cell header';
+                cell.textContent = hour;
+                cell.title = `${hour}:00 UTC`;
+                headerRow.appendChild(cell);
+            }
+            heatmap.appendChild(headerRow);
+
+            // Data rows (days)
+            for (let day = 0; day < 7; day++) {
+                const row = document.createElement('div');
+                row.className = 'heatmap-row';
+
+                // Day label
+                const labelCell = document.createElement('div');
+                labelCell.className = 'heatmap-cell row-label';
+                labelCell.textContent = days[day];
+                row.appendChild(labelCell);
+
+                // Hour cells
+                for (let hour = 0; hour < 24; hour++) {
+                    const cell = document.createElement('div');
+                    const count = grid[day][hour];
+                    const rate = rates[day][hour];
+                    const level = getColorLevel(rate, maxRate);
+
+                    cell.className = `heatmap-cell data level-${level}`;
+                    cell.textContent = count;
+                    cell.dataset.day = days[day];
+                    cell.dataset.hour = hour;
+                    cell.dataset.count = count;
+                    cell.dataset.rate = rate.toFixed(3);
+
+                    // Tooltip on hover
+                    cell.addEventListener('mouseenter', (e) => {
+                        const tooltip = document.getElementById('tooltip');
+                        tooltip.innerHTML = `
+                            <strong>${e.target.dataset.day} ${e.target.dataset.hour}:00 UTC</strong><br>
+                            Incidents: ${e.target.dataset.count}<br>
+                            Rate: ${e.target.dataset.rate} per week
+                        `;
+                        tooltip.classList.add('visible');
+                    });
+
+                    cell.addEventListener('mousemove', (e) => {
+                        const tooltip = document.getElementById('tooltip');
+                        tooltip.style.left = (e.clientX + 15) + 'px';
+                        tooltip.style.top = (e.clientY + 15) + 'px';
+                    });
+
+                    cell.addEventListener('mouseleave', () => {
+                        const tooltip = document.getElementById('tooltip');
+                        tooltip.classList.remove('visible');
+                    });
+
+                    row.appendChild(cell);
+                }
+                heatmap.appendChild(row);
+            }
+
+            container.appendChild(heatmap);
+
+            // Render legend
+            const legendScale = document.getElementById('legend-scale');
+            for (let i = 0; i <= 10; i++) {
+                const box = document.createElement('div');
+                box.className = `legend-box level-${i}`;
+                legendScale.appendChild(box);
+            }
+        };
+
+        // Calculate and render statistics
+        const renderStats = (grid, rates, incidents, weeksCount) => {
+            const container = document.getElementById('stats');
+
+            // Total incidents
+            const totalIncidents = incidents.length;
+
+            // Find busiest hour
+            let busiestHour = { day: 0, hour: 0, count: 0 };
+            let quietestHour = { day: 0, hour: 0, count: Infinity };
+
+            for (let day = 0; day < 7; day++) {
+                for (let hour = 0; hour < 24; hour++) {
+                    if (grid[day][hour] > busiestHour.count) {
+                        busiestHour = { day, hour, count: grid[day][hour] };
+                    }
+                    if (grid[day][hour] < quietestHour.count) {
+                        quietestHour = { day, hour, count: grid[day][hour] };
+                    }
+                }
+            }
+
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+            // Calculate average incidents per week
+            const avgPerWeek = (totalIncidents / weeksCount).toFixed(1);
+
+            const stats = [
+                {
+                    value: totalIncidents,
+                    label: 'Total Incidents'
+                },
+                {
+                    value: avgPerWeek,
+                    label: 'Avg Incidents/Week'
+                },
+                {
+                    value: `${days[busiestHour.day].slice(0, 3)} ${busiestHour.hour}:00`,
+                    label: `Busiest Time (${busiestHour.count} incidents)`
+                },
+                {
+                    value: `${days[quietestHour.day].slice(0, 3)} ${quietestHour.hour}:00`,
+                    label: `Quietest Time (${quietestHour.count} incidents)`
+                }
+            ];
+
+            stats.forEach(stat => {
+                const card = document.createElement('div');
+                card.className = 'stat-card';
+                card.innerHTML = `
+                    <div class="stat-value">${stat.value}</div>
+                    <div class="stat-label">${stat.label}</div>
+                `;
+                container.appendChild(card);
+            });
+        };
+
+        // Initialize
+        const init = async () => {
+            const incidents = await getIncidents();
+            const { grid, rates, totalHours, weeksCount } = calculateHeatmapData(incidents);
+            renderHeatmap(grid, rates);
+            renderStats(grid, rates, incidents, weeksCount);
+
+            // Set year in footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+            document.body.classList.add('ready');
+        };
+
+        init();
+    </script>
+</body>
+</html>
