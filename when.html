@@ -48,6 +48,11 @@
             border: none;
         }
 
+        .shift-indicator {
+            font-size: 14px;
+            margin-left: 2px;
+        }
+
         .heatmap-cell.row-label {
             text-align: right;
             padding-right: var(--spectrum-spacing-300);
@@ -89,6 +94,25 @@
             margin-top: var(--spectrum-spacing-600);
             font-size: var(--spectrum-font-size-small);
             color: var(--spectrum-gray-700);
+        }
+
+        .shift-legend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spectrum-spacing-600);
+            margin-top: var(--spectrum-spacing-400);
+            font-size: var(--spectrum-font-size-small);
+            color: var(--spectrum-gray-700);
+            padding: var(--spectrum-spacing-300);
+            background: var(--spectrum-gray-50);
+            border-radius: var(--spectrum-border-radius-200);
+        }
+
+        .shift-info {
+            display: flex;
+            align-items: center;
+            gap: var(--spectrum-spacing-200);
         }
 
         .legend-scale {
@@ -176,6 +200,16 @@
             </div>
             <div class="heatmap-container">
                 <div id="heatmap"></div>
+                <div class="shift-legend">
+                    <div class="shift-info">
+                        <span>🇪🇺 EU Shift</span>
+                        <span style="color: var(--spectrum-gray-500);">03:00-15:00 UTC</span>
+                    </div>
+                    <div class="shift-info">
+                        <span>🇺🇸 US Shift</span>
+                        <span style="color: var(--spectrum-gray-500);">15:00-03:00 UTC</span>
+                    </div>
+                </div>
                 <div class="legend">
                     <span>Less likely</span>
                     <div class="legend-scale" id="legend-scale"></div>
@@ -288,6 +322,17 @@
             return Math.min(Math.ceil(normalized * 10), 10);
         };
 
+        // Determine shift for a given UTC hour
+        // EU shift: 8:30 AM - 8:30 PM IST = 3:00 AM - 3:00 PM UTC (hours 3-14)
+        // US shift: 8:30 PM - 8:30 AM IST = 3:00 PM - 3:00 AM UTC (hours 15-23, 0-2)
+        const getShift = (hourUTC) => {
+            if (hourUTC >= 3 && hourUTC <= 14) {
+                return { name: 'EU', flag: '🇪🇺' };
+            } else {
+                return { name: 'US', flag: '🇺🇸' };
+            }
+        };
+
         // Render heatmap
         const renderHeatmap = (grid, rates) => {
             const container = document.getElementById('heatmap');
@@ -306,12 +351,13 @@
             cornerCell.className = 'heatmap-cell header';
             headerRow.appendChild(cornerCell);
 
-            // Hour headers
+            // Hour headers with shift indicators
             for (let hour = 0; hour < 24; hour++) {
                 const cell = document.createElement('div');
                 cell.className = 'heatmap-cell header';
-                cell.textContent = hour;
-                cell.title = `${hour}:00 UTC`;
+                const shift = getShift(hour);
+                cell.innerHTML = `${hour}<span class="shift-indicator" title="${shift.name} shift">${shift.flag}</span>`;
+                cell.title = `${hour}:00 UTC (${shift.name} shift)`;
                 headerRow.appendChild(cell);
             }
             heatmap.appendChild(headerRow);
@@ -334,18 +380,22 @@
                     const rate = rates[day][hour];
                     const level = getColorLevel(rate, maxRate);
 
+                    const shift = getShift(hour);
                     cell.className = `heatmap-cell data level-${level}`;
                     cell.textContent = count;
                     cell.dataset.day = days[day];
                     cell.dataset.hour = hour;
                     cell.dataset.count = count;
                     cell.dataset.rate = rate.toFixed(3);
+                    cell.dataset.shift = shift.name;
+                    cell.dataset.shiftFlag = shift.flag;
 
                     // Tooltip on hover
                     cell.addEventListener('mouseenter', (e) => {
                         const tooltip = document.getElementById('tooltip');
                         tooltip.innerHTML = `
                             <strong>${e.target.dataset.day} ${e.target.dataset.hour}:00 UTC</strong><br>
+                            Shift: ${e.target.dataset.shiftFlag} ${e.target.dataset.shift}<br>
                             Incidents: ${e.target.dataset.count}<br>
                             Rate: ${e.target.dataset.rate} per week
                         `;
