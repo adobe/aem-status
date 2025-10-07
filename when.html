@@ -51,6 +51,30 @@
         .shift-indicator {
             font-size: 14px;
             margin-left: 2px;
+            display: inline-block;
+            position: relative;
+            width: 20px;
+            height: 16px;
+            overflow: hidden;
+        }
+
+        .shift-indicator .flag {
+            position: absolute;
+            animation: fadeInOut 12s infinite;
+            opacity: 0;
+        }
+
+        .shift-indicator.eu .flag:nth-child(1) { animation-delay: 0s; }
+        .shift-indicator.eu .flag:nth-child(2) { animation-delay: 4s; }
+        .shift-indicator.eu .flag:nth-child(3) { animation-delay: 8s; }
+
+        .shift-indicator.us .flag:nth-child(1) { animation-delay: 0s; }
+        .shift-indicator.us .flag:nth-child(2) { animation-delay: 6s; }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            8%, 25% { opacity: 1; }
+            33% { opacity: 0; }
         }
 
         .heatmap-cell.row-label {
@@ -202,12 +226,12 @@
                 <div id="heatmap"></div>
                 <div class="shift-legend">
                     <div class="shift-info">
-                        <span>🇪🇺 EU Shift</span>
-                        <span style="color: var(--spectrum-gray-500);">03:00-15:00 UTC</span>
+                        <span>🇨🇭 🇫🇷 🇩🇪 EU Shift</span>
+                        <span style="color: var(--spectrum-gray-500);">03:00-15:00 UTC (Switzerland, France, Germany)</span>
                     </div>
                     <div class="shift-info">
-                        <span>🇺🇸 US Shift</span>
-                        <span style="color: var(--spectrum-gray-500);">15:00-03:00 UTC</span>
+                        <span>🇺🇸 🇨🇦 US Shift</span>
+                        <span style="color: var(--spectrum-gray-500);">15:00-03:00 UTC (United States, Canada)</span>
                     </div>
                 </div>
                 <div class="legend">
@@ -361,9 +385,17 @@
         // US shift: 8:30 PM - 8:30 AM IST = 3:00 PM - 3:00 AM UTC (hours 15-23, 0-2)
         const getShift = (hourUTC) => {
             if (hourUTC >= 3 && hourUTC <= 14) {
-                return { name: 'EU', flag: '🇪🇺' };
+                return {
+                    name: 'EU',
+                    flags: ['🇨🇭', '🇫🇷', '🇩🇪'],
+                    countries: 'Switzerland, France, Germany'
+                };
             } else {
-                return { name: 'US', flag: '🇺🇸' };
+                return {
+                    name: 'US',
+                    flags: ['🇺🇸', '🇨🇦'],
+                    countries: 'United States, Canada'
+                };
             }
         };
 
@@ -390,8 +422,9 @@
                 const cell = document.createElement('div');
                 cell.className = 'heatmap-cell header';
                 const shift = getShift(hour);
-                cell.innerHTML = `${hour}<span class="shift-indicator" title="${shift.name} shift">${shift.flag}</span>`;
-                cell.title = `${hour}:00 UTC (${shift.name} shift)`;
+                const flagsHTML = shift.flags.map(flag => `<span class="flag">${flag}</span>`).join('');
+                cell.innerHTML = `${hour}<span class="shift-indicator ${shift.name.toLowerCase()}" title="${shift.name} shift: ${shift.countries}">${flagsHTML}</span>`;
+                cell.title = `${hour}:00 UTC (${shift.name} shift: ${shift.countries})`;
                 headerRow.appendChild(cell);
             }
             heatmap.appendChild(headerRow);
@@ -424,14 +457,14 @@
                     cell.dataset.rate = rate.toFixed(3);
                     cell.dataset.frequency = frequency;
                     cell.dataset.shift = shift.name;
-                    cell.dataset.shiftFlag = shift.flag;
+                    cell.dataset.shiftCountries = shift.countries;
 
                     // Tooltip on hover
                     cell.addEventListener('mouseenter', (e) => {
                         const tooltip = document.getElementById('tooltip');
                         tooltip.innerHTML = `
                             <strong>${e.target.dataset.day} ${e.target.dataset.hour}:00 UTC</strong><br>
-                            Shift: ${e.target.dataset.shiftFlag} ${e.target.dataset.shift}<br>
+                            Shift: ${e.target.dataset.shift} (${e.target.dataset.shiftCountries})<br>
                             Incidents: ${e.target.dataset.count}<br>
                             Frequency: ${e.target.dataset.frequency}
                         `;
