@@ -322,6 +322,40 @@
             return Math.min(Math.ceil(normalized * 10), 10);
         };
 
+        // Convert rate to human-readable frequency
+        const formatFrequency = (rate) => {
+            if (rate === 0) {
+                return 'Never happened';
+            }
+
+            const weeksPerOccurrence = 1 / rate;
+
+            if (weeksPerOccurrence < 1) {
+                // More than once per week
+                const timesPerWeek = rate;
+                if (timesPerWeek >= 2) {
+                    return `~${Math.round(timesPerWeek)} times per week`;
+                } else {
+                    return 'About once per week';
+                }
+            } else if (weeksPerOccurrence < 4.33) {
+                // Less than a month
+                const weeks = Math.round(weeksPerOccurrence);
+                return `Every ${weeks} week${weeks !== 1 ? 's' : ''}`;
+            } else if (weeksPerOccurrence < 52) {
+                // Less than a year
+                const months = Math.round(weeksPerOccurrence / 4.33);
+                return `Every ${months} month${months !== 1 ? 's' : ''}`;
+            } else {
+                // More than a year
+                const years = Math.round(weeksPerOccurrence / 52);
+                if (years > 10) {
+                    return 'Very rarely (10+ years)';
+                }
+                return `Every ${years} year${years !== 1 ? 's' : ''}`;
+            }
+        };
+
         // Determine shift for a given UTC hour
         // EU shift: 8:30 AM - 8:30 PM IST = 3:00 AM - 3:00 PM UTC (hours 3-14)
         // US shift: 8:30 PM - 8:30 AM IST = 3:00 PM - 3:00 AM UTC (hours 15-23, 0-2)
@@ -381,12 +415,14 @@
                     const level = getColorLevel(rate, maxRate);
 
                     const shift = getShift(hour);
+                    const frequency = formatFrequency(rate);
                     cell.className = `heatmap-cell data level-${level}`;
                     cell.textContent = count;
                     cell.dataset.day = days[day];
                     cell.dataset.hour = hour;
                     cell.dataset.count = count;
                     cell.dataset.rate = rate.toFixed(3);
+                    cell.dataset.frequency = frequency;
                     cell.dataset.shift = shift.name;
                     cell.dataset.shiftFlag = shift.flag;
 
@@ -397,7 +433,7 @@
                             <strong>${e.target.dataset.day} ${e.target.dataset.hour}:00 UTC</strong><br>
                             Shift: ${e.target.dataset.shiftFlag} ${e.target.dataset.shift}<br>
                             Incidents: ${e.target.dataset.count}<br>
-                            Rate: ${e.target.dataset.rate} per week
+                            Frequency: ${e.target.dataset.frequency}
                         `;
                         tooltip.classList.add('visible');
                     });
