@@ -13,7 +13,7 @@
     "lint:css": "stylelint 'blocks/**/*.css' 'styles/*.css'",
     "lint": "npm run lint:js && npm run lint:css",
     "update-incidents": "node scripts/update-incidents-index.js",
-    "localhost": "npx live-server --port=3000 --open=/ --watch=."
+    "localhost": "npx live-server --port=2999 --open=/ --watch=."
   },
   "repository": {
     "type": "git",
