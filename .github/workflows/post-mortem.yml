@@ -74,9 +74,19 @@ jobs:
             - Insights are transferable to prevent similar incidents
             - Identifies trends across multiple incidents if applicable
 
+            As our post-mortems are public-facing, the main focus should be on impact to customers.
+            Impact to the team is secondary, and only interesting in so far as it touches the lessons
+            learned and improvements made to ensure this kind of incident does not repeat.
+
+            Use @incidents/incident-template-long.html as a reference for a post-mortem for a high-impact incident.
+            Use @incidents/incident-template-short.html as a reference for a post-mortem for a low-impact incident.
+
             Please provide thorough feedback with inline comments on areas that need improvement,
             missing information, or where the analysis could be deeper. Highlight particularly
             well-written sections as examples of best practices.
+
+            Use the ```suggestion markdown syntax to provide actionable recommendations that the
+            post-mortem author can merge right away.
 
           claude_args: |
             --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*), Bash(gh pr diff:*), Bash(gh pr view:*)"
