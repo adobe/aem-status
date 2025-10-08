@@ -2,6 +2,12 @@
 
 Status page and incident tracking for AEM Edge Delivery Services.
 
+## Installation
+
+```bash
+npm install
+```
+
 ## Development
 
 ### Local Development Server
@@ -9,7 +15,7 @@ Status page and incident tracking for AEM Edge Delivery Services.
 To run the status page locally with live reload:
 
 ```bash
-npm run localhost
+npm start
 ```
 
 This will start a development server on `http://localhost:2999` and automatically open your browser. The server watches for file changes and reloads the page automatically.
