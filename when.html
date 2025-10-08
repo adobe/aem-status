@@ -46,19 +46,20 @@
             font-weight: 800;
             color: var(--spectrum-gray-700);
             border: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 2px;
+        }
+
+        .heatmap-cell.header > div {
+            display: block;
+            text-align: center;
         }
 
         .shift-indicator {
             font-size: 14px;
-            display: inline-block;
+            display: block;
             position: relative;
             width: 22px;
             height: 18px;
+            margin: 0 auto;
         }
 
         .shift-indicator .flag {
@@ -462,7 +463,7 @@
                 cell.className = 'heatmap-cell header';
                 const shift = getShift(hour);
                 const flagsHTML = shift.flags.map(flag => `<span class="flag">${flag}</span>`).join('');
-                cell.innerHTML = `<span>${hour}</span><span class="shift-indicator ${shift.name.toLowerCase()}" title="${shift.name} shift: ${shift.countries}">${flagsHTML}</span>`;
+                cell.innerHTML = `<div>${hour}</div><div class="shift-indicator ${shift.name.toLowerCase()}" title="${shift.name} shift: ${shift.countries}">${flagsHTML}</div>`;
                 cell.title = `${hour}:00 UTC (${shift.name} shift: ${shift.countries})`;
                 headerRow.appendChild(cell);
             }
