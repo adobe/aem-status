@@ -114,8 +114,10 @@
         }
 
         .heatmap-cell.summary:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
+            box-shadow: var(--spectrum-shadow-300);
             background-color: var(--spectrum-gray-200);
+            z-index: 10;
         }
 
         .heatmap-cell.data {
