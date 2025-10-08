@@ -1,0 +1,39 @@
+<h1>Github notifications unavailable</h1>
+<article
+    data-incident-start-time="2025-10-07T18:25:03.343Z"
+    data-incident-end-time="2025-10-07T19:26:17.694Z"
+    data-incident-error-rate="0.000"
+    data-incident-impacted-service="delivery">
+    <h2>Postmortem</h2>
+    <p>
+        On 10.07.2025 18:25 UTC we received alerts that Operational Telemetry script delivery was failing.
+    </p>
+    <p>
+        This turned out to be a false positive, and no actual script delivery failures were observed.
+    </p>
+    <h3>Executive Summary</h3>
+    <p>Nothing happened. Phew!</p>
+
+    <h3>Impact Analysis</h3>
+    <p>No customers or projects were impacted</p>
+
+    <h3>Root Cause Analysis</h3>
+    <p>
+        Our monitoring for Operational Telemetry confirms that the scripts delivered by Operational Telemetry
+        have checksums matching the published checksums on GitHub releases. This check uses the GitHub API
+        to retrieve recent releases and release artifacts.
+    </p>
+    <p>
+        If the GitHub API is not available, or the worker running the check is rate limited, the check will fail.
+        This has been causing the alert and our team was notified.
+    </p>
+    <h3>Next Steps</h3>
+    <p>
+        As this is a very infrequent occurrence and the cost of a false negative exceeds the cost of a false positive
+        alert, no changes to the monitoring configuration will be made.
+    </p>
+    <time></time>
+</article>
+
+<ul class="updates">
+</ul>
