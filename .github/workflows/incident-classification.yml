@@ -1,0 +1,107 @@
+name: Incident-Classification
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      # Only run when incidents are modified
+      - "incidents/index.json"
+
+jobs:
+  claude-classify-incident:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Claude Incident Classification
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            Please review the changes to incidents/index.json and verify that all new or modified incidents
+            have been properly classified with the required taxonomy fields.
+
+            Note: The PR branch is already checked out in the current working directory.
+
+            ## Classification Taxonomy:
+
+            Each incident MUST have the following three fields:
+
+            ### 1. affectedComponents (array)
+            Which systems were impacted. Choose from:
+            - **delivery** - Content/page delivery
+            - **publishing** - Authoring/preview/publish operations
+            - **admin-api** - Admin service
+            - **forms** - Form processing
+            - **code-sync** - GitHub integration/bot
+            - **rum** - Real User Monitoring
+            - **indexing** - Index updates
+            - **logging** - Log collection
+            - **dns** - DNS resolution
+            - **sidekick** - Sidekick tool
+            - **media** - Image/media delivery
+
+            Multiple components can be selected if the incident affected multiple systems.
+
+            ### 2. externalVendors (array or null)
+            Which third-party services were involved. Choose from:
+            - **cloudflare** - Including R2, Workers
+            - **aws** - Including Lambda, CloudWatch, etc.
+            - **fastly** - Including Image Optimizer
+            - **github** - GitHub API or services
+            - **microsoft** - Azure, SharePoint, OneDrive
+            - **unpkg** - unpkg.com CDN
+            - **zscaler** - zScaler proxy/security
+            - **null** - If no external vendor was involved
+
+            ### 3. rootCause (string)
+            Primary cause category. Choose ONE from:
+            - **third-party-outage** - External service disruption
+            - **configuration-change** - Configuration error or misconfiguration
+            - **deployment-issue** - Code deployment or release problem
+            - **resource-limits** - Capacity, concurrency, or resource exhaustion
+            - **credential-issue** - Authentication, authorization, or credential problems
+            - **dns-issue** - DNS resolution or configuration problems
+            - **network-issue** - Network connectivity or routing issues
+            - **unknown** - Cause not identified or maintenance
+
+            ## Review Instructions:
+
+            1. **Check for missing classifications**: Identify any incidents that are missing one or more
+               of the required fields (affectedComponents, externalVendors, rootCause).
+
+            2. **Validate classifications**: For each classified incident, verify that:
+               - The affectedComponents are accurate based on the incident name and message
+               - The externalVendors are correctly identified from the incident description
+               - The rootCause is the most appropriate category
+
+            3. **Suggest corrections**: If any classifications appear incorrect or incomplete, provide
+               specific suggestions using the ```suggestion markdown syntax for inline comments.
+
+            4. **Auto-classify if needed**: If there are new incidents without classifications, analyze
+               the incident name and message to determine the appropriate values for all three fields,
+               and provide the suggested classifications.
+
+            5. **Look for patterns**: Comment on any trends you notice (e.g., multiple incidents from
+               the same vendor, recurring root causes).
+
+            Please provide thorough feedback with inline comments on:
+            - Missing or incomplete classifications
+            - Potentially incorrect classifications
+            - Suggested improvements to the taxonomy values
+
+            Use the ```suggestion markdown syntax to provide actionable recommendations that can be
+            merged directly into the JSON file.
+
+          claude_args: |
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*), Bash(gh pr diff:*), Bash(gh pr view:*)"
