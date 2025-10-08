@@ -105,6 +105,19 @@
             background: transparent;
         }
 
+        .heatmap-cell.summary {
+            background-color: var(--spectrum-gray-100);
+            color: var(--spectrum-gray-800);
+            font-weight: 700;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        .heatmap-cell.summary:hover {
+            transform: scale(1.05);
+            background-color: var(--spectrum-gray-200);
+        }
+
         .heatmap-cell.data {
             cursor: pointer;
             font-size: 11px;
@@ -447,6 +460,14 @@
                 cell.title = `${hour}:00 UTC (${shift.name} shift: ${shift.countries})`;
                 headerRow.appendChild(cell);
             }
+
+            // Total column header
+            const totalColHeader = document.createElement('div');
+            totalColHeader.className = 'heatmap-cell header';
+            totalColHeader.textContent = 'Total';
+            totalColHeader.title = 'Total incidents for each day';
+            headerRow.appendChild(totalColHeader);
+
             heatmap.appendChild(headerRow);
 
             // Data rows (days)
@@ -504,8 +525,131 @@
 
                     row.appendChild(cell);
                 }
+
+                // Row total (sum of all hours for this day)
+                let dayTotal = 0;
+                let dayTotalRate = 0;
+                for (let hour = 0; hour < 24; hour++) {
+                    dayTotal += grid[day][hour];
+                    dayTotalRate += rates[day][hour];
+                }
+                const dayTotalCell = document.createElement('div');
+                dayTotalCell.className = 'heatmap-cell summary';
+                dayTotalCell.textContent = dayTotal;
+                dayTotalCell.dataset.count = dayTotal;
+                dayTotalCell.dataset.frequency = formatFrequency(dayTotalRate);
+                dayTotalCell.title = `${days[day]}: ${dayTotal} total incidents (${formatFrequency(dayTotalRate)})`;
+
+                dayTotalCell.addEventListener('mouseenter', (e) => {
+                    const tooltip = document.getElementById('tooltip');
+                    tooltip.innerHTML = `
+                        <strong>${days[day]} Total</strong><br>
+                        Incidents: ${e.target.dataset.count}<br>
+                        Frequency: ${e.target.dataset.frequency}
+                    `;
+                    tooltip.classList.add('visible');
+                });
+
+                dayTotalCell.addEventListener('mousemove', (e) => {
+                    const tooltip = document.getElementById('tooltip');
+                    tooltip.style.left = (e.clientX + 15) + 'px';
+                    tooltip.style.top = (e.clientY + 15) + 'px';
+                });
+
+                dayTotalCell.addEventListener('mouseleave', () => {
+                    const tooltip = document.getElementById('tooltip');
+                    tooltip.classList.remove('visible');
+                });
+
+                row.appendChild(dayTotalCell);
                 heatmap.appendChild(row);
             }
+
+            // Summary row (totals for each hour across all days)
+            const summaryRow = document.createElement('div');
+            summaryRow.className = 'heatmap-row';
+
+            // Label for summary row
+            const summaryLabel = document.createElement('div');
+            summaryLabel.className = 'heatmap-cell row-label';
+            summaryLabel.textContent = 'Total';
+            summaryRow.appendChild(summaryLabel);
+
+            // Calculate totals for each hour
+            let grandTotal = 0;
+            let grandTotalRate = 0;
+            for (let hour = 0; hour < 24; hour++) {
+                let hourTotal = 0;
+                let hourTotalRate = 0;
+                for (let day = 0; day < 7; day++) {
+                    hourTotal += grid[day][hour];
+                    hourTotalRate += rates[day][hour];
+                }
+                grandTotal += hourTotal;
+                grandTotalRate += hourTotalRate;
+
+                const hourTotalCell = document.createElement('div');
+                hourTotalCell.className = 'heatmap-cell summary';
+                hourTotalCell.textContent = hourTotal;
+                hourTotalCell.dataset.hour = hour;
+                hourTotalCell.dataset.count = hourTotal;
+                hourTotalCell.dataset.frequency = formatFrequency(hourTotalRate);
+                hourTotalCell.title = `Hour ${hour}:00 UTC: ${hourTotal} total incidents (${formatFrequency(hourTotalRate)})`;
+
+                hourTotalCell.addEventListener('mouseenter', (e) => {
+                    const tooltip = document.getElementById('tooltip');
+                    tooltip.innerHTML = `
+                        <strong>Hour ${e.target.dataset.hour}:00 UTC Total</strong><br>
+                        Incidents: ${e.target.dataset.count}<br>
+                        Frequency: ${e.target.dataset.frequency}
+                    `;
+                    tooltip.classList.add('visible');
+                });
+
+                hourTotalCell.addEventListener('mousemove', (e) => {
+                    const tooltip = document.getElementById('tooltip');
+                    tooltip.style.left = (e.clientX + 15) + 'px';
+                    tooltip.style.top = (e.clientY + 15) + 'px';
+                });
+
+                hourTotalCell.addEventListener('mouseleave', () => {
+                    const tooltip = document.getElementById('tooltip');
+                    tooltip.classList.remove('visible');
+                });
+
+                summaryRow.appendChild(hourTotalCell);
+            }
+
+            // Grand total (bottom-right corner)
+            const grandTotalCell = document.createElement('div');
+            grandTotalCell.className = 'heatmap-cell summary';
+            grandTotalCell.textContent = grandTotal;
+            grandTotalCell.title = `Grand total: ${grandTotal} incidents`;
+            grandTotalCell.style.fontWeight = '800';
+            grandTotalCell.style.backgroundColor = 'var(--spectrum-gray-200)';
+
+            grandTotalCell.addEventListener('mouseenter', (e) => {
+                const tooltip = document.getElementById('tooltip');
+                tooltip.innerHTML = `
+                    <strong>Grand Total</strong><br>
+                    All incidents: ${grandTotal}
+                `;
+                tooltip.classList.add('visible');
+            });
+
+            grandTotalCell.addEventListener('mousemove', (e) => {
+                const tooltip = document.getElementById('tooltip');
+                tooltip.style.left = (e.clientX + 15) + 'px';
+                tooltip.style.top = (e.clientY + 15) + 'px';
+            });
+
+            grandTotalCell.addEventListener('mouseleave', () => {
+                const tooltip = document.getElementById('tooltip');
+                tooltip.classList.remove('visible');
+            });
+
+            summaryRow.appendChild(grandTotalCell);
+            heatmap.appendChild(summaryRow);
 
             container.appendChild(heatmap);
 
