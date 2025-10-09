@@ -66,10 +66,10 @@ jobs:
             echo "Classification still pending"
           fi
 
-      - name: Auto-merge PR
+      - name: Auto-merge PR (Dry Run)
         if: steps.check_complete.outputs.complete == 'true'
         run: |
-          gh pr merge ${{ github.event.pull_request.number }} \
+          echo gh pr merge ${{ github.event.pull_request.number }} \
             --auto \
             --squash \
             --delete-branch
