@@ -1,0 +1,81 @@
+name: Classify Incidents
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  issue_comment:
+    types: [created]
+
+jobs:
+  classify:
+    # Only run on PRs with classification-pending file or @claude mentions
+    if: |
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.body, '@claude')) ||
+      (github.event_name == 'issue_comment' && github.event.issue.pull_request && contains(github.event.comment.body, '@claude'))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Claude Classification
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Classify all unclassified incidents in incidents/index.json.
+
+            ## Instructions:
+
+            1. Read incidents/index.json
+            2. Find incidents missing: affectedComponents, externalVendors, or rootCause
+            3. For each unclassified incident, analyze the name and message to determine:
+               - affectedComponents (array): delivery, publishing, admin-api, forms, code-sync, rum, indexing, logging, dns, sidekick, media
+               - externalVendors (array or null): cloudflare, aws, fastly, github, microsoft, unpkg, zscaler, or null
+               - rootCause (string): third-party-outage, configuration-change, deployment-issue, resource-limits, credential-issue, dns-issue, network-issue, unknown
+            4. Add these fields to each unclassified incident
+            5. Remove the .classification-pending file
+            6. Commit all changes with message: "feat: classify incidents"
+
+            Be precise in your classifications based on the incident descriptions.
+          claude_args: |
+            --allowedTools "Read,Write,Edit,Bash(git *),Bash(rm *)"
+
+  auto_merge:
+    needs: classify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.head_ref }}
+
+      - name: Check if classification complete
+        id: check_complete
+        run: |
+          if [ ! -f .classification-pending ]; then
+            echo "complete=true" >> $GITHUB_OUTPUT
+            echo "Classification is complete"
+          else
+            echo "complete=false" >> $GITHUB_OUTPUT
+            echo "Classification still pending"
+          fi
+
+      - name: Auto-merge PR
+        if: steps.check_complete.outputs.complete == 'true'
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} \
+            --auto \
+            --squash \
+            --delete-branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
