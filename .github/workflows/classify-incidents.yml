@@ -3,6 +3,8 @@ name: Classify Incidents
 on:
   pull_request:
     types: [opened]
+    branches:
+      - 'feature/incident-classification'
 
 jobs:
   classify:
