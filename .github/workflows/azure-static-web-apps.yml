@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature/incident-classification
     # Prevent workflow from running on automated commits to avoid infinite loops
     paths-ignore:
       - 'incidents/index.json'
@@ -35,7 +36,107 @@ jobs:
       
       - name: Update incidents index
         run: npm run update-incidents
-      
+
+      - name: Check for unclassified incidents
+        id: check_unclassified
+        run: |
+          UNCLASSIFIED=$(node -e "
+          const fs = require('fs');
+          const incidents = JSON.parse(fs.readFileSync('incidents/index.json', 'utf-8'));
+          const unclassified = incidents.filter(i =>
+            !i.affectedComponents ||
+            i.externalVendors === undefined ||
+            !i.rootCause
+          );
+          console.log(unclassified.length);
+          ")
+
+          echo "count=$UNCLASSIFIED" >> $GITHUB_OUTPUT
+
+          if [ "$UNCLASSIFIED" -gt 0 ]; then
+            echo "needs_classification=true" >> $GITHUB_OUTPUT
+            echo "Found $UNCLASSIFIED unclassified incidents"
+          else
+            echo "needs_classification=false" >> $GITHUB_OUTPUT
+            echo "All incidents classified ✓"
+          fi
+
+      - name: Install Anthropic SDK
+        if: steps.check_unclassified.outputs.needs_classification == 'true'
+        run: npm install --no-save @anthropic-ai/sdk
+
+      - name: Classify incidents with Claude
+        if: steps.check_unclassified.outputs.needs_classification == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          node << 'CLASSIFY_EOF'
+          const Anthropic = require('@anthropic-ai/sdk');
+          const fs = require('fs');
+
+          const anthropic = new Anthropic({
+            apiKey: process.env.ANTHROPIC_API_KEY,
+          });
+
+          async function classifyIncidents() {
+            const incidents = JSON.parse(fs.readFileSync('incidents/index.json', 'utf-8'));
+
+            const unclassified = incidents.filter(i =>
+              !i.affectedComponents ||
+              i.externalVendors === undefined ||
+              !i.rootCause
+            );
+
+            console.log(`Classifying ${unclassified.length} incidents...`);
+
+            const prompt = `Classify these incident reports. Analyze the "name" and "message" fields:
+
+          ${JSON.stringify(unclassified, null, 2)}
+
+          For EACH incident, determine:
+          1. affectedComponents (array): delivery, publishing, admin-api, forms, code-sync, rum, indexing, logging, dns, sidekick, media
+          2. externalVendors (array or null): cloudflare, aws, fastly, github, microsoft, unpkg, zscaler, or null
+          3. rootCause (string): third-party-outage, configuration-change, deployment-issue, resource-limits, credential-issue, dns-issue, network-issue, unknown
+
+          Return ONLY a JSON array in this exact format:
+          [{"code":"incident-code","affectedComponents":["delivery"],"externalVendors":["cloudflare"],"rootCause":"third-party-outage"}]`;
+
+            const message = await anthropic.messages.create({
+              model: 'claude-sonnet-4-20250514',
+              max_tokens: 4096,
+              messages: [{ role: 'user', content: prompt }]
+            });
+
+            const responseText = message.content[0].text;
+            const jsonMatch = responseText.match(/\[[\s\S]*\]/);
+
+            if (!jsonMatch) {
+              console.error('Could not extract JSON from Claude response');
+              process.exit(1);
+            }
+
+            const classifications = JSON.parse(jsonMatch[0]);
+
+            classifications.forEach(classification => {
+              const incident = incidents.find(i => i.code === classification.code);
+              if (incident) {
+                incident.affectedComponents = classification.affectedComponents;
+                incident.externalVendors = classification.externalVendors;
+                incident.rootCause = classification.rootCause;
+                console.log(`✓ Classified ${classification.code}`);
+              }
+            });
+
+            fs.writeFileSync('incidents/index.json', JSON.stringify(incidents, null, 2) + '\n');
+            console.log(`Successfully classified ${classifications.length} incidents`);
+          }
+
+          classifyIncidents().catch(err => {
+            console.error('Classification error:', err.message);
+            process.exit(1);
+          });
+          CLASSIFY_EOF
+
       - name: Check for changes in index.json
         id: check_changes
         run: |
@@ -46,7 +147,7 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "Changes detected in incidents/index.json"
           fi
-      
+
       - name: Commit and push changes
         if: steps.check_changes.outputs.changed == 'true'
         run: |
@@ -54,7 +155,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add incidents/index.json
           git commit -m "chore: update incidents index [skip ci]"
-          git push origin main
+          git push origin ${{ github.ref_name }}
       
       - name: Build And Deploy
         uses: Azure/static-web-apps-deploy@v1
