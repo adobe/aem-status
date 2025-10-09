@@ -1,0 +1,94 @@
+name: Claude-Classify
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  issue_comment:
+    types: [created]
+
+jobs:
+  claude-classify:
+    # Only run on PRs with @claude mention or on auto-classify PRs
+    if: |
+      (github.event_name == 'pull_request' && (
+        contains(github.event.pull_request.body, '@claude') ||
+        startsWith(github.event.pull_request.head.ref, 'auto-classify-')
+      )) ||
+      (github.event_name == 'issue_comment' &&
+        github.event.issue.pull_request &&
+        contains(github.event.comment.body, '@claude'))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 1
+
+      - name: Claude Code Classification
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Please classify any unclassified incidents in incidents/index.json.
+
+            ## Classification Taxonomy:
+
+            Each incident MUST have these three fields:
+
+            ### 1. affectedComponents (array)
+            Which systems were impacted. Choose from:
+            - **delivery** - Content/page delivery
+            - **publishing** - Authoring/preview/publish operations
+            - **admin-api** - Admin service
+            - **forms** - Form processing
+            - **code-sync** - GitHub integration/bot
+            - **rum** - Real User Monitoring
+            - **indexing** - Index updates
+            - **logging** - Log collection
+            - **dns** - DNS resolution
+            - **sidekick** - Sidekick tool
+            - **media** - Image/media delivery
+
+            Multiple components can be selected if the incident affected multiple systems.
+
+            ### 2. externalVendors (array or null)
+            Which third-party services were involved. Choose from:
+            - **cloudflare** - Including R2, Workers
+            - **aws** - Including Lambda, CloudWatch, etc.
+            - **fastly** - Including Image Optimizer
+            - **github** - GitHub API or services
+            - **microsoft** - Azure, SharePoint, OneDrive
+            - **unpkg** - unpkg.com CDN
+            - **zscaler** - zScaler proxy/security
+            - **null** - If no external vendor was involved
+
+            ### 3. rootCause (string)
+            Primary cause category. Choose ONE from:
+            - **third-party-outage** - External service disruption
+            - **configuration-change** - Configuration error or misconfiguration
+            - **deployment-issue** - Code deployment or release problem
+            - **resource-limits** - Capacity, concurrency, or resource exhaustion
+            - **credential-issue** - Authentication, authorization, or credential problems
+            - **dns-issue** - DNS resolution or configuration problems
+            - **network-issue** - Network connectivity or routing issues
+            - **unknown** - Cause not identified or maintenance
+
+            ## Instructions:
+
+            1. Read incidents/index.json
+            2. Find ALL incidents missing any of the three classification fields
+            3. For each unclassified incident, analyze the "name" and "message" fields
+            4. Add the appropriate classification fields based on your analysis
+            5. Commit the changes
+
+            Be thorough and precise in your classifications. Use the incident descriptions
+            to make informed decisions about affected components, vendor involvement, and
+            root causes.
+
+          claude_args: |
+            --allowedTools "Read,Write,Edit,Bash(git *)"
