@@ -166,16 +166,14 @@ function updateIncidentsIndex() {
   const htmlDir = path.join(incidentsDir, 'html');
   const indexPath = path.join(incidentsDir, 'index.json');
 
-  // Read existing index to preserve timestamps for simple format files
+  // Read existing index to preserve timestamps and classifications
   let existingIndex = [];
   const existingIncidentsMap = new Map();
   try {
     existingIndex = JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
     // Build map of existing incidents for lookup
-    existingIndex.forEach((month) => {
-      month.incidents.forEach((incident) => {
-        existingIncidentsMap.set(incident.code, incident);
-      });
+    existingIndex.forEach((incident) => {
+      existingIncidentsMap.set(incident.code, incident);
     });
   } catch (e) {
     // No existing index.json found or could not parse, creating new one
@@ -198,6 +196,20 @@ function updateIncidentsIndex() {
       // If timestamp needs update and we have existing data, use it
       if (incident.timestamp === 'NEEDS_MANUAL_UPDATE' && existingIncidentsMap.has(incident.code)) {
         incident.timestamp = existingIncidentsMap.get(incident.code).timestamp;
+      }
+
+      // Preserve classification fields from existing incident if they exist
+      if (existingIncidentsMap.has(incident.code)) {
+        const existingIncident = existingIncidentsMap.get(incident.code);
+        if (existingIncident.affectedComponents) {
+          incident.affectedComponents = existingIncident.affectedComponents;
+        }
+        if (existingIncident.externalVendors !== undefined) {
+          incident.externalVendors = existingIncident.externalVendors;
+        }
+        if (existingIncident.rootCause) {
+          incident.rootCause = existingIncident.rootCause;
+        }
       }
 
       // Skip incidents without valid timestamps
