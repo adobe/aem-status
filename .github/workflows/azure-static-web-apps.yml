@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature/incident-classification
     # Prevent workflow from running on automated commits to avoid infinite loops
     paths-ignore:
       - 'incidents/index.json'
@@ -35,26 +36,107 @@ jobs:
       
       - name: Update incidents index
         run: npm run update-incidents
-      
-      - name: Check for changes in index.json
-        id: check_changes
+
+      - name: Check for unclassified incidents
+        id: check_unclassified
         run: |
-          if git diff --quiet incidents/index.json; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-            echo "No changes detected in incidents/index.json"
+          UNCLASSIFIED=$(node -e "
+          const fs = require('fs');
+          const incidents = JSON.parse(fs.readFileSync('incidents/index.json', 'utf-8'));
+          const unclassified = incidents.filter(i =>
+            !i.affectedComponents ||
+            i.externalVendors === undefined ||
+            !i.rootCause
+          );
+          console.log(unclassified.length);
+          ")
+
+          echo "count=$UNCLASSIFIED" >> $GITHUB_OUTPUT
+
+          if [ "$UNCLASSIFIED" -gt 0 ]; then
+            echo "needs_classification=true" >> $GITHUB_OUTPUT
+            echo "Found $UNCLASSIFIED unclassified incidents"
           else
-            echo "changed=true" >> $GITHUB_OUTPUT
-            echo "Changes detected in incidents/index.json"
+            echo "needs_classification=false" >> $GITHUB_OUTPUT
+            echo "All incidents classified ✓"
           fi
-      
-      - name: Commit and push changes
-        if: steps.check_changes.outputs.changed == 'true'
+
+      - name: Commit updated index
+        id: commit_index
+        if: steps.check_unclassified.outputs.needs_classification == 'true'
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add incidents/index.json
-          git commit -m "chore: update incidents index [skip ci]"
-          git push origin main
+
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "chore: update incidents index [skip ci]"
+            git push origin ${{ github.ref_name }}
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create classification PR
+        if: steps.check_unclassified.outputs.needs_classification == 'true'
+        run: |
+          BRANCH_NAME="auto-classify-$(date +%s)"
+
+          git checkout -b "$BRANCH_NAME"
+
+          # Create marker file
+          echo "Waiting for Claude to classify ${{ steps.check_unclassified.outputs.count }} incidents" > .classification-pending
+          git add .classification-pending
+          git commit -m "chore: trigger incident classification
+
+          Found ${{ steps.check_unclassified.outputs.count }} incidents needing classification."
+
+          git push -u origin "$BRANCH_NAME"
+
+          # Create PR
+          gh pr create \
+            --title "Classify ${{ steps.check_unclassified.outputs.count }} incidents" \
+            --body "**Automated classification request**
+
+          This PR was automatically created because ${{ steps.check_unclassified.outputs.count }} incidents need classification.
+
+          @claude please classify all unclassified incidents in \`incidents/index.json\`.
+
+          ## Instructions:
+
+          Read \`incidents/index.json\` and find incidents missing these fields:
+          - \`affectedComponents\`
+          - \`externalVendors\`
+          - \`rootCause\`
+
+          For each unclassified incident, analyze the \`name\` and \`message\` fields to determine:
+
+          ### 1. affectedComponents (array)
+          Choose from: delivery, publishing, admin-api, forms, code-sync, rum, indexing, logging, dns, sidekick, media
+
+          ### 2. externalVendors (array or null)
+          Choose from: cloudflare, aws, fastly, github, microsoft, unpkg, zscaler, or null
+
+          ### 3. rootCause (string)
+          Choose ONE: third-party-outage, configuration-change, deployment-issue, resource-limits, credential-issue, dns-issue, network-issue, unknown
+
+          After classifying all incidents:
+          1. Remove the \`.classification-pending\` file
+          2. Commit all changes
+
+          This PR will be auto-merged once classification is complete." \
+            --base ${{ github.ref_name }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Wait for classification
+        if: steps.check_unclassified.outputs.needs_classification == 'true'
+        run: |
+          echo "Classification PR created. Waiting for Claude to complete classification..."
+          echo "This workflow will resume after the PR is merged."
+          exit 1
       
       - name: Build And Deploy
         uses: Azure/static-web-apps-deploy@v1
