@@ -126,7 +126,6 @@ jobs:
           - **third-party-outage**, **configuration-change**, **deployment-issue**, **resource-limits**, **credential-issue**, **dns-issue**, **network-issue**, **unknown**
 
           Please analyze each incident's \`name\` and \`message\` fields to determine appropriate classifications." \
-            --label "claude" \
             --base ${{ github.ref_name }}
         env:
           GH_TOKEN: ${{ github.token }}
