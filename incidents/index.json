@@ -8,14 +8,7 @@
     "startTime": "2025-09-09T18:25:03.343Z",
     "endTime": "2025-09-09T19:26:17.694Z",
     "errorRate": "0.001",
-    "impactedService": "delivery",
-    "affectedComponents": [
-      "delivery"
-    ],
-    "externalVendors": [
-      "cloudflare"
-    ],
-    "rootCause": "third-party-outage"
+    "impactedService": "delivery"
   },
   {
     "code": "AEM-u5ni9f8k",
@@ -26,27 +19,14 @@
     "startTime": "2025-09-02T16:24:55.049Z",
     "endTime": "2025-09-02T20:26:04.212Z",
     "errorRate": "0.001",
-    "impactedService": "delivery",
-    "affectedComponents": [
-      "media",
-      "delivery"
-    ],
-    "externalVendors": [
-      "fastly"
-    ],
-    "rootCause": "third-party-outage"
+    "impactedService": "delivery"
   },
   {
     "code": "ljzbj9qn50hf",
     "name": "Increased Delivery Error Rate",
     "message": "Executive Summary\n\nOn Wednesday, June 12, 2025, between 18:02 and 20:04 UTC (approximately 2 hours), one of our external suppliers experienced a critical outage that impacted Adobe Experience Manager (AEM) Sites Edge Delivery Services.\n\nAs a result, the average error rate for origin traffic temporarily increased to approximately 0.75%. The issue was mitigated by rerouting all eligible traffic away from the affected supplier, significantly reducing end-user impact.\n\nIncident Timeline\n\n\n18:02 UTC:",
     "impact": "minor",
-    "timestamp": "2025-06-12T20:52:00.000Z",
-    "affectedComponents": [
-      "delivery"
-    ],
-    "externalVendors": null,
-    "rootCause": "third-party-outage"
+    "timestamp": "2025-06-12T20:52:00.000Z"
   },
   {
     "code": "9hrqs86dmn18",
