@@ -9,12 +9,10 @@ on:
       - "incidents/index.json"
 
 jobs:
-  check-and-classify:
+  classify-incidents:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
-      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
@@ -57,75 +55,110 @@ jobs:
             echo "needs_classification=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Create classification PR
+      - name: Setup Node.js
+        if: steps.check_unclassified.outputs.needs_classification == 'true'
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Install Anthropic SDK
+        if: steps.check_unclassified.outputs.needs_classification == 'true'
+        run: npm install @anthropic-ai/sdk
+
+      - name: Classify incidents with Claude
+        if: steps.check_unclassified.outputs.needs_classification == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          node << 'EOF'
+          const Anthropic = require('@anthropic-ai/sdk');
+          const fs = require('fs');
+
+          const anthropic = new Anthropic({
+            apiKey: process.env.ANTHROPIC_API_KEY,
+          });
+
+          async function classifyIncidents() {
+            const incidents = JSON.parse(fs.readFileSync('incidents/index.json', 'utf-8'));
+
+            const unclassified = incidents.filter(i =>
+              !i.affectedComponents ||
+              i.externalVendors === undefined ||
+              !i.rootCause
+            );
+
+            console.log(`Classifying ${unclassified.length} incidents...`);
+
+            const prompt = `You are classifying incident reports. Here are the unclassified incidents:
+
+          ${JSON.stringify(unclassified, null, 2)}
+
+          For each incident, analyze the "name" and "message" fields and add these three classification fields:
+
+          1. affectedComponents (array): Choose from: delivery, publishing, admin-api, forms, code-sync, rum, indexing, logging, dns, sidekick, media
+
+          2. externalVendors (array or null): Choose from: cloudflare, aws, fastly, github, microsoft, unpkg, zscaler, or null if no external vendor
+
+          3. rootCause (string): Choose ONE from: third-party-outage, configuration-change, deployment-issue, resource-limits, credential-issue, dns-issue, network-issue, unknown
+
+          Return ONLY a JSON array with the classifications for each incident in the same order, like:
+          [
+            {
+              "code": "incident-code",
+              "affectedComponents": ["delivery"],
+              "externalVendors": ["cloudflare"],
+              "rootCause": "third-party-outage"
+            }
+          ]`;
+
+            const message = await anthropic.messages.create({
+              model: 'claude-sonnet-4-20250514',
+              max_tokens: 4096,
+              messages: [{
+                role: 'user',
+                content: prompt
+              }]
+            });
+
+            const responseText = message.content[0].text;
+            const jsonMatch = responseText.match(/\[[\s\S]*\]/);
+            if (!jsonMatch) {
+              console.error('Could not extract JSON from response');
+              process.exit(1);
+            }
+
+            const classifications = JSON.parse(jsonMatch[0]);
+
+            // Merge classifications back into incidents
+            classifications.forEach(classification => {
+              const incident = incidents.find(i => i.code === classification.code);
+              if (incident) {
+                incident.affectedComponents = classification.affectedComponents;
+                incident.externalVendors = classification.externalVendors;
+                incident.rootCause = classification.rootCause;
+                console.log(`✓ Classified ${classification.code}`);
+              }
+            });
+
+            fs.writeFileSync('incidents/index.json', JSON.stringify(incidents, null, 2) + '\n');
+            console.log(`\nSuccessfully classified ${classifications.length} incidents`);
+          }
+
+          classifyIncidents().catch(err => {
+            console.error('Error:', err);
+            process.exit(1);
+          });
+          EOF
+
+      - name: Commit classifications
         if: steps.check_unclassified.outputs.needs_classification == 'true'
         run: |
-          # Create a new branch for classification
-          BRANCH_NAME="auto-classify-$(date +%s)"
-          git checkout -b "$BRANCH_NAME"
-
-          # Create a marker file to indicate classification is needed
-          echo "${{ steps.check_unclassified.outputs.count }} incidents need classification" > .classification-needed
-          git add .classification-needed
-
-          # Commit and push
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "chore: trigger incident classification
+          git add incidents/index.json
+          git commit -m "chore: auto-classify ${{ steps.check_unclassified.outputs.count }} incidents [skip ci]
 
-          Found ${{ steps.check_unclassified.outputs.count }} incidents needing classification.
+          Automatically classified incidents using AI analysis.
 
-          @claude please classify the unclassified incidents in incidents/index.json using this taxonomy:
-
-          ## Classification Taxonomy:
-
-          ### 1. affectedComponents (array)
-          - delivery, publishing, admin-api, forms, code-sync, rum, indexing, logging, dns, sidekick, media
-
-          ### 2. externalVendors (array or null)
-          - cloudflare, aws, fastly, github, microsoft, unpkg, zscaler, or null
-
-          ### 3. rootCause (string)
-          - third-party-outage, configuration-change, deployment-issue, resource-limits, credential-issue, dns-issue, network-issue, unknown
-
-          Analyze each incident's name and message to determine the appropriate classifications."
-
-          git push -u origin "$BRANCH_NAME"
-
-          # Create PR
-          gh pr create \
-            --title "Auto-classify incidents" \
-            --body "This PR was automatically created because ${{ steps.check_unclassified.outputs.count }} incidents are missing classification fields.
-
-          @claude please classify all unclassified incidents in \`incidents/index.json\`.
-
-          Use the following taxonomy:
-
-          ## Classification Fields Required:
-
-          ### 1. affectedComponents (array)
-          Which systems were impacted:
-          - **delivery** - Content/page delivery
-          - **publishing** - Authoring/preview/publish operations
-          - **admin-api** - Admin service
-          - **forms** - Form processing
-          - **code-sync** - GitHub integration/bot
-          - **rum** - Real User Monitoring
-          - **indexing** - Index updates
-          - **logging** - Log collection
-          - **dns** - DNS resolution
-          - **sidekick** - Sidekick tool
-          - **media** - Image/media delivery
-
-          ### 2. externalVendors (array or null)
-          Third-party services involved:
-          - **cloudflare**, **aws**, **fastly**, **github**, **microsoft**, **unpkg**, **zscaler**, or **null**
-
-          ### 3. rootCause (string)
-          Primary cause:
-          - **third-party-outage**, **configuration-change**, **deployment-issue**, **resource-limits**, **credential-issue**, **dns-issue**, **network-issue**, **unknown**
-
-          Please analyze each incident's \`name\` and \`message\` fields to determine appropriate classifications." \
-            --base ${{ github.ref_name }}
-        env:
-          GH_TOKEN: ${{ github.token }}
+          🤖 Classified with Claude Code"
+          git push
