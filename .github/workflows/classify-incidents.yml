@@ -3,15 +3,11 @@ name: Classify Incidents
 on:
   pull_request:
     types: [opened]
-    branches:
-      - 'feature/incident-classification'
 
 jobs:
   classify:
-    # Only run on auto-classification PRs targeting feature/incident-classification
     if: |
-      startsWith(github.event.pull_request.head.ref, 'auto-classify-') &&
-      github.event.pull_request.base.ref == 'feature/incident-classification'
+      startsWith(github.event.pull_request.head.ref, 'auto-classify-')
     runs-on: ubuntu-latest
     permissions:
       contents: write
