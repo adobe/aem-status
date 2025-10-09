@@ -1,5 +1,16 @@
 [
   {
+    "code": "AEM-2x9qsuon",
+    "name": "code deployment delayed because of Github API exhaustion for one customer",
+    "message": "On October 9, 2025 at 15:41 UTC, we noticed that the Github API limit was reached for one customer.",
+    "impact": "none",
+    "timestamp": "2025-10-09T17:44:47.821Z",
+    "startTime": "2025-10-09T15:41:46.422Z",
+    "endTime": "2025-10-09T17:43:54.488Z",
+    "errorRate": "0.000",
+    "impactedService": "publishing"
+  },
+  {
     "code": "AEM-l4127tvy",
     "name": "Increased error rate on delivery via workers",
     "message": "On 09.09.2025 18:35 UTC we noticed a slight increase (<0.1%) in Edge Delivery Service errors.\n        Upon investigation, we found that one of our suppliers had already opened a major incident related\n        to worker delivery, confirmed status, and implemented a fix within 30 minutes. There were no\n        reports of customer impact.",
