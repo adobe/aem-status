@@ -3,31 +3,35 @@
     <h2>Postmortem</h2>
     <p>
         On October 20, 2025 at 07:07 UTC, we detected error messages in our monitoring system
-        related to an underlying AWS outage in the US-EAST-1 region. AWS reported increased error
-        rates and latencies affecting multiple services, with the root cause identified as DNS
-        resolution issues with the DynamoDB API endpoint.
+        related to an underlying AWS outage in the US-EAST-1 region. The outage primarily affected
+        AWS Lambda and SQS services, causing disruptions to dependent services including AEM.
     </p>
     <p>
-        The incident initially impacted AEM publishing operations. At 07:20 UTC, we began observing
-        a low level of delivery errors, totaling approximately 200 errors. Our delivery infrastructure
-        operates as a dual-stack system across multiple regions, which allowed our team to quickly
-        switch to the secondary stack at 07:25 UTC, eliminating delivery disruptions while continuing
-        to investigate the publishing impact.
+        The incident initially impacted AEM publishing operations, affecting all customers' publishing
+        workflows. At 07:20 UTC, we began observing a low level of delivery errors, totaling 200 requests
+        with minimal customer impact. Our delivery infrastructure operates as a dual-stack system across
+        multiple regions, which allowed our team to quickly switch to the secondary stack at 07:25 UTC,
+        eliminating delivery disruptions while continuing to investigate the publishing impact.
     </p>
     <p>
         At the time of the incident, publishing was operating on a single-stack, single-region
-        configuration. At 09:03 UTC, our team successfully brought up a secondary region for AEM
-        publishing, restoring full publishing functionality even as the AWS incident continued.
-        By 12:06 UTC, we began restoring the original service configuration while closely monitoring
-        the situation. Normal operations were fully restored at 12:14 UTC, with a total incident
-        duration of 5 hours and 7 minutes.
+        configuration. Given the uncertain resolution timeline from AWS and the availability of our
+        engineering team, we made the decision to bring up a secondary region rather than wait for
+        the AWS recovery. Within approximately 1 hour and 46 minutes of identifying the publishing
+        impact, at 09:03 UTC, our team successfully deployed a secondary publishing region, restoring
+        full functionality for all customers even as the AWS incident continued.
+    </p>
+    <p>
+        Some customers contacted support regarding publishing disruptions, but by that time, the impact
+        and status had already been communicated through our status page. By 12:06 UTC, we began
+        restoring the original service configuration while closely monitoring the situation. Normal
+        operations were fully restored at 12:14 UTC, with a total incident duration of 5 hours and 7 minutes.
     </p>
     <p>
         The rapid mitigation demonstrated the effectiveness of our dual-stack delivery architecture
         for immediate failover, and our team's ability to rapidly provision and deploy additional
-        infrastructure capacity for publishing during an active incident. This allowed us to maintain
-        service continuity despite the severity of the underlying AWS infrastructure issue that
-        affected numerous major platforms globally.
+        infrastructure capacity during an active incident. This experience reinforces the value of
+        multi-region architectures and having the right team available during critical incidents.
     </p>
 </article>
 
