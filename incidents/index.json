@@ -2,7 +2,7 @@
   {
     "code": "AEM-yanvkiuy",
     "name": "Minor publishing disruption due to AWS US-EAST-1 outage",
-    "message": "On October 20, 2025 at 07:07 UTC, we detected the first error messages in our monitoring system\n        related to an underlying AWS outage in the US-EAST-1 region. The outage primarily affected\n        AWS Lambda and SQS services, causing disruptions to dependent services including AEM.",
+    "message": "On October 20, 2025 at 06:54 UTC, we detected the first error messages in our monitoring system\n        related to an underlying AWS outage in the US-EAST-1 region. The outage primarily affected\n        AWS Lambda and SQS services, causing disruptions to dependent services including AEM.",
     "impact": "minor",
     "timestamp": "2025-10-20T07:07:48.558Z",
     "startTime": "2025-10-20T06:54:00.000Z",
