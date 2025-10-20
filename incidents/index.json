@@ -5,9 +5,9 @@
     "message": "On October 20, 2025 at 07:07 UTC, we detected the first error messages in our monitoring system\n        related to an underlying AWS outage in the US-EAST-1 region. The outage primarily affected\n        AWS Lambda and SQS services, causing disruptions to dependent services including AEM.",
     "impact": "minor",
     "timestamp": "2025-10-20T07:07:48.558Z",
-    "startTime": "2025-10-20T07:07:48.558Z",
-    "endTime": "2025-10-20T12:14:50.057Z",
-    "errorRate": "0.001",
+    "startTime": "2025-10-20T06:54:00.000Z",
+    "endTime": "2025-10-20T08:44:00.000Z",
+    "errorRate": "0.72",
     "impactedService": "publishing"
   },
   {
