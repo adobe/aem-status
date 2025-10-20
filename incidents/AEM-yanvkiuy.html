@@ -9,20 +9,25 @@
     </p>
     <p>
         The incident initially impacted AEM publishing operations. At 07:20 UTC, we began observing
-        a low level of delivery errors, totaling approximately 200 errors. To mitigate the delivery
-        impact, our team quickly switched delivery to our secondary stack at 07:25 UTC, eliminating
-        delivery disruptions while continuing to investigate the publishing impact.
+        a low level of delivery errors, totaling approximately 200 errors. Our delivery infrastructure
+        operates as a dual-stack system across multiple regions, which allowed our team to quickly
+        switch to the secondary stack at 07:25 UTC, eliminating delivery disruptions while continuing
+        to investigate the publishing impact.
     </p>
     <p>
-        At 09:03 UTC, a secondary region for AEM publishing was brought up, restoring full publishing
-        functionality even as the AWS incident continued. By 12:06 UTC, we began restoring the original
-        service configuration while closely monitoring the situation. Normal operations were fully
-        restored at 12:14 UTC, with a total incident duration of 5 hours and 7 minutes.
+        At the time of the incident, publishing was operating on a single-stack, single-region
+        configuration. At 09:03 UTC, our team successfully brought up a secondary region for AEM
+        publishing, restoring full publishing functionality even as the AWS incident continued.
+        By 12:06 UTC, we began restoring the original service configuration while closely monitoring
+        the situation. Normal operations were fully restored at 12:14 UTC, with a total incident
+        duration of 5 hours and 7 minutes.
     </p>
     <p>
-        The rapid mitigation was achieved through our multi-region architecture and failover capabilities,
-        allowing us to maintain service continuity despite the severity of the underlying AWS infrastructure
-        issue that affected numerous major platforms globally.
+        The rapid mitigation demonstrated the effectiveness of our dual-stack delivery architecture
+        for immediate failover, and our team's ability to rapidly provision and deploy additional
+        infrastructure capacity for publishing during an active incident. This allowed us to maintain
+        service continuity despite the severity of the underlying AWS infrastructure issue that
+        affected numerous major platforms globally.
     </p>
     <time>2025-10-20T12:22:03.751Z</time>    
 </article>
