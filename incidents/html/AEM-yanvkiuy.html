@@ -2,12 +2,12 @@
 <article data-incident-start-time="2025-10-20T06:54:00.000Z" data-incident-end-time="2025-10-20T08:44:00.000Z" data-incident-error-rate="0.72" data-incident-impacted-service="publishing">
     <h2>Postmortem</h2>
     <p>
-        On October 20, 2025 at 07:07 UTC, we detected the first error messages in our monitoring system
+        On October 20, 2025 at 06:54 UTC, we detected the first error messages in our monitoring system
         related to an underlying AWS outage in the US-EAST-1 region. The outage primarily affected
         AWS Lambda and SQS services, causing disruptions to dependent services including AEM.
     </p>
     <p>
-        At 07:17 UTC, we observed publishing disruptions caused by the AWS outage, affecting all
+        At 07:05 UTC, we observed publishing disruptions caused by the AWS outage, affecting all
         customers' publishing workflows. At 07:20 UTC, we began observing a low level of delivery
         errors, totaling 200 requests with minimal customer impact. Our delivery infrastructure
         operates as a dual-stack system across multiple regions, which allowed our team to quickly
