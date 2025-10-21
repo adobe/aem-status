@@ -201,13 +201,16 @@ function updateIncidentsIndex() {
       // Preserve classification fields from existing incident if they exist
       if (existingIncidentsMap.has(incident.code)) {
         const existingIncident = existingIncidentsMap.get(incident.code);
-        if (existingIncident.affectedComponents) {
+        if (existingIncident.affectedComponents !== undefined) {
           incident.affectedComponents = existingIncident.affectedComponents;
+        }
+        if (existingIncident.internalServices !== undefined) {
+          incident.internalServices = existingIncident.internalServices;
         }
         if (existingIncident.externalVendors !== undefined) {
           incident.externalVendors = existingIncident.externalVendors;
         }
-        if (existingIncident.rootCause) {
+        if (existingIncident.rootCause !== undefined) {
           incident.rootCause = existingIncident.rootCause;
         }
       }
