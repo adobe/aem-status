@@ -1,4 +1,4 @@
- <h1 class="minor">Minor publishing disruption due to AWS US-EAST-1 outage</h1>
+ <h1 class="major">Major publishing disruption due to AWS US-EAST-1 outage</h1>
 <article data-incident-start-time="2025-10-20T06:54:00.000Z" data-incident-end-time="2025-10-20T08:44:00.000Z" data-incident-error-rate="0.72" data-incident-impacted-service="publishing">
     <h2>Postmortem</h2>
     <p>
@@ -42,37 +42,37 @@
         <p>First error messages relating to the incident appear in our monitoring system.</p>
         <time>2025-10-20T07:07:48.558Z</time>
       </li>
-  
+
       <li>
         <h2>investigating</h2>
         <p>We are observing publishing disruptions caused by an underlying AWS outage. Our team investigates the solution and works on mitigation.</p>
         <time>2025-10-20T07:17:58.318Z</time>
       </li>
-  
+
       <li>
         <h2>investigating</h2>
         <p>In addition to publishing disruptions, we now also observe a low level of delivery errors (200 errors in total). Mitigation is under way.</p>
         <time>2025-10-20T07:20:08.975Z</time>
       </li>
-  
+
       <li>
         <h2>investigating</h2>
         <p>We have switched delivery to our secondary stack, so that the ongoing incident no longer has any delivery impact. Impact to publishing is still being investigated.</p>
         <time>2025-10-20T07:25:57.948Z</time>
       </li>
-  
+
       <li>
         <h2>investigating</h2>
         <p>A secondary region for AEM publishing has been brought up, so that publishing functionality has been restored, even though the underlying AWS incident is still ongoing. We are watching the situation closely.</p>
         <time>2025-10-20T09:03:13.706Z</time>
       </li>
-  
+
       <li>
         <h2>monitoring</h2>
         <p>The original service configuration is being restored, we continue to monitor the situation.</p>
         <time>2025-10-20T12:06:02.967Z</time>
       </li>
-  
+
       <li>
         <h2>resolved</h2>
         <p>Normal operations have been restored.</p>
