@@ -1,6 +1,14 @@
  <h1 class="major">Major publishing disruption due to AWS US-EAST-1 outage</h1>
 <article data-incident-start-time="2025-10-20T06:54:00.000Z" data-incident-end-time="2025-10-20T08:44:00.000Z" data-incident-error-rate="0.0833" data-incident-impacted-service="publishing">
     <h2>Postmortem</h2>
+    <h3>Executive Summary</h3>
+    <p>
+        On October 20, 2025, between 06:54 and 08:44 UTC, an AWS US-EAST-1 region outage 
+        affecting Lambda and SQS services caused publishing disruptions for all AEM customers 
+        and minimal delivery errors. Our team deployed a secondary publishing region within 
+        110 minutes, restoring full functionality while the AWS incident was ongoing.
+    </p>
+    <h3>Incident Overview</h3>
     <p>
         On October 20, 2025 at 06:54 UTC, we detected the first error messages in our monitoring system
         related to an underlying AWS outage in the US-EAST-1 region. The outage primarily affected
