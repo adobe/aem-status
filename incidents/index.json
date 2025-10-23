@@ -4,7 +4,13 @@
     "name": "CDN Cache Invalidation Delays",
     "message": "On October 23, 2025, between 14:30 and 15:45 UTC (approximately 75 minutes),\n        customers experienced delays in content updates appearing on their Edge Delivery\n        Services websites. The issue was caused by a configuration change in our CDN\n        provider's cache invalidation API that increased the time-to-live (TTL) for\n        purge requests from 5 seconds to 60 seconds.",
     "impact": "none",
-    "timestamp": "2025-10-23T15:45:00.000Z"
+    "timestamp": "2025-10-23T15:45:00.000Z",
+    "affectedComponents": [
+      "delivery"
+    ],
+    "internalServices": null,
+    "externalVendors": null,
+    "rootCause": "configuration-change"
   },
   {
     "code": "AEM-yanvkiuy",
@@ -15,7 +21,16 @@
     "startTime": "2025-10-20T06:54:00.000Z",
     "endTime": "2025-10-20T08:44:00.000Z",
     "errorRate": "0.0833",
-    "impactedService": "publishing"
+    "impactedService": "publishing",
+    "affectedComponents": [
+      "publishing",
+      "delivery"
+    ],
+    "internalServices": null,
+    "externalVendors": [
+      "aws"
+    ],
+    "rootCause": "third-party-outage"
   },
   {
     "code": "AEM-2x9qsuon",
@@ -26,7 +41,15 @@
     "startTime": "2025-10-09T15:41:46.422Z",
     "endTime": "2025-10-09T17:43:54.488Z",
     "errorRate": "0.000",
-    "impactedService": "publishing"
+    "impactedService": "publishing",
+    "affectedComponents": null,
+    "internalServices": [
+      "code-sync"
+    ],
+    "externalVendors": [
+      "github"
+    ],
+    "rootCause": "resource-limits"
   },
   {
     "code": "AEM-l4127tvy",
@@ -37,7 +60,13 @@
     "startTime": "2025-09-09T18:25:03.343Z",
     "endTime": "2025-09-09T19:26:17.694Z",
     "errorRate": "0.001",
-    "impactedService": "delivery"
+    "impactedService": "delivery",
+    "affectedComponents": [
+      "delivery"
+    ],
+    "internalServices": null,
+    "externalVendors": null,
+    "rootCause": "third-party-outage"
   },
   {
     "code": "AEM-u5ni9f8k",
@@ -48,14 +77,28 @@
     "startTime": "2025-09-02T16:24:55.049Z",
     "endTime": "2025-09-02T20:26:04.212Z",
     "errorRate": "0.001",
-    "impactedService": "delivery"
+    "impactedService": "delivery",
+    "affectedComponents": [
+      "delivery"
+    ],
+    "internalServices": [
+      "media"
+    ],
+    "externalVendors": null,
+    "rootCause": "dependency-issue"
   },
   {
     "code": "ljzbj9qn50hf",
     "name": "Increased Delivery Error Rate",
     "message": "Executive Summary\n\nOn Wednesday, June 12, 2025, between 18:02 and 20:04 UTC (approximately 2 hours), one of our external suppliers experienced a critical outage that impacted Adobe Experience Manager (AEM) Sites Edge Delivery Services.\n\nAs a result, the average error rate for origin traffic temporarily increased to approximately 0.75%. The issue was mitigated by rerouting all eligible traffic away from the affected supplier, significantly reducing end-user impact.\n\nIncident Timeline\n\n\n18:02 UTC:",
     "impact": "minor",
-    "timestamp": "2025-06-12T20:52:00.000Z"
+    "timestamp": "2025-06-12T20:52:00.000Z",
+    "affectedComponents": [
+      "delivery"
+    ],
+    "internalServices": null,
+    "externalVendors": null,
+    "rootCause": "third-party-outage"
   },
   {
     "code": "9hrqs86dmn18",
