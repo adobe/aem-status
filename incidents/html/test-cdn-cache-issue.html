@@ -1,0 +1,144 @@
+<h1>CDN Cache Invalidation Delays</h1>
+<article
+    data-incident-start-time="2025-10-23T14:30:00.000Z"
+    data-incident-end-time="2025-10-23T15:45:00.000Z"
+    data-incident-error-rate="0.002"
+    data-incident-impacted-service="delivery">
+    <h2>Executive Summary</h2>
+    <p>
+        On October 23, 2025, between 14:30 and 15:45 UTC (approximately 75 minutes),
+        customers experienced delays in content updates appearing on their Edge Delivery
+        Services websites. The issue was caused by a configuration change in our CDN
+        provider's cache invalidation API that increased the time-to-live (TTL) for
+        purge requests from 5 seconds to 60 seconds.
+    </p>
+    <p>
+        The error rate remained low at 0.2%, but customer-reported issues indicated
+        perceived impact was higher as content changes were not visible immediately.
+        The issue was resolved by reverting the CDN configuration and implementing
+        additional monitoring for cache invalidation latency.
+    </p>
+
+    <h2>Impact</h2>
+    <ul>
+        <li>Duration: 75 minutes</li>
+        <li>Affected service: Content delivery (hlx.live and aem.live domains)</li>
+        <li>Error rate: 0.2%</li>
+        <li>Customer reports: 12 support tickets filed</li>
+        <li>Scope: All customers using document-based authoring with preview/publish workflows</li>
+    </ul>
+
+    <h2>Root Cause</h2>
+    <p>
+        A configuration change in Fastly's cache invalidation API increased the processing
+        time for purge requests. This was implemented as part of a vendor-side performance
+        optimization but was not communicated to customers. The change affected our automated
+        cache invalidation workflow triggered by publish actions in the admin API.
+    </p>
+    <p>
+        Our monitoring systems detected the increased latency but did not trigger alerts
+        because the threshold was set to 90 seconds, while the new behavior caused 60-second
+        delays. This is an example of insufficient alert tuning.
+    </p>
+
+    <h2>Trigger</h2>
+    <p>
+        The trigger was a rollout of Fastly's updated cache API configuration to our
+        production endpoints at 14:30 UTC on October 23, 2025.
+    </p>
+
+    <h2>Resolution</h2>
+    <h3>Immediate Actions</h3>
+    <ul>
+        <li>14:45 UTC: Customer reports identified pattern of delayed content updates</li>
+        <li>15:00 UTC: Engineering team identified increased cache invalidation latency</li>
+        <li>15:15 UTC: Contacted Fastly support to investigate configuration changes</li>
+        <li>15:30 UTC: Fastly reverted the cache API configuration change</li>
+        <li>15:45 UTC: Verified normal cache invalidation behavior restored</li>
+    </ul>
+
+    <h3>Long-term Fix</h3>
+    <p>
+        Implemented more granular monitoring and alerting for cache invalidation latency
+        with thresholds at 10 seconds (warning) and 30 seconds (critical).
+    </p>
+
+    <h2>Detection</h2>
+    <p>
+        The incident was initially detected through customer support tickets rather than
+        automated monitoring. This represents a gap in our observability that has been
+        addressed in the action items.
+    </p>
+
+    <h2>Timeline (All times in UTC)</h2>
+    <ul>
+        <li><strong>14:30</strong>: Fastly deploys cache API configuration change</li>
+        <li><strong>14:35</strong>: First customer support ticket received</li>
+        <li><strong>14:45</strong>: Support team escalates to engineering (3 similar tickets)</li>
+        <li><strong>15:00</strong>: Engineering identifies cache invalidation latency spike</li>
+        <li><strong>15:15</strong>: Fastly support contacted</li>
+        <li><strong>15:20</strong>: Fastly confirms recent configuration change</li>
+        <li><strong>15:30</strong>: Configuration reverted by Fastly</li>
+        <li><strong>15:45</strong>: Normal behavior confirmed, incident closed</li>
+    </ul>
+
+    <h2>Action Items</h2>
+    <ol>
+        <li><strong>[Engineering - @cache-team]</strong>: Add detailed latency monitoring for cache invalidation with 10s warning and 30s critical thresholds</li>
+        <li><strong>[DevRel - @docs-team]</strong>: Document expected cache invalidation latency in admin API documentation</li>
+        <li><strong>[Engineering - @sre-team]</strong>: Implement synthetic monitoring for publish workflow end-to-end latency</li>
+        <li><strong>[Partnership - @vendor-relations]</strong>: Request advance notification of CDN configuration changes from Fastly</li>
+        <li><strong>[Engineering - @cache-team]</strong>: Evaluate implementing fallback cache invalidation mechanism with direct origin updates</li>
+    </ol>
+
+    <h2>Lessons Learned</h2>
+    <h3>What Went Well</h3>
+    <ul>
+        <li>Support team quickly identified pattern and escalated to engineering</li>
+        <li>Fastly support was responsive and able to revert quickly</li>
+        <li>Error rate remained low throughout the incident</li>
+    </ul>
+
+    <h3>What Went Wrong</h3>
+    <ul>
+        <li>Monitoring did not detect the latency increase automatically</li>
+        <li>No advance notification of CDN configuration changes</li>
+        <li>Alert thresholds were not tuned for this type of degradation</li>
+    </ul>
+
+    <h3>Where We Got Lucky</h3>
+    <ul>
+        <li>The change was easily reversible without data loss</li>
+        <li>Low overall error rate meant most requests still succeeded, just with delays</li>
+        <li>Incident occurred during business hours with full team availability</li>
+    </ul>
+
+    <time></time>
+</article>
+
+<ul class="updates">
+    <li>
+        <h2>Resolved</h2>
+        <p>This incident has been resolved. Cache invalidation is operating normally with expected latency.</p>
+        <time></time>
+    </li>
+
+    <li>
+        <h2>Monitoring</h2>
+        <p>
+            The CDN configuration has been reverted and we are monitoring cache invalidation
+            latency to ensure it remains within normal parameters (under 5 seconds).
+        </p>
+        <time></time>
+    </li>
+
+    <li>
+        <h2>Identified</h2>
+        <p>
+            We have identified that a CDN configuration change is causing cache invalidation
+            delays of up to 60 seconds. We are working with our CDN provider to revert the change.
+        </p>
+        <time></time>
+    </li>
+</ul>
+</article>
