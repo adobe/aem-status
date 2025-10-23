@@ -1,5 +1,12 @@
 [
   {
+    "code": "test-cdn-cache-issue",
+    "name": "CDN Cache Invalidation Delays",
+    "message": "On October 23, 2025, between 14:30 and 15:45 UTC (approximately 75 minutes),\n        customers experienced delays in content updates appearing on their Edge Delivery\n        Services websites. The issue was caused by a configuration change in our CDN\n        provider's cache invalidation API that increased the time-to-live (TTL) for\n        purge requests from 5 seconds to 60 seconds.",
+    "impact": "none",
+    "timestamp": "2025-10-23T15:45:00.000Z"
+  },
+  {
     "code": "AEM-yanvkiuy",
     "name": "Major publishing disruption due to AWS US-EAST-1 outage",
     "message": "On October 20, 2025, between 06:54 and 08:44 UTC, an AWS US-EAST-1 region outage \n        affecting Lambda and SQS services caused publishing disruptions for all AEM customers \n        and minimal delivery errors. Our team deployed a secondary publishing region within \n        110 minutes, restoring full functionality while the AWS incident was ongoing.",
