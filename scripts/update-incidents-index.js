@@ -224,6 +224,23 @@ function updateIncidentsIndex() {
     }
   });
 
+  // Validate classification fields
+  incidents.forEach((incident) => {
+    if (incident.affectedComponents) {
+      const validComponents = ['delivery', 'publishing'];
+      const invalidComponents = incident.affectedComponents.filter(
+        (comp) => !validComponents.includes(comp),
+      );
+      if (invalidComponents.length > 0) {
+        console.warn(
+          `Warning: Incident ${incident.code} has invalid affectedComponents: ${invalidComponents.join(', ')}`,
+        );
+        console.warn('  Valid values are: delivery, publishing');
+        console.warn('  Other services should be in internalServices field');
+      }
+    }
+  });
+
   // Filter out incidents without valid timestamps and sort by timestamp
   const validIncidents = incidents
     .filter((incident) => {
