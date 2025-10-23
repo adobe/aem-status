@@ -99,8 +99,9 @@ jobs:
                - **rootCause** (string): Primary cause of the incident
                  Options: third-party-outage, configuration-change, deployment-issue, resource-limits,
                          credential-issue, dns-issue, network-issue, dependency-issue, unknown
-            4. Add these fields to each unclassified incident
-            5. Commit all changes with message: "feat: classify incidents"
+            4. Use the Edit tool to update incidents/index.json with these classification fields
+
+            IMPORTANT: DO NOT commit any changes. Just edit the file. The workflow will handle committing and pushing.
 
             Be precise in your classifications based on the incident descriptions.
 
@@ -110,10 +111,29 @@ jobs:
             - Some incidents may have affectedComponents without internalServices or vice versa
             - Use null when a field doesn't apply rather than an empty array
           claude_args: |
-            --allowedTools "Read,Edit,Bash(git add *),Bash(git commit *)"
+            --allowedTools "Read,Edit"
+
+      - name: Commit classification changes
+        if: steps.commit_index.outputs.changed == 'true'
+        run: |
+          # Ensure git config is set
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          git add incidents/index.json
+          if git diff --staged --quiet; then
+            echo "No classification changes to commit"
+          else
+            git commit -m "feat: classify incidents"
+            echo "✅ Committed classification changes"
+          fi
 
       - name: Push all changes to PR branch
         run: |
+          # Reconfigure git auth (Claude action may have modified it)
+          git config --local --unset-all http.https://github.com/.extraheader || true
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic $(echo -n x-access-token:${{ secrets.GITHUB_TOKEN }} | base64)"
+
           # Check if there are commits to push
           if git log origin/${{ github.event.pull_request.head.ref }}..HEAD --oneline | grep -q .; then
             git push origin ${{ github.event.pull_request.head.ref }}
