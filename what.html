@@ -8,6 +8,36 @@
     <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="styles/styles.css">
     <style>
+        .year-filters {
+            display: flex;
+            gap: var(--spectrum-spacing-200);
+            flex-wrap: wrap;
+        }
+
+        .year-tab {
+            padding: var(--spectrum-spacing-200) var(--spectrum-spacing-400);
+            border: 2px solid var(--spectrum-gray-300);
+            border-radius: var(--spectrum-border-radius-100);
+            background: white;
+            cursor: pointer;
+            font-size: var(--spectrum-font-size-small);
+            font-weight: 600;
+            color: var(--spectrum-gray-700);
+            transition: all 0.2s ease;
+        }
+
+        .year-tab:hover {
+            border-color: var(--spectrum-blue-600);
+            color: var(--spectrum-blue-700);
+            background: var(--spectrum-blue-50);
+        }
+
+        .year-tab.active {
+            background: var(--spectrum-blue-600);
+            color: white;
+            border-color: var(--spectrum-blue-600);
+        }
+
         .analysis-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -311,7 +341,11 @@
     </header>
 
     <main class="container">
-        <p><a class="back-link" href="/">← Back to status</a></p>
+        <!-- Navigation and Year Filters -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spectrum-spacing-400); flex-wrap: wrap; gap: var(--spectrum-spacing-300);">
+            <p style="margin: 0;"><a class="back-link" href="/">← Back to status</a></p>
+            <div class="year-filters" id="year-filters"></div>
+        </div>
 
         <!-- Key Metrics -->
         <section class="section">
@@ -757,9 +791,58 @@
             container.appendChild(matrixEl);
         };
 
-        // Initialize
-        const init = async () => {
-            const incidents = await getIncidents();
+        // Filter incidents by year
+        const filterIncidentsByYear = (incidents, year) => {
+            if (year === 'all') return incidents;
+            return incidents.filter(incident => {
+                const date = new Date(incident.timestamp);
+                return date.getFullYear() === parseInt(year);
+            });
+        };
+
+        // Get unique years from incidents
+        const getAvailableYears = (incidents) => {
+            const years = new Set();
+            incidents.forEach(incident => {
+                const date = new Date(incident.timestamp);
+                years.add(date.getFullYear());
+            });
+            return Array.from(years).sort((a, b) => b - a); // Descending order
+        };
+
+        // Render year filter tabs
+        const renderYearFilters = (incidents, currentYear) => {
+            const container = document.getElementById('year-filters');
+            container.innerHTML = '';
+
+            const years = getAvailableYears(incidents);
+
+            // Add "All time" tab
+            const allTab = document.createElement('button');
+            allTab.className = `year-tab ${currentYear === 'all' ? 'active' : ''}`;
+            allTab.textContent = 'All time';
+            allTab.dataset.year = 'all';
+            container.appendChild(allTab);
+
+            // Add year tabs
+            years.forEach(year => {
+                const tab = document.createElement('button');
+                tab.className = `year-tab ${currentYear === year.toString() ? 'active' : ''}`;
+                tab.textContent = year;
+                tab.dataset.year = year;
+                container.appendChild(tab);
+            });
+        };
+
+        // Render all visualizations
+        const renderAllVisualizations = (incidents) => {
+            // Clear existing visualizations
+            document.getElementById('pie-chart').innerHTML = '';
+            document.getElementById('cause-legend').innerHTML = '';
+            document.getElementById('services-chart').innerHTML = '';
+            document.getElementById('vendors-chart').innerHTML = '';
+            document.getElementById('matrix-container').innerHTML = '';
+            document.getElementById('key-metrics').innerHTML = '';
 
             // Aggregate data
             const causes = aggregateRootCauses(incidents);
@@ -775,6 +858,36 @@
             renderBarChart(services, 'services-chart', false);
             renderBarChart(vendors, 'vendors-chart', true);
             renderMatrix(matrixData);
+        };
+
+        // Initialize
+        const init = async () => {
+            const allIncidents = await getIncidents();
+            let currentYear = 'all';
+
+            // Render year filters
+            renderYearFilters(allIncidents, currentYear);
+
+            // Render initial visualizations with all data
+            renderAllVisualizations(allIncidents);
+
+            // Add event listeners to year tabs
+            document.getElementById('year-filters').addEventListener('click', (e) => {
+                if (e.target.classList.contains('year-tab')) {
+                    const year = e.target.dataset.year;
+                    currentYear = year;
+
+                    // Update active tab
+                    document.querySelectorAll('.year-tab').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    e.target.classList.add('active');
+
+                    // Filter incidents and re-render
+                    const filteredIncidents = filterIncidentsByYear(allIncidents, year);
+                    renderAllVisualizations(filteredIncidents);
+                }
+            });
 
             // Set year in footer
             document.getElementById('year').textContent = new Date().getFullYear();
