@@ -166,16 +166,14 @@ function updateIncidentsIndex() {
   const htmlDir = path.join(incidentsDir, 'html');
   const indexPath = path.join(incidentsDir, 'index.json');
 
-  // Read existing index to preserve timestamps for simple format files
+  // Read existing index to preserve timestamps and classifications
   let existingIndex = [];
   const existingIncidentsMap = new Map();
   try {
     existingIndex = JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
     // Build map of existing incidents for lookup
-    existingIndex.forEach((month) => {
-      month.incidents.forEach((incident) => {
-        existingIncidentsMap.set(incident.code, incident);
-      });
+    existingIndex.forEach((incident) => {
+      existingIncidentsMap.set(incident.code, incident);
     });
   } catch (e) {
     // No existing index.json found or could not parse, creating new one
@@ -200,11 +198,45 @@ function updateIncidentsIndex() {
         incident.timestamp = existingIncidentsMap.get(incident.code).timestamp;
       }
 
+      // Preserve classification fields from existing incident if they exist
+      if (existingIncidentsMap.has(incident.code)) {
+        const existingIncident = existingIncidentsMap.get(incident.code);
+        if (existingIncident.affectedComponents !== undefined) {
+          incident.affectedComponents = existingIncident.affectedComponents;
+        }
+        if (existingIncident.internalServices !== undefined) {
+          incident.internalServices = existingIncident.internalServices;
+        }
+        if (existingIncident.externalVendors !== undefined) {
+          incident.externalVendors = existingIncident.externalVendors;
+        }
+        if (existingIncident.rootCause !== undefined) {
+          incident.rootCause = existingIncident.rootCause;
+        }
+      }
+
       // Skip incidents without valid timestamps
       if (incident.timestamp && incident.timestamp !== 'NEEDS_MANUAL_UPDATE') {
         incidents.push(incident);
       } else {
         // Skipping incident - no valid timestamp
+      }
+    }
+  });
+
+  // Validate classification fields
+  incidents.forEach((incident) => {
+    if (incident.affectedComponents) {
+      const validComponents = ['delivery', 'publishing'];
+      const invalidComponents = incident.affectedComponents.filter(
+        (comp) => !validComponents.includes(comp),
+      );
+      if (invalidComponents.length > 0) {
+        console.warn(
+          `Warning: Incident ${incident.code} has invalid affectedComponents: ${invalidComponents.join(', ')}`,
+        );
+        console.warn('  Valid values are: delivery, publishing');
+        console.warn('  Other services should be in internalServices field');
       }
     }
   });

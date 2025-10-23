@@ -6,10 +6,48 @@ on:
     paths:
       # Only run when specific paths are modified
       - "incidents/html/*.html"
+      - "incidents/**/*.html"  # Catch misplaced incident files
       # You can add more specific patterns as needed
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
+  validate-incident-location:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check for misplaced incident files
+        run: |
+          # Get list of changed files in this PR
+          git fetch origin ${{ github.base_ref }}
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+
+          # Check for incident files outside incidents/html/ (excluding templates)
+          MISPLACED=$(echo "$CHANGED_FILES" | grep -E '^incidents/[^/]+\.html$' | grep -v 'template' || true)
+
+          if [ -n "$MISPLACED" ]; then
+            echo "❌ Error: Incident files must be placed in incidents/html/ directory"
+            echo ""
+            echo "Misplaced files found:"
+            echo "$MISPLACED"
+            echo ""
+            echo "Please move these files to incidents/html/"
+            exit 1
+          fi
+
+          echo "✅ All incident files are in the correct location"
+
   claude-review-paths:
+    needs: validate-incident-location
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -32,6 +70,20 @@ jobs:
             Please review this incident post-mortem following industry best practices for SaaS services.
 
             Note: The PR branch is already checked out in the current working directory.
+
+            ## Important: Check for Existing Reviews First
+
+            Before providing feedback:
+            1. Use `gh pr view ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --json reviews,comments` to check for existing reviews from @claude[bot]
+            2. If there are previous reviews from @claude[bot]:
+               - Review only the changes made since the last review
+               - Check if previous feedback has been addressed
+               - For addressed feedback: Update or resolve the original comment thread if possible
+               - For unaddressed feedback: Reference the original comment rather than repeating it
+               - Only add NEW comments for NEW issues or issues that have gotten worse
+            3. If this is the first review, proceed with a full comprehensive review
+
+            This approach prevents comment pile-up and maintains a cleaner review thread.
 
             ## Review Criteria:
 
