@@ -90,10 +90,10 @@ jobs:
                - externalVendors
                - rootCause
             3. For each unclassified incident, analyze the name and message to determine:
-               - **affectedComponents** (array or null): High-level areas affected
-                 Options: delivery, publishing, admin-api, forms, code-sync, rum, indexing, logging, dns, sidekick, media
-               - **internalServices** (array or null): Specific internal services impacted
-                 Options: admin-api, rum, code-sync, indexing, logging, sidekick, media, or null if not applicable
+               - **affectedComponents** (array or null): HIGH-LEVEL customer-facing areas affected
+                 Options: delivery, publishing (ONLY these two - everything else goes in internalServices)
+               - **internalServices** (array or null): Specific internal services/systems impacted
+                 Options: admin-api, forms, code-sync, rum, indexing, logging, dns, sidekick, media, or null if not applicable
                - **externalVendors** (array or null): Third-party vendors involved
                  Options: cloudflare, aws, fastly, github, microsoft, unpkg, zscaler, webpack, or null if not applicable
                - **rootCause** (string): Primary cause of the incident
@@ -106,9 +106,10 @@ jobs:
             Be precise in your classifications based on the incident descriptions.
 
             Notes:
-            - affectedComponents represents broad categories (delivery, publishing, etc.)
-            - internalServices represents specific AEM services (admin-api, rum, etc.)
-            - Some incidents may have affectedComponents without internalServices or vice versa
+            - affectedComponents represents ONLY customer-facing areas: delivery or publishing (or both, or null)
+            - internalServices represents specific AEM services (admin-api, rum, code-sync, etc.)
+            - An incident may affect delivery/publishing without a specific internal service being identified
+            - An incident may affect internal services without customer-facing impact (use null for affectedComponents)
             - Use null when a field doesn't apply rather than an empty array
           claude_args: |
             --allowedTools "Read,Edit"
