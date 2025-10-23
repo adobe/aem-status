@@ -329,7 +329,8 @@
     "message": "The scheduled maintenance has been completed.",
     "impact": "maintenance",
     "timestamp": "2024-05-25T07:00:00.000Z",
-    "affectedComponents": [],
+    "affectedComponents": null,
+    "internalServices": null,
     "externalVendors": null,
     "rootCause": "unknown"
   },
