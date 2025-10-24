@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root Cause Analysis - AEM Edge Delivery Status</title>
+    <meta name="description" content="Analysis of incident root causes, internal services, and external vendor dependencies">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/what.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div>
+                <h1>Root Cause Analysis</h1>
+                <p>Understanding what causes incidents and system dependencies</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Navigation and Year Filters -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spectrum-spacing-400); flex-wrap: wrap; gap: var(--spectrum-spacing-300);">
+            <p style="margin: 0;"><a class="back-link" href="/">← Back to status</a></p>
+            <div class="year-filters" id="year-filters"></div>
+        </div>
+
+        <!-- Key Metrics -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Key Metrics</h2>
+            </div>
+            <div class="stats-grid" id="key-metrics"></div>
+        </section>
+
+        <!-- Root Cause Analysis -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Root Cause Distribution</h2>
+            </div>
+            <div class="analysis-section">
+                <div class="visualization-grid">
+                    <div class="visualization-container">
+                        <h3 class="section-title">By Category</h3>
+                        <div class="pie-chart-container">
+                            <svg class="pie-chart" id="pie-chart" viewBox="0 0 400 400"></svg>
+                        </div>
+                    </div>
+                    <div class="visualization-container">
+                        <h3 class="section-title">Breakdown</h3>
+                        <div class="legend" id="cause-legend"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Systems & Vendors -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Systems & Vendors</h2>
+            </div>
+            <div class="analysis-section">
+                <div class="visualization-grid">
+                    <div class="visualization-container">
+                        <h3 class="section-title">Internal Services</h3>
+                        <div class="bar-chart" id="services-chart"></div>
+                    </div>
+                    <div class="visualization-container">
+                        <h3 class="section-title">External Vendors</h3>
+                        <div class="bar-chart" id="vendors-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dependency Matrix -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Dependency Matrix</h2>
+                <p style="color: var(--spectrum-gray-600); font-size: var(--spectrum-font-size-small); margin-top: var(--spectrum-spacing-200);">
+                    Shows co-occurrence of internal services and external vendors in incidents
+                </p>
+            </div>
+            <div class="analysis-section">
+                <div class="matrix-container" id="matrix-container"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container copyright">
+            Copyright &copy; <span id="year"></span> Adobe. All rights reserved /
+            <a href="https://adobe.com/privacy.html">Privacy</a> /
+            <a href="https://www.adobe.com/legal/terms.html">Terms of Use</a> /
+            <a href="https://www.adobe.com/privacy/ca-rights.html">Do not sell my personal information</a>
+        </div>
+    </footer>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script type="module" src="scripts/what.js"></script>
+</body>
+</html>
