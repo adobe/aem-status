@@ -213,6 +213,12 @@ function updateIncidentsIndex() {
         if (existingIncident.rootCause !== undefined) {
           incident.rootCause = existingIncident.rootCause;
         }
+        if (existingIncident.startTime !== undefined) {
+          incident.startTime = existingIncident.startTime;
+        }
+        if (existingIncident.endTime !== undefined) {
+          incident.endTime = existingIncident.endTime;
+        }
       }
 
       // Skip incidents without valid timestamps

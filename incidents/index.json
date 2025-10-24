@@ -85,7 +85,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2025-06-12T18:02:00.000Z",
+    "endTime": "2025-06-12T20:04:00.000Z"
   },
   {
     "code": "9hrqs86dmn18",
@@ -100,7 +102,9 @@
       "admin-api"
     ],
     "externalVendors": null,
-    "rootCause": "deployment-issue"
+    "rootCause": "deployment-issue",
+    "startTime": "2025-04-08T10:44:51.000Z",
+    "endTime": "2025-04-08T11:23:17.000Z"
   },
   {
     "code": "6hbfdsts4wk8",
@@ -116,7 +120,9 @@
     "externalVendors": [
       "cloudflare"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2025-03-21T21:36:00.000Z",
+    "endTime": "2025-03-21T22:45:00.000Z"
   },
   {
     "code": "40br3wfxhmb2",
@@ -131,7 +137,9 @@
     "externalVendors": [
       "unpkg"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2025-03-15T07:00:00.000Z",
+    "endTime": "2025-03-15T11:21:00.000Z"
   },
   {
     "code": "6lkttxk8rqy6",
@@ -146,7 +154,9 @@
     "externalVendors": [
       "aws"
     ],
-    "rootCause": "configuration-change"
+    "rootCause": "configuration-change",
+    "startTime": "2025-03-13T14:25:00.000Z",
+    "endTime": "2025-03-13T15:03:00.000Z"
   },
   {
     "code": "97mbkgvnrw2j",
@@ -161,7 +171,9 @@
     "externalVendors": [
       "cloudflare"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2025-02-06T08:36:00.000Z",
+    "endTime": "2025-02-06T09:48:00.000Z"
   },
   {
     "code": "h6vy991vffyz",
@@ -176,7 +188,9 @@
     "externalVendors": [
       "cloudflare"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2025-02-06T08:35:00.000Z",
+    "endTime": "2025-02-06T09:48:00.000Z"
   },
   {
     "code": "fplc2c1ssh6v",
@@ -189,7 +203,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "network-issue"
+    "rootCause": "network-issue",
+    "startTime": "2025-01-22T09:17:00.000Z",
+    "endTime": "2025-01-22T15:17:00.000Z"
   },
   {
     "code": "5ndjv5c9j47b",
@@ -204,7 +220,9 @@
     "externalVendors": [
       "github"
     ],
-    "rootCause": "configuration-change"
+    "rootCause": "configuration-change",
+    "startTime": "2024-11-18T09:50:00.000Z",
+    "endTime": "2024-11-18T10:26:00.000Z"
   },
   {
     "code": "qv1w85fv3f2q",
@@ -219,7 +237,9 @@
     "externalVendors": [
       "zscaler"
     ],
-    "rootCause": "configuration-change"
+    "rootCause": "configuration-change",
+    "startTime": "2024-12-11T16:30:00.000Z",
+    "endTime": "2024-12-11T19:00:00.000Z"
   },
   {
     "code": "53d2zks3cmw6",
@@ -235,7 +255,9 @@
       "admin-api"
     ],
     "externalVendors": null,
-    "rootCause": "configuration-change"
+    "rootCause": "configuration-change",
+    "startTime": "2024-11-11T13:57:00.000Z",
+    "endTime": "2024-11-11T14:00:00.000Z"
   },
   {
     "code": "gn1csh4v2xz1",
@@ -250,7 +272,9 @@
     "externalVendors": [
       "aws"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2024-07-30T16:42:00.000Z",
+    "endTime": "2024-07-31T04:55:00.000Z"
   },
   {
     "code": "frj5ykfrh7cz",
@@ -265,7 +289,9 @@
     "externalVendors": [
       "github"
     ],
-    "rootCause": "credential-issue"
+    "rootCause": "credential-issue",
+    "startTime": "2024-09-11T05:00:00.000Z",
+    "endTime": "2024-09-11T13:35:00.000Z"
   },
   {
     "code": "vgm8p3z2d042",
@@ -280,7 +306,9 @@
     "externalVendors": [
       "cloudflare"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2024-06-19T15:38:00.000Z",
+    "endTime": "2024-06-19T18:02:00.000Z"
   },
   {
     "code": "zkm8z5k27vjx",
@@ -293,7 +321,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "deployment-issue"
+    "rootCause": "deployment-issue",
+    "startTime": "2024-07-17T16:02:00.000Z",
+    "endTime": "2024-07-17T16:09:00.000Z"
   },
   {
     "code": "cyknb4nf32d1",
@@ -308,7 +338,9 @@
     "externalVendors": [
       "cloudflare"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2024-06-20T20:23:00.000Z",
+    "endTime": "2024-06-20T20:25:00.000Z"
   },
   {
     "code": "1fkhn4kkjpqh",
@@ -321,7 +353,9 @@
       "indexing"
     ],
     "externalVendors": null,
-    "rootCause": "configuration-change"
+    "rootCause": "configuration-change",
+    "startTime": "2024-03-18T04:00:00.000Z",
+    "endTime": "2024-03-18T05:00:00.000Z"
   },
   {
     "code": "7h0lm9mtk28z",
@@ -329,9 +363,12 @@
     "message": "The scheduled maintenance has been completed.",
     "impact": "maintenance",
     "timestamp": "2024-05-25T07:00:00.000Z",
-    "affectedComponents": [],
+    "affectedComponents": null,
+    "internalServices": null,
     "externalVendors": null,
-    "rootCause": "unknown"
+    "rootCause": "unknown",
+    "startTime": "2024-05-25T02:00:00.000Z",
+    "endTime": "2024-05-25T07:00:00.000Z"
   },
   {
     "code": "x1yzvp083bg4",
@@ -344,7 +381,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "resource-limits"
+    "rootCause": "resource-limits",
+    "startTime": "2024-05-24T15:07:00.000Z",
+    "endTime": "2024-05-24T15:09:00.000Z"
   },
   {
     "code": "vgljj64vswn1",
@@ -357,7 +396,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "deployment-issue"
+    "rootCause": "deployment-issue",
+    "startTime": "2024-05-13T17:05:00.000Z",
+    "endTime": "2024-05-13T17:25:00.000Z"
   },
   {
     "code": "vd2d6p159zgf",
@@ -374,7 +415,9 @@
     "externalVendors": [
       "microsoft"
     ],
-    "rootCause": "credential-issue"
+    "rootCause": "credential-issue",
+    "startTime": "2024-04-12T14:06:00.000Z",
+    "endTime": "2024-04-12T16:22:00.000Z"
   },
   {
     "code": "zmrwnkkj7lxc",
@@ -389,7 +432,9 @@
     "externalVendors": [
       "unpkg"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2024-04-12T12:38:00.000Z",
+    "endTime": "2024-04-12T14:05:00.000Z"
   },
   {
     "code": "h7hlzbqkvp0q",
@@ -402,7 +447,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "resource-limits"
+    "rootCause": "resource-limits",
+    "startTime": "2024-03-04T01:07:00.000Z",
+    "endTime": "2024-03-04T03:04:00.000Z"
   },
   {
     "code": "ytjf8m5lc7xq",
@@ -415,7 +462,9 @@
       "forms"
     ],
     "externalVendors": null,
-    "rootCause": "unknown"
+    "rootCause": "unknown",
+    "startTime": "2024-02-01T16:19:00.000Z",
+    "endTime": "2024-02-01T19:36:00.000Z"
   },
   {
     "code": "qjsydytlcl2m",
@@ -428,7 +477,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2023-12-08T09:57:00.000Z",
+    "endTime": "2023-12-08T12:27:00.000Z"
   },
   {
     "code": "z87clhfsj73v",
@@ -443,7 +494,9 @@
     "externalVendors": [
       "cloudflare"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2024-01-19T15:29:00.000Z",
+    "endTime": "2024-01-19T15:54:00.000Z"
   },
   {
     "code": "sh7fyhvcblv5",
@@ -458,7 +511,9 @@
     "externalVendors": [
       "cloudflare"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2024-01-15T22:34:00.000Z",
+    "endTime": "2024-01-15T23:07:00.000Z"
   },
   {
     "code": "83bcqnqs1cq8",
@@ -473,7 +528,9 @@
     "externalVendors": [
       "fastly"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2023-12-15T11:42:00.000Z",
+    "endTime": "2023-12-15T12:04:00.000Z"
   },
   {
     "code": "t8s3g7nppjtr",
@@ -488,7 +545,9 @@
     "externalVendors": [
       "cloudflare"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2023-12-12T03:56:00.000Z",
+    "endTime": "2023-12-12T04:43:00.000Z"
   },
   {
     "code": "n7cjqj33nvy4",
@@ -501,7 +560,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "unknown"
+    "rootCause": "unknown",
+    "startTime": "2023-10-30T19:53:00.000Z",
+    "endTime": "2023-10-30T20:20:00.000Z"
   },
   {
     "code": "pwkj7x7lt653",
@@ -514,7 +575,9 @@
       "sidekick"
     ],
     "externalVendors": null,
-    "rootCause": "configuration-change"
+    "rootCause": "configuration-change",
+    "startTime": "2023-10-19T09:18:00.000Z",
+    "endTime": "2023-10-19T14:36:00.000Z"
   },
   {
     "code": "vbcbbm14rcts",
@@ -527,7 +590,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2023-06-07T18:56:00.000Z",
+    "endTime": "2023-06-07T19:12:00.000Z"
   },
   {
     "code": "lymy0j297t0j",
@@ -540,7 +605,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "dns-issue"
+    "rootCause": "dns-issue",
+    "startTime": "2023-09-26T00:00:00.000Z",
+    "endTime": "2023-09-26T00:00:00.000Z"
   },
   {
     "code": "pkq3983rfszz",
@@ -553,7 +620,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "dns-issue"
+    "rootCause": "dns-issue",
+    "startTime": "2023-09-28T15:36:00.000Z",
+    "endTime": "2023-09-28T19:39:00.000Z"
   },
   {
     "code": "dkcqyx77px1d",
@@ -567,7 +636,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2023-06-13T18:54:00.000Z",
+    "endTime": "2023-06-13T20:53:00.000Z"
   },
   {
     "code": "cg71nfn8gr7f",
@@ -584,7 +655,9 @@
     "externalVendors": [
       "microsoft"
     ],
-    "rootCause": "credential-issue"
+    "rootCause": "credential-issue",
+    "startTime": "2023-02-23T11:27:00.000Z",
+    "endTime": "2023-02-23T11:44:00.000Z"
   },
   {
     "code": "pz9k5bf91729",
@@ -597,7 +670,9 @@
       "code-sync"
     ],
     "externalVendors": null,
-    "rootCause": "deployment-issue"
+    "rootCause": "deployment-issue",
+    "startTime": "2023-02-09T10:11:00.000Z",
+    "endTime": "2023-02-09T10:18:00.000Z"
   },
   {
     "code": "2kjpfbfftc30",
@@ -612,7 +687,9 @@
     "externalVendors": [
       "microsoft"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2023-01-25T09:41:00.000Z",
+    "endTime": "2023-01-25T10:50:00.000Z"
   },
   {
     "code": "c679fxq4rbsh",
@@ -629,7 +706,9 @@
     "externalVendors": [
       "cloudflare"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2023-01-24T18:21:00.000Z",
+    "endTime": "2023-01-24T19:10:00.000Z"
   },
   {
     "code": "ddj0d4mj1xpk",
@@ -644,7 +723,9 @@
     "externalVendors": [
       "fastly"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2023-01-19T23:00:00.000Z",
+    "endTime": "2023-01-19T23:07:00.000Z"
   },
   {
     "code": "8cjdvfw5ghwq",
@@ -659,7 +740,9 @@
     "externalVendors": [
       "github"
     ],
-    "rootCause": "deployment-issue"
+    "rootCause": "deployment-issue",
+    "startTime": "2022-12-22T11:09:00.000Z",
+    "endTime": "2022-12-22T22:20:00.000Z"
   },
   {
     "code": "fl2qfrtzydlf",
@@ -674,7 +757,9 @@
     "externalVendors": [
       "microsoft"
     ],
-    "rootCause": "configuration-change"
+    "rootCause": "configuration-change",
+    "startTime": "2022-11-25T13:11:00.000Z",
+    "endTime": "2022-11-25T14:20:00.000Z"
   },
   {
     "code": "wl0y1yft6ywn",
@@ -688,7 +773,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2022-11-04T16:34:00.000Z",
+    "endTime": "2022-11-04T17:18:00.000Z"
   },
   {
     "code": "0my60637t0n1",
@@ -703,7 +790,9 @@
     "externalVendors": [
       "fastly"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2022-06-29T01:03:00.000Z",
+    "endTime": "2022-06-29T04:04:00.000Z"
   },
   {
     "code": "smlxnkw0pqcp",
@@ -718,7 +807,9 @@
     "externalVendors": [
       "microsoft"
     ],
-    "rootCause": "credential-issue"
+    "rootCause": "credential-issue",
+    "startTime": "2022-06-20T00:45:00.000Z",
+    "endTime": "2022-06-20T04:45:00.000Z"
   },
   {
     "code": "kwq2cxl4bx7t",
@@ -733,7 +824,9 @@
       "admin-api"
     ],
     "externalVendors": null,
-    "rootCause": "dns-issue"
+    "rootCause": "dns-issue",
+    "startTime": "2022-06-07T11:08:00.000Z",
+    "endTime": "2022-06-07T11:09:00.000Z"
   },
   {
     "code": "yr69qy98l3k3",
@@ -746,7 +839,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2022-06-03T15:59:00.000Z",
+    "endTime": "2022-06-03T18:38:00.000Z"
   },
   {
     "code": "k30m7mskylhj",
@@ -761,7 +856,9 @@
     "externalVendors": [
       "microsoft"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2022-05-06T07:04:00.000Z",
+    "endTime": "2022-05-06T07:11:00.000Z"
   },
   {
     "code": "8j769gbg9f6m",
@@ -775,7 +872,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "unknown"
+    "rootCause": "unknown",
+    "startTime": "2022-04-22T12:00:00.000Z",
+    "endTime": "2022-04-22T12:20:00.000Z"
   },
   {
     "code": "9vhwfttz4rmw",
@@ -790,7 +889,9 @@
     "externalVendors": [
       "microsoft"
     ],
-    "rootCause": "credential-issue"
+    "rootCause": "credential-issue",
+    "startTime": "2022-03-22T13:01:00.000Z",
+    "endTime": "2022-03-22T13:12:00.000Z"
   },
   {
     "code": "rfddvfdtbyhf",
@@ -803,7 +904,9 @@
     ],
     "internalServices": null,
     "externalVendors": null,
-    "rootCause": "unknown"
+    "rootCause": "unknown",
+    "startTime": "2022-03-11T09:30:00.000Z",
+    "endTime": "2022-03-11T09:38:00.000Z"
   },
   {
     "code": "fq7y8r15mwxv",
@@ -818,7 +921,9 @@
     "externalVendors": [
       "github"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2022-01-17T21:19:00.000Z",
+    "endTime": "2022-01-17T21:27:00.000Z"
   },
   {
     "code": "vnk41m44yrn3",
@@ -833,7 +938,9 @@
     "externalVendors": [
       "github"
     ],
-    "rootCause": "third-party-outage"
+    "rootCause": "third-party-outage",
+    "startTime": "2022-01-12T02:10:00.000Z",
+    "endTime": "2022-01-12T02:39:00.000Z"
   },
   {
     "code": "jl69shj426hs",
@@ -850,6 +957,8 @@
     "externalVendors": [
       "fastly"
     ],
-    "rootCause": "deployment-issue"
+    "rootCause": "deployment-issue",
+    "startTime": "2019-05-13T17:49:00.000Z",
+    "endTime": "2019-05-18T07:31:00.000Z"
   }
 ]
