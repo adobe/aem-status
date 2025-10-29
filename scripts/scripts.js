@@ -66,63 +66,12 @@ const timeAgo = (date) => {
   return `${prefix}${years} year${years === 1 ? '' : 's'}${suffix}`;
 };
 
-// Helper function to parse ISO 8601 timestamp format
-const parseIncidentTimestamp = (timestamp) => {
-  // Handle ISO 8601 format: "2024-12-10T02:26:00.000Z"
-  const date = new Date(timestamp);
-  if (!Number.isNaN(date.getTime())) {
-    return date;
-  }
-
-  // Fallback to standard date parsing
-  return new Date(timestamp);
-};
+import { calculateUptime as calculateUptimeBase, parseIncidentTimestamp, getUptimeStatus } from './slo-calculator.js';
 
 const calculateUptime = (incidents) => {
-  const status = {};
-  [
-    ['delivery', 0.9999],
-    ['publishing', 0.999],
-  ].forEach(([service, sla]) => {
-    status[service] = {
-      sla,
-      uptime: 1,
-      numIncidents: 0,
-      disruptionMins: 0,
-    };
-  });
-
-  const ninetyDaysMins = 90 * 24 * 60;
-  const ninetyDaysMillies = ninetyDaysMins * 60 * 1000;
-
-  incidents
-    .map((incident) => ({
-      startTime: parseIncidentTimestamp(incident.startTime),
-      endTime: parseIncidentTimestamp(incident.endTime),
-      impactedService: incident.impactedService,
-      errorRate: parseFloat(incident.errorRate) || 0,
-    }))
-    .filter(({
-      startTime, endTime, impactedService, errorRate,
-    }) => startTime && endTime && impactedService && errorRate)
-    .filter(({ startTime }) => startTime > new Date(Date.now() - ninetyDaysMillies))
-    .forEach(({
-      startTime, endTime, impactedService, errorRate,
-    }) => {
-      const disruptionMins = Math.round((endTime.getTime() - startTime.getTime()) / 60000);
-      const downtimeMins = disruptionMins * errorRate;
-      const uptimeMins = ninetyDaysMins - downtimeMins;
-      const uptime = uptimeMins / ninetyDaysMins;
-
-      status[impactedService].uptime = uptime;
-      status[impactedService].numIncidents += 1;
-    });
+  const status = calculateUptimeBase(incidents);
 
   Object.entries(status).forEach(([service, serviceStatus]) => {
-    // format uptime percentage to 2 decimal places
-    // toFixed(2) rounds 99.99 up to 100.00, fall back to string slicing
-    serviceStatus.uptimePercentage = `${(serviceStatus.uptime * 100)}`.slice(0, 6);
-
     // display uptime details
     const serviceElement = document.querySelector(`.service.${service}`);
     if (!serviceElement) return;
@@ -132,13 +81,8 @@ const calculateUptime = (incidents) => {
       <p>${serviceStatus.numIncidents} incident${serviceStatus.numIncidents === 1 ? '' : 's'}</p>
     `;
     // color coding based on uptime
-    if (serviceStatus.uptime >= serviceStatus.sla) {
-      uptimeElement.classList.add('ok');
-    } else if (serviceStatus.uptime >= serviceStatus.sla - (1 - serviceStatus.sla)) {
-      uptimeElement.classList.add('warn');
-    } else {
-      uptimeElement.classList.add('err');
-    }
+    const statusClass = getUptimeStatus(serviceStatus.uptime, serviceStatus.sla);
+    uptimeElement.classList.add(statusClass);
   });
 };
 
