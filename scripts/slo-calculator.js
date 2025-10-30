@@ -66,15 +66,17 @@ export function calculateUptime(incidents, options = {}) {
     }) => {
       const disruptionMins = Math.round((endTime.getTime() - startTime.getTime()) / 60000);
       const downtimeMins = disruptionMins * errorRate;
-      const uptimeMins = windowMins - downtimeMins;
-      const uptime = uptimeMins / windowMins;
 
-      status[impactedService].uptime = uptime;
+      status[impactedService].totalDowntimeMins += downtimeMins;
       status[impactedService].numIncidents += 1;
-      status[impactedService].disruptionMins += disruptionMins;
     });
 
+  // Calculate final uptime for each service based on accumulated downtime
   Object.entries(status).forEach(([, serviceStatus]) => {
+    const uptimeMins = windowMins - serviceStatus.totalDowntimeMins;
+    // eslint-disable-next-line no-param-reassign
+    serviceStatus.uptime = uptimeMins / windowMins;
+
     // format uptime percentage to 2 decimal places
     // toFixed(2) rounds 99.99 up to 100.00, fall back to string slicing
     // eslint-disable-next-line no-param-reassign
