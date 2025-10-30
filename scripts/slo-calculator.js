@@ -44,6 +44,7 @@ export function calculateUptime(incidents, options = {}) {
       uptime: 1,
       numIncidents: 0,
       disruptionMins: 0,
+      totalDowntimeMins: 0,
     };
   });
 
