@@ -411,8 +411,15 @@
 .incident-name {
     font-size: var(--spectrum-font-size-medium);
     font-weight: 600;
-    color: var(--spectrum-gray-900);
+    color: var(--spectrum-blue-700);
     line-height: 1.4;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.incident-name:hover {
+    color: var(--spectrum-blue-900);
+    text-decoration: underline;
 }
 
 .incident-code {

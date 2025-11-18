@@ -482,7 +482,7 @@ const renderIncidentsByCategory = (incidents) => {
       incidentItem.innerHTML = `
                 <div class="incident-date">${formattedDate}</div>
                 <div class="incident-details">
-                    <div class="incident-name">${incident.name}</div>
+                    <a href="/details.html?incident=${incident.code}" class="incident-name">${incident.name}</a>
                     <div class="incident-code">${incident.code}</div>
                     ${metadata.length > 0 ? `<div class="incident-metadata">${metadata.join(' • ')}</div>` : ''}
                 </div>
