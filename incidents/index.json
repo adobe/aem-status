@@ -941,12 +941,5 @@
     "rootCause": "third-party-outage",
     "startTime": "2022-01-12T02:10:00.000Z",
     "endTime": "2022-01-12T02:39:00.000Z"
-  },
-  {
-    "code": "jl69shj426hs",
-    "name": "Helix Logging unable to publish new sites",
-    "message": "What happened?\n\nFrom May 13th to May 19th, the Helix Publish service wasn’t working as expected and failed to create new log configurations for Fastly service configurations that have not been used with Helix before. The failure of the Helix Publish service lead to Helix CLI aborting the attempt to publish the site, making it impossible to publish new sites. If you have been trying and failing to launch a site on Helix last week, we are sorry and we apologize for making it impossible to start ne",
-    "impact": "major",
-    "timestamp": "2019-05-20T13:39:00.000Z"
   }
 ]
