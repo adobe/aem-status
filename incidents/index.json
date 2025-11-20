@@ -8,7 +8,16 @@
     "startTime": "2025-11-18T11:48:33.836Z",
     "endTime": "2025-11-18T12:29:16.168Z",
     "errorRate": "0.001",
-    "impactedService": "delivery"
+    "impactedService": "delivery",
+    "affectedComponents": [
+      "delivery"
+    ],
+    "internalServices": null,
+    "externalVendors": [
+      "cloudflare",
+      "aws"
+    ],
+    "rootCause": "third-party-outage"
   },
   {
     "code": "AEM-yanvkiuy",
