@@ -8,7 +8,16 @@
     "startTime": "2025-11-18T11:31:33.836Z",
     "endTime": "2025-11-18T15:30:16.168Z",
     "errorRate": "0.61",
-    "impactedService": "publishing"
+    "impactedService": "publishing",
+    "affectedComponents": [
+      "publishing"
+    ],
+    "internalServices": null,
+    "externalVendors": [
+      "cloudflare",
+      "aws"
+    ],
+    "rootCause": "third-party-outage"
   },
   {
     "code": "AEM-sp59g7mr",
