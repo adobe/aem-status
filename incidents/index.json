@@ -22,7 +22,7 @@
   {
     "code": "AEM-sp59g7mr",
     "name": "Cloudflare Outage with Minor Impact on Delivery",
-    "message": "On November 18, 2025, between 11:31 UTC and 14:40 UTC, a global Cloudflare outage impacted our\n        delivery services with an overall error rate of 0.07%. Our team detected the issue within\n        minutes through automated monitoring and initiated failover to AWS within 11 minutes. The delivery\n        service experienced minimal impact and was fully restored by 14:40 UTC. The\n        publishing service was restored by 15:30 UTC. No data loss occurred, and the vast majority of\n        custom",
+    "message": "On November 18, 2025, between 11:31 UTC and 14:40 UTC, a global Cloudflare outage impacted our\n        delivery services with an overall error rate of 0.07%. Our team detected the issue within\n        minutes through automated monitoring and initiated failover to AWS within 11 minutes. The delivery\n        service experienced minimal impact and was fully restored by 14:40 UTC.",
     "impact": "minor",
     "timestamp": "2025-11-20T10:52:26.239Z",
     "startTime": "2025-11-18T11:48:33.836Z",
