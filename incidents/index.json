@@ -1,13 +1,24 @@
 [
   {
+    "code": "AEM-b10mmhnp",
+    "name": "Cloudflare Outage with Minor Impact on Publishing Services",
+    "message": "On 18.11.2025 11:31 UTC one of our monitors alerted us that there was an elevated\n        error rate from Cloudflare Workers. 11 minutes later, we switched the origins\n        for our *.aem.live and *.aem.page Fastly service to AWS and the error rate\n        went down.",
+    "impact": "minor",
+    "timestamp": "2025-11-20T10:52:26.239Z",
+    "startTime": "2025-11-18T11:31:33.836Z",
+    "endTime": "2025-11-18T15:30:16.168Z",
+    "errorRate": "0.61",
+    "impactedService": "publishing"
+  },
+  {
     "code": "AEM-sp59g7mr",
-    "name": "Page Delivery Issues ...",
+    "name": "Cloudflare Outage with Minor Impact on Delivery",
     "message": "On 18.11.2025 11:31 UTC one of our monitors alerted us that there was an elevated\n        error rate from Cloudflare Workers. 11 minutes later, we switched the origins\n        for our *.aem.live and *.aem.page Fastly service to AWS and the error rate\n        went down.",
     "impact": "minor",
     "timestamp": "2025-11-20T10:52:26.239Z",
     "startTime": "2025-11-18T11:48:33.836Z",
     "endTime": "2025-11-18T12:29:16.168Z",
-    "errorRate": "0.001",
+    "errorRate": "0.07",
     "impactedService": "delivery",
     "affectedComponents": [
       "delivery"
