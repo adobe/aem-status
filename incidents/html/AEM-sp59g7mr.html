@@ -1,14 +1,17 @@
 <h1 class="minor">Cloudflare Outage with Minor Impact on Delivery</h1>
-<article data-incident-start-time="2025-11-18T11:31:33.836Z" data-incident-end-time="2025-11-18T14:40:16.168Z" data-incident-error-rate="0.07" data-incident-impacted-service="delivery">
+<article data-incident-start-time="2025-11-18T11:31:00.000Z" data-incident-end-time="2025-11-18T14:40:00.000Z" data-incident-error-rate="0.07" data-incident-impacted-service="delivery">
     <h2>Postmortem</h2>
+    <h2>Executive Summary</h2>
     <p>
-        On 18.11.2025 11:31 UTC one of our monitors alerted us that there was an elevated
-        error rate from Cloudflare Workers. 11 minutes later, we switched the origins
-        for our <code>*.aem.live</code> and <code>*.aem.page</code> Fastly service to AWS and the error rate
-        went down.
+        On November 18, 2025, between 11:31 UTC and 14:40 UTC, a global Cloudflare outage impacted our
+        delivery services with an overall error rate of 0.07%. Our team detected the issue within
+        minutes through automated monitoring and initiated failover to AWS within 11 minutes. The delivery
+        service experienced minimal impact and was fully restored by 14:40 UTC. The
+        publishing service was restored by 15:30 UTC. No data loss occurred, and the vast majority of
+        customers experienced either no impact or brief interruptions.
     </p>
     <p>
-        The reason was a <a href="https://blog.cloudflare.com/18-november-2025-outage/">global outage at Cloudflare</a>,
+        The root cause was a <a href="https://blog.cloudflare.com/18-november-2025-outage/">global outage at Cloudflare</a>,
         lasting from 11:20 UTC to 17:06 UTC.
     </p>
     <p>
@@ -57,7 +60,11 @@
 
     <li>
       <h2>resolved</h2>
-      <p>At 14:40 UTC, we switched the DNS for some customer projects from Cloudflare to the Fastly service for <code>*.aem.live</code>.</p>
-      <time>2025-11-18T14:40:09.377Z</time>
+      <p>
+        At 14:40 UTC, all AEM services have been fully restored via failover to AWS infrastructure.
+        While the Cloudflare issue continues, our customers are no longer impacted. We will monitor
+        the situation and plan to switch back to Cloudflare once their infrastructure is confirmed stable.
+      </p>
+      <time>2025-11-18T14:40:00.000Z</time>
     </li>
 </ul>
