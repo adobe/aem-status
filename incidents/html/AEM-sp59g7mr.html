@@ -1,0 +1,78 @@
+<h1 class="minor">Page Delivery Issues ...</h1>
+<article data-incident-start-time="2025-11-18T11:48:33.836Z" data-incident-end-time="2025-11-18T12:29:16.168Z" data-incident-error-rate="0.001" data-incident-impacted-service="delivery">
+    <h2>Postmortem</h2>
+    <p>
+        On 18.11.2025 11:31 UTC one of our monitors alerted us that there was an elevated
+        error rate from Cloudflare Workers. 11 minutes later, we switched the origins
+        for our <code>*.aem.live</code> and <code>*.aem.page</code> Fastly service to AWS and the error rate
+        went down.
+    </p>
+    <p>
+        The reason was a <a href="https://blog.cloudflare.com/18-november-2025-outage/">global outage at Cloudflare</a>,
+        lasting from 11:20 UTC to 17:06 UTC.
+    </p>
+    <p>
+        The impact on the delivery service was barely noticeable at an overall error rate of 0.07%,
+        from 11:30 UTC to 14:40 UTC. The vast majority of projects was only impacted for
+        12 minutes until 11:42 UTC, and a very small number of projects experienced errors
+        until 14:40 UTC.
+    </p>
+    <p>
+        The authoring and publishing service had an overall error rate of 0.61%, between 11:30 UTC and 15:30 UTC.
+        The admin service used for publishing was not impacted at all. <code>aem.page</code> had a negliglible
+        impact until 14:40 UTC. <code>aem.reviews</code> experienced a higher error rate until the end of the
+        Cloudflare outage, but there was almost no traffic at the time of the outage. <code>da.live</code> suffered
+        the biggest impact at an error rate of 4.1% and users were not able to edit or publish content until 15:30
+        UTC.
+    </p>
+    <h2>Action items</h2>
+    <ol>
+      <li>
+        In case of a future Cloudflare outage, we always need to switch to the healthy stack at the DNS level from the beginning
+      </li>
+      <li>
+        Improve runbook to provide clearer steps and better help us manage a global Cloudflare outage
+      </li>
+      <li>
+        Clearly define all technical services that belong to the delivery and publishing business service SLOs
+      </li>
+      <li>
+        Consolidate logs from all relevant technical services to help the on-call engineer with an overview during an outage, as well as facilitate the RCA
+      </li>
+    </ol>
+    <time>2025-11-20T10:52:26.239Z</time>
+</article>
+
+<ul class="updates">
+    <li>
+      <h2>investigating</h2>
+      <p>At 11:31 UTC, our monitors alerted as about errors from Cloudflare workers.</p>
+      <time>2025-11-18T11:48:33.836Z</time>
+    </li>
+
+    <li>
+      <h2>monitoring</h2>
+      <p>At 11:42 UTC, we switched our backends to AWS. In the 11 minutes that passed since our monitor alerted us,
+        we observed elevated error rates of 0.07% on delivery (*.live), and 0.61% on publishing (*.page).</p>
+      <time>2025-11-18T11:50:43.461Z</time>
+    </li>
+
+    <li>
+      <h2>monitoring</h2>
+      <p>At 11:48 UTC, Cloudflare confirmed a global networking issue on their infrastructure.</p>
+      <time>2025-11-18T11:51:09.377Z</time>
+    </li>
+
+    <li>
+      <h2>monitoring</h2>
+      <p>At 14:40 UTC, we switched the DNS for some customer projects from Cloudflare to the Fastly service for <code>*.aem.live</code>.</p>
+      <time>2025-11-18T14:40:09.377Z</time>
+    </li>
+
+    <li>
+      <h2>resolved</h2>
+      <p>The issue at Cloudflare is still ongoing, we'll switch back our backends when it will be resolved.</p>
+      <time>2025-11-18T14:41:16.168Z</time>
+    </li>
+</ul>
+
