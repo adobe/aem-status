@@ -1,5 +1,16 @@
 [
   {
+    "code": "AEM-sp59g7mr",
+    "name": "Page Delivery Issues ...",
+    "message": "On 18.11.2025 11:31 UTC one of our monitors alerted us that there was an elevated\n        error rate from Cloudflare Workers. 11 minutes later, we switched the origins\n        for our *.aem.live and *.aem.page Fastly service to AWS and the error rate\n        went down.",
+    "impact": "minor",
+    "timestamp": "2025-11-20T10:52:26.239Z",
+    "startTime": "2025-11-18T11:48:33.836Z",
+    "endTime": "2025-11-18T12:29:16.168Z",
+    "errorRate": "0.001",
+    "impactedService": "delivery"
+  },
+  {
     "code": "AEM-yanvkiuy",
     "name": "Major publishing disruption due to AWS US-EAST-1 outage",
     "message": "On October 20, 2025, between 06:54 and 08:44 UTC, an AWS US-EAST-1 region outage \n        affecting Lambda and SQS services caused publishing disruptions for all AEM customers \n        and minimal delivery errors. Our team deployed a secondary publishing region within \n        110 minutes, restoring full functionality while the AWS incident was ongoing.",
