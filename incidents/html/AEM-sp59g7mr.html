@@ -13,11 +13,19 @@
         lasting from 11:20 UTC to 17:06 UTC.
     </p>
     <p>
-        The impact on the delivery service was barely noticeable at an overall error rate of 0.07%,
+        The impact on the delivery service was barely noticeable at an overall error rate of 0.08%,
         from 11:30 UTC to 14:40 UTC. The vast majority of projects were only impacted for
         12 minutes until 11:42 UTC, and a very small number of projects experienced errors
         until 14:40 UTC.
     </p>
+
+    <h2>What went well</h2>
+    <ul>
+      <li>Automated monitoring detected the issue within minutes</li>
+      <li>Failover to AWS was executed within 11 minutes</li>
+      <li>Multi-cloud strategy limited customer impact</li>
+    </ul>
+
     <h2>Action items</h2>
     <ol>
       <li>
@@ -59,10 +67,10 @@
     <li>
       <h2>resolved</h2>
       <p>
-        At 14:40 UTC, delivery has been fully restored via failover to AWS infrastructure.
+        At 14:40 UTC, delivery has been fully restored via failover to Fastly and AWS infrastructure.
         While the Cloudflare issue continues, our customers are no longer impacted. We will monitor
         the situation and plan to switch back to Cloudflare once their infrastructure is confirmed stable.
       </p>
-      <time>2025-11-18T14:40:00.000Z</time>
+      <time>2025-11-18T14:50:00.000Z</time>
     </li>
 </ul>

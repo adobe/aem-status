@@ -19,9 +19,17 @@
       content on <code>aem.page</code> domains, especially during the first few minutes of the incident.
     </p>
     <p>
-      <code>da.live</code> domains were impacted more severly at a 4.1% error rate. Viewing, updating
+      <code>da.live</code> domains were impacted more severely at a 4.1% error rate. Viewing, updating
       and publishing remained challenging for most customers throughout the incident.
     </p>
+
+    <h2>What went well</h2>
+    <ul>
+      <li>Automated monitoring detected the issue within minutes</li>
+      <li>Failover to AWS was executed within 11 minutes</li>
+      <li>Multi-cloud strategy limited customer impact</li>
+    </ul>
+
     <h2>Action items</h2>
     <ol>
       <li>
@@ -61,18 +69,11 @@
     </li>
 
     <li>
-      <h2>monitoring</h2>
-      <p>At 14:40 UTC, we switched the DNS for some customer projects from Cloudflare to the Fastly service for <code>*.aem.live</code>.</p>
-      <time>2025-11-18T14:40:09.377Z</time>
+      <h2>resolved</h2>
+      <p>At 14:40 UTC, we switched the DNS for some customer projects from Cloudflare to the Fastly service for <code>*.aem.live</code>.
+      This fully restored authoring and publishing services. While the Cloudflare issue continued, our customers were no longer impacted.
+      We will continue to monitor the situation and plan to switch back to Cloudflare once their infrastructure is confirmed stable</p>
+      <time>2025-11-18T14:50:09.377Z</time>
     </li>
 
-    <li>
-      <h2>resolved</h2>
-      <p>
-        At 15:30 UTC, authoring and publishing services have been fully restored via failover to AWS infrastructure.
-        While the Cloudflare issue continues, our customers are no longer impacted. We will monitor
-        the situation and plan to switch back to Cloudflare once their infrastructure is confirmed stable.
-      </p>
-      <time>2025-11-18T15:30:00.000Z</time>
-    </li>
-</ul>
+  </ul>
