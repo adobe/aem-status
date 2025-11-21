@@ -1,0 +1,80 @@
+<h1 class="minor">Cloudflare Outage with Minor Impact on Authoring and Publishing</h1>
+<article data-incident-start-time="2025-11-18T11:30:00.000Z" data-incident-end-time="2025-11-18T11:43:00.000Z" data-incident-error-rate="0.02794" data-incident-impacted-service="publishing">
+    <h2>Executive Summary</h2>
+    <p>
+        On November 18, 2025, between 11:30 UTC and 11:43 UTC, a global Cloudflare outage impacted our
+        publishing services with a weighted average error rate of 2.794%. Our team detected the issue within
+        minutes through automated monitoring and initiated failover to AWS within 11 minutes. The
+        publishing service was fully restored by 11:43 UTC. No data loss occurred, and the vast majority of
+        customers experienced either no impact or brief interruptions.
+    </p>
+    <p>
+        The root cause was a <a href="https://blog.cloudflare.com/18-november-2025-outage/">global outage at Cloudflare</a>
+        lasting from 11:20 UTC to 17:06 UTC.
+    </p>
+    <p>
+      The Admin API was not impacted by the outage: Updating and publishing content remained
+      available throughout the incident. Customers would run into occasional errors while previewing
+      content on <code>aem.page</code> domains, especially during the first few minutes of the incident.
+    </p>
+    <p>
+      Outside of the Authoring and Publishing SLO, but related, <code>da.live</code> was impacted severely at a 4.1% error rate for a longer duration, between 11:30 UTC and 15:30 UTC.
+      Viewing, updating and publishing remained challenging for most customers throughout the incident.
+    </p>
+
+    <h2>What went well</h2>
+    <ul>
+      <li>Automated monitoring detected the issue within minutes</li>
+      <li>Failover to alternate stack was executed within 11 minutes</li>
+      <li>Multi-cloud strategy limited customer impact</li>
+    </ul>
+
+    <h2>Action items</h2>
+    <ol>
+      <li>
+        In case of a future Cloudflare outage, for customer sites using Cloudflare, switch to the healthy stack at the DNS level
+        immediately upon detection (target: within 5 minutes of confirmed outage)
+      </li>
+      <li>
+        Improve runbook to provide clearer steps for managing a global Cloudflare outage, including decision tree for DNS-level failover
+      </li>
+      <li>
+        Clearly define all technical services that belong to the publishing business service SLO, including <code>*.aem.reviews</code> and <code>*.da.live</code>.
+      </li>
+      <li>
+        Consolidate logs from all relevant technical services to help the on-call engineer with an overview during an outage, as well as facilitate the RCA
+      </li>
+      <li>
+        Improve monitoring to alert on elevated error rates on <code>*.da.live</code> and <code>*.aem.reviews</code> services
+      </li>
+      <li>
+        Allow for DNS-level switch on <code>admin.hlx.page</code> and <code>da.live</code>.
+      </li>
+    </ol>
+    <time>2025-11-21T10:52:26.239Z</time>
+</article>
+
+<ul class="updates">
+    <li>
+      <h2>investigating</h2>
+      <p>At 11:31 UTC, our monitors alerted us about errors from Cloudflare workers.</p>
+      <time>2025-11-18T11:31:33.836Z</time>
+    </li>
+
+    <li>
+      <h2>monitoring</h2>
+      <p>At 11:42 UTC, we switched our backends to AWS. In the 11 minutes that passed since our monitor alerted us,
+        we observed elevated error rates on publishing (*.page).</p>
+      <time>2025-11-18T11:42:43.461Z</time>
+    </li>
+
+    <li>
+      <h2>resolved</h2>
+      <p>At 11:48 UTC, Cloudflare confirmed a global networking issue on their infrastructure.</p>
+      <p>Since 11:43 UTC, we switched the DNS for some customer projects from Cloudflare to the Fastly service for <code>*.aem.live</code>.
+      This fully restored authoring and publishing services. While the Cloudflare issue continued, our customers were no longer impacted.
+      We will continue to monitor the situation and plan to switch back to Cloudflare once their infrastructure is confirmed stable.</p>
+      <time>2025-11-18T11:43:00.000Z</time>
+    </li>
+
+  </ul>
