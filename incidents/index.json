@@ -2,7 +2,7 @@
   {
     "code": "AEM-b10mmhnp",
     "name": "Cloudflare Outage with Minor Impact on Authoring and Publishing",
-    "message": "On November 18, 2025, between 11:30 UTC and 14:40 UTC, a global Cloudflare outage impacted our\n        publishing services with an overall error rate of 0.255%. Our team detected the issue within\n        minutes through automated monitoring and initiated failover to AWS within 11 minutes. The\n        publishing service was fully restored by 14:40 UTC. No data loss occurred, and the vast majority of\n        customers experienced either no impact or brief interruptions.",
+    "message": "On November 18, 2025, between 11:30 UTC and 14:40 UTC, a global Cloudflare outage impacted our\n        publishing services with an weighted average error rate of 0.255%. Our team detected the issue within\n        minutes through automated monitoring and initiated failover to AWS within 11 minutes. The\n        publishing service was fully restored by 14:40 UTC. No data loss occurred, and the vast majority of\n        customers experienced either no impact or brief interruptions.",
     "impact": "minor",
     "timestamp": "2025-11-20T10:52:26.239Z",
     "startTime": "2025-11-18T11:30:00.000Z",
