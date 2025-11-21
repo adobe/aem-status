@@ -222,11 +222,14 @@ jobs:
             Use @incidents/incident-template-short.html as a reference for a post-mortem for a low-impact incident.
 
             Please provide thorough feedback with inline comments on areas that need improvement,
-            missing information, or where the analysis could be deeper. Highlight particularly
-            well-written sections as examples of best practices.
+            missing information, or where the analysis could be deeper.
+            Do not comment on sections that do not need improvement.
 
             Use the ```suggestion markdown syntax to provide actionable recommendations that the
             post-mortem author can merge right away.
+
+            Keep the number of feedback comments limited to no more than 10, so prioritize the highest-impact
+            suggestions.
 
           claude_args: |
             --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*), Bash(gh pr diff:*), Bash(gh pr view:*)"
