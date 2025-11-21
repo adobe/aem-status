@@ -4,7 +4,7 @@
     <h2>Executive Summary</h2>
     <p>
         On November 18, 2025, between 11:30 UTC and 14:40 UTC, a global Cloudflare outage impacted our
-        publishing services with an overall error rate of 0.255%. Our team detected the issue within
+        publishing services with an weighted average error rate of 0.255%. Our team detected the issue within
         minutes through automated monitoring and initiated failover to AWS within 11 minutes. The
         publishing service was fully restored by 14:40 UTC. No data loss occurred, and the vast majority of
         customers experienced either no impact or brief interruptions.
@@ -58,7 +58,7 @@
     <li>
       <h2>monitoring</h2>
       <p>At 11:42 UTC, we switched our backends to AWS. In the 11 minutes that passed since our monitor alerted us,
-        we observed elevated error rates of 0.07% on delivery (*.live), and 0.61% on publishing (*.page).</p>
+        we observed elevated error rates on publishing (*.page).</p>
       <time>2025-11-18T11:42:43.461Z</time>
     </li>
 
@@ -73,7 +73,7 @@
       <p>At 14:40 UTC, we switched the DNS for some customer projects from Cloudflare to the Fastly service for <code>*.aem.live</code>.
       This fully restored authoring and publishing services. While the Cloudflare issue continued, our customers were no longer impacted.
       We will continue to monitor the situation and plan to switch back to Cloudflare once their infrastructure is confirmed stable</p>
-      <time>2025-11-18T14:50:09.377Z</time>
+      <time>2025-11-18T14:40:09.377Z</time>
     </li>
 
   </ul>
