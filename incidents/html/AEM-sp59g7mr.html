@@ -1,42 +1,39 @@
 <h1 class="minor">Cloudflare Outage with Minor Impact on Delivery</h1>
-<article data-incident-start-time="2025-11-18T11:30:00.000Z" data-incident-end-time="2025-11-18T14:40:00.000Z" data-incident-error-rate="0.08" data-incident-impacted-service="delivery">
+<article data-incident-start-time="2025-11-18T11:30:00.000Z" data-incident-end-time="2025-11-18T11:43:00.000Z" data-incident-error-rate="0.00927" data-incident-impacted-service="delivery">
     <h2>Executive Summary</h2>
     <p>
-        On November 18, 2025, between 11:30 UTC and 14:40 UTC, a global Cloudflare outage impacted our
-        delivery services with an overall error rate of 0.08%. Our team detected the issue within
+        On November 18, 2025, between 11:30 UTC and 11:43 UTC, a global Cloudflare outage impacted our
+        delivery services with an overall error rate of 0.927%. Our team detected the issue within
         minutes through automated monitoring and initiated failover to AWS within 11 minutes. The delivery
-        service experienced minimal impact and was fully restored by 14:40 UTC.
+        service experienced minimal impact and was fully restored by 11:43 UTC.
     </p>
     <p>
         The root cause was a <a href="https://blog.cloudflare.com/18-november-2025-outage/">global outage at Cloudflare</a>,
         lasting from 11:20 UTC to 17:06 UTC.
     </p>
     <p>
-        The impact on the delivery service was barely noticeable at an overall error rate of 0.08%,
-        from 11:30 UTC to 14:40 UTC. The vast majority of projects were only impacted for
-        12 minutes until 11:42 UTC, and less than 1% of projects experienced elevated
-        errors until 14:40 UTC.
+        The impact on the delivery service was noticeable at an overall error rate of 0.927%,
+        from 11:30 UTC to 11:43 UTC. Customer sites were impacted with a slighty elevated error rate for 13 minutes.
+        Customers who had project-specific Cloudflare dependencies were more severely impacted. This includes
+        usage of Early Access features hosted by Adobe, or self-hosted Cloudflare Workers.
     </p>
 
     <h2>What went well</h2>
     <ul>
       <li>Automated monitoring detected the issue within minutes</li>
-      <li>Failover to AWS was executed within 11 minutes</li>
+      <li>Failover to alernate stack was executed within 11 minutes</li>
       <li>Multi-cloud strategy limited customer impact</li>
     </ul>
 
     <h2>Action items</h2>
     <ol>
       <li>
-        In case of a future Cloudflare outage, switch to the healthy stack at the DNS level immediately upon detection
+        In case of a future Cloudflare outage, for customer sites using Cloudflare, switch to the healthy stack at the DNS level immediately upon detection
         (target: within 5 minutes of confirmed outage)
       </li>
       <li>
         Improve runbook to provide clearer steps for managing a global Cloudflare outage, including decision tree for
         DNS-level failover
-      </li>
-      <li>
-        Clearly define all technical services that belong to the delivery and publishing business service SLOs
       </li>
       <li>
         Consolidate logs from all relevant technical services to help the on-call engineer with an overview during an
@@ -61,18 +58,13 @@
     </li>
 
     <li>
-      <h2>monitoring</h2>
-      <p>At 11:48 UTC, Cloudflare confirmed a global networking issue on their infrastructure.</p>
-      <time>2025-11-18T11:48:09.377Z</time>
-    </li>
-
-    <li>
       <h2>resolved</h2>
+      <p>At 11:48 UTC, Cloudflare confirmed a global networking issue on their infrastructure.</p>
       <p>
-        At 14:40 UTC, delivery has been fully restored via failover to Fastly and AWS infrastructure.
+        Since 11:43 UTC, delivery has been fully restored via failover to the alternate delivery stack.
         While the Cloudflare issue continues, our customers are no longer impacted. We will monitor
         the situation and plan to switch back to Cloudflare once their infrastructure is confirmed stable.
       </p>
-      <time>2025-11-18T14:40:00.000Z</time>
+      <time>2025-11-18T11:43:09.377Z</time>
     </li>
 </ul>
