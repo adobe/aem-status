@@ -31,7 +31,9 @@ const calculateHeatmapData = (incidents) => {
 
     // Count incidents by day of week and hour (UTC)
     incidents.forEach(incident => {
-        const date = parseTimestamp(incident.timestamp);
+        // Use startTime when available, otherwise fall back to incidentUpdated (or legacy timestamp)
+        const timestamp = incident.startTime || incident.incidentUpdated || incident.timestamp;
+        const date = parseTimestamp(timestamp);
         if (!isNaN(date.getTime())) {
             const dayOfWeek = date.getUTCDay(); // 0 = Sunday, 1 = Monday, etc.
             const hour = date.getUTCHours();
@@ -43,7 +45,9 @@ const calculateHeatmapData = (incidents) => {
     // (total number of that day/hour combination in the data range)
     const now = new Date();
     const oldestIncident = incidents.reduce((oldest, incident) => {
-        const date = parseTimestamp(incident.timestamp);
+        // Use startTime when available, otherwise fall back to incidentUpdated (or legacy timestamp)
+        const timestamp = incident.startTime || incident.incidentUpdated || incident.timestamp;
+        const date = parseTimestamp(timestamp);
         return date < oldest ? date : oldest;
     }, now);
 

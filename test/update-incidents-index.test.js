@@ -171,7 +171,7 @@ describe('update-incidents-index', () => {
               code: 'test1',
               name: 'Test Incident 1',
               impact: 'minor',
-              timestamp: 'Feb 07, 2025',
+              incidentUpdated: 'Feb 07, 2025',
               message: 'Test message',
             },
           ],
