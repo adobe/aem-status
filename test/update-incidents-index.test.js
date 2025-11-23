@@ -253,7 +253,7 @@ describe('update-incidents-index', () => {
         fs.writeFileSync(tempScriptPath, modifiedScript);
 
         // Run the script for the first time
-        // eslint-disable-next-line
+        // eslint-disable-next-line import/no-dynamic-require
         const { default: updateFunc } = await import(`file://${tempScriptPath}?t=${Date.now()}`);
         updateFunc();
 
@@ -279,7 +279,7 @@ describe('update-incidents-index', () => {
         const tempScriptPath2 = path.join(tempDir, 'update-script2.js');
         fs.writeFileSync(tempScriptPath2, modifiedScript);
 
-        // eslint-disable-next-line
+        // eslint-disable-next-line import/no-dynamic-require
         const { default: updateFunc2 } = await import(`file://${tempScriptPath2}?t=${Date.now()}`);
         updateFunc2();
 
@@ -316,7 +316,7 @@ describe('update-incidents-index', () => {
       fs.writeFileSync(tempScriptPath, modifiedScript);
 
       // Run the script
-      // eslint-disable-next-line
+      // eslint-disable-next-line import/no-dynamic-require
       const { default: updateFunc } = await import(`file://${tempScriptPath}?t=${Date.now()}`);
       updateFunc();
 
