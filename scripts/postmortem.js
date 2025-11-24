@@ -95,8 +95,6 @@ const updatePostmortem = async () => {
   doc.querySelector('article time').textContent = new Date().toISOString();
 
   incidentTextArea.value = doc.body.innerHTML;
-
-
 };
 
 const initPostmortem = async () => {
