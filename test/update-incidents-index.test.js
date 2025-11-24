@@ -204,4 +204,117 @@ describe('update-incidents-index', () => {
       assert.ok(htmlFiles.includes('test2.html'), 'Should include test2.html');
     });
   });
+
+  describe('startTime and endTime updates', () => {
+    let tempDir;
+    let incidentsDir;
+    let htmlDir;
+    let indexPath;
+
+    // Helper function to create and run the update script
+    async function createAndRunScript(scriptName = 'update-script.js') {
+      const scriptDir = path.join(path.dirname(testDir), 'scripts');
+      const scriptContent = fs.readFileSync(path.join(scriptDir, 'update-incidents-index.js'), 'utf-8');
+      const modifiedScript = scriptContent
+        .replace("path.join(dirname, '..', 'incidents')", `'${incidentsDir}'`);
+
+      const tempScriptPath = path.join(tempDir, scriptName);
+      fs.writeFileSync(tempScriptPath, modifiedScript);
+
+      // eslint-disable-next-line import/no-dynamic-require
+      const { default: updateFunc } = await import(`file://${tempScriptPath}?t=${Date.now()}`);
+      updateFunc();
+    }
+
+    // Helper function to read the incidents index
+    function readIndex() {
+      return JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
+    }
+
+    beforeEach(() => {
+      // Create temporary directory structure
+      tempDir = fs.mkdtempSync(path.join(testDir, 'test-incidents-'));
+      incidentsDir = path.join(tempDir, 'incidents');
+      htmlDir = path.join(incidentsDir, 'html');
+      indexPath = path.join(incidentsDir, 'index.json');
+
+      fs.mkdirSync(incidentsDir, { recursive: true });
+      fs.mkdirSync(htmlDir, { recursive: true });
+    });
+
+    afterEach(() => {
+      if (tempDir && fs.existsSync(tempDir)) {
+        fs.rmSync(tempDir, { recursive: true, force: true });
+      }
+    });
+
+    it('should update startTime and endTime when changed in article metadata', async () => {
+      // Create an incident HTML file with initial startTime and endTime
+      const initialHTML = `<h1 class="minor">Test Incident</h1>
+<article data-incident-start-time="2025-01-01T10:00:00.000Z" data-incident-end-time="2025-01-01T11:00:00.000Z">
+    <h2>Postmortem</h2>
+    <p>Initial postmortem content.</p>
+    <time>2025-01-01T12:00:00.000Z</time>
+</article>`;
+
+      fs.writeFileSync(path.join(htmlDir, 'AEM-test123.html'), initialHTML);
+
+      // Run the script for the first time
+      await createAndRunScript('update-script-1.js');
+
+      // Read the generated index
+      const index1 = readIndex();
+
+      assert.equal(index1.length, 1, 'Should have one incident');
+      assert.equal(index1[0].code, 'AEM-test123');
+      assert.equal(index1[0].startTime, '2025-01-01T10:00:00.000Z', 'Should have correct initial startTime');
+      assert.equal(index1[0].endTime, '2025-01-01T11:00:00.000Z', 'Should have correct initial endTime');
+
+      // Now update the HTML file with new startTime and endTime
+      const updatedHTML = `<h1 class="minor">Test Incident</h1>
+<article data-incident-start-time="2025-01-01T09:30:00.000Z" data-incident-end-time="2025-01-01T11:30:00.000Z">
+    <h2>Postmortem</h2>
+    <p>Updated postmortem content with corrected times.</p>
+    <time>2025-01-01T12:00:00.000Z</time>
+</article>`;
+
+      fs.writeFileSync(path.join(htmlDir, 'AEM-test123.html'), updatedHTML);
+
+      // Re-run the script
+      await createAndRunScript('update-script-2.js');
+
+      // Read the updated index
+      const index2 = readIndex();
+
+      assert.equal(index2.length, 1, 'Should still have one incident');
+      assert.equal(index2[0].code, 'AEM-test123');
+      assert.equal(index2[0].startTime, '2025-01-01T09:30:00.000Z', 'Should have updated startTime from article metadata');
+      assert.equal(index2[0].endTime, '2025-01-01T11:30:00.000Z', 'Should have updated endTime from article metadata');
+    });
+
+    it('should extract startTime and endTime from article data attributes', async () => {
+      // Create an incident HTML file with data attributes
+      const html = `<h1 class="major">AWS Outage</h1>
+<article data-incident-start-time="2025-02-15T08:00:00.000Z" data-incident-end-time="2025-02-15T09:00:00.000Z" data-incident-error-rate="0.05" data-incident-impacted-service="publishing">
+    <h2>Postmortem</h2>
+    <p>AWS outage affected publishing service.</p>
+    <time>2025-02-15T10:00:00.000Z</time>
+</article>`;
+
+      fs.writeFileSync(path.join(htmlDir, 'AEM-aws123.html'), html);
+
+      // Run the script
+      await createAndRunScript();
+
+      // Read the generated index
+      const index = readIndex();
+
+      assert.equal(index.length, 1, 'Should have one incident');
+      assert.equal(index[0].code, 'AEM-aws123');
+      assert.equal(index[0].startTime, '2025-02-15T08:00:00.000Z', 'Should extract startTime from data attribute');
+      assert.equal(index[0].endTime, '2025-02-15T09:00:00.000Z', 'Should extract endTime from data attribute');
+      assert.equal(index[0].errorRate, '0.05', 'Should extract errorRate from data attribute');
+      assert.equal(index[0].impactedService, 'publishing', 'Should extract impactedService from data attribute');
+    });
+  });
 });
