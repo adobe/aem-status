@@ -374,8 +374,8 @@ const renderMatrix = (matrixData) => {
 const filterIncidentsByYear = (incidents, year) => {
   if (year === 'all') return incidents;
   return incidents.filter((incident) => {
-    // Use startTime when available, otherwise fall back to incidentUpdated (or legacy timestamp)
-    const timestamp = incident.startTime || incident.incidentUpdated || incident.timestamp;
+    // Use startTime when available, otherwise fall back to incidentUpdated
+    const timestamp = incident.startTime || incident.incidentUpdated;
     const date = new Date(timestamp);
     return date.getFullYear() === parseInt(year, 10);
   });
@@ -385,8 +385,8 @@ const filterIncidentsByYear = (incidents, year) => {
 const getAvailableYears = (incidents) => {
   const years = new Set();
   incidents.forEach((incident) => {
-    // Use startTime when available, otherwise fall back to incidentUpdated (or legacy timestamp)
-    const timestamp = incident.startTime || incident.incidentUpdated || incident.timestamp;
+    // Use startTime when available, otherwise fall back to incidentUpdated
+    const timestamp = incident.startTime || incident.incidentUpdated;
     const date = new Date(timestamp);
     years.add(date.getFullYear());
   });
@@ -457,9 +457,9 @@ const renderIncidentsByCategory = (incidents) => {
 
     // Sort incidents by startTime (most recent first)
     const sortedIncidents = [...categoryIncidents].sort((a, b) => {
-      // Use startTime when available, otherwise fall back to incidentUpdated (or legacy timestamp)
-      const aTime = a.startTime || a.incidentUpdated || a.timestamp;
-      const bTime = b.startTime || b.incidentUpdated || b.timestamp;
+      // Use startTime when available, otherwise fall back to incidentUpdated
+      const aTime = a.startTime || a.incidentUpdated;
+      const bTime = b.startTime || b.incidentUpdated;
       return new Date(bTime) - new Date(aTime);
     });
 
@@ -467,8 +467,8 @@ const renderIncidentsByCategory = (incidents) => {
       const incidentItem = document.createElement('div');
       incidentItem.className = 'incident-item';
 
-      // Use startTime when available, otherwise fall back to incidentUpdated (or legacy timestamp)
-      const timestamp = incident.startTime || incident.incidentUpdated || incident.timestamp;
+      // Use startTime when available, otherwise fall back to incidentUpdated
+      const timestamp = incident.startTime || incident.incidentUpdated;
       const date = new Date(timestamp);
       const formattedDate = date.toLocaleDateString('en-US', {
         year: 'numeric',

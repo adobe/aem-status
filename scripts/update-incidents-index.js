@@ -196,8 +196,7 @@ function updateIncidentsIndex() {
       // If incidentUpdated needs update and we have existing data, use it
       if (incident.incidentUpdated === 'NEEDS_MANUAL_UPDATE' && existingIncidentsMap.has(incident.code)) {
         const existing = existingIncidentsMap.get(incident.code);
-        // Support both old 'timestamp' and new 'incidentUpdated' property names
-        incident.incidentUpdated = existing.incidentUpdated || existing.timestamp;
+        incident.incidentUpdated = existing.incidentUpdated;
       }
 
       // Preserve classification fields from existing incident if they exist
