@@ -1,4 +1,4 @@
-<h1 class="minor">Status page not updated for Edge Delivery Services API during AWS outage</h1>
+<h1 class="minor">Status page not updated for API for Edge Delivery Services and Integrations during AWS outage</h1>
 <article
     data-incident-start-time="2025-10-20T07:05:00.000Z"
     data-incident-end-time="2025-10-24T18:00:00.000Z"
@@ -8,16 +8,16 @@
     <h3>Executive Summary</h3>
     <p>
         On October 20, 2025, during a broader AWS US-EAST-1 region outage that affected multiple
-        Adobe Experience Manager services, the Edge Delivery Services API experienced a
+        Adobe Experience Manager services, the API for Edge Delivery Services and Integrations experienced a
         service disruption. While the underlying service issue was resolved within hours, the
-        status page at status.adobe.com was not updated to reflect the Edge Delivery Services API impact. This
+        status page at status.adobe.com was not updated to reflect the API for Edge Delivery Services and Integrations impact. This
         resulted in customer confusion and an escalation from a major customer (Accenture) who
         was unable to confirm service status through official channels. The status page was
         corrected 4 days after the incident, on October 24, 2025.
     </p>
     <h3>Impact Analysis</h3>
     <p>
-        <strong>Service Impact:</strong> The Edge Delivery Services API experienced disruptions
+        <strong>Service Impact:</strong> The API for Edge Delivery Services and Integrations experienced disruptions
         during the AWS outage window (07:05 - 08:44 UTC on October 20, 2025), consistent with
         the broader impact to AEM publishing services. While the underlying technical issue was
         resolved within the incident window, customers lacked visibility into the status through
@@ -25,13 +25,13 @@
     </p>
     <p>
         <strong>Communication Impact:</strong> For 4 days (October 20-24, 2025), the status page
-        did not accurately reflect that Edge Delivery Services API had been impacted. Customers checking
-        status.adobe.com would not have seen acknowledgment of the Edge Delivery Services API disruption during the
+        did not accurately reflect that API for Edge Delivery Services and Integrations had been impacted. Customers checking
+        status.adobe.com would not have seen acknowledgment of the API for Edge Delivery Services and Integrations disruption during the
         October 20th incident. This communication gap led to at least one customer escalation and
         undermined trust in our status communication channels.
     </p>
     <p>
-        <strong>Customer Impact:</strong> Customers using Edge Delivery Services API experienced
+        <strong>Customer Impact:</strong> Customers using API for Edge Delivery Services and Integrations experienced
         the same publishing disruptions as other AEM services during the AWS outage (8.33% overall
         error rate, with Admin API experiencing 72% errors). The lack of status page updates
         prevented customers from distinguishing between localized issues and platform-wide incidents,
@@ -42,7 +42,7 @@
         The underlying service disruption was detected through our standard monitoring at 06:54 UTC
         on October 20, 2025. However, the failure to update the status page went undetected by
         our systems. The issue was discovered 4 days later when the AEM Service Manager was notified
-        by the engineering team that the Edge Delivery Services API impact had not been reflected on the status page
+        by the engineering team that the API for Edge Delivery Services and Integrations impact had not been reflected on the status page
         during the incident.
     </p>
     <p>
@@ -55,13 +55,13 @@
     <p>All times in UTC.</p>
     <ul>
         <li><strong>October 20, 06:54</strong> - AWS US-EAST-1 outage begins, first errors detected in monitoring</li>
-        <li><strong>October 20, 07:05</strong> - Publishing disruptions observed, affecting all AEM services including Edge Delivery Services API</li>
+        <li><strong>October 20, 07:05</strong> - Publishing disruptions observed, affecting all AEM services including API for Edge Delivery Services and Integrations</li>
         <li><strong>October 20, 07:17</strong> - Incident response initiated, Customer Service Organization (CSO) created for broader AEM impact</li>
-        <li><strong>October 20, 07:20-09:03</strong> - Engineering team reports impact to multiple services in incident Slack channel, including Edge Delivery Services API. Due to high message volume (100+ messages), Edge Delivery Services API update is not processed by the status page team</li>
-        <li><strong>October 20, 09:03</strong> - Secondary publishing region deployed, restoring publishing functionality including Edge Delivery Services API</li>
+        <li><strong>October 20, 07:20-09:03</strong> - Engineering team reports impact to multiple services in incident Slack channel, including API for Edge Delivery Services and Integrations. Due to high message volume (100+ messages), API for Edge Delivery Services and Integrations update is not processed by the status page team</li>
+        <li><strong>October 20, 09:03</strong> - Secondary publishing region deployed, restoring publishing functionality including API for Edge Delivery Services and Integrations</li>
         <li><strong>October 20, 12:14</strong> - AWS incident resolved, all services restored</li>
-        <li><strong>October 20-23</strong> - Status page continues to show no Edge Delivery Services API impact; customer escalation received from Accenture regarding lack of status visibility</li>
-        <li><strong>October 24, ~18:00</strong> - Service Manager notified by engineering team of missing status update; Edge Delivery Services API added to the CSO record and status page corrected</li>
+        <li><strong>October 20-23</strong> - Status page continues to show no API for Edge Delivery Services and Integrations impact; customer escalation received from Accenture regarding lack of status visibility</li>
+        <li><strong>October 24, ~18:00</strong> - Service Manager notified by engineering team of missing status update; API for Edge Delivery Services and Integrations added to the CSO record and status page corrected</li>
         <li><strong>November 1</strong> - Process improvements implemented to strengthen intake protocols</li>
     </ul>
     <h3>Root Cause Analysis</h3>
@@ -70,7 +70,7 @@
         The immediate trigger was the high-volume, high-stress nature of the AWS US-EAST-1 outage
         on October 20, 2025. With more than 100 services reporting impact through a single Slack
         thread, the manual intake process for updating status.adobe.com became overwhelmed, and
-        the Edge Delivery Services API impact report was not processed.
+        the API for Edge Delivery Services and Integrations impact report was not processed.
     </p>
     <h4>Root Cause</h4>
     <p>
@@ -78,8 +78,8 @@
     </p>
     <ol>
         <li>
-            <strong>Why was the Edge Delivery Services API not added to status.adobe.com?</strong><br>
-            The manual intake process that relies on monitoring Slack channels missed the Edge Delivery Services API
+            <strong>Why was the API for Edge Delivery Services and Integrations not added to status.adobe.com?</strong><br>
+            The manual intake process that relies on monitoring Slack channels missed the API for Edge Delivery Services and Integrations
             update among 100+ concurrent messages during the AWS outage.
         </li>
         <li>
@@ -89,8 +89,8 @@
             Services without auto-launch require manual intervention to be added to the status page.
         </li>
         <li>
-            <strong>Why doesn't Edge Delivery Services API have auto-launch configured?</strong><br>
-            The monitoring for Edge Delivery Services API has historically produced false positives ("twitchiness"),
+            <strong>Why doesn't API for Edge Delivery Services and Integrations have auto-launch configured?</strong><br>
+            The monitoring for API for Edge Delivery Services and Integrations has historically produced false positives ("twitchiness"),
             leading to a decision to disable auto-launch to prevent unnecessary customer notifications.
             This design choice prioritized accuracy over resilience during actual incidents.
         </li>
@@ -120,7 +120,7 @@
     <h3>Resolution</h3>
     <p>
         <strong>Immediate Fix:</strong> On October 24, 2025, when notified of the missing status
-        update, the Service Manager manually added the Edge Delivery Services API to the October 20th Customer Service
+        update, the Service Manager manually added the API for Edge Delivery Services and Integrations to the October 20th Customer Service
         Organization (CSO) record, correcting the historical status page to accurately reflect the
         impact.
     </p>
@@ -132,14 +132,14 @@
     </p>
     <p>
         <strong>Long-term Prevention:</strong> A working group has been formed to re-assess the
-        feasibility of automated status updates for Edge Delivery Services API, exploring options such as
+        feasibility of automated status updates for API for Edge Delivery Services and Integrations, exploring options such as
         context-aware alerting (only triggering during correlated platform incidents) and
         improved monitoring to reduce false positives.
     </p>
     <h3>Lessons Learned</h3>
     <h4>What Went Well</h4>
     <ul>
-        <li>The underlying technical issue (Edge Delivery Services API service disruption) was resolved quickly as part of the broader AWS incident response</li>
+        <li>The underlying technical issue (API for Edge Delivery Services and Integrations service disruption) was resolved quickly as part of the broader AWS incident response</li>
         <li>The engineering team properly reported the impact through established channels (Slack)</li>
         <li>Once notified on October 24, the Service Manager acted quickly to correct the status page</li>
         <li>Process improvements were implemented within 2 weeks (by November 1)</li>
@@ -184,8 +184,8 @@
     <h4>Monitoring and Alerting</h4>
     <ol>
         <li>
-            <strong>Improve Edge Delivery Services API monitoring accuracy</strong><br>
-            Work with engineering to tune Edge Delivery Services API monitoring to reduce false positives while maintaining
+            <strong>Improve API for Edge Delivery Services and Integrations monitoring accuracy</strong><br>
+            Work with engineering to tune API for Edge Delivery Services and Integrations monitoring to reduce false positives while maintaining
             sensitivity to real incidents, enabling reliable auto-launch capabilities.<br>
             <em>Target: Q1 2026</em>
         </li>
@@ -232,7 +232,7 @@
 <ul class="updates">
     <li>
         <h2>resolved</h2>
-        <p>Status page has been corrected to reflect that Edge Delivery Services API was impacted during the October 20th AWS outage. Process improvements have been implemented to prevent similar communication gaps.</p>
+        <p>Status page has been corrected to reflect that API for Edge Delivery Services and Integrations was impacted during the October 20th AWS outage. Process improvements have been implemented to prevent similar communication gaps.</p>
         <time>2025-10-24T18:00:00.000Z</time>
     </li>
 
@@ -244,7 +244,7 @@
 
     <li>
         <h2>identified</h2>
-        <p>We have identified that the Edge Delivery Services API was impacted during the October 20th AWS outage but was not reflected on status.adobe.com at the time. We are correcting the historical record and investigating the root cause of this communication gap.</p>
+        <p>We have identified that the API for Edge Delivery Services and Integrations was impacted during the October 20th AWS outage but was not reflected on status.adobe.com at the time. We are correcting the historical record and investigating the root cause of this communication gap.</p>
         <time>2025-10-24T16:00:00.000Z</time>
     </li>
 </ul>
