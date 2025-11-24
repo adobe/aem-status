@@ -4,7 +4,7 @@
   "description": "Azure Functions API for AEM Status - caches Google Apps Script data",
   "type": "module",
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   },
   "scripts": {
     "start": "func start",
