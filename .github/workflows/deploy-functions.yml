@@ -36,7 +36,7 @@ jobs:
       - name: Deploy to Azure Functions (Flex Consumption)
         run: |
           cd api
-          zip -r ../deployment.zip . -x "node_modules/*" "*.git*"
+          zip -r ../deployment.zip . -x "*.git*"
           az functionapp deployment source config-zip \
             --resource-group helix-prod \
             --name aemstatus-net-api \
