@@ -51,11 +51,9 @@ const updatePostmortem = async () => {
   }
 
   const startTimestamp = incidentStartTime.value
-    ? new Date(incidentStartTime.value).toISOString()
-    : (firstUpdate?.timestamp || new Date(0).toISOString());
+    || firstUpdate?.timestamp || new Date(new Date().getFullYear()).toISOString();
   const endTimestamp = incidentEndTime.value
-    ? new Date(incidentEndTime.value).toISOString()
-    : (lastUpdate?.timestamp || new Date(0).toISOString());
+    || lastUpdate?.timestamp || new Date(0).toISOString();
   const errorRate = incidentErrorRate.value || '';
   const impactedService = incidentImpactedService.value || '';
 
@@ -65,12 +63,12 @@ const updatePostmortem = async () => {
   article.setAttribute('data-incident-error-rate', errorRate);
   article.setAttribute('data-incident-impacted-service', impactedService);
 
-  if (!incidentStartTime.value && firstUpdate) {
-    incidentStartTime.value = new Date(firstUpdate.timestamp).toISOString().slice(0, 16);
-  }
-  if (!incidentEndTime.value && lastUpdate) {
-    incidentEndTime.value = new Date(lastUpdate.timestamp).toISOString().slice(0, 16);
-  }
+  // if (!incidentStartTime.value) {
+  //   incidentStartTime.value = startTimestamp;
+  // }
+  // if (!incidentEndTime.value) {
+  //   incidentEndTime.value = endTimestamp;
+  // }
   if (errorRate >= 0.1) {
     incidentImpact.value = 'critical';
   } else if (errorRate >= 0.05) {
