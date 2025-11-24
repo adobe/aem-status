@@ -8,9 +8,9 @@
     <h3>Executive Summary</h3>
     <p>
         On October 20, 2025, during a broader AWS US-EAST-1 region outage that affected multiple
-        Adobe Experience Manager services, the Edge Delivery Services (EDS) API experienced a
+        Adobe Experience Manager services, the Edge Delivery Services API experienced a
         service disruption. While the underlying service issue was resolved within hours, the
-        status page at status.adobe.com was not updated to reflect the EDS API impact. This
+        status page at status.adobe.com was not updated to reflect the Edge Delivery Services API impact. This
         resulted in customer confusion and an escalation from a major customer (Accenture) who
         was unable to confirm service status through official channels. The status page was
         corrected 4 days after the incident, on October 24, 2025.
@@ -25,8 +25,8 @@
     </p>
     <p>
         <strong>Communication Impact:</strong> For 4 days (October 20-24, 2025), the status page
-        did not accurately reflect that EDS API had been impacted. Customers checking
-        status.adobe.com would not have seen acknowledgment of the EDS API disruption during the
+        did not accurately reflect that Edge Delivery Services API had been impacted. Customers checking
+        status.adobe.com would not have seen acknowledgment of the Edge Delivery Services API disruption during the
         October 20th incident. This communication gap led to at least one customer escalation and
         undermined trust in our status communication channels.
     </p>
@@ -42,7 +42,7 @@
         The underlying service disruption was detected through our standard monitoring at 06:54 UTC
         on October 20, 2025. However, the failure to update the status page went undetected by
         our systems. The issue was discovered 4 days later when the AEM Service Manager was notified
-        by the engineering team that the EDS API impact had not been reflected on the status page
+        by the engineering team that the Edge Delivery Services API impact had not been reflected on the status page
         during the incident.
     </p>
     <p>
@@ -55,13 +55,13 @@
     <p>All times in UTC.</p>
     <ul>
         <li><strong>October 20, 06:54</strong> - AWS US-EAST-1 outage begins, first errors detected in monitoring</li>
-        <li><strong>October 20, 07:05</strong> - Publishing disruptions observed, affecting all AEM services including EDS API</li>
+        <li><strong>October 20, 07:05</strong> - Publishing disruptions observed, affecting all AEM services including Edge Delivery Services API</li>
         <li><strong>October 20, 07:17</strong> - Incident response initiated, Customer Service Organization (CSO) created for broader AEM impact</li>
-        <li><strong>October 20, 07:20-09:03</strong> - Engineering team reports impact to multiple services in incident Slack channel, including EDS API. Due to high message volume (100+ messages), EDS API update is not processed by the status page team</li>
-        <li><strong>October 20, 09:03</strong> - Secondary publishing region deployed, restoring publishing functionality including EDS API</li>
+        <li><strong>October 20, 07:20-09:03</strong> - Engineering team reports impact to multiple services in incident Slack channel, including Edge Delivery Services API. Due to high message volume (100+ messages), Edge Delivery Services API update is not processed by the status page team</li>
+        <li><strong>October 20, 09:03</strong> - Secondary publishing region deployed, restoring publishing functionality including Edge Delivery Services API</li>
         <li><strong>October 20, 12:14</strong> - AWS incident resolved, all services restored</li>
-        <li><strong>October 20-23</strong> - Status page continues to show no EDS API impact; customer escalation received from Accenture regarding lack of status visibility</li>
-        <li><strong>October 24, ~18:00</strong> - Service Manager notified by engineering team of missing status update; EDS API added to the CSO record and status page corrected</li>
+        <li><strong>October 20-23</strong> - Status page continues to show no Edge Delivery Services API impact; customer escalation received from Accenture regarding lack of status visibility</li>
+        <li><strong>October 24, ~18:00</strong> - Service Manager notified by engineering team of missing status update; Edge Delivery Services API added to the CSO record and status page corrected</li>
         <li><strong>November 1</strong> - Process improvements implemented to strengthen intake protocols</li>
     </ul>
     <h3>Root Cause Analysis</h3>
@@ -70,7 +70,7 @@
         The immediate trigger was the high-volume, high-stress nature of the AWS US-EAST-1 outage
         on October 20, 2025. With more than 100 services reporting impact through a single Slack
         thread, the manual intake process for updating status.adobe.com became overwhelmed, and
-        the EDS API impact report was not processed.
+        the Edge Delivery Services API impact report was not processed.
     </p>
     <h4>Root Cause</h4>
     <p>
@@ -78,8 +78,8 @@
     </p>
     <ol>
         <li>
-            <strong>Why was the EDS API not added to status.adobe.com?</strong><br>
-            The manual intake process that relies on monitoring Slack channels missed the EDS API
+            <strong>Why was the Edge Delivery Services API not added to status.adobe.com?</strong><br>
+            The manual intake process that relies on monitoring Slack channels missed the Edge Delivery Services API
             update among 100+ concurrent messages during the AWS outage.
         </li>
         <li>
@@ -89,8 +89,8 @@
             Services without auto-launch require manual intervention to be added to the status page.
         </li>
         <li>
-            <strong>Why doesn't EDS API have auto-launch configured?</strong><br>
-            The monitoring for EDS API has historically produced false positives ("twitchiness"),
+            <strong>Why doesn't Edge Delivery Services API have auto-launch configured?</strong><br>
+            The monitoring for Edge Delivery Services API has historically produced false positives ("twitchiness"),
             leading to a decision to disable auto-launch to prevent unnecessary customer notifications.
             This design choice prioritized accuracy over resilience during actual incidents.
         </li>
@@ -120,7 +120,7 @@
     <h3>Resolution</h3>
     <p>
         <strong>Immediate Fix:</strong> On October 24, 2025, when notified of the missing status
-        update, the Service Manager manually added the EDS API to the October 20th Customer Service
+        update, the Service Manager manually added the Edge Delivery Services API to the October 20th Customer Service
         Organization (CSO) record, correcting the historical status page to accurately reflect the
         impact.
     </p>
@@ -132,14 +132,14 @@
     </p>
     <p>
         <strong>Long-term Prevention:</strong> A working group has been formed to re-assess the
-        feasibility of automated status updates for EDS API, exploring options such as
+        feasibility of automated status updates for Edge Delivery Services API, exploring options such as
         context-aware alerting (only triggering during correlated platform incidents) and
         improved monitoring to reduce false positives.
     </p>
     <h3>Lessons Learned</h3>
     <h4>What Went Well</h4>
     <ul>
-        <li>The underlying technical issue (EDS API service disruption) was resolved quickly as part of the broader AWS incident response</li>
+        <li>The underlying technical issue (Edge Delivery Services API service disruption) was resolved quickly as part of the broader AWS incident response</li>
         <li>The engineering team properly reported the impact through established channels (Slack)</li>
         <li>Once notified on October 24, the Service Manager acted quickly to correct the status page</li>
         <li>Process improvements were implemented within 2 weeks (by November 1)</li>
@@ -184,8 +184,8 @@
     <h4>Monitoring and Alerting</h4>
     <ol>
         <li>
-            <strong>Improve EDS API monitoring accuracy</strong><br>
-            Work with engineering to tune EDS API monitoring to reduce false positives while maintaining
+            <strong>Improve Edge Delivery Services API monitoring accuracy</strong><br>
+            Work with engineering to tune Edge Delivery Services API monitoring to reduce false positives while maintaining
             sensitivity to real incidents, enabling reliable auto-launch capabilities.<br>
             <em>Target: Q1 2026</em>
         </li>
