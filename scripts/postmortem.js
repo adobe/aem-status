@@ -52,7 +52,7 @@ const updatePostmortem = async () => {
   }
 
   const startTimestamp = incidentStartTime.value
-    || firstUpdate?.timestamp || new Date(new Date().getFullYear()).toISOString();
+    || firstUpdate?.timestamp || new Date(0).toISOString();
   const endTimestamp = incidentEndTime.value
     || lastUpdate?.timestamp || new Date(0).toISOString();
   const errorRate = incidentErrorRate.value || '';
