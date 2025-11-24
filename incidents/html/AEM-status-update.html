@@ -1,0 +1,250 @@
+<h1 class="minor">Status page not updated for Edge Delivery Services API during AWS outage</h1>
+<article
+    data-incident-start-time="2025-10-20T07:05:00.000Z"
+    data-incident-end-time="2025-10-24T18:00:00.000Z"
+    data-incident-error-rate="0.0"
+    data-incident-impacted-service="publishing">
+    <h2>Postmortem</h2>
+    <h3>Executive Summary</h3>
+    <p>
+        On October 20, 2025, during a broader AWS US-EAST-1 region outage that affected multiple
+        Adobe Experience Manager services, the Edge Delivery Services (EDS) API experienced a
+        service disruption. While the underlying service issue was resolved within hours, the
+        status page at status.adobe.com was not updated to reflect the EDS API impact. This
+        resulted in customer confusion and an escalation from a major customer (Accenture) who
+        was unable to confirm service status through official channels. The status page was
+        corrected 4 days after the incident, on October 24, 2025.
+    </p>
+    <h3>Impact Analysis</h3>
+    <p>
+        <strong>Service Impact:</strong> The Edge Delivery Services API experienced disruptions
+        during the AWS outage window (07:05 - 08:44 UTC on October 20, 2025), consistent with
+        the broader impact to AEM publishing services. While the underlying technical issue was
+        resolved within the incident window, customers lacked visibility into the status through
+        official channels.
+    </p>
+    <p>
+        <strong>Communication Impact:</strong> For 4 days (October 20-24, 2025), the status page
+        did not accurately reflect that EDS API had been impacted. Customers checking
+        status.adobe.com would not have seen acknowledgment of the EDS API disruption during the
+        October 20th incident. This communication gap led to at least one customer escalation and
+        undermined trust in our status communication channels.
+    </p>
+    <p>
+        <strong>Customer Impact:</strong> Customers using Edge Delivery Services API experienced
+        the same publishing disruptions as other AEM services during the AWS outage (8.33% overall
+        error rate, with Admin API experiencing 72% errors). The lack of status page updates
+        prevented customers from distinguishing between localized issues and platform-wide incidents,
+        increasing support burden and customer frustration.
+    </p>
+    <h3>Detection</h3>
+    <p>
+        The underlying service disruption was detected through our standard monitoring at 06:54 UTC
+        on October 20, 2025. However, the failure to update the status page went undetected by
+        our systems. The issue was discovered 4 days later when the AEM Service Manager was notified
+        by the engineering team that the EDS API impact had not been reflected on the status page
+        during the incident.
+    </p>
+    <p>
+        The delayed detection highlights a gap in our status communication verification processes—we
+        had no automated checks to ensure all affected services were properly reflected on
+        status.adobe.com, and no manual review process caught the omission during or immediately
+        after the incident.
+    </p>
+    <h3>Timeline</h3>
+    <p>All times in UTC.</p>
+    <ul>
+        <li><strong>October 20, 06:54</strong> - AWS US-EAST-1 outage begins, first errors detected in monitoring</li>
+        <li><strong>October 20, 07:05</strong> - Publishing disruptions observed, affecting all AEM services including EDS API</li>
+        <li><strong>October 20, 07:17</strong> - Incident response initiated, Customer Service Organization (CSO) created for broader AEM impact</li>
+        <li><strong>October 20, 07:20-09:03</strong> - Engineering team reports impact to multiple services in incident Slack channel, including EDS API. Due to high message volume (100+ messages), EDS API update is not processed by the status page team</li>
+        <li><strong>October 20, 09:03</strong> - Secondary publishing region deployed, restoring publishing functionality including EDS API</li>
+        <li><strong>October 20, 12:14</strong> - AWS incident resolved, all services restored</li>
+        <li><strong>October 20-23</strong> - Status page continues to show no EDS API impact; customer escalation received from Accenture regarding lack of status visibility</li>
+        <li><strong>October 24, ~18:00</strong> - Service Manager notified by engineering team of missing status update; EDS API added to the CSO record and status page corrected</li>
+        <li><strong>November 1</strong> - Process improvements implemented to strengthen intake protocols</li>
+    </ul>
+    <h3>Root Cause Analysis</h3>
+    <h4>Trigger</h4>
+    <p>
+        The immediate trigger was the high-volume, high-stress nature of the AWS US-EAST-1 outage
+        on October 20, 2025. With more than 100 services reporting impact through a single Slack
+        thread, the manual intake process for updating status.adobe.com became overwhelmed, and
+        the EDS API impact report was not processed.
+    </p>
+    <h4>Root Cause</h4>
+    <p>
+        Using the "Five Whys" technique to dig deeper into the systematic failures:
+    </p>
+    <ol>
+        <li>
+            <strong>Why was the EDS API not added to status.adobe.com?</strong><br>
+            The manual intake process that relies on monitoring Slack channels missed the EDS API
+            update among 100+ concurrent messages during the AWS outage.
+        </li>
+        <li>
+            <strong>Why does status page updating rely on manual monitoring of Slack channels?</strong><br>
+            Not all AEM services are configured with auto-launch capabilities to automatically create
+            and update Customer Service Organization (CSO) records when monitoring detects issues.
+            Services without auto-launch require manual intervention to be added to the status page.
+        </li>
+        <li>
+            <strong>Why doesn't EDS API have auto-launch configured?</strong><br>
+            The monitoring for EDS API has historically produced false positives ("twitchiness"),
+            leading to a decision to disable auto-launch to prevent unnecessary customer notifications.
+            This design choice prioritized accuracy over resilience during actual incidents.
+        </li>
+        <li>
+            <strong>Why is there no fallback mechanism when manual intake fails?</strong><br>
+            The status update process was designed with the assumption that manual intake would scale
+            adequately. There were no automated verification checks to ensure all reported impacts
+            were reflected on status.adobe.com, and no systematic post-incident review to validate
+            status page completeness.
+        </li>
+        <li>
+            <strong>Why was there no detection that status.adobe.com was incomplete for 4 days?</strong><br>
+            We lacked monitoring and alerting for status page accuracy. There was no system to verify
+            that services experiencing known impacts were properly reflected on the status page, and
+            no automated reconciliation between incident records and published status updates.
+        </li>
+    </ol>
+    <h4>Systemic Issues Identified</h4>
+    <ul>
+        <li><strong>Single point of failure:</strong> Status updates depend entirely on a manual process with no automated failsafes</li>
+        <li><strong>Design doesn't handle scale:</strong> Manual intake works for small incidents but breaks down during platform-wide outages</li>
+        <li><strong>False dichotomy in monitoring:</strong> Treating auto-launch as binary (on/off) rather than exploring graduated responses or context-aware automation</li>
+        <li><strong>Lack of verification loops:</strong> No post-incident review process to ensure status page accuracy</li>
+        <li><strong>Insufficient ownership clarity:</strong> Service teams cannot directly update status, creating dependency on centralized team during high-stress incidents</li>
+        <li><strong>Missing observability:</strong> No monitoring of the status communication system itself</li>
+    </ul>
+    <h3>Resolution</h3>
+    <p>
+        <strong>Immediate Fix:</strong> On October 24, 2025, when notified of the missing status
+        update, the Service Manager manually added the EDS API to the October 20th Customer Service
+        Organization (CSO) record, correcting the historical status page to accurately reflect the
+        impact.
+    </p>
+    <p>
+        <strong>Short-term Improvements:</strong> As of November 1, 2025, the Customer Response
+        Center (CRC) implemented strengthened intake protocols and updated runbooks for handling
+        high-volume incident scenarios. These improvements include better tagging of impacted
+        services and structured checklists for large-scale outages.
+    </p>
+    <p>
+        <strong>Long-term Prevention:</strong> A working group has been formed to re-assess the
+        feasibility of automated status updates for EDS API, exploring options such as
+        context-aware alerting (only triggering during correlated platform incidents) and
+        improved monitoring to reduce false positives.
+    </p>
+    <h3>Lessons Learned</h3>
+    <h4>What Went Well</h4>
+    <ul>
+        <li>The underlying technical issue (EDS API service disruption) was resolved quickly as part of the broader AWS incident response</li>
+        <li>The engineering team properly reported the impact through established channels (Slack)</li>
+        <li>Once notified on October 24, the Service Manager acted quickly to correct the status page</li>
+        <li>Process improvements were implemented within 2 weeks (by November 1)</li>
+    </ul>
+    <h4>What Went Wrong</h4>
+    <ul>
+        <li>Manual status update process created a single point of failure that broke under load</li>
+        <li>4-day delay in detecting and correcting the status page damaged customer trust</li>
+        <li>Lack of automated verification allowed the error to persist undetected</li>
+        <li>The tradeoff between preventing false positives and ensuring incident coverage was not properly balanced</li>
+        <li>Service teams lacked agency to correct status page issues they identified</li>
+    </ul>
+    <h4>Where We Got Lucky</h4>
+    <ul>
+        <li>The customer escalation prompted discovery of the issue before it affected additional incidents</li>
+        <li>The underlying service was restored quickly, so the status page gap didn't compound an ongoing outage</li>
+        <li>The engineering team proactively notified the Service Manager on October 24, enabling correction</li>
+    </ul>
+    <h3>Action Items</h3>
+    <h4>Status Communication System Improvements</h4>
+    <ol>
+        <li>
+            <strong>Implement automated status page verification</strong><br>
+            Create monitoring that compares services experiencing known incidents (detected by our
+            monitoring systems or reported in incident channels) against services listed on
+            status.adobe.com, with alerts for discrepancies.<br>
+            <em>Target: Q1 2026</em>
+        </li>
+        <li>
+            <strong>Build post-incident status page audit</strong><br>
+            Add a mandatory step to post-incident reviews that verifies all affected services were
+            properly communicated on status.adobe.com, with documentation in runbooks.<br>
+            <em>Target: December 2025</em>
+        </li>
+        <li>
+            <strong>Develop graduated incident notification system</strong><br>
+            Replace binary auto-launch with context-aware automation that considers incident severity,
+            correlated impacts across services, and confidence levels before triggering status updates.<br>
+            <em>Target: Q2 2026</em>
+        </li>
+    </ol>
+    <h4>Monitoring and Alerting</h4>
+    <ol>
+        <li>
+            <strong>Improve EDS API monitoring accuracy</strong><br>
+            Work with engineering to tune EDS API monitoring to reduce false positives while maintaining
+            sensitivity to real incidents, enabling reliable auto-launch capabilities.<br>
+            <em>Target: Q1 2026</em>
+        </li>
+        <li>
+            <strong>Implement correlation-based alerting</strong><br>
+            Create monitoring that triggers status updates when multiple related services show concurrent
+            issues (e.g., if 3+ AEM services alert simultaneously, automatically create CSO).<br>
+            <em>Target: Q2 2026</em>
+        </li>
+    </ol>
+    <h4>Process and Documentation</h4>
+    <ol>
+        <li>
+            <strong>Document manual intake limitations</strong><br>
+            Update runbooks to explicitly state capacity limits of manual intake (e.g., "process
+            supports up to 20 concurrent service updates") and escalation procedures when limits are reached.<br>
+            <em>Status: Completed November 1, 2025</em>
+        </li>
+        <li>
+            <strong>Create status page "health check" dashboard</strong><br>
+            Build internal dashboard showing all services with active monitoring alerts alongside current
+            status.adobe.com state, enabling quick visual verification of completeness.<br>
+            <em>Target: Q1 2026</em>
+        </li>
+        <li>
+            <strong>Establish service team status update pathway</strong><br>
+            Create a process for service teams to flag missing or incorrect status page information with
+            priority routing to status page team, reducing discovery-to-fix time.<br>
+            <em>Target: December 2025</em>
+        </li>
+    </ol>
+    <h4>Customer Communication</h4>
+    <ol>
+        <li>
+            <strong>Proactive communication for retroactive corrections</strong><br>
+            When status page corrections are made more than 24 hours after incident resolution,
+            proactively reach out to affected customers to acknowledge the communication gap and
+            provide accurate incident information.<br>
+            <em>Target: December 2025</em>
+        </li>
+    </ol>
+</article>
+
+<ul class="updates">
+    <li>
+        <h2>resolved</h2>
+        <p>Status page has been corrected to reflect that Edge Delivery Services API was impacted during the October 20th AWS outage. Process improvements have been implemented to prevent similar communication gaps.</p>
+        <time>2025-10-24T18:00:00.000Z</time>
+    </li>
+
+    <li>
+        <h2>monitoring</h2>
+        <p>We are implementing process improvements to our status page update procedures and reviewing automation options for service status communication.</p>
+        <time>2025-10-24T17:00:00.000Z</time>
+    </li>
+
+    <li>
+        <h2>identified</h2>
+        <p>We have identified that the Edge Delivery Services API was impacted during the October 20th AWS outage but was not reflected on status.adobe.com at the time. We are correcting the historical record and investigating the root cause of this communication gap.</p>
+        <time>2025-10-24T16:00:00.000Z</time>
+    </li>
+</ul>
