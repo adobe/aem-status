@@ -23,6 +23,15 @@ const CAUSE_LABELS = {
   'dependency-issue': 'Dependency Issue',
 };
 
+/**
+ * Get the appropriate timestamp to display for an incident.
+ * Prefers startTime (when incident occurred) over incidentUpdated (editorial time).
+ * Falls back to deprecated timestamp field for backward compatibility.
+ */
+const getIncidentDisplayTime = (incident) => {
+  return incident.startTime || incident.incidentUpdated || incident.timestamp;
+};
+
 // Fetch incident data
 const getIncidents = async () => {
   const response = await fetch('/incidents/index.json');
@@ -374,7 +383,7 @@ const renderMatrix = (matrixData) => {
 const filterIncidentsByYear = (incidents, year) => {
   if (year === 'all') return incidents;
   return incidents.filter((incident) => {
-    const date = new Date(incident.timestamp);
+    const date = new Date(getIncidentDisplayTime(incident));
     return date.getFullYear() === parseInt(year, 10);
   });
 };
@@ -383,7 +392,7 @@ const filterIncidentsByYear = (incidents, year) => {
 const getAvailableYears = (incidents) => {
   const years = new Set();
   incidents.forEach((incident) => {
-    const date = new Date(incident.timestamp);
+    const date = new Date(getIncidentDisplayTime(incident));
     years.add(date.getFullYear());
   });
   return Array.from(years).sort((a, b) => b - a); // Descending order
@@ -451,16 +460,16 @@ const renderIncidentsByCategory = (incidents) => {
     const incidentList = document.createElement('div');
     incidentList.className = 'incident-list';
 
-    // Sort incidents by timestamp (most recent first)
+    // Sort incidents by occurrence time (most recent first)
     const sortedIncidents = [...categoryIncidents].sort(
-      (a, b) => new Date(b.timestamp) - new Date(a.timestamp),
+      (a, b) => new Date(getIncidentDisplayTime(b)) - new Date(getIncidentDisplayTime(a)),
     );
 
     sortedIncidents.forEach((incident) => {
       const incidentItem = document.createElement('div');
       incidentItem.className = 'incident-item';
 
-      const date = new Date(incident.timestamp);
+      const date = new Date(getIncidentDisplayTime(incident));
       const formattedDate = date.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',

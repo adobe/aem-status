@@ -131,7 +131,8 @@ function parseIncidentHTML(filePath, incidentCode) {
     name,
     message: message || 'This incident has been resolved.',
     impact,
-    timestamp: timestamp || 'NEEDS_MANUAL_UPDATE',
+    incidentUpdated: timestamp || 'NEEDS_MANUAL_UPDATE',
+    timestamp: timestamp || 'NEEDS_MANUAL_UPDATE', // Kept for backward compatibility (deprecated)
   };
 
   // Extract data attributes for AEM-prefixed incidents
@@ -194,8 +195,10 @@ function updateIncidentsIndex() {
     const incident = parseIncidentHTML(file.path, file.code);
     if (incident) {
       // If timestamp needs update and we have existing data, use it
-      if (incident.timestamp === 'NEEDS_MANUAL_UPDATE' && existingIncidentsMap.has(incident.code)) {
-        incident.timestamp = existingIncidentsMap.get(incident.code).timestamp;
+      if (incident.incidentUpdated === 'NEEDS_MANUAL_UPDATE' && existingIncidentsMap.has(incident.code)) {
+        const existing = existingIncidentsMap.get(incident.code);
+        incident.incidentUpdated = existing.incidentUpdated || existing.timestamp;
+        incident.timestamp = existing.timestamp || existing.incidentUpdated;
       }
 
       // Preserve classification fields from existing incident if they exist
@@ -244,10 +247,10 @@ function updateIncidentsIndex() {
       }
 
       // Skip incidents without valid timestamps
-      if (incident.timestamp && incident.timestamp !== 'NEEDS_MANUAL_UPDATE') {
+      if (incident.incidentUpdated && incident.incidentUpdated !== 'NEEDS_MANUAL_UPDATE') {
         incidents.push(incident);
       } else {
-        // Skipping incident - no valid timestamp
+        // Skipping incident - no valid incidentUpdated timestamp
       }
     }
   });
@@ -269,13 +272,19 @@ function updateIncidentsIndex() {
     }
   });
 
-  // Filter out incidents without valid timestamps and sort by timestamp
+  // Filter out incidents without valid timestamps and sort by startTime (incident occurrence)
+  // with fallback to incidentUpdated (editorial update time)
   const validIncidents = incidents
     .filter((incident) => {
-      const dateInfo = parseTimestamp(incident.timestamp);
+      const dateInfo = parseTimestamp(incident.incidentUpdated);
       return dateInfo !== null;
     })
-    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); // Sort newest first
+    .sort((a, b) => {
+      // Use startTime when available (incident occurrence), fallback to incidentUpdated, then timestamp
+      const aTime = a.startTime || a.incidentUpdated || a.timestamp;
+      const bTime = b.startTime || b.incidentUpdated || b.timestamp;
+      return new Date(bTime) - new Date(aTime); // Sort newest first
+    });
 
   // Write to index.json
   fs.writeFileSync(indexPath, `${JSON.stringify(validIncidents, null, 2)}\n`);

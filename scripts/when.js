@@ -7,6 +7,15 @@ const parseTimestamp = (timestamp) => {
     return new Date(timestamp);
 };
 
+/**
+ * Get the appropriate timestamp to display for an incident.
+ * Prefers startTime (when incident occurred) over incidentUpdated (editorial time).
+ * Falls back to deprecated timestamp field for backward compatibility.
+ */
+const getIncidentDisplayTime = (incident) => {
+    return incident.startTime || incident.incidentUpdated || incident.timestamp;
+};
+
 // Fetch incident data
 const getIncidents = async () => {
     const response = await fetch('/incidents/index.json');
@@ -31,7 +40,7 @@ const calculateHeatmapData = (incidents) => {
 
     // Count incidents by day of week and hour (UTC)
     incidents.forEach(incident => {
-        const date = parseTimestamp(incident.timestamp);
+        const date = parseTimestamp(getIncidentDisplayTime(incident));
         if (!isNaN(date.getTime())) {
             const dayOfWeek = date.getUTCDay(); // 0 = Sunday, 1 = Monday, etc.
             const hour = date.getUTCHours();
@@ -43,7 +52,7 @@ const calculateHeatmapData = (incidents) => {
     // (total number of that day/hour combination in the data range)
     const now = new Date();
     const oldestIncident = incidents.reduce((oldest, incident) => {
-        const date = parseTimestamp(incident.timestamp);
+        const date = parseTimestamp(getIncidentDisplayTime(incident));
         return date < oldest ? date : oldest;
     }, now);
 

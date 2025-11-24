@@ -68,6 +68,18 @@ const timeAgo = (date) => {
 
 import { calculateUptime as calculateUptimeBase, parseIncidentTimestamp, getUptimeStatus } from './slo-calculator.js';
 
+/**
+ * Get the appropriate timestamp to display for an incident.
+ * Prefers startTime (when incident occurred) over incidentUpdated (editorial time).
+ * Falls back to deprecated timestamp field for backward compatibility.
+ *
+ * @param {Object} incident - The incident object
+ * @returns {string} ISO 8601 timestamp string
+ */
+const getIncidentDisplayTime = (incident) => {
+  return incident.startTime || incident.incidentUpdated || incident.timestamp;
+};
+
 const calculateUptime = (incidents) => {
   const status = calculateUptimeBase(incidents);
 
@@ -96,14 +108,14 @@ const displayLast30Days = (incidents) => {
 
   // Get all incidents from the last 30 days
   const recentIncidents = incidents.filter((incident) => {
-    const incidentDate = parseIncidentTimestamp(incident.timestamp);
+    const incidentDate = parseIncidentTimestamp(getIncidentDisplayTime(incident));
     return incidentDate >= thirtyDaysAgo;
   });
 
   // Group incidents by day
   const incidentsByDay = {};
   recentIncidents.forEach((incident) => {
-    const incidentDate = parseIncidentTimestamp(incident.timestamp);
+    const incidentDate = parseIncidentTimestamp(getIncidentDisplayTime(incident));
     const dayKey = incidentDate.toDateString();
     if (!incidentsByDay[dayKey]) {
       incidentsByDay[dayKey] = [];
@@ -142,7 +154,7 @@ const displayLast30Days = (incidents) => {
       dayIncidents.forEach((incident) => {
         const incidentElement = document.createElement('div');
         incidentElement.classList.add('incident', incident.impact);
-        const incidentDate = parseIncidentTimestamp(incident.timestamp);
+        const incidentDate = parseIncidentTimestamp(getIncidentDisplayTime(incident));
 
         incidentElement.innerHTML = `<h4><a href="/details.html?incident=${incident.code}">${incident.name}</a><span class="pill ${incident.impact}">${incident.impact}</span></h4>
             <p>${incident.message}</p>
@@ -158,10 +170,10 @@ const displayIncidentArchive = (incidents) => {
   incidentArchive.innerHTML = '';
   incidentArchive.classList.add('incidents');
 
-  // Group incidents by month/year based on timestamp
+  // Group incidents by month/year based on incident occurrence time
   const incidentsByMonth = {};
   incidents.forEach((incident) => {
-    const incidentDate = parseIncidentTimestamp(incident.timestamp);
+    const incidentDate = parseIncidentTimestamp(getIncidentDisplayTime(incident));
     const month = incidentDate.toLocaleDateString('en-US', { month: 'long' });
     const year = incidentDate.getFullYear();
     const key = `${year}-${month}`;
@@ -198,7 +210,7 @@ const displayIncidentArchive = (incidents) => {
     month.incidents.forEach((incident) => {
       const incidentElement = document.createElement('div');
       incidentElement.classList.add('incident', incident.impact);
-      const incidentDate = parseIncidentTimestamp(incident.timestamp);
+      const incidentDate = parseIncidentTimestamp(getIncidentDisplayTime(incident));
       incidentElement.innerHTML = `<h4><a href="/details.html?incident=${incident.code}">${incident.name}</a><span class="pill ${incident.impact}">${incident.impact}</span></h4>
           <p>${incident.message}</p>
           <time class="meta" datetime="${incidentDate.toISOString()}">${incidentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} at ${incidentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' })}</time>`;
@@ -355,7 +367,8 @@ const saveIndex = async () => {
     name: document.getElementById('incidentName').value,
     message: document.getElementById('incidentText').value,
     impact: document.getElementById('incidentImpact').value,
-    timestamp: new Date().toISOString(),
+    incidentUpdated: new Date().toISOString(),
+    timestamp: new Date().toISOString(), // Kept for backward compatibility
   };
 
   incidents.unshift(newIncident);
