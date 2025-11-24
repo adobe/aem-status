@@ -10,9 +10,12 @@
         On October 20, 2025, during a broader AWS US-EAST-1 region outage that affected multiple
         Adobe Experience Manager services, the API for Edge Delivery Services and Integrations experienced a
         service disruption. While the underlying service issue was resolved within hours, the
-        status page at status.adobe.com was not updated to reflect the API for Edge Delivery Services and Integrations impact. This
+        official status page at status.adobe.com was not updated to reflect the API for Edge Delivery Services and Integrations impact.
+        The community-maintained status site at <a href="https://www.aemstatus.net/details.html?incident=AEM-yanvkiuy">aemstatus.net</a>
+        correctly reflected the incident in real-time, demonstrating that our monitoring and automated incident reporting
+        was functioning properly. However, customers relying on the official Adobe status page experienced a communication gap. This
         resulted in customer confusion and an escalation from a major customer (Accenture) who
-        was unable to confirm service status through official channels. The status page was
+        was unable to confirm service status through official channels. The official status page was
         corrected 4 days after the incident, on October 24, 2025.
     </p>
     <h3>Impact Analysis</h3>
@@ -24,11 +27,14 @@
         official channels.
     </p>
     <p>
-        <strong>Communication Impact:</strong> For 4 days (October 20-24, 2025), the status page
-        did not accurately reflect that API for Edge Delivery Services and Integrations had been impacted. Customers checking
-        status.adobe.com would not have seen acknowledgment of the API for Edge Delivery Services and Integrations disruption during the
-        October 20th incident. This communication gap led to at least one customer escalation and
-        undermined trust in our status communication channels.
+        <strong>Communication Impact:</strong> For 4 days (October 20-24, 2025), the official Adobe
+        status page at status.adobe.com did not accurately reflect that API for Edge Delivery Services and Integrations had been impacted.
+        Customers checking status.adobe.com would not have seen acknowledgment of the API for Edge Delivery Services and Integrations
+        disruption during the October 20th incident. In contrast, the community-maintained
+        <a href="https://www.aemstatus.net/">aemstatus.net</a> correctly displayed the incident status throughout,
+        highlighting that the failure was specific to the official status page communication pipeline rather than
+        our monitoring capabilities. This communication gap on the official channel led to at least one customer escalation and
+        undermined trust in our official status communication channels.
     </p>
     <p>
         <strong>Customer Impact:</strong> Customers using API for Edge Delivery Services and Integrations experienced
@@ -40,16 +46,19 @@
     <h3>Detection</h3>
     <p>
         The underlying service disruption was detected through our standard monitoring at 06:54 UTC
-        on October 20, 2025. However, the failure to update the status page went undetected by
+        on October 20, 2025, and was correctly published to <a href="https://www.aemstatus.net/details.html?incident=AEM-yanvkiuy">aemstatus.net</a>
+        in real-time. However, the failure to update the official status page at status.adobe.com went undetected by
         our systems. The issue was discovered 4 days later when the AEM Service Manager was notified
-        by the engineering team that the API for Edge Delivery Services and Integrations impact had not been reflected on the status page
+        by the engineering team that the API for Edge Delivery Services and Integrations impact had not been reflected on the official status page
         during the incident.
     </p>
     <p>
         The delayed detection highlights a gap in our status communication verification processes—we
         had no automated checks to ensure all affected services were properly reflected on
         status.adobe.com, and no manual review process caught the omission during or immediately
-        after the incident.
+        after the incident. The fact that aemstatus.net displayed correct information demonstrates
+        that our automated monitoring and incident detection systems were functioning as designed, but
+        the manual process for updating the official status page failed.
     </p>
     <h3>Timeline</h3>
     <p>All times in UTC.</p>
@@ -140,6 +149,7 @@
     <h4>What Went Well</h4>
     <ul>
         <li>The underlying technical issue (API for Edge Delivery Services and Integrations service disruption) was resolved quickly as part of the broader AWS incident response</li>
+        <li>Our automated monitoring and incident detection systems worked correctly, with <a href="https://www.aemstatus.net/details.html?incident=AEM-yanvkiuy">aemstatus.net</a> displaying accurate real-time status throughout the incident</li>
         <li>The engineering team properly reported the impact through established channels (Slack)</li>
         <li>Once notified on October 24, the Service Manager acted quickly to correct the status page</li>
         <li>Process improvements were implemented within 2 weeks (by November 1)</li>
