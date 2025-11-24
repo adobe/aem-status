@@ -2,9 +2,16 @@
 coverage/*
 coverage.lcov
 logs/*
-node_modules/*
+node_modules
+**/node_modules
 
 helix-importer-ui
 .DS_Store
 *.bak
 .idea
+
+# Azure Functions
+api/local.settings.json
+api/bin/
+api/obj/
+api/.vscode/

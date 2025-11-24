@@ -1,0 +1,13 @@
+{
+  "name": "aem-status-api",
+  "version": "1.0.0",
+  "description": "Azure Functions API for AEM Status - caches Google Apps Script data",
+  "type": "module",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests yet\""
+  },
+  "dependencies": {
+    "@azure/functions": "^4.5.1"
+  }
+}
