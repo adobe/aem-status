@@ -199,6 +199,9 @@ function updateIncidentsIndex() {
       }
 
       // Preserve classification fields from existing incident if they exist
+      // Note: startTime and endTime are NOT preserved - they should always
+      // reflect the latest values from article metadata as these are often
+      // refined during RCA work
       if (existingIncidentsMap.has(incident.code)) {
         const existingIncident = existingIncidentsMap.get(incident.code);
         if (existingIncident.affectedComponents !== undefined) {
@@ -212,6 +215,31 @@ function updateIncidentsIndex() {
         }
         if (existingIncident.rootCause !== undefined) {
           incident.rootCause = existingIncident.rootCause;
+        }
+      }
+
+      // Validate startTime and endTime if present
+      if (incident.startTime && incident.endTime) {
+        const startTime = new Date(incident.startTime);
+        const endTime = new Date(incident.endTime);
+        const now = new Date();
+
+        if (startTime > endTime) {
+          console.warn(
+            `Warning: Incident ${incident.code} has startTime (${incident.startTime}) after endTime (${incident.endTime})`,
+          );
+        }
+
+        if (startTime > now) {
+          console.warn(
+            `Warning: Incident ${incident.code} has startTime (${incident.startTime}) in the future`,
+          );
+        }
+
+        if (endTime > now) {
+          console.warn(
+            `Warning: Incident ${incident.code} has endTime (${incident.endTime}) in the future`,
+          );
         }
       }
 

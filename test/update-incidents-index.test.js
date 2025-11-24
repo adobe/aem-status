@@ -211,6 +211,26 @@ describe('update-incidents-index', () => {
     let htmlDir;
     let indexPath;
 
+    // Helper function to create and run the update script
+    async function createAndRunScript(scriptName = 'update-script.js') {
+      const scriptDir = path.join(path.dirname(testDir), 'scripts');
+      const scriptContent = fs.readFileSync(path.join(scriptDir, 'update-incidents-index.js'), 'utf-8');
+      const modifiedScript = scriptContent
+        .replace("path.join(dirname, '..', 'incidents')", `'${incidentsDir}'`);
+
+      const tempScriptPath = path.join(tempDir, scriptName);
+      fs.writeFileSync(tempScriptPath, modifiedScript);
+
+      // eslint-disable-next-line import/no-dynamic-require
+      const { default: updateFunc } = await import(`file://${tempScriptPath}?t=${Date.now()}`);
+      updateFunc();
+    }
+
+    // Helper function to read the incidents index
+    function readIndex() {
+      return JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
+    }
+
     beforeEach(() => {
       // Create temporary directory structure
       tempDir = fs.mkdtempSync(path.join(testDir, 'test-incidents-'));
@@ -239,60 +259,37 @@ describe('update-incidents-index', () => {
 
       fs.writeFileSync(path.join(htmlDir, 'AEM-test123.html'), initialHTML);
 
-      // Mock the script's path resolution by temporarily changing the working directory
-      const originalCwd = process.cwd();
-      const scriptDir = path.join(path.dirname(testDir), 'scripts');
+      // Run the script for the first time
+      await createAndRunScript('update-script-1.js');
 
-      try {
-        // Create a modified version of the script that works with our temp directory
-        const scriptContent = fs.readFileSync(path.join(scriptDir, 'update-incidents-index.js'), 'utf-8');
-        const modifiedScript = scriptContent
-          .replace("path.join(dirname, '..', 'incidents')", `'${incidentsDir}'`);
+      // Read the generated index
+      const index1 = readIndex();
 
-        const tempScriptPath = path.join(tempDir, 'update-script.js');
-        fs.writeFileSync(tempScriptPath, modifiedScript);
+      assert.equal(index1.length, 1, 'Should have one incident');
+      assert.equal(index1[0].code, 'AEM-test123');
+      assert.equal(index1[0].startTime, '2025-01-01T10:00:00.000Z', 'Should have correct initial startTime');
+      assert.equal(index1[0].endTime, '2025-01-01T11:00:00.000Z', 'Should have correct initial endTime');
 
-        // Run the script for the first time
-        // eslint-disable-next-line import/no-dynamic-require
-        const { default: updateFunc } = await import(`file://${tempScriptPath}?t=${Date.now()}`);
-        updateFunc();
-
-        // Read the generated index
-        const index1 = JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
-
-        assert.equal(index1.length, 1, 'Should have one incident');
-        assert.equal(index1[0].code, 'AEM-test123');
-        assert.equal(index1[0].startTime, '2025-01-01T10:00:00.000Z', 'Should have correct initial startTime');
-        assert.equal(index1[0].endTime, '2025-01-01T11:00:00.000Z', 'Should have correct initial endTime');
-
-        // Now update the HTML file with new startTime and endTime
-        const updatedHTML = `<h1 class="minor">Test Incident</h1>
+      // Now update the HTML file with new startTime and endTime
+      const updatedHTML = `<h1 class="minor">Test Incident</h1>
 <article data-incident-start-time="2025-01-01T09:30:00.000Z" data-incident-end-time="2025-01-01T11:30:00.000Z">
     <h2>Postmortem</h2>
     <p>Updated postmortem content with corrected times.</p>
     <time>2025-01-01T12:00:00.000Z</time>
 </article>`;
 
-        fs.writeFileSync(path.join(htmlDir, 'AEM-test123.html'), updatedHTML);
+      fs.writeFileSync(path.join(htmlDir, 'AEM-test123.html'), updatedHTML);
 
-        // Re-import and run the script again
-        const tempScriptPath2 = path.join(tempDir, 'update-script2.js');
-        fs.writeFileSync(tempScriptPath2, modifiedScript);
+      // Re-run the script
+      await createAndRunScript('update-script-2.js');
 
-        // eslint-disable-next-line import/no-dynamic-require
-        const { default: updateFunc2 } = await import(`file://${tempScriptPath2}?t=${Date.now()}`);
-        updateFunc2();
+      // Read the updated index
+      const index2 = readIndex();
 
-        // Read the updated index
-        const index2 = JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
-
-        assert.equal(index2.length, 1, 'Should still have one incident');
-        assert.equal(index2[0].code, 'AEM-test123');
-        assert.equal(index2[0].startTime, '2025-01-01T09:30:00.000Z', 'Should have updated startTime from article metadata');
-        assert.equal(index2[0].endTime, '2025-01-01T11:30:00.000Z', 'Should have updated endTime from article metadata');
-      } finally {
-        process.chdir(originalCwd);
-      }
+      assert.equal(index2.length, 1, 'Should still have one incident');
+      assert.equal(index2[0].code, 'AEM-test123');
+      assert.equal(index2[0].startTime, '2025-01-01T09:30:00.000Z', 'Should have updated startTime from article metadata');
+      assert.equal(index2[0].endTime, '2025-01-01T11:30:00.000Z', 'Should have updated endTime from article metadata');
     });
 
     it('should extract startTime and endTime from article data attributes', async () => {
@@ -306,22 +303,11 @@ describe('update-incidents-index', () => {
 
       fs.writeFileSync(path.join(htmlDir, 'AEM-aws123.html'), html);
 
-      // Create a modified version of the script
-      const scriptDir = path.join(path.dirname(testDir), 'scripts');
-      const scriptContent = fs.readFileSync(path.join(scriptDir, 'update-incidents-index.js'), 'utf-8');
-      const modifiedScript = scriptContent
-        .replace("path.join(dirname, '..', 'incidents')", `'${incidentsDir}'`);
-
-      const tempScriptPath = path.join(tempDir, 'update-script.js');
-      fs.writeFileSync(tempScriptPath, modifiedScript);
-
       // Run the script
-      // eslint-disable-next-line import/no-dynamic-require
-      const { default: updateFunc } = await import(`file://${tempScriptPath}?t=${Date.now()}`);
-      updateFunc();
+      await createAndRunScript();
 
       // Read the generated index
-      const index = JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
+      const index = readIndex();
 
       assert.equal(index.length, 1, 'Should have one incident');
       assert.equal(index[0].code, 'AEM-aws123');
