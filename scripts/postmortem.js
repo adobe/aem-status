@@ -30,6 +30,7 @@ const updatePostmortem = async () => {
   const incidentErrorRate = document.getElementById('incidentErrorRate');
   const incidentImpact = document.getElementById('incidentImpact');
   const incidentImpactedService = document.getElementById('incidentImpactedService');
+  const saveButton = document.getElementById('saveButton');
 
   const updates = doc.querySelector('.updates');
   let updatesHTML = '';
@@ -87,11 +88,15 @@ const updatePostmortem = async () => {
     }
   });
 
+  saveButton.disabled = document.querySelectorAll('input.field-empty, select.field-empty').length > 0;
+
   doc.querySelector('h1').textContent = incidentName;
   doc.querySelector('h1').className = incidentImpact.value;
   doc.querySelector('article time').textContent = new Date().toISOString();
 
   incidentTextArea.value = doc.body.innerHTML;
+
+
 };
 
 const initPostmortem = async () => {
