@@ -99,9 +99,11 @@
         </li>
         <li>
             <strong>Why doesn't API for Edge Delivery Services and Integrations have auto-launch configured?</strong><br>
-            The monitoring for API for Edge Delivery Services and Integrations has historically produced false positives ("twitchiness"),
-            leading to a decision to disable auto-launch to prevent unnecessary customer notifications.
-            This design choice prioritized accuracy over resilience during actual incidents.
+            The integration between the API for Edge Delivery Services and Integrations monitoring (which functions
+            reliably, as evidenced by aemstatus.net's accurate real-time reporting) and Adobe's corporate
+            status page infrastructure has been assessed as producing false positives. Rather than improving
+            the integration layer or the corporate status tooling, the decision was made to disable auto-launch
+            entirely, creating a dependency on manual processes.
         </li>
         <li>
             <strong>Why is there no fallback mechanism when manual intake fails?</strong><br>
@@ -140,10 +142,10 @@
         services and structured checklists for large-scale outages.
     </p>
     <p>
-        <strong>Long-term Prevention:</strong> A working group has been formed to re-assess the
-        feasibility of automated status updates for API for Edge Delivery Services and Integrations, exploring options such as
-        context-aware alerting (only triggering during correlated platform incidents) and
-        improved monitoring to reduce false positives.
+        <strong>Long-term Prevention:</strong> A meeting will be scheduled with relevant parties to re-assess the
+        feasibility of implementing automated status updates for API for Edge Delivery Services and Integrations,
+        exploring options to better integrate the service's existing reliable monitoring with Adobe's
+        corporate status page infrastructure.
     </p>
     <h3>Lessons Learned</h3>
     <h4>What Went Well</h4>
@@ -169,72 +171,22 @@
         <li>The engineering team proactively notified the Service Manager on October 24, enabling correction</li>
     </ul>
     <h3>Action Items</h3>
-    <h4>Status Communication System Improvements</h4>
+    <h4>Committed Actions</h4>
     <ol>
         <li>
-            <strong>Implement automated status page verification</strong><br>
-            Create monitoring that compares services experiencing known incidents (detected by our
-            monitoring systems or reported in incident channels) against services listed on
-            status.adobe.com, with alerts for discrepancies.<br>
-            <em>Target: Q1 2026</em>
-        </li>
-        <li>
-            <strong>Build post-incident status page audit</strong><br>
-            Add a mandatory step to post-incident reviews that verifies all affected services were
-            properly communicated on status.adobe.com, with documentation in runbooks.<br>
-            <em>Target: December 2025</em>
-        </li>
-        <li>
-            <strong>Develop graduated incident notification system</strong><br>
-            Replace binary auto-launch with context-aware automation that considers incident severity,
-            correlated impacts across services, and confidence levels before triggering status updates.<br>
-            <em>Target: Q2 2026</em>
-        </li>
-    </ol>
-    <h4>Monitoring and Alerting</h4>
-    <ol>
-        <li>
-            <strong>Improve API for Edge Delivery Services and Integrations monitoring accuracy</strong><br>
-            Work with engineering to tune API for Edge Delivery Services and Integrations monitoring to reduce false positives while maintaining
-            sensitivity to real incidents, enabling reliable auto-launch capabilities.<br>
-            <em>Target: Q1 2026</em>
-        </li>
-        <li>
-            <strong>Implement correlation-based alerting</strong><br>
-            Create monitoring that triggers status updates when multiple related services show concurrent
-            issues (e.g., if 3+ AEM services alert simultaneously, automatically create CSO).<br>
-            <em>Target: Q2 2026</em>
-        </li>
-    </ol>
-    <h4>Process and Documentation</h4>
-    <ol>
-        <li>
-            <strong>Document manual intake limitations</strong><br>
-            Update runbooks to explicitly state capacity limits of manual intake (e.g., "process
-            supports up to 20 concurrent service updates") and escalation procedures when limits are reached.<br>
+            <strong>Strengthen intake protocols</strong><br>
+            The Customer Response Center has implemented strengthened intake protocols and updated
+            the process for manually tagging impacted services during high-volume incidents. These
+            runbook additions include better procedures for handling large-scale outages.<br>
             <em>Status: Completed November 1, 2025</em>
         </li>
         <li>
-            <strong>Create status page "health check" dashboard</strong><br>
-            Build internal dashboard showing all services with active monitoring alerts alongside current
-            status.adobe.com state, enabling quick visual verification of completeness.<br>
-            <em>Target: Q1 2026</em>
-        </li>
-        <li>
-            <strong>Establish service team status update pathway</strong><br>
-            Create a process for service teams to flag missing or incorrect status page information with
-            priority routing to status page team, reducing discovery-to-fix time.<br>
-            <em>Target: December 2025</em>
-        </li>
-    </ol>
-    <h4>Customer Communication</h4>
-    <ol>
-        <li>
-            <strong>Proactive communication for retroactive corrections</strong><br>
-            When status page corrections are made more than 24 hours after incident resolution,
-            proactively reach out to affected customers to acknowledge the communication gap and
-            provide accurate incident information.<br>
-            <em>Target: December 2025</em>
+            <strong>Re-assess auto-launch feasibility</strong><br>
+            Schedule and conduct a meeting with relevant parties to re-assess the feasibility of
+            implementing automated status updates for API for Edge Delivery Services and Integrations.
+            This will explore options for automation that balance the need for accurate incident
+            reporting with the risk of false positives.<br>
+            <em>Status: Meeting to be scheduled</em>
         </li>
     </ol>
 </article>
