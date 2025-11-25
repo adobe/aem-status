@@ -1,50 +1,71 @@
-<h1>Github notifications unavailable</h1>
+<h1>[Brief incident title - e.g., "Github notifications unavailable"]</h1>
 <article
-    data-incident-start-time="1970-09-09T18:25:03.343Z"
-    data-incident-end-time="1970-09-09T19:26:17.694Z"
-    data-incident-error-rate="0.001"
-    data-incident-impacted-service="delivery">
-    <h2>Postmortem</h2>
+    data-incident-start-time="[ISO 8601 timestamp - e.g., 2024-09-11T05:00:00.000Z]"
+    data-incident-end-time="[ISO 8601 timestamp - e.g., 2024-09-11T12:30:00.000Z]"
+    data-incident-error-rate="[Error rate as decimal - e.g., 0.001]"
+    data-incident-impacted-service="[delivery|publishing]">
+
+    <h3>Executive Summary</h3>
     <p>
-        On 11.09.2024 12:30 UTC we noticed that the AEM Code Sync Github application has 
-        stopped dispatching github events since 05:00 UTC. As a result, github actions that 
-        are triggered on a repository_dispatch event were not longer invoked. 
+        [Describe when the incident was noticed, what the observable problem was, and what
+        services or features were affected. Use UTC timestamps and be specific about the impact.]
     </p>
     <p>
-        The reason was a removed content-write permission of the AEM Code Sync Github 
-        application which is required to dispatch events. After restoring the permission, 
-        the notifications were dispatched again. 
+        Example: On September 11, 2024 at 12:30 UTC, we noticed that the AEM Code Sync Github
+        application had stopped dispatching github events since 05:00 UTC. As a result, github
+        actions triggered by repository_dispatch events were no longer invoked.
     </p>
-    <time></time>    
+
+    <h3>Root Cause</h3>
+    <p>
+        [Explain the underlying technical reason for the incident. What failed or changed?]
+    </p>
+    <p>
+        Example: A content-write permission on the AEM Code Sync Github application was removed,
+        which is required to dispatch events. This permission change prevented the application
+        from notifying repositories of content updates.
+    </p>
+
+    <h3>Resolution</h3>
+    <p>
+        [Describe how the issue was fixed and any actions customers need to take.]
+    </p>
+    <p>
+        Example: The missing permission was restored, and event dispatching resumed immediately.
+        Customers using repository_dispatch events in their github actions need to approve the
+        altered permissions. Organization admins should have received an email from GitHub.
+    </p>
+
+    <h3>Action Items</h3>
+    <p>
+        [List 2-5 specific actions to prevent recurrence. Include monitoring, process, or
+        technical improvements with owners if known.]
+    </p>
+    <ul>
+        <li>[Example: Add monitoring for GitHub App permission changes (Owner: Alice)]</li>
+        <li>[Example: Document required permissions in runbook (Owner: Bob)]</li>
+        <li>[Example: Implement alerts for event dispatch failures (Owner: Carol)]</li>
+    </ul>
+
+    <time>[ISO 8601 timestamp when postmortem was completed - e.g., 2024-09-11T14:00:00.000Z]</time>
 </article>
 
 <ul class="updates">
     <li>
         <h2>Resolved</h2>
-        <p>This incident has been resolved.</p>
-        <time></time>
+        <p>[Description of final resolution - e.g., "This incident has been resolved."]</p>
+        <time>[ISO 8601 timestamp - e.g., 2024-09-11T12:30:00.000Z]</time>
     </li>
 
     <li>
         <h2>Monitoring</h2>
-        <p>
-            The relevant permission needed for the github events have been updated and the notifications are dispatched again. 
-            Customers that use repository_dispatch events in their github actions need to approve the altered permissions. 
-            The organization admins should have received an email from github.
-        </p>
-        <time></time>
+        <p>[Description of monitoring phase and any customer actions needed - e.g., "The relevant permission has been updated and notifications are being dispatched again. Customers need to approve the altered permissions."]</p>
+        <time>[ISO 8601 timestamp - e.g., 2024-09-11T12:15:00.000Z]</time>
     </li>
 
     <li>
         <h2>Identified</h2>
-        <p>
-            On 11.09.2024 UTC 05:00, the AEM Code Sync Github application stopped dispatching github events. 
-            As a result, github actions that are triggered on a repository_dispatch event are not longer invoked.
-            <br>
-            <br>
-            We have identified the root cause and are working on a solution.
-        </p>
-        <time></time>
+        <p>[Description of the problem and that root cause was found - e.g., "We have identified the root cause and are working on a solution."]</p>
+        <time>[ISO 8601 timestamp - e.g., 2024-09-11T07:00:00.000Z]</time>
     </li>
 </ul>
-</div>
