@@ -38,6 +38,17 @@
     "rootCause": "third-party-outage"
   },
   {
+    "code": "AEM-status-update",
+    "name": "Status page not updated for API for Edge Delivery Services and Integrations during AWS outage",
+    "message": "On October 20, 2025, during a broader AWS US-EAST-1 region outage that affected multiple\n        Adobe Experience Manager services, the API for Edge Delivery Services and Integrations experienced a\n        service disruption. While the underlying service issue was resolved within hours, the\n        official status page at status.adobe.com was not updated to reflect the API for Edge Delivery Services and Integrations impact.\n        The status site at aemstatus.net\n        correctly reflected the",
+    "impact": "minor",
+    "timestamp": "2025-10-24T18:00:00.000Z",
+    "startTime": "2025-10-20T07:05:00.000Z",
+    "endTime": "2025-10-24T18:00:00.000Z",
+    "errorRate": "0.0",
+    "impactedService": "publishing"
+  },
+  {
     "code": "AEM-yanvkiuy",
     "name": "Major publishing disruption due to AWS US-EAST-1 outage",
     "message": "On October 20, 2025, between 06:54 and 08:44 UTC, an AWS US-EAST-1 region outage \n        affecting Lambda and SQS services caused publishing disruptions for all AEM customers \n        and minimal delivery errors. Our team deployed a secondary publishing region within \n        110 minutes, restoring full functionality while the AWS incident was ongoing.",
