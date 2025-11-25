@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Incident postmortem</title>
     <link rel="stylesheet" href="/styles/styles.css">
-    <script src="/scripts/scripts.js" type="module"></script>
+    <script src="/scripts/postmortem.js" type="module"></script>
     <style>
         .back-link { display: inline-block; margin: 12px 0 0; color: white; text-decoration: none; }
         .back-link:hover { text-decoration: underline; }
@@ -18,9 +18,52 @@
             padding: 16px 20px;
         }
 
+        .incident label {
+            font-weight: 600;
+            min-width: 150px;
+        }
+
+        .incident input {
+            flex: 1;
+            font-family: var(--spectrum-font-family);
+        }
+
         .incident textarea {
             flex: 1;
             min-height: 200px;
+        }
+
+        .incident select {
+            flex: 1;
+            font-family: var(--spectrum-font-family);
+        }
+
+        .field-wrapper {
+            display: flex;
+            flex-flow: column;
+            gap: 8px;
+        }
+
+        .field-empty:not([disabled]) {
+            border: solid 2px var(--spectrum-blue-600);
+        }
+
+        button {
+            padding: 12px 20px;
+        }
+
+        @media (min-width: 900px) {
+            .field-wrapper {
+                flex-flow: row nowrap;
+            }
+
+            .incident textarea {
+                min-height: 300px;
+            }
+
+            button {
+                margin-left: 158px;
+            }
         }
     </style>
 </head>
@@ -45,16 +88,44 @@
                 <fieldset disabled>
                     <div class="incident">
                     <span id="incidentid">AEM-123456</span>
-                    <input type="text" id="incidentName">
-                    <select id="incidentImpact">
-                        <option value="none">None</option>
-                        <option value="minor">Minor</option>
-                        <option value="major">Major</option>
-                        <option value="critical">Critical</option>
-                    </select>
-                    <textarea id="incidentText"></textarea>
+                    <div class="field-wrapper">
+                        <label for="incidentName">Title</label>
+                        <input type="text" id="incidentName" placeholder="XYZ Outage affecting Page Delivery">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="incidentStartTime">Start Time (UTC)</label>
+                        <input type="text" id="incidentStartTime" placeholder="YYYY-MM-DDTHH:mm:ss.sssZ">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="incidentEndTime">End Time (UTC)</label>
+                        <input type="text" id="incidentEndTime" placeholder="YYYY-MM-DDTHH:mm:ss.sssZ">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="incidentErrorRate">Error Rate</label>
+                        <input type="number" id="incidentErrorRate" placeholder="e.g. 0.013 for 1.3%">
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="incidentImpact">Impact</label>
+                        <select id="incidentImpact" disabled>
+                            <option value="none">None (less than 0.5% error rate)</option>
+                            <option value="minor">Minor (0.5% - 5% error rate)</option>
+                            <option value="major">Major (5% - 10% error rate)</option>
+                            <option value="critical">Critical (more than 10% error rate)</option>
+                        </select>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="incidentImpactedService">Impacted Service</label>
+                        <select id="incidentImpactedService">
+                            <option value="">Choose service...</option>
+                            <option value="delivery">Delivery</option>
+                            <option value="publishing">Authoring and Publishing</option>
+                        </select>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="incidentText">Postmortem</label>
+                        <textarea id="incidentText"></textarea>
+                    </div>
                     <button id="saveButton">Save Postmorten</button>
-                    <button id="saveIndexButton">Save Index</button>
                     </div>
                 </fieldset>
             </div>

@@ -19,7 +19,7 @@ jobs:
       id-token: write
     steps:
       - name: Checkout PR branch
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -131,10 +131,6 @@ jobs:
 
       - name: Push all changes to PR branch
         run: |
-          # Reconfigure git auth (Claude action may have modified it)
-          git config --local --unset-all http.https://github.com/.extraheader || true
-          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic $(echo -n x-access-token:${{ secrets.GITHUB_TOKEN }} | base64)"
-
           # Check if there are commits to push
           if git log origin/${{ github.event.pull_request.head.ref }}..HEAD --oneline | grep -q .; then
             git push origin ${{ github.event.pull_request.head.ref }}
