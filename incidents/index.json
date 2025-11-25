@@ -46,7 +46,17 @@
     "startTime": "2025-10-20T07:05:00.000Z",
     "endTime": "2025-10-24T18:00:00.000Z",
     "errorRate": "0.0",
-    "impactedService": "publishing"
+    "impactedService": "publishing",
+    "affectedComponents": [
+      "publishing"
+    ],
+    "internalServices": [
+      "admin-api"
+    ],
+    "externalVendors": [
+      "aws"
+    ],
+    "rootCause": "third-party-outage"
   },
   {
     "code": "AEM-yanvkiuy",
