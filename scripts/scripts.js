@@ -96,14 +96,18 @@ const displayLast30Days = (incidents) => {
 
   // Get all incidents from the last 30 days
   const recentIncidents = incidents.filter((incident) => {
-    const incidentDate = parseIncidentTimestamp(incident.timestamp);
+    // Use startTime when available, otherwise fall back to incidentUpdated
+    const timestamp = incident.startTime || incident.incidentUpdated;
+    const incidentDate = parseIncidentTimestamp(timestamp);
     return incidentDate >= thirtyDaysAgo;
   });
 
   // Group incidents by day
   const incidentsByDay = {};
   recentIncidents.forEach((incident) => {
-    const incidentDate = parseIncidentTimestamp(incident.timestamp);
+    // Use startTime when available, otherwise fall back to incidentUpdated
+    const timestamp = incident.startTime || incident.incidentUpdated;
+    const incidentDate = parseIncidentTimestamp(timestamp);
     const dayKey = incidentDate.toDateString();
     if (!incidentsByDay[dayKey]) {
       incidentsByDay[dayKey] = [];
@@ -142,7 +146,9 @@ const displayLast30Days = (incidents) => {
       dayIncidents.forEach((incident) => {
         const incidentElement = document.createElement('div');
         incidentElement.classList.add('incident', incident.impact);
-        const incidentDate = parseIncidentTimestamp(incident.timestamp);
+        // Use startTime when available, otherwise fall back to incidentUpdated
+        const timestamp = incident.startTime || incident.incidentUpdated;
+        const incidentDate = parseIncidentTimestamp(timestamp);
 
         incidentElement.innerHTML = `<h4><a href="/details.html?incident=${incident.code}">${incident.name}</a><span class="pill ${incident.impact}">${incident.impact}</span></h4>
             <p>${incident.message}</p>
@@ -158,10 +164,12 @@ const displayIncidentArchive = (incidents) => {
   incidentArchive.innerHTML = '';
   incidentArchive.classList.add('incidents');
 
-  // Group incidents by month/year based on timestamp
+  // Group incidents by month/year based on incident occurrence time
   const incidentsByMonth = {};
   incidents.forEach((incident) => {
-    const incidentDate = parseIncidentTimestamp(incident.timestamp);
+    // Use startTime when available, otherwise fall back to incidentUpdated
+    const timestamp = incident.startTime || incident.incidentUpdated;
+    const incidentDate = parseIncidentTimestamp(timestamp);
     const month = incidentDate.toLocaleDateString('en-US', { month: 'long' });
     const year = incidentDate.getFullYear();
     const key = `${year}-${month}`;
@@ -198,7 +206,9 @@ const displayIncidentArchive = (incidents) => {
     month.incidents.forEach((incident) => {
       const incidentElement = document.createElement('div');
       incidentElement.classList.add('incident', incident.impact);
-      const incidentDate = parseIncidentTimestamp(incident.timestamp);
+      // Use startTime when available, otherwise fall back to incidentUpdated
+      const timestamp = incident.startTime || incident.incidentUpdated;
+      const incidentDate = parseIncidentTimestamp(timestamp);
       incidentElement.innerHTML = `<h4><a href="/details.html?incident=${incident.code}">${incident.name}</a><span class="pill ${incident.impact}">${incident.impact}</span></h4>
           <p>${incident.message}</p>
           <time class="meta" datetime="${incidentDate.toISOString()}">${incidentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} at ${incidentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' })}</time>`;

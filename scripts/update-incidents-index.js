@@ -31,7 +31,7 @@ function parseIncidentHTML(filePath, incidentCode) {
 
   let name = null;
   let impact = 'none';
-  let timestamp = null;
+  let incidentUpdated = null;
   let message = null;
 
   // Check if it's a legacy format (has DOCTYPE)
@@ -50,7 +50,7 @@ function parseIncidentHTML(filePath, incidentCode) {
       }
     }
 
-    // Try to get timestamp from update sections
+    // Try to get incidentUpdated from update sections
     const timestampEl = doc.querySelector('.update-timestamp');
     if (timestampEl) {
       const timestampText = timestampEl.textContent.replace(/^Posted\s*/, '').trim();
@@ -69,7 +69,7 @@ function parseIncidentHTML(filePath, incidentCode) {
           const minute = parseInt(parts[5], 10);
 
           const date = new Date(year, month, day, hour, minute);
-          timestamp = date.toISOString();
+          incidentUpdated = date.toISOString();
         }
       }
     }
@@ -103,12 +103,12 @@ function parseIncidentHTML(filePath, incidentCode) {
       // Parse ISO timestamp and use it directly
       const date = new Date(isoTimestamp);
       if (!Number.isNaN(date.getTime())) {
-        timestamp = date.toISOString();
+        incidentUpdated = date.toISOString();
       } else {
-        timestamp = 'NEEDS_MANUAL_UPDATE';
+        incidentUpdated = 'NEEDS_MANUAL_UPDATE';
       }
     } else {
-      timestamp = 'NEEDS_MANUAL_UPDATE';
+      incidentUpdated = 'NEEDS_MANUAL_UPDATE';
     }
 
     // Try to get message from article
@@ -131,7 +131,7 @@ function parseIncidentHTML(filePath, incidentCode) {
     name,
     message: message || 'This incident has been resolved.',
     impact,
-    timestamp: timestamp || 'NEEDS_MANUAL_UPDATE',
+    incidentUpdated: incidentUpdated || 'NEEDS_MANUAL_UPDATE',
   };
 
   // Extract data attributes for AEM-prefixed incidents
@@ -193,9 +193,10 @@ function updateIncidentsIndex() {
   htmlFiles.forEach((file) => {
     const incident = parseIncidentHTML(file.path, file.code);
     if (incident) {
-      // If timestamp needs update and we have existing data, use it
-      if (incident.timestamp === 'NEEDS_MANUAL_UPDATE' && existingIncidentsMap.has(incident.code)) {
-        incident.timestamp = existingIncidentsMap.get(incident.code).timestamp;
+      // If incidentUpdated needs update and we have existing data, use it
+      if (incident.incidentUpdated === 'NEEDS_MANUAL_UPDATE' && existingIncidentsMap.has(incident.code)) {
+        const existing = existingIncidentsMap.get(incident.code);
+        incident.incidentUpdated = existing.incidentUpdated;
       }
 
       // Preserve classification fields from existing incident if they exist
@@ -221,11 +222,11 @@ function updateIncidentsIndex() {
         }
       }
 
-      // Skip incidents without valid timestamps
-      if (incident.timestamp && incident.timestamp !== 'NEEDS_MANUAL_UPDATE') {
+      // Skip incidents without valid incidentUpdated
+      if (incident.incidentUpdated && incident.incidentUpdated !== 'NEEDS_MANUAL_UPDATE') {
         incidents.push(incident);
       } else {
-        // Skipping incident - no valid timestamp
+        // Skipping incident - no valid incidentUpdated
       }
     }
   });
@@ -247,13 +248,21 @@ function updateIncidentsIndex() {
     }
   });
 
-  // Filter out incidents without valid timestamps and sort by timestamp
+  // Filter out incidents without valid timestamps and sort by startTime
+  // (or incidentUpdated as fallback)
   const validIncidents = incidents
     .filter((incident) => {
-      const dateInfo = parseTimestamp(incident.timestamp);
+      // Use startTime if available, otherwise incidentUpdated
+      const sortTimestamp = incident.startTime || incident.incidentUpdated;
+      const dateInfo = parseTimestamp(sortTimestamp);
       return dateInfo !== null;
     })
-    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); // Sort newest first
+    .sort((a, b) => {
+      // Use startTime for sorting when available, otherwise fall back to incidentUpdated
+      const aTime = a.startTime || a.incidentUpdated;
+      const bTime = b.startTime || b.incidentUpdated;
+      return new Date(bTime) - new Date(aTime); // Sort newest first
+    });
 
   // Write to index.json
   fs.writeFileSync(indexPath, `${JSON.stringify(validIncidents, null, 2)}\n`);

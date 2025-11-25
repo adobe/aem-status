@@ -374,7 +374,9 @@ const renderMatrix = (matrixData) => {
 const filterIncidentsByYear = (incidents, year) => {
   if (year === 'all') return incidents;
   return incidents.filter((incident) => {
-    const date = new Date(incident.timestamp);
+    // Use startTime when available, otherwise fall back to incidentUpdated
+    const timestamp = incident.startTime || incident.incidentUpdated;
+    const date = new Date(timestamp);
     return date.getFullYear() === parseInt(year, 10);
   });
 };
@@ -383,7 +385,9 @@ const filterIncidentsByYear = (incidents, year) => {
 const getAvailableYears = (incidents) => {
   const years = new Set();
   incidents.forEach((incident) => {
-    const date = new Date(incident.timestamp);
+    // Use startTime when available, otherwise fall back to incidentUpdated
+    const timestamp = incident.startTime || incident.incidentUpdated;
+    const date = new Date(timestamp);
     years.add(date.getFullYear());
   });
   return Array.from(years).sort((a, b) => b - a); // Descending order
@@ -451,16 +455,21 @@ const renderIncidentsByCategory = (incidents) => {
     const incidentList = document.createElement('div');
     incidentList.className = 'incident-list';
 
-    // Sort incidents by timestamp (most recent first)
-    const sortedIncidents = [...categoryIncidents].sort(
-      (a, b) => new Date(b.timestamp) - new Date(a.timestamp),
-    );
+    // Sort incidents by startTime (most recent first)
+    const sortedIncidents = [...categoryIncidents].sort((a, b) => {
+      // Use startTime when available, otherwise fall back to incidentUpdated
+      const aTime = a.startTime || a.incidentUpdated;
+      const bTime = b.startTime || b.incidentUpdated;
+      return new Date(bTime) - new Date(aTime);
+    });
 
     sortedIncidents.forEach((incident) => {
       const incidentItem = document.createElement('div');
       incidentItem.className = 'incident-item';
 
-      const date = new Date(incident.timestamp);
+      // Use startTime when available, otherwise fall back to incidentUpdated
+      const timestamp = incident.startTime || incident.incidentUpdated;
+      const date = new Date(timestamp);
       const formattedDate = date.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',

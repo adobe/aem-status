@@ -4,7 +4,7 @@
     "name": "Cloudflare Outage with Minor Impact on Authoring and Publishing",
     "message": "On November 18, 2025, between 11:30 UTC and 11:43 UTC, a global Cloudflare outage impacted our\n        publishing services with a weighted average error rate of 2.794%. Our team detected the issue within\n        minutes through automated monitoring and initiated failover to the alternate stack within 11 minutes. The\n        publishing service was fully restored by 11:43 UTC. No data loss occurred, and the vast majority of\n        customers experienced either no impact or brief interruptions.",
     "impact": "minor",
-    "timestamp": "2025-11-18T20:52:26.239Z",
+    "incidentUpdated": "2025-11-18T20:52:26.239Z",
     "startTime": "2025-11-18T11:30:00.000Z",
     "endTime": "2025-11-18T11:43:00.000Z",
     "errorRate": "0.02794",
@@ -23,7 +23,7 @@
     "name": "Cloudflare Outage with Minor Impact on Delivery",
     "message": "On November 18, 2025, between 11:30 UTC and 11:43 UTC, a global Cloudflare outage impacted our\n        delivery services with an overall error rate of 0.927%. Our team detected the issue within\n        minutes through automated monitoring and initiated failover to the alternate stack within 11 minutes. The delivery\n        service experienced minimal impact and was fully restored by 11:43 UTC.",
     "impact": "minor",
-    "timestamp": "2025-11-18T20:52:26.239Z",
+    "incidentUpdated": "2025-11-18T20:52:26.239Z",
     "startTime": "2025-11-18T11:30:00.000Z",
     "endTime": "2025-11-18T11:43:00.000Z",
     "errorRate": "0.00927",
@@ -42,7 +42,7 @@
     "name": "Major publishing disruption due to AWS US-EAST-1 outage",
     "message": "On October 20, 2025, between 06:54 and 08:44 UTC, an AWS US-EAST-1 region outage \n        affecting Lambda and SQS services caused publishing disruptions for all AEM customers \n        and minimal delivery errors. Our team deployed a secondary publishing region within \n        110 minutes, restoring full functionality while the AWS incident was ongoing.",
     "impact": "major",
-    "timestamp": "2025-10-20T07:07:48.558Z",
+    "incidentUpdated": "2025-10-20T07:07:48.558Z",
     "startTime": "2025-10-20T06:54:00.000Z",
     "endTime": "2025-10-20T08:44:00.000Z",
     "errorRate": "0.0833",
@@ -62,7 +62,7 @@
     "name": "code deployment delayed because of Github API exhaustion for one customer",
     "message": "On October 9, 2025 at 15:41 UTC, we noticed that the Github API limit was reached for one customer.",
     "impact": "none",
-    "timestamp": "2025-10-09T17:44:47.821Z",
+    "incidentUpdated": "2025-10-09T17:44:47.821Z",
     "startTime": "2025-10-09T15:41:46.422Z",
     "endTime": "2025-10-09T17:43:54.488Z",
     "errorRate": "0.000",
@@ -81,7 +81,7 @@
     "name": "Increased error rate on delivery via workers",
     "message": "On 09.09.2025 18:35 UTC we noticed a slight increase (<0.1%) in Edge Delivery Service errors.\n        Upon investigation, we found that one of our suppliers had already opened a major incident related\n        to worker delivery, confirmed status, and implemented a fix within 30 minutes. There were no\n        reports of customer impact.",
     "impact": "none",
-    "timestamp": "2025-09-09T19:26:17.694Z",
+    "incidentUpdated": "2025-09-09T19:26:17.694Z",
     "startTime": "2025-09-09T18:25:03.343Z",
     "endTime": "2025-09-09T19:26:17.694Z",
     "errorRate": "0.001",
@@ -98,7 +98,7 @@
     "name": "Increased error rate with images in delivery",
     "message": "On 02.09.2025 16:24 UTC we noticed that there was a slight (<0.1%) increase in errors being served by Edge\n    Delivery\n    Services. Upon investigation, we found that the errors were limited to media requests and caused by a degradation\n    of a service dependency.",
     "impact": "none",
-    "timestamp": "2025-09-02T16:24:55.049Z",
+    "incidentUpdated": "2025-09-02T16:24:55.049Z",
     "startTime": "2025-09-02T16:24:55.049Z",
     "endTime": "2025-09-02T20:26:04.212Z",
     "errorRate": "0.001",
@@ -117,7 +117,7 @@
     "name": "Increased Delivery Error Rate",
     "message": "Executive Summary\n\nOn Wednesday, June 12, 2025, between 18:02 and 20:04 UTC (approximately 2 hours), one of our external suppliers experienced a critical outage that impacted Adobe Experience Manager (AEM) Sites Edge Delivery Services.\n\nAs a result, the average error rate for origin traffic temporarily increased to approximately 0.75%. The issue was mitigated by rerouting all eligible traffic away from the affected supplier, significantly reducing end-user impact.\n\nIncident Timeline\n\n\n18:02 UTC:",
     "impact": "minor",
-    "timestamp": "2025-06-12T20:52:00.000Z",
+    "incidentUpdated": "2025-06-12T18:52:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -132,7 +132,7 @@
     "name": "Elevated amount of publishing failures",
     "message": "Executive Summary\n\nOn Tuesday, April 8, 2025, between 10:44:51 and 11:23:17 UTC (approximately 38 minutes), users of the admin API for Edge Delivery Services in Adobe Experience Manager Sites as a Cloud Service with document-based authoring experienced publishing failures. The incident was caused by a regression in webpack 5.99.0 that was introduced through a dependency update in helix-deploy. During this period, 277 errors were recorded out of 37,258 total requests (approximately 0.7% error rat",
     "impact": "minor",
-    "timestamp": "2025-04-10T10:27:00.000Z",
+    "incidentUpdated": "2025-04-10T08:27:00.000Z",
     "affectedComponents": [
       "publishing"
     ],
@@ -149,7 +149,7 @@
     "name": "Increased errors rate for delivery and publishing",
     "message": "Executive Summary\nOn March 21, 2025, starting at 21:36 UTC, a cloud provider outage impacted both our publishing and delivery systems. Monitoring revealed increased error rates during the event, with delivery on hlx.live and aem.live showing modest errors, while publishing operations on admin.hlx.page had a perceived higher impact due to misleading errors surfacing in the sidekick.\n\nIncident Timeline\n\n\n21:36 UTC: Cloud provider outage begins; our monitoring systems detect rising errors.\n21:36–22",
     "impact": "none",
-    "timestamp": "2025-04-04T16:35:00.000Z",
+    "incidentUpdated": "2025-04-04T14:35:00.000Z",
     "affectedComponents": [
       "delivery",
       "publishing"
@@ -167,7 +167,7 @@
     "name": "RUM Script Delivery Delayed",
     "message": "Executive Summary\n\nOn March 15, 2025, between 7:00 AM and 11:21 AM UTC, approximately 90% of customers experienced issues with the delivery of RUM (Real User Monitoring) scripts due to availability problems with the unpkg.com backend. The incident was caused by unpkg.com experiencing degraded performance, combined with our system's inability to properly handle first-byte timeout errors in the backend fallback mechanism. The issue was identified and resolved by adjusting timeout configurations an",
     "impact": "none",
-    "timestamp": "2025-03-18T12:07:00.000Z",
+    "incidentUpdated": "2025-03-18T11:07:00.000Z",
     "affectedComponents": null,
     "internalServices": [
       "rum"
@@ -184,7 +184,7 @@
     "name": "Page Delivery Issues Observed for a single customer",
     "message": "Executive Summary\n\nOn March 13, 2025, between 2:25 PM and 3:03 PM UTC, a single customer experienced a service disruption due to oversized configuration files exceeding AWS Lambda's response size limit. The issue was identified and resolved, with no impact to other Adobe Experience Manager customers.\n\nIncident Timeline\n\nOn March 13, 2025, at 2:25 PM UTC, our monitoring systems detected 503 pipeline errors, leading to a service disruption for a single customer. The customer was informed immediate",
     "impact": "minor",
-    "timestamp": "2025-03-14T14:25:00.000Z",
+    "incidentUpdated": "2025-03-14T13:25:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -201,7 +201,7 @@
     "name": "Publishing Issues Observed",
     "message": "Actions taken\n\n\ncreated a configuration that will allow to disable storing redundantly to R2 while the outage lasts",
     "impact": "critical",
-    "timestamp": "2025-02-07T15:10:00.000Z",
+    "incidentUpdated": "2025-02-07T14:10:00.000Z",
     "affectedComponents": [
       "publishing"
     ],
@@ -218,7 +218,7 @@
     "name": "Page Delivery Issues Observed",
     "message": "Actions taken\n\n\nredirected traffic to AWS infrastructure",
     "impact": "major",
-    "timestamp": "2025-02-07T15:09:00.000Z",
+    "incidentUpdated": "2025-02-07T14:09:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -235,7 +235,7 @@
     "name": "Page Delivery Issues Observed",
     "message": "Actions taken\n\n\nredirected traffic to more resilient infrastructure\nidentifying source of misguided traffic",
     "impact": "none",
-    "timestamp": "2025-01-31T16:04:00.000Z",
+    "incidentUpdated": "2025-01-31T15:04:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -246,28 +246,11 @@
     "endTime": "2025-01-22T15:17:00.000Z"
   },
   {
-    "code": "5ndjv5c9j47b",
-    "name": "Code Sync Issues Observed",
-    "message": "An aemsites organisation owner updated the AEM Code Sync config and accidentally removed all repositories from the config. Github UI is not fully intuitive.\n\nAs a follow up step, a reminder email has been sent to all the owners.",
-    "impact": "minor",
-    "timestamp": "2024-12-13T09:05:00.000Z",
-    "affectedComponents": null,
-    "internalServices": [
-      "code-sync"
-    ],
-    "externalVendors": [
-      "github"
-    ],
-    "rootCause": "configuration-change",
-    "startTime": "2024-11-18T09:50:00.000Z",
-    "endTime": "2024-11-18T10:26:00.000Z"
-  },
-  {
     "code": "qv1w85fv3f2q",
     "name": "Traffic blocked by zScaler",
     "message": "Executive Summary\n\nOn December 11, 2024, between 4:30 PM and 7:00 PM UTC, a single customer experienced a service disruption affecting their internal traffic routing to Adobe Experience Manager. The incident was caused by a configuration change in our content delivery infrastructure that interacted unexpectedly with the customer's network security setup (zScaler). The issue was identified and resolved, with no impact to other Adobe Experience Manager customers.\n\nOther zScaler customers were not ",
     "impact": "minor",
-    "timestamp": "2024-12-12T15:00:00.000Z",
+    "incidentUpdated": "2024-12-12T14:00:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -280,11 +263,28 @@
     "endTime": "2024-12-11T19:00:00.000Z"
   },
   {
+    "code": "5ndjv5c9j47b",
+    "name": "Code Sync Issues Observed",
+    "message": "An aemsites organisation owner updated the AEM Code Sync config and accidentally removed all repositories from the config. Github UI is not fully intuitive.\n\nAs a follow up step, a reminder email has been sent to all the owners.",
+    "impact": "minor",
+    "incidentUpdated": "2024-12-13T08:05:00.000Z",
+    "affectedComponents": null,
+    "internalServices": [
+      "code-sync"
+    ],
+    "externalVendors": [
+      "github"
+    ],
+    "rootCause": "configuration-change",
+    "startTime": "2024-11-18T09:50:00.000Z",
+    "endTime": "2024-11-18T10:26:00.000Z"
+  },
+  {
     "code": "53d2zks3cmw6",
     "name": "Publishing issues via AEM Sidekick observed",
     "message": "On 11.11.2024 1:57 PM we noticed that the AEM Sidekick was no longer able to talk to the admin service. As a result, customers were no able to execute any publishing operations through the sidekick.\n\nThe reason was the removal of a CORS header which was believed to no longer be necessary. This caused the browser to block requests outgoing from the sidekick to the admin. After reverting the commit at 2:00 PM that caused the issue, the sidekick was again operable.\n\nDuring that outage, the Admin HT",
     "impact": "none",
-    "timestamp": "2024-11-11T14:50:00.000Z",
+    "incidentUpdated": "2024-11-11T13:50:00.000Z",
     "affectedComponents": [
       "publishing"
     ],
@@ -298,28 +298,11 @@
     "endTime": "2024-11-11T14:00:00.000Z"
   },
   {
-    "code": "gn1csh4v2xz1",
-    "name": "Logging interruption",
-    "message": "Beginning July 30, 2024, at 16:42 UTC, we observed a reduction in available logs for some services. Our services continue to run as expected, with no operational impact. The issue is due to increased error rates and delays affecting AWS services.\n\nBy July 31, 2024 at 4:55 UTC, the increased error rates and delays impacting AWS services had been resolved.",
-    "impact": "none",
-    "timestamp": "2024-09-11T14:21:00.000Z",
-    "affectedComponents": null,
-    "internalServices": [
-      "logging"
-    ],
-    "externalVendors": [
-      "aws"
-    ],
-    "rootCause": "third-party-outage",
-    "startTime": "2024-07-30T16:42:00.000Z",
-    "endTime": "2024-07-31T04:55:00.000Z"
-  },
-  {
     "code": "frj5ykfrh7cz",
     "name": "Github notifications unavailable",
     "message": "On 11.09.2024 12:30 UTC we noticed that the AEM Code Sync Github application has stopped dispatching github events since 05:00 UTC. As a result, github actions that are triggered on a repository_dispatch event were not longer invoked. \n\nThe reason was a removed content-write permission of the AEM Code Sync Github application which is required to dispatch events. After restoring the permission, the notifications were dispatched again. \n\nCustomers that use repository_dispatch events in their githu",
     "impact": "minor",
-    "timestamp": "2024-09-11T14:08:00.000Z",
+    "incidentUpdated": "2024-09-11T12:08:00.000Z",
     "affectedComponents": null,
     "internalServices": [
       "code-sync"
@@ -332,28 +315,28 @@
     "endTime": "2024-09-11T13:35:00.000Z"
   },
   {
-    "code": "vgm8p3z2d042",
-    "name": "Increased error rate from Cloudflare backends",
-    "message": "We observed an elevated error rate of approximately 0.2% affecting .page domains. The root cause was traced to latency issues with one of our third-party service providers.\n\nRoot Cause:\n\nThe issue was caused by latency problems from one of our service providers, which affected the performance of our systems handling .page domains.\n\nMitigation:\n\nUpon identifying the issue, we quickly migrated the affected sites to an alternative provider. This action immediately reduced the error rate.",
+    "code": "gn1csh4v2xz1",
+    "name": "Logging interruption",
+    "message": "Beginning July 30, 2024, at 16:42 UTC, we observed a reduction in available logs for some services. Our services continue to run as expected, with no operational impact. The issue is due to increased error rates and delays affecting AWS services.\n\nBy July 31, 2024 at 4:55 UTC, the increased error rates and delays impacting AWS services had been resolved.",
     "impact": "none",
-    "timestamp": "2024-09-11T13:53:00.000Z",
-    "affectedComponents": [
-      "delivery"
+    "incidentUpdated": "2024-09-11T12:21:00.000Z",
+    "affectedComponents": null,
+    "internalServices": [
+      "logging"
     ],
-    "internalServices": null,
     "externalVendors": [
-      "cloudflare"
+      "aws"
     ],
     "rootCause": "third-party-outage",
-    "startTime": "2024-06-19T15:38:00.000Z",
-    "endTime": "2024-06-19T18:02:00.000Z"
+    "startTime": "2024-07-30T16:42:00.000Z",
+    "endTime": "2024-07-31T04:55:00.000Z"
   },
   {
     "code": "zkm8z5k27vjx",
     "name": "Publishing Issues Observed",
     "message": "What happened?\n\nAt 9:02AM PST on 07/17/24, a change to the publishing service caused content-encoding headers to be dropped during preview/publishing. This resulted in 502 errors for ~10.5% of requests between 9:02AM and 9:09AM, when the change was reverted and affected files began restoration.\n\nWhat are we doing now?\n\nWe have added additional post-deployment tests to ensure correct headers are present on preview/published files before changes go live in production.",
     "impact": "major",
-    "timestamp": "2024-07-24T17:31:00.000Z",
+    "incidentUpdated": "2024-07-24T15:31:00.000Z",
     "affectedComponents": [
       "publishing"
     ],
@@ -368,7 +351,7 @@
     "name": "Increased error rate",
     "message": "Monitoring - Beginning June 20, 17:20 UTC, we observed an elevated error rate of approximately 0.2% for about 2 hours on .page domains. This issue is attributed to latency problems with one of our service providers.\n\nFor detailed information, please refer to the Cloudflare incident: https://www.cloudflarestatus.com/incidents/p7l6rrbhysck.",
     "impact": "none",
-    "timestamp": "2024-06-20T20:27:00.000Z",
+    "incidentUpdated": "2024-06-20T18:27:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -381,26 +364,28 @@
     "endTime": "2024-06-20T20:25:00.000Z"
   },
   {
-    "code": "1fkhn4kkjpqh",
-    "name": "Slow Index Updates",
-    "message": "On March 18 the system experienced a unexpected indexing load that overwhelmed the indexing queue. Due to a suboptimal configuration the system was not able to process the queue fast enough and clogged indexing processing for all customers.\n\nConsequently, index updates might have been delayed by over 1 hour.\n\nAfter identifying the problem we could reconfigure the queue to avoid similar problems in the future.",
-    "impact": "minor",
-    "timestamp": "2024-05-27T14:58:00.000Z",
-    "affectedComponents": null,
-    "internalServices": [
-      "indexing"
+    "code": "vgm8p3z2d042",
+    "name": "Increased error rate from Cloudflare backends",
+    "message": "We observed an elevated error rate of approximately 0.2% affecting .page domains. The root cause was traced to latency issues with one of our third-party service providers.\n\nRoot Cause:\n\nThe issue was caused by latency problems from one of our service providers, which affected the performance of our systems handling .page domains.\n\nMitigation:\n\nUpon identifying the issue, we quickly migrated the affected sites to an alternative provider. This action immediately reduced the error rate.",
+    "impact": "none",
+    "incidentUpdated": "2024-09-11T11:53:00.000Z",
+    "affectedComponents": [
+      "delivery"
     ],
-    "externalVendors": null,
-    "rootCause": "configuration-change",
-    "startTime": "2024-03-18T04:00:00.000Z",
-    "endTime": "2024-03-18T05:00:00.000Z"
+    "internalServices": null,
+    "externalVendors": [
+      "cloudflare"
+    ],
+    "rootCause": "third-party-outage",
+    "startTime": "2024-06-19T15:38:00.000Z",
+    "endTime": "2024-06-19T18:02:00.000Z"
   },
   {
     "code": "7h0lm9mtk28z",
     "name": "Support Slack Migration with Downtime",
     "message": "The scheduled maintenance has been completed.",
     "impact": "maintenance",
-    "timestamp": "2024-05-25T07:00:00.000Z",
+    "incidentUpdated": "2024-05-25T05:00:00.000Z",
     "affectedComponents": null,
     "internalServices": null,
     "externalVendors": null,
@@ -413,7 +398,7 @@
     "name": "Page Delivery Issues Observed",
     "message": "Between 15:07 and 15:09 UTC we observed an increased error rate well below <1% of overall traffic due to resource contention in one of our compute backends. We are considering architecture and configuration changes if this incident occurs more frequently.",
     "impact": "none",
-    "timestamp": "2024-05-24T15:09:00.000Z",
+    "incidentUpdated": "2024-05-24T13:09:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -428,7 +413,7 @@
     "name": "Page Delivery Issues Observed",
     "message": "Between 17:05 and 17:25 UTC an update to our v5 config service has lead to a small fraction of projects sending 5xx responses. The overall error rate hasn’t exceeded a meaningful threshold, and the newly deployed change was reverted.\nWe will make sure that these edge case errors are caught by the test harness in the future.",
     "impact": "none",
-    "timestamp": "2024-05-13T17:39:00.000Z",
+    "incidentUpdated": "2024-05-13T15:39:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -443,7 +428,7 @@
     "name": "Publishing Issues Observed",
     "message": "Starting around 14:00 UTC, we noticed SharePoint related issues following a default user password rotation and accidental subsequent permission change. This resulted in delayed processing of the forms queue and a small amount of previewing/publishing errors (mostly affecting non-critical projects using the default user to connect to SharePoint). No form data got lost, all submissions were correctly delivered after the incident was resolved 2 hours later.\n\nAs a precaution, we have restricted pass",
     "impact": "none",
-    "timestamp": "2024-04-26T09:00:00.000Z",
+    "incidentUpdated": "2024-04-26T07:00:00.000Z",
     "affectedComponents": [
       "publishing"
     ],
@@ -462,7 +447,7 @@
     "name": "RUM JavaScript Delivery Partially Delayed",
     "message": "Between 7:00 am and 12:45 pm (UTC) today, the JavaScript delivery feature of the Helix RUM Collector Service experienced an outage that resulted in slow responses and responses with status code 520 for following request types:\n\n\nhelix-rum-js: this slowed down page rendering for customers of Adobe Experience Manager as a Cloud Service that are part of the VIP program for RUM collection in AEM CS. This affected a small double digit number of customers.\nhelix-rum-enhancer: all customers of AEM CS a",
     "impact": "minor",
-    "timestamp": "2024-04-12T14:31:00.000Z",
+    "incidentUpdated": "2024-04-12T12:31:00.000Z",
     "affectedComponents": null,
     "internalServices": [
       "rum"
@@ -475,11 +460,26 @@
     "endTime": "2024-04-12T14:05:00.000Z"
   },
   {
+    "code": "1fkhn4kkjpqh",
+    "name": "Slow Index Updates",
+    "message": "On March 18 the system experienced a unexpected indexing load that overwhelmed the indexing queue. Due to a suboptimal configuration the system was not able to process the queue fast enough and clogged indexing processing for all customers.\n\nConsequently, index updates might have been delayed by over 1 hour.\n\nAfter identifying the problem we could reconfigure the queue to avoid similar problems in the future.",
+    "impact": "minor",
+    "incidentUpdated": "2024-05-27T12:58:00.000Z",
+    "affectedComponents": null,
+    "internalServices": [
+      "indexing"
+    ],
+    "externalVendors": null,
+    "rootCause": "configuration-change",
+    "startTime": "2024-03-18T04:00:00.000Z",
+    "endTime": "2024-03-18T05:00:00.000Z"
+  },
+  {
     "code": "h7hlzbqkvp0q",
     "name": "Publishing Issues Observed",
     "message": "Increased Publishing Error Rate Due to Concurrency Limits being Exceeded\nBetween 01:07 UTC and 03:04 UTC, our monitoring systems detected an abnormal increase in publishing errors, with rates escalating to 36%. Our team traced the root cause to concurrency limits being exceeded in functions critical to our publishing workflow.\n\nImpact\nA significant portion of publishing operations failed during the incident window, there was no significant impact on content delivery for traffic to hlx.page.\n\nRoo",
     "impact": "major",
-    "timestamp": "2024-03-04T19:58:00.000Z",
+    "incidentUpdated": "2024-03-04T18:58:00.000Z",
     "affectedComponents": [
       "publishing"
     ],
@@ -494,7 +494,7 @@
     "name": "Page Delivery Issues Observed",
     "message": "What happened?\n\nA disruption in the forms service, starting at 15:16 UTC on Thursday, February 1, caused a temporary delay in form submissions. During the incident no data loss occurred. All delayed and pending form submissions were successfully processed by 19:33 UTC on Thursday, February 1.",
     "impact": "none",
-    "timestamp": "2024-02-02T21:31:00.000Z",
+    "incidentUpdated": "2024-02-02T20:31:00.000Z",
     "affectedComponents": null,
     "internalServices": [
       "forms"
@@ -505,26 +505,11 @@
     "endTime": "2024-02-01T19:36:00.000Z"
   },
   {
-    "code": "qjsydytlcl2m",
-    "name": "Slack Bot is unable to upload images or videos",
-    "message": "On December 8, 2023 at around 09:40 UTC, we started getting error reports from users trying to upload files via Slack bot. After a brief investigation, we identified a change in Slack’s API as the root cause. Since it had been our goal for a while to deprecate the Slack bot’s upload skill in favor of uploads via Microsoft SharePoint or Google Drive using AEM Sidekick, we decided against fixing the issue and instead replaced the upload skill with instructions on how to upload files going forward.",
-    "impact": "minor",
-    "timestamp": "2024-02-02T10:38:00.000Z",
-    "affectedComponents": [
-      "publishing"
-    ],
-    "internalServices": null,
-    "externalVendors": null,
-    "rootCause": "third-party-outage",
-    "startTime": "2023-12-08T09:57:00.000Z",
-    "endTime": "2023-12-08T12:27:00.000Z"
-  },
-  {
     "code": "z87clhfsj73v",
     "name": "Page Delivery Issues Observed",
     "message": "We observed increased errors on requests served from Cloudflare backends, most likely due to an R2 outage. The errors started 1/19 15:17 (UTC) and at 15:37 (UTC) we switched projects using Cloudflare backends to another cloud provider. During this period we served 1.16k errors for a total of 12.37K requests with Cloudflare backends. This resulted in an error rate of ~9% for projects with Cloudflare backends and an aggregate error rate across all requests, covering all backends, stood at 0.14%.",
     "impact": "none",
-    "timestamp": "2024-01-19T16:09:00.000Z",
+    "incidentUpdated": "2024-01-19T15:09:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -541,7 +526,7 @@
     "name": "Page Delivery Issues Observed",
     "message": "We observed increased errors on requests served from Cloudflare backends, most likely due to a (partial) R2 outage. The errors started 1/15 22:34 UTC and stopped 1/15 23:07 UTC. During this period we served ~2k errors for a total of ~6k requests with Cloudflare backends, i.e. on projects with Cloudflare backends we had an error rate of ~33% while our aggregate error rate across all requests, covering all backends, stood at 0.41%.",
     "impact": "none",
-    "timestamp": "2024-01-16T13:30:00.000Z",
+    "incidentUpdated": "2024-01-16T12:30:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -558,7 +543,7 @@
     "name": "Fastly Image Optimizer issue",
     "message": "We discovered that the errors were caused by an issue with a specific IO region in Fastly. The impact of the incident lasted for approximately 22 minutes, from 11:42 to 12:04 UTC. During that period we saw an increase of the media delivery error rate from 0% to 4.8%. About 50% of the errored requests were initiated by Bots. Customer impact has been negligible. We will continue to closely monitor error rates of the the infrastructure we are using and take action if necessary.",
     "impact": "minor",
-    "timestamp": "2023-12-15T15:11:00.000Z",
+    "incidentUpdated": "2023-12-15T14:11:00.000Z",
     "affectedComponents": null,
     "internalServices": [
       "media"
@@ -575,7 +560,7 @@
     "name": "Cloudflare Workers Issue",
     "message": "As the issue only affected a small number of internal customers that were assigned to the (secondary) Cloudflare stack, the slightly elevated error rate did not raise an alert, so no mitigating actions were taken.\n\nAs a consequence, we’ve lowered the alert thresholds, so that we can switch between primary and secondary stacks faster.",
     "impact": "minor",
-    "timestamp": "2023-12-13T09:12:00.000Z",
+    "incidentUpdated": "2023-12-13T08:12:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -588,11 +573,26 @@
     "endTime": "2023-12-12T04:43:00.000Z"
   },
   {
+    "code": "qjsydytlcl2m",
+    "name": "Slack Bot is unable to upload images or videos",
+    "message": "On December 8, 2023 at around 09:40 UTC, we started getting error reports from users trying to upload files via Slack bot. After a brief investigation, we identified a change in Slack’s API as the root cause. Since it had been our goal for a while to deprecate the Slack bot’s upload skill in favor of uploads via Microsoft SharePoint or Google Drive using AEM Sidekick, we decided against fixing the issue and instead replaced the upload skill with instructions on how to upload files going forward.",
+    "impact": "minor",
+    "incidentUpdated": "2024-02-02T09:38:00.000Z",
+    "affectedComponents": [
+      "publishing"
+    ],
+    "internalServices": null,
+    "externalVendors": null,
+    "rootCause": "third-party-outage",
+    "startTime": "2023-12-08T09:57:00.000Z",
+    "endTime": "2023-12-08T12:27:00.000Z"
+  },
+  {
     "code": "n7cjqj33nvy4",
     "name": "Delivery Increased Error Rate",
     "message": "There has not been any report of this incident being noticed by our customers that we are aware of and all systems seem to have recovered automatically at the end of the incident.",
     "impact": "minor",
-    "timestamp": "2023-10-31T20:23:00.000Z",
+    "incidentUpdated": "2023-10-31T19:23:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -607,7 +607,7 @@
     "name": "[Publishing Issues Observed] Sidekick Library",
     "message": "Between 9:18 UTC and 14:36 UTC on 18-oct-2023 due to a change in the domain of our externally facing documentation website https://www.hlx.live to https://www.aem.live a small portion of www.hlx.com/tools which hosts resources used by sidekick was redirected accidentally.   \n\nOur analysis shows that 0.6% of the traffic to www.hlx.com/tools during that time window was wrongly redirected and was potentially leading to an issue where users were not able to open up the sidekick library under certain",
     "impact": "minor",
-    "timestamp": "2023-10-19T14:01:00.000Z",
+    "incidentUpdated": "2023-10-19T12:01:00.000Z",
     "affectedComponents": null,
     "internalServices": [
       "sidekick"
@@ -618,41 +618,11 @@
     "endTime": "2023-10-19T14:36:00.000Z"
   },
   {
-    "code": "vbcbbm14rcts",
-    "name": "Publishing Issues Observed",
-    "message": "At 6:55PM UTC an automated monitor identified an issue with previewing and publishing content.\n\nThe issue was determined to be caused by a brief degradation in an upstream dependency, which resulted in elevated 500 errors for the duration of the degradation, ultimately resulting in intermittent failures in Sidekick preview/publish actions. \n\nThe upstream service issues lasted until 7:12PM UTC, at which point the CSO was automatically closed by the monitor.\n\nThe issue only impacted authoring, no ",
-    "impact": "none",
-    "timestamp": "2023-10-02T16:55:00.000Z",
-    "affectedComponents": [
-      "publishing"
-    ],
-    "internalServices": null,
-    "externalVendors": null,
-    "rootCause": "third-party-outage",
-    "startTime": "2023-06-07T18:56:00.000Z",
-    "endTime": "2023-06-07T19:12:00.000Z"
-  },
-  {
-    "code": "lymy0j297t0j",
-    "name": "DNS Disruption for hlx.page and hlx.live",
-    "message": "Please see this postmortem for a complete update.",
-    "impact": "minor",
-    "timestamp": "2023-10-02T16:41:00.000Z",
-    "affectedComponents": [
-      "delivery"
-    ],
-    "internalServices": null,
-    "externalVendors": null,
-    "rootCause": "dns-issue",
-    "startTime": "2023-09-26T00:00:00.000Z",
-    "endTime": "2023-09-26T00:00:00.000Z"
-  },
-  {
     "code": "pkq3983rfszz",
     "name": "Ongoing DNS Disruption for hlx.page and hlx.live",
     "message": "Around midnight (UTC) of Tuesday, September 26th 2023 we received reports from users that their preview sites on *.hlx.page, *.hlx.live, or the Adobe Experience Manager homepage on www.hlx.live or even the status page on status.hlx.live were unavailable. These reports were scattered, inconsistent, and could not be reproduced by the on-call engineers. Over the next 24 hours it became clear that this was related to a wider Domain Name System (DNS)  issue that affected the DNS provider for our serv",
     "impact": "major",
-    "timestamp": "2023-10-02T16:39:00.000Z",
+    "incidentUpdated": "2023-10-02T14:39:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -663,11 +633,26 @@
     "endTime": "2023-09-28T19:39:00.000Z"
   },
   {
+    "code": "lymy0j297t0j",
+    "name": "DNS Disruption for hlx.page and hlx.live",
+    "message": "Please see this postmortem for a complete update.",
+    "impact": "minor",
+    "incidentUpdated": "2023-10-02T14:41:00.000Z",
+    "affectedComponents": [
+      "delivery"
+    ],
+    "internalServices": null,
+    "externalVendors": null,
+    "rootCause": "dns-issue",
+    "startTime": "2023-09-26T00:00:00.000Z",
+    "endTime": "2023-09-26T00:00:00.000Z"
+  },
+  {
     "code": "dkcqyx77px1d",
     "name": "Page Delivery And Publishing Issues Observed",
     "message": "At 6:49 PM UTC we observed an issue that affected page delivery, authoring services and code deployments due to an outage with one of our cloud providers.\n\nAt 7:14 PM UTC, we switched delivery to another provider which resolved the delivery errors immediately. The franklin authoring services were still impacted at this time. Between 6:50pm UTC and 7:14pm UTC we experienced a slightly higher error rate (0.83%)\n\nAt 8:42 PM UTC, full service was recovered and publishing and code deployments could r",
     "impact": "none",
-    "timestamp": "2023-06-14T21:48:00.000Z",
+    "incidentUpdated": "2023-06-14T19:48:00.000Z",
     "affectedComponents": [
       "delivery",
       "publishing"
@@ -679,11 +664,26 @@
     "endTime": "2023-06-13T20:53:00.000Z"
   },
   {
+    "code": "vbcbbm14rcts",
+    "name": "Publishing Issues Observed",
+    "message": "At 6:55PM UTC an automated monitor identified an issue with previewing and publishing content.\n\nThe issue was determined to be caused by a brief degradation in an upstream dependency, which resulted in elevated 500 errors for the duration of the degradation, ultimately resulting in intermittent failures in Sidekick preview/publish actions. \n\nThe upstream service issues lasted until 7:12PM UTC, at which point the CSO was automatically closed by the monitor.\n\nThe issue only impacted authoring, no ",
+    "impact": "none",
+    "incidentUpdated": "2023-10-02T14:55:00.000Z",
+    "affectedComponents": [
+      "publishing"
+    ],
+    "internalServices": null,
+    "externalVendors": null,
+    "rootCause": "third-party-outage",
+    "startTime": "2023-06-07T18:56:00.000Z",
+    "endTime": "2023-06-07T19:12:00.000Z"
+  },
+  {
     "code": "cg71nfn8gr7f",
     "name": "Publishing Issues Observed",
     "message": "Between February 23rd 11:25 and 11:45 (UTC), Franklin publishing from Sharepoint and Franklin forms processing to Excel have been inspirational due to a scheduled token rotation. No data has been lost.\n\nIn order to provide smoother token rotation in the future, we will update our token rotation procedure, and if necessary combine it with a planned maintenance window.",
     "impact": "minor",
-    "timestamp": "2023-02-23T11:48:00.000Z",
+    "incidentUpdated": "2023-02-23T10:48:00.000Z",
     "affectedComponents": [
       "publishing"
     ],
@@ -702,7 +702,7 @@
     "name": "GitHub Synchronization Issues Observed",
     "message": "Between 10:01 am an 10:16 am today, a configuration change to a Serverless function caused the GitHub bot to fail to respond to notifications from GitHub. In total 31 requests were affected.\n\nIf you pushed code changes in that time period, they might not have come through. You can remedy this by pushing an additional, empty commit to the same branch.\n\nIn order to prevent similar issues to arise in the future, we will establish a review process for configuration changes to the production services",
     "impact": "minor",
-    "timestamp": "2023-02-09T10:28:00.000Z",
+    "incidentUpdated": "2023-02-09T09:28:00.000Z",
     "affectedComponents": null,
     "internalServices": [
       "code-sync"
@@ -717,7 +717,7 @@
     "name": "Publishing Issues Observed",
     "message": "The global major Azure outage (Tracking ID: VSG1-B90, https://azure.status.microsoft/en-gb/status/history/) did affect Franklin Authoring. From 7:14AM to 9:29AM UTC we saw 25 related errors of failed publish actions. The impact was therefore only minor.",
     "impact": "minor",
-    "timestamp": "2023-01-25T11:06:00.000Z",
+    "incidentUpdated": "2023-01-25T10:06:00.000Z",
     "affectedComponents": [
       "publishing"
     ],
@@ -734,7 +734,7 @@
     "name": "Increased error rate with the Franklin Admin Service.",
     "message": "Between 18:21 and 19:10 UTC, one of our cloud providers experienced a momentary disruption in their storage service. This had an effect on the preview and publish operations performed by the Franklin Admin service. These operations perform actions in the primary Franklin stack and also in our redundant stack which was affected. Due to the failing operations in the redundant stack users were presented with error messages even though the underlying operations had succeeded in the primary stack.\n\nh",
     "impact": "minor",
-    "timestamp": "2023-01-24T20:59:00.000Z",
+    "incidentUpdated": "2023-01-24T19:59:00.000Z",
     "affectedComponents": [
       "publishing"
     ],
@@ -753,7 +753,7 @@
     "name": "Page Delivery Issues Observed",
     "message": "Between 23:00 and 23:07 UTC there was an increased error rate due to a networking issue with one of our supplier, the system auto recovered. The visible customer impact was minimal according to our logs.  \n\nhttps://www.fastlystatus.com/incident/375707",
     "impact": "minor",
-    "timestamp": "2023-01-19T23:31:00.000Z",
+    "incidentUpdated": "2023-01-19T22:31:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -770,7 +770,7 @@
     "name": "Publishing Issues Observed",
     "message": "An new version of the Franklin admin service conflicted with a behavior of the Franklin github bot which lead to a delay of synchronizations of code updates. The issue was not noticed for a few hours as the function that was affected was not heavily used at the time.\nThe issue is fixed in a newly released version of the Franklin github bot, and all affected code synchronization will be synchronized.",
     "impact": "minor",
-    "timestamp": "2022-12-22T22:54:00.000Z",
+    "incidentUpdated": "2022-12-22T21:54:00.000Z",
     "affectedComponents": null,
     "internalServices": [
       "code-sync"
@@ -787,7 +787,7 @@
     "name": "Authoring issues observed",
     "message": "What happened?\n\nOn 9:55 AM UTC, we started getting intermittent reports of errors in the Sidekick which impacted authoring on customer projects using SharePoint. The issue was caused by an earlier configuration change which had unexpected side effects. On 2:05 PM UTC, the issue was fully resolved.\n\nWhat’s next?\n\nWe will improve both our processes and monitoring to prevent such an extended outage from reoccurring after future configuration updates.",
     "impact": "major",
-    "timestamp": "2022-11-25T15:28:00.000Z",
+    "incidentUpdated": "2022-11-25T14:28:00.000Z",
     "affectedComponents": [
       "publishing"
     ],
@@ -804,7 +804,7 @@
     "name": "Page Delivery Issues Observed",
     "message": "From approximately 9:28am - 11:04am, November 4th, we experienced on and off failure to access services related to our content delivery infrastructure. At some points, we experienced 50% failure rate of requests to these services. After notifying one of our cloud providers, the issue was immediately resolved and everything was once again, operational. Franklin content authors who depend on programs that make authoring changes to sites, like the Sidekick, were unable to use those services. For we",
     "impact": "critical",
-    "timestamp": "2022-11-05T20:48:00.000Z",
+    "incidentUpdated": "2022-11-05T19:48:00.000Z",
     "affectedComponents": [
       "delivery",
       "publishing"
@@ -820,7 +820,7 @@
     "name": "Increased error rate on media delivery",
     "message": "The underlying reason for the increased error rates on media delivery was a partial outage of Fastly’s Image Optimizer:\nhttps://status.fastly.com/incidents/s542qjby04vb\n\nWe have opened an issue with Fastly support, asking for an official statement about how Fastly is going to address this issue and prevent future such outages.",
     "impact": "minor",
-    "timestamp": "2022-06-29T15:29:00.000Z",
+    "incidentUpdated": "2022-06-29T13:29:00.000Z",
     "affectedComponents": null,
     "internalServices": [
       "media"
@@ -837,7 +837,7 @@
     "name": "Form Processing Issues Observed",
     "message": "On June 20th, 2022, Helix Form processing was delayed for about 4 hours. During this timeframe, new form submissions were still accepted, but would not show up in the target spreadsheets. After the issue has been resolved, normal processing resumed and all stalled form submissions were delivered.\n\nThe issue was caused by a manual rotation of a security credential.",
     "impact": "minor",
-    "timestamp": "2022-06-20T05:34:00.000Z",
+    "incidentUpdated": "2022-06-20T03:34:00.000Z",
     "affectedComponents": null,
     "internalServices": [
       "forms"
@@ -854,7 +854,7 @@
     "name": "Publishing Issues Observed",
     "message": "At 11:00 am UTC today, a DNS change was made that erased a CNAME record for admin.hlx.page, making the Helix Publishing API unavailable for all customers that have not been using the API in the previous ten minutes.\n\nWhen the error was detected by our monitoring, we rolled back the DNS change, so that the API hostname could be resolved again.\n\nThe Helix team will establish procedures to double-check DNS changes that affect existing records going forward.",
     "impact": "minor",
-    "timestamp": "2022-06-07T11:18:00.000Z",
+    "incidentUpdated": "2022-06-07T09:18:00.000Z",
     "affectedComponents": [
       "publishing"
     ],
@@ -871,7 +871,7 @@
     "name": "Publishing Issues Observed",
     "message": "Between 15:59 UTC and 18:38 UTC due to a degraded performance with one of our providers, publishing may have been impacted with delays for all helix websites.",
     "impact": "minor",
-    "timestamp": "2022-06-03T18:56:00.000Z",
+    "incidentUpdated": "2022-06-03T16:56:00.000Z",
     "affectedComponents": [
       "publishing"
     ],
@@ -886,7 +886,7 @@
     "name": "Publishing Issues Observed",
     "message": "Between 07:04 and 07:11 UTC, a small amount of errors originating from the OneDrive API bubbled up to end users through the Helix Admin API and caused errors to be displayed in the Helix Sidekick. Operations are back to normal, affected users can reload their browser tab. \n\nNo further action will be taken at this point apart from continuing to closely monitor the situation.",
     "impact": "minor",
-    "timestamp": "2022-05-06T08:14:00.000Z",
+    "incidentUpdated": "2022-05-06T06:14:00.000Z",
     "affectedComponents": [
       "publishing"
     ],
@@ -903,7 +903,7 @@
     "name": "Publishing Issues Observed",
     "message": "From 12:00 UTC to 12:20 UTC we had experienced an outage that affected all preview operations and lead to an increased error rate of 4% for our production .live origins that feed the CDNs of our customers.",
     "impact": "minor",
-    "timestamp": "2022-04-22T13:10:00.000Z",
+    "incidentUpdated": "2022-04-22T11:10:00.000Z",
     "affectedComponents": [
       "delivery",
       "publishing"
@@ -919,7 +919,7 @@
     "name": "Form Processing Issues Observed",
     "message": "On March 22nd, 2022, Helix Form processing was delayed for about 30 minutes. During this timeframe, new form submissions were still accepted, but would not show up in the target spreadsheets. After the issue has been resolved, normal processing resumed and all stalled form submissions were delivered.\n\nThe issue was caused by an automated rotation of a security credential.\n\nWe have identified an engineering solution to the problem of automated credential rotation that will be rolled out in the ne",
     "impact": "minor",
-    "timestamp": "2022-03-23T09:54:00.000Z",
+    "incidentUpdated": "2022-03-23T08:54:00.000Z",
     "affectedComponents": null,
     "internalServices": [
       "forms"
@@ -936,7 +936,7 @@
     "name": "Page Delivery Issues Observed",
     "message": "Due to an unknown problem, the CDN serving content for DC and OH, accidentally cached an error response, serving static content on the https://blog.adobe.com/ homepage. After clearing the CDN cache, the correct homepage was served again.\n\nThe impact of this incident was minimal, only affecting users from that region, and only on that page.",
     "impact": "minor",
-    "timestamp": "2022-03-11T10:02:00.000Z",
+    "incidentUpdated": "2022-03-11T09:02:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -951,7 +951,7 @@
     "name": "Page Delivery Issues Observed",
     "message": "Github raw content API had intermittent slow response times starting at about 1PM PT, leading to 2 status checks failing at 1:18PM due to 504s in Paris, FR and Ohio, US. Two other regions also received 504s during the same period but were not marked as failures: Sydney, AU and London, UK. Two additional regions had increased latency with no timeouts: Mumbai, IN and Singapore, SG; both increasing by ~22s.  \n\nGithub did not open any incident for the increased latency, and it was largely stable wit",
     "impact": "minor",
-    "timestamp": "2022-02-01T22:44:00.000Z",
+    "incidentUpdated": "2022-02-01T21:44:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
@@ -968,7 +968,7 @@
     "name": "Page Delivery Issues Observed",
     "message": "There was a brief github outage that resulted in this incident. After a review of our logs it does not appear to have caused any impact to Helix customers.",
     "impact": "none",
-    "timestamp": "2022-01-13T17:13:00.000Z",
+    "incidentUpdated": "2022-01-13T16:13:00.000Z",
     "affectedComponents": [
       "delivery"
     ],
