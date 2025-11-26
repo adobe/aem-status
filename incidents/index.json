@@ -13,8 +13,8 @@
       "publishing"
     ],
     "internalServices": null,
-    "externalVendors": [],
-    "rootCause": "deployment issue"
+    "externalVendors": null,
+    "rootCause": "deployment-issue"
   },
   {
     "code": "AEM-b10mmhnp",
