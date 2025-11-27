@@ -1,5 +1,22 @@
 [
   {
+    "code": "AEM-u1y1wme4",
+    "name": "Outage affecting Document Authoring (DA)",
+    "message": "On November 26, 2025 at 13:55 UTC, authors began experiencing \"not permitted\" errors and observed that updates to da.live were not being saved. The issue was quickly escalated and identified as impacting Document Authoring functionality.\n        The issue affected few Document Authoring users for 25 minutes. Only about 60 save operations failed during this period, though no data loss occurred due to client-side drafts. The issue was quickly escalated and resolved by 14:20 UTC.",
+    "impact": "minor",
+    "incidentUpdated": "2025-11-26T14:15:00.000Z",
+    "startTime": "2025-11-26T13:55:00Z",
+    "endTime": "2025-11-26T14:20:00Z",
+    "errorRate": "0.0001",
+    "impactedService": "publishing",
+    "affectedComponents": [
+      "publishing"
+    ],
+    "internalServices": null,
+    "externalVendors": null,
+    "rootCause": "deployment-issue"
+  },
+  {
     "code": "AEM-b10mmhnp",
     "name": "Cloudflare Outage with Minor Impact on Authoring and Publishing",
     "message": "On November 18, 2025, between 11:30 UTC and 11:43 UTC, a global Cloudflare outage impacted our\n        publishing services with a weighted average error rate of 2.794%. Our team detected the issue within\n        minutes through automated monitoring and initiated failover to the alternate stack within 11 minutes. The\n        publishing service was fully restored by 11:43 UTC. No data loss occurred, and the vast majority of\n        customers experienced either no impact or brief interruptions.",
