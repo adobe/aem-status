@@ -143,7 +143,31 @@ jobs:
         if: steps.commit_index.outputs.changed == 'true'
         run: sleep 5
 
+      - name: Check for existing Claude reviews
+        id: check_reviews
+        run: |
+          # Check for existing open review comments from claude[bot]
+          REVIEWS=$(gh pr view ${{ github.event.pull_request.number }} --json reviews --jq '.reviews[] | select(.author.login == "claude" and .state == "COMMENTED") | .id' | wc -l)
+
+          # Check for recent Claude reviews (within last hour)
+          RECENT_REVIEWS=$(gh pr view ${{ github.event.pull_request.number }} --json reviews --jq '.reviews[] | select(.author.login == "claude" and .state == "COMMENTED" and (.submittedAt | fromdateiso8601) > (now - 3600)) | .id' | wc -l)
+
+          echo "existing_reviews=$REVIEWS" >> $GITHUB_OUTPUT
+          echo "recent_reviews=$RECENT_REVIEWS" >> $GITHUB_OUTPUT
+
+          if [ "$REVIEWS" -gt 0 ]; then
+            echo "⚠️  Found $REVIEWS existing Claude review(s) on this PR"
+          fi
+
+          if [ "$RECENT_REVIEWS" -gt 0 ]; then
+            echo "⚠️  Found $RECENT_REVIEWS recent Claude review(s) (within last hour)"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Claude Code Review
+        # Skip review if there are existing reviews or recent reviews
+        if: steps.check_reviews.outputs.existing_reviews == '0' && steps.check_reviews.outputs.recent_reviews == '0'
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -154,20 +178,6 @@ jobs:
             Please review this incident post-mortem following industry best practices for SaaS services.
 
             Note: The PR branch is already checked out in the current working directory.
-
-            ## Important: Check for Existing Reviews First
-
-            Before providing feedback:
-            1. Use `gh pr view ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --json reviews,comments` to check for existing reviews from @claude[bot]
-            2. If there are previous reviews from @claude[bot]:
-               - Review only the changes made since the last review
-               - Check if previous feedback has been addressed
-               - For addressed feedback: Update or resolve the original comment thread if possible
-               - For unaddressed feedback: Reference the original comment rather than repeating it
-               - Only add NEW comments for NEW issues or issues that have gotten worse
-            3. If this is the first review, proceed with a full comprehensive review
-
-            This approach prevents comment pile-up and maintains a cleaner review thread.
 
             ## Review Criteria:
 
@@ -229,3 +239,21 @@ jobs:
 
           claude_args: |
             --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*), Bash(gh pr diff:*), Bash(gh pr view:*)"
+
+      - name: Log review skip reason
+        if: steps.check_reviews.outputs.existing_reviews != '0' || steps.check_reviews.outputs.recent_reviews != '0'
+        run: |
+          if [ "${{ steps.check_reviews.outputs.existing_reviews }}" != "0" ]; then
+            echo "🚫 Skipping Claude review: Found ${{ steps.check_reviews.outputs.existing_reviews }} existing review(s)"
+            echo "   To avoid overwhelming the PR author with duplicate feedback."
+          fi
+
+          if [ "${{ steps.check_reviews.outputs.recent_reviews }}" != "0" ]; then
+            echo "🚫 Skipping Claude review: Found ${{ steps.check_reviews.outputs.recent_reviews }} recent review(s) within the last hour"
+            echo "   To prevent review spam on rapid commits."
+          fi
+
+          echo "💡 If you need a fresh review, you can:"
+          echo "   1. Resolve existing review comments, or"
+          echo "   2. Wait at least 1 hour since the last review, or"
+          echo "   3. Manually trigger the workflow"
