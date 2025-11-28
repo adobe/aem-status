@@ -12,17 +12,24 @@ jobs:
   build_and_deploy_job:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
-    # Add write permissions for contents to allow committing
     permissions:
       contents: write
       pull-requests: write
+      deployments: write
     steps:
       - uses: actions/checkout@v6
         with:
           submodules: true
           lfs: false
-          # Use a PAT or GitHub App token to allow the commit to trigger other workflows if needed
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Deployment
+        uses: chrnorm/deployment-action@v2
+        id: deployment
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production
+          environment-url: https://www.aemstatus.net
       
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -62,8 +69,25 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/" # App source code path
-          api_location: "" # Api source code path - optional
-          output_location: "" # Built app content directory - optional
-          skip_app_build: true # Skip build for static sites
+          app_location: "/"
+          api_location: ""
+          output_location: ""
+          skip_app_build: true
+
+      - name: Update Deployment Status (success)
+        if: success()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+          state: success
+          environment-url: https://www.aemstatus.net
+
+      - name: Update Deployment Status (failure)
+        if: failure()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+          state: failure
 
