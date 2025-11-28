@@ -15,12 +15,19 @@ app.http('getCurrentIncident', {
     const now = Date.now();
     const cacheAge = now - cache.timestamp;
 
+    const corsHeaders = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    };
+
     // Return cached data if valid
     if (cache.data && cacheAge < CACHE_TTL_MS) {
       context.log(`Serving cached data (age: ${Math.round(cacheAge / 1000)}s)`);
       return {
         status: 200,
         headers: {
+          ...corsHeaders,
           'Content-Type': 'application/json',
           'X-Cache': 'HIT',
           'Age': String(Math.round(cacheAge / 1000))
@@ -48,6 +55,7 @@ app.http('getCurrentIncident', {
       return {
         status: 200,
         headers: {
+          ...corsHeaders,
           'Content-Type': 'application/json',
           'X-Cache': 'MISS',
           'Age': '0'
@@ -63,6 +71,7 @@ app.http('getCurrentIncident', {
         return {
           status: 200,
           headers: {
+            ...corsHeaders,
             'Content-Type': 'application/json',
             'X-Cache': 'STALE',
             'Age': String(Math.round(cacheAge / 1000))
@@ -73,7 +82,7 @@ app.http('getCurrentIncident', {
 
       return {
         status: 502,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         body: JSON.stringify({ error: 'Failed to fetch incident data' })
       };
     }
