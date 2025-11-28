@@ -1,7 +1,7 @@
 import { calculateUptime as calculateUptimeBase, parseIncidentTimestamp, getUptimeStatus } from './slo-calculator.js';
 
 const fetchCurrentIncident = async () => {
-  const response = await fetch('https://script.google.com/macros/s/AKfycbxoBSj7v-y5WyoeSn1T0KcFsoQXEYQiiK_nmOPf-pKAJqf7w46ubpt0XmwFM7qdbzgCzw/exec', {
+  const response = await fetch('https://aem-status-api.azurewebsites.net/api/getCurrentIncident', {
     cache: 'reload',
   });
   const json = await response.json();
