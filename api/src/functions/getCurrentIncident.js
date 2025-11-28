@@ -100,7 +100,7 @@ app.http('getCurrentIncident', {
 
       const isTimeout = error.name === 'AbortError';
       return {
-        status: 502,
+        status: isTimeout ? 504 : 502,
         headers: {
           ...corsHeaders,
           'Content-Type': 'application/json',
