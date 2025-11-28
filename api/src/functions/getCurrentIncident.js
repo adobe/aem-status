@@ -23,7 +23,7 @@ app.http('getCurrentIncident', {
         headers: {
           'Content-Type': 'application/json',
           'X-Cache': 'HIT',
-          'X-Cache-Age': String(Math.round(cacheAge / 1000))
+          'Age': String(Math.round(cacheAge / 1000))
         },
         body: JSON.stringify(cache.data)
       };
@@ -49,7 +49,8 @@ app.http('getCurrentIncident', {
         status: 200,
         headers: {
           'Content-Type': 'application/json',
-          'X-Cache': 'MISS'
+          'X-Cache': 'MISS',
+          'Age': '0'
         },
         body: JSON.stringify(data)
       };
@@ -64,7 +65,7 @@ app.http('getCurrentIncident', {
           headers: {
             'Content-Type': 'application/json',
             'X-Cache': 'STALE',
-            'X-Cache-Age': String(Math.round(cacheAge / 1000))
+            'Age': String(Math.round(cacheAge / 1000))
           },
           body: JSON.stringify(cache.data)
         };
