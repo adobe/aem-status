@@ -1,7 +1,9 @@
 import { app } from '@azure/functions';
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxoBSj7v-y5WyoeSn1T0KcFsoQXEYQiiK_nmOPf-pKAJqf7w46ubpt0XmwFM7qdbzgCzw/exec';
+const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL
+  || 'https://script.google.com/macros/s/AKfycbxoBSj7v-y5WyoeSn1T0KcFsoQXEYQiiK_nmOPf-pKAJqf7w46ubpt0XmwFM7qdbzgCzw/exec';
 const CACHE_TTL_MS = 2 * 60 * 1000; // 2 minutes
+const FETCH_TIMEOUT_MS = 10000; // 10 seconds
 
 let cache = {
   data: null,
@@ -39,12 +41,26 @@ app.http('getCurrentIncident', {
     // Fetch fresh data from Google
     context.log('Cache miss, fetching from Google Apps Script');
     try {
-      const response = await fetch(GOOGLE_SCRIPT_URL);
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+      
+      let response;
+      try {
+        response = await fetch(GOOGLE_SCRIPT_URL, { signal: controller.signal });
+      } finally {
+        clearTimeout(timeout);
+      }
+      
       if (!response.ok) {
-        throw new Error(`Google API returned ${response.status}`);
+        throw new Error(`Upstream API returned ${response.status}`);
       }
       
       const data = await response.json();
+      
+      // Validate response structure
+      if (typeof data !== 'object' || !('rows' in data)) {
+        throw new Error('Invalid response structure from upstream');
+      }
       
       // Update cache
       cache = {
@@ -80,10 +96,14 @@ app.http('getCurrentIncident', {
         };
       }
 
+      const isTimeout = error.name === 'AbortError';
       return {
         status: 502,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ error: 'Failed to fetch incident data' })
+        body: JSON.stringify({
+          error: 'Failed to fetch incident data',
+          reason: isTimeout ? 'timeout' : 'upstream_error'
+        })
       };
     }
   }
