@@ -101,11 +101,12 @@ app.http('getCurrentIncident', {
       const isTimeout = error.name === 'AbortError';
       return {
         status: 502,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          error: 'Failed to fetch incident data',
-          reason: isTimeout ? 'timeout' : 'upstream_error'
-        })
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'application/json',
+          'X-Error': isTimeout ? 'timeout' : 'upstream_error'
+        },
+        body: JSON.stringify({ error: 'Failed to fetch incident data' })
       };
     }
   }
