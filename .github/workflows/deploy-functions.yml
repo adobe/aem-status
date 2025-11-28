@@ -56,6 +56,15 @@ jobs:
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE_STAGING }}
 
+      - name: Wait for deployment to stabilize
+        run: sleep 10
+
+      - name: Run post-deploy tests
+        working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        env:
+          API_URL: ${{ github.ref == 'refs/heads/main' && 'https://aem-status-api.azurewebsites.net/api/getCurrentIncident' || 'https://aem-status-api-staging.azurewebsites.net/api/getCurrentIncident' }}
+        run: node --test test/post-deploy.test.js
+
       - name: Update Deployment Status (success)
         if: success()
         uses: chrnorm/deployment-status@v2
