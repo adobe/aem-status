@@ -1,7 +1,9 @@
 import { app } from '@azure/functions';
 
-const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL
-  || 'https://script.google.com/macros/s/AKfycbxoBSj7v-y5WyoeSn1T0KcFsoQXEYQiiK_nmOPf-pKAJqf7w46ubpt0XmwFM7qdbzgCzw/exec';
+const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL;
+if (!GOOGLE_SCRIPT_URL) {
+  throw new Error('GOOGLE_SCRIPT_URL environment variable is not set');
+}
 const CACHE_TTL_MS = 2 * 60 * 1000; // 2 minutes
 const FETCH_TIMEOUT_MS = 30000; // 30 seconds
 

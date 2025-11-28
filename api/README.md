@@ -125,6 +125,12 @@ az resource update \
   --set properties.allow=true
 ```
 
+## Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `GOOGLE_SCRIPT_URL` | Yes | Google Apps Script endpoint URL |
+
 ## Azure Resources
 
 | Resource | Name | Resource Group |
