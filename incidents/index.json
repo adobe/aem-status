@@ -16,7 +16,7 @@
       "admin-api"
     ],
     "externalVendors": null,
-    "rootCause": "deployment-issue"
+    "rootCause": "dependency-update"
   },
   {
     "code": "AEM-u1y1wme4",
