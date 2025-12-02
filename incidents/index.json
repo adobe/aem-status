@@ -2,7 +2,7 @@
   {
     "code": "AEM-da5ea49h",
     "name": "Faulty deployment of Document Authoring (DA) admin service caused publishing errors",
-    "message": "On December 2, 2025 at 6:53 UTC, an automatic dependency update was deployed to admin.da.live that caused the service to fail. Publishing content on admin.da.live was no longer possible, affecting all customers attempting to publish content from da.live. The overall da.live error rate reached 22.3% during the incident, with publishing requests being affected the most at 97%. The issue was detected through monitoring alerts after 24 minutes at 7:17 AM UTC. The service was fully restored 31 minute",
+    "message": "On December 2, 2025 at 6:53 UTC, an automatic dependency update was deployed to admin.da.live that\n        caused the service to fail. Publishing content on admin.da.live was no longer possible, affecting\n        all customers attempting to publish content from da.live. The overall da.live error rate reached 22.3% during\n        the incident, with publishing requests being affected the most at 97%. The issue was detected through monitoring\n        alerts after 24 minutes at 7:17 AM UTC. After a ",
     "impact": "none",
     "incidentUpdated": "2025-12-02T08:23:51.269Z",
     "startTime": "2025-12-02T06:53:00.000Z",
