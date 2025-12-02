@@ -1,5 +1,24 @@
 [
   {
+    "code": "AEM-da5ea49h",
+    "name": "Outage affecting publishing in Document Authoring (DA)",
+    "message": "On December 2, 2025 at 6:53 UTC, an automatic dependency update was deployed to admin.da.live that\n        caused the service to fail. Publishing content on admin.da.live was no longer possible, affecting\n        all customers attempting to publish content from da.live. The overall da.live error rate reached 22.3% during\n        the incident, with publishing requests being affected the most at 97%. The issue was detected through monitoring\n        alerts after 24 minutes at 7:17 AM UTC. After a ",
+    "impact": "none",
+    "incidentUpdated": "2025-12-02T08:23:51.269Z",
+    "startTime": "2025-12-02T06:53:00.000Z",
+    "endTime": "2025-12-02T07:24:00.000Z",
+    "errorRate": "0.0022",
+    "impactedService": "publishing",
+    "affectedComponents": [
+      "publishing"
+    ],
+    "internalServices": [
+      "admin-api"
+    ],
+    "externalVendors": null,
+    "rootCause": "dependency-update"
+  },
+  {
     "code": "AEM-u1y1wme4",
     "name": "Outage affecting Document Authoring (DA)",
     "message": "On November 26, 2025 at 13:55 UTC, authors began experiencing \"not permitted\" errors and observed that updates to da.live were not being saved. The issue was quickly escalated and identified as impacting Document Authoring functionality.\n        The issue affected few Document Authoring users for 25 minutes. Only about 60 save operations failed during this period, though no data loss occurred due to client-side drafts. The issue was quickly escalated and resolved by 14:20 UTC.",
