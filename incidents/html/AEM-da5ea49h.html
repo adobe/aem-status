@@ -1,0 +1,48 @@
+ <h1 class="critical">Faulty deployment of Document Authoring (DA) admin service caused publishing errors</h1>
+<article data-incident-start-time="2025-12-02T06:53:00.000Z" data-incident-end-time="2025-12-02T07:24:00.000Z" data-incident-error-rate="0.223" data-incident-impacted-service="publishing">
+
+    <h3>Executive Summary</h3>
+    <p>
+        On December 2, 2024 at 6:53 UTC, an automatic dependency update was deployed to <code>admin.da.live</code> that caused the service to fail. Publishing content on <code>admin.da.live</code> was no longer possible, affecting all users attempting to publish content from da.live. The overall da.live error rate reached 22.3% during the incident, with <code>PUT</code> and <code>POST</code> requests being affected the most at 97%. The issue was detected through monitoring alerts and user reports. The service was fully restored at 07:24 UTC after a rollback to the previous version.
+    </p>
+
+    <h3>Root Cause</h3>
+    <p>
+        A major version dependency update was automatically deployed to the <code>admin.da.live</code> service as part of our dependency management service and continuous deployment pipeline. This dependency update introduced a breaking change that was not caught by our automated testing suite. The faulty dependency caused the admin service to fail when attempting to process publishing requests, resulting in a complete inability for users to publish content.
+    </p>
+
+    <h3>Resolution</h3>
+    <p>
+        At 7:17 UTC, the engineering team identified the faulty deployment and at 7:23 AM UTC initiated a rollback to the previous stable version of admin.da.live. The rollback completed successfully at 07:24 UTC, immediately restoring publishing functionality. Publishing operations that failed during the incident should be retried.
+    </p>
+
+    <h3>Action Items</h3>
+    <ul>
+        <li>Implement pre-production testing environment for automatic dependency updates to catch breaking changes before they reach production</li>
+        <li>Add integration tests that specifically validate publishing workflows to prevent similar failures</li>
+        <li>Establish dependency update review process requiring manual approval for all changes</li>
+        <li>Improve monitoring and alerting to detect publishing failures earlier than 20 minutes</li>
+    </ul>
+
+    <time>2025-12-02T08:23:51.269Z</time>
+</article>
+
+<ul class="updates">
+      <li>
+        <h2>investigating</h2>
+        <p>Starting 6:53 AM UTC, publishing content on da.live was no longer possible due to the deployment of a faulty version of admin.da.live.</p>
+        <time>2025-12-02T06:53:28.110Z</time>
+      </li>
+
+      <li>
+        <h2>monitoring</h2>
+        <p>At 77:23 AM UTC, we rolled back admin.da.live to the previous version which fixed the issue.</p>
+        <time>2025-12-02T07:13:52.068Z</time>
+      </li>
+
+      <li>
+        <h2>resolved</h2>
+        <p>At 7.24 AM UTC, admin.da.live became usable again.</p>
+        <time>2025-12-02T08:16:10.802Z</time>
+      </li>
+      </ul>
