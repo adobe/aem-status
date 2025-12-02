@@ -8,7 +8,7 @@
 
     <h3>Root Cause</h3>
     <p>
-        A major version dependency update was automatically deployed to the <code>admin.da.live</code> service as part of our dependency management service and continuous deployment pipeline. This dependency update introduced a breaking change that was not caught by our automated testing suite. The faulty dependency caused the admin service to fail when attempting to process publishing requests, resulting in a complete inability for users to publish content.
+        A dependency update of <code>@aws-sdk/client-s3</code> to version <code>3.933.0</code> was automatically deployed to the <code>admin.da.live</code> service as part of our dependency management service and continuous deployment pipeline. This dependency update was incompatible with existing worker deployment infrastructure and resulting in a broken deployment that was not caught by our automated testing suite. This caused the admin service to fail when attempting to process publishing requests, resulting in a complete inability for users to publish content.
     </p>
 
     <h3>Resolution</h3>
