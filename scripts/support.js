@@ -93,9 +93,16 @@ const REGION_COLORS = {
 
 // Fetch case data
 const getCases = async () => {
-  const response = await fetch('/support-cases/index.json');
-  const cases = await response.json();
-  return cases;
+  try {
+    const response = await fetch('/support-cases/index.json');
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching support cases:', error);
+    return [];
+  }
 };
 
 // Aggregate by field
@@ -136,8 +143,10 @@ const calculateMetrics = (cases) => {
   const bugCount = cases.filter((c) => c.issueType === 'bug').length;
   const bugPercent = ((bugCount / cases.length) * 100).toFixed(1);
 
-  const avgOca = cases.filter((c) => c.oca !== null).reduce((sum, c) => sum + c.oca, 0)
-    / cases.filter((c) => c.oca !== null).length;
+  const ocaCases = cases.filter((c) => c.oca !== null);
+  const avgOca = ocaCases.length > 0
+    ? ocaCases.reduce((sum, c) => sum + c.oca, 0) / ocaCases.length
+    : 0;
 
   return {
     total: cases.length,

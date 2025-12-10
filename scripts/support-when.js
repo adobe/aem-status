@@ -5,8 +5,16 @@ const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
 
 // Fetch case data
 const getCases = async () => {
-  const response = await fetch('/support-cases/index.json');
-  return response.json();
+  try {
+    const response = await fetch('/support-cases/index.json');
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching support cases:', error);
+    return [];
+  }
 };
 
 // Build heatmap data (day x hour)
@@ -67,8 +75,9 @@ const calculateStats = (cases) => {
 
   // Weekend vs weekday
   const weekdayCount = [1, 2, 3, 4, 5].reduce((sum, d) => sum + (dayCount[d] || 0), 0);
-  const weekendCount = [0, 6].reduce((sum, d) => sum + (dayCount[d] || 0), 0);
-  const weekdayPercent = ((weekdayCount / cases.length) * 100).toFixed(1);
+  const weekdayPercent = cases.length > 0
+    ? ((weekdayCount / cases.length) * 100).toFixed(1)
+    : '0.0';
 
   return {
     total: cases.length,
@@ -166,9 +175,7 @@ const renderHeatmap = (heatmapData) => {
   const legendScale = document.getElementById('legend-scale');
   for (let i = 0; i <= 10; i += 1) {
     const segment = document.createElement('div');
-    segment.className = `legend-scale-segment level-${i}`;
-    segment.style.backgroundColor = getComputedStyle(document.documentElement)
-      .getPropertyValue(`--level-${i}`) || '';
+    segment.className = `legend-box level-${i}`;
     legendScale.appendChild(segment);
   }
 };
@@ -184,7 +191,8 @@ const renderDayChart = (cases) => {
     }
   });
 
-  const max = Math.max(...Object.values(dayCounts));
+  const dayValues = Object.values(dayCounts);
+  const max = dayValues.length > 0 ? Math.max(...dayValues) : 1;
 
   for (let day = 1; day <= 7; day += 1) {
     const actualDay = day % 7; // Start with Monday (1), end with Sunday (0)
@@ -217,7 +225,8 @@ const renderMonthChart = (cases) => {
     }
   });
 
-  const max = Math.max(...Object.values(monthCounts));
+  const monthValues = Object.values(monthCounts);
+  const max = monthValues.length > 0 ? Math.max(...monthValues) : 1;
 
   for (let month = 1; month <= 12; month += 1) {
     const count = monthCounts[month] || 0;
