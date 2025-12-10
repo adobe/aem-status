@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Case Analysis - AEM Edge Delivery Services</title>
+    <meta name="description" content="Analysis of EDS support cases by product area, issue type, and trends">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/support.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div>
+                <h1>Support Case Analysis</h1>
+                <p>Understanding what drives EDS support volume</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Navigation and Filters -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spectrum-spacing-400); flex-wrap: wrap; gap: var(--spectrum-spacing-300);">
+            <p style="margin: 0;">
+                <a class="back-link" href="/">← Back to status</a>
+                <span style="margin: 0 var(--spectrum-spacing-200);">|</span>
+                <a class="back-link" href="support-when.html">When do cases arrive?</a>
+            </p>
+            <div class="year-filters" id="year-filters"></div>
+        </div>
+
+        <!-- Key Metrics -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Key Metrics</h2>
+            </div>
+            <div class="stats-grid" id="key-metrics"></div>
+        </section>
+
+        <!-- Product Area Distribution -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Product Area Distribution</h2>
+            </div>
+            <div class="analysis-section">
+                <div class="visualization-grid">
+                    <div class="visualization-container">
+                        <h3 class="section-title">By Product Area</h3>
+                        <div class="pie-chart-container">
+                            <svg class="pie-chart" id="product-area-pie" viewBox="0 0 400 400"></svg>
+                        </div>
+                    </div>
+                    <div class="visualization-container">
+                        <h3 class="section-title">Breakdown</h3>
+                        <div class="legend scrollable-legend" id="product-area-legend"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Issue Type Analysis -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Issue Type Analysis</h2>
+            </div>
+            <div class="analysis-section">
+                <div class="visualization-grid">
+                    <div class="visualization-container">
+                        <h3 class="section-title">By Issue Type</h3>
+                        <div class="bar-chart" id="issue-type-chart"></div>
+                    </div>
+                    <div class="visualization-container">
+                        <h3 class="section-title">By Priority</h3>
+                        <div class="bar-chart" id="priority-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integration & Authoring -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Integration & Authoring Patterns</h2>
+            </div>
+            <div class="analysis-section">
+                <div class="visualization-grid">
+                    <div class="visualization-container">
+                        <h3 class="section-title">Integration Type</h3>
+                        <div class="bar-chart" id="integration-chart"></div>
+                    </div>
+                    <div class="visualization-container">
+                        <h3 class="section-title">Authoring Mode</h3>
+                        <div class="bar-chart" id="authoring-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Regional Distribution -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Regional Distribution</h2>
+            </div>
+            <div class="analysis-section">
+                <div class="visualization-grid">
+                    <div class="visualization-container">
+                        <h3 class="section-title">By Region</h3>
+                        <div class="pie-chart-container">
+                            <svg class="pie-chart" id="region-pie" viewBox="0 0 400 400"></svg>
+                        </div>
+                    </div>
+                    <div class="visualization-container">
+                        <h3 class="section-title">Region Breakdown</h3>
+                        <div class="legend" id="region-legend"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tags/Themes -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Common Themes & Tags</h2>
+                <p style="color: var(--spectrum-gray-600); font-size: var(--spectrum-font-size-small); margin-top: var(--spectrum-spacing-200);">
+                    Specific concerns and patterns identified in support cases
+                </p>
+            </div>
+            <div class="analysis-section">
+                <div class="tag-cloud" id="tag-cloud"></div>
+            </div>
+        </section>
+
+        <!-- Product Area x Issue Type Matrix -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Product Area × Issue Type Matrix</h2>
+                <p style="color: var(--spectrum-gray-600); font-size: var(--spectrum-font-size-small); margin-top: var(--spectrum-spacing-200);">
+                    Shows which product areas generate which types of issues
+                </p>
+            </div>
+            <div class="analysis-section">
+                <div class="matrix-container" id="matrix-container"></div>
+            </div>
+        </section>
+
+        <!-- Monthly Trend -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Monthly Trend</h2>
+            </div>
+            <div class="analysis-section">
+                <div class="trend-chart-container">
+                    <svg class="trend-chart" id="trend-chart" viewBox="0 0 900 300"></svg>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container copyright">
+            Copyright &copy; <span id="year"></span> Adobe. All rights reserved /
+            <a href="https://adobe.com/privacy.html">Privacy</a> /
+            <a href="https://www.adobe.com/legal/terms.html">Terms of Use</a> /
+            <a href="https://www.adobe.com/privacy/ca-rights.html">Do not sell my personal information</a>
+        </div>
+    </footer>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script type="module" src="scripts/support.js"></script>
+</body>
+</html>

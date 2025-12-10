@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Case Timing - AEM Edge Delivery Services</title>
+    <meta name="description" content="Heatmap showing when support cases are created by hour and day of week">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/when.css">
+    <link rel="stylesheet" href="styles/support.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div>
+                <h1>Support Case Timing</h1>
+                <p>When do support cases arrive? (UTC)</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <p style="margin: 0;">
+            <a class="back-link" href="/">← Back to status</a>
+            <span style="margin: 0 var(--spectrum-spacing-200);">|</span>
+            <a class="back-link" href="support.html">What drives support cases?</a>
+        </p>
+
+        <!-- Key Stats -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Timing Statistics</h2>
+            </div>
+            <div class="stats-grid" id="timing-stats"></div>
+        </section>
+
+        <!-- Heatmap -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Case Creation Heatmap</h2>
+            </div>
+            <div class="heatmap-container">
+                <div id="heatmap"></div>
+                <div class="shift-legend">
+                    <div class="shift-info">
+                        <span>🌍 EU Business Hours</span>
+                        <span style="color: var(--spectrum-gray-500);">07:00-17:00 UTC</span>
+                    </div>
+                    <div class="shift-info">
+                        <span>🌎 US Business Hours</span>
+                        <span style="color: var(--spectrum-gray-500);">13:00-23:00 UTC</span>
+                    </div>
+                    <div class="shift-info">
+                        <span>🌏 APAC Business Hours</span>
+                        <span style="color: var(--spectrum-gray-500);">23:00-09:00 UTC</span>
+                    </div>
+                </div>
+                <div class="legend">
+                    <span>Fewer cases</span>
+                    <div class="legend-scale" id="legend-scale"></div>
+                    <span>More cases</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day of Week -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Cases by Day of Week</h2>
+            </div>
+            <div class="analysis-section">
+                <div class="bar-chart" id="day-chart"></div>
+            </div>
+        </section>
+
+        <!-- Monthly Distribution -->
+        <section class="section">
+            <div class="section-head">
+                <h2>Cases by Month</h2>
+            </div>
+            <div class="analysis-section">
+                <div class="bar-chart" id="month-chart"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container copyright">
+            Copyright &copy; <span id="year"></span> Adobe. All rights reserved /
+            <a href="https://adobe.com/privacy.html">Privacy</a> /
+            <a href="https://www.adobe.com/legal/terms.html">Terms of Use</a> /
+            <a href="https://www.adobe.com/privacy/ca-rights.html">Do not sell my personal information</a>
+        </div>
+    </footer>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script type="module" src="scripts/support-when.js"></script>
+</body>
+</html>
