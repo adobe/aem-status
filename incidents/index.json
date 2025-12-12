@@ -1,5 +1,25 @@
 [
   {
+    "code": "AEM-4uyyugn6",
+    "name": "3rd party incident impacting selected customers",
+    "message": "On December 5, 2025, at 08:56 UTC, we were alerted to a service disruption by one of our customer-specific site alerts. Selected customers utilizing Cloudflare infrastructure, like Web Application Firewall (WAF) for their delivery experienced delivery failures and 500 errors from Cloudflare. Our internal logging and monitoring service, Coralogix, which relies on the same third-party provider, was also impacted. The incident was isolated to the customer's chosen impacted Cloudflare services. It did not impact any of our core customer-facing services. Normal service resumed at 09:20 UTC following the resolution of the 3rd-party outage.",
+    "impact": "none",
+    "incidentUpdated": "2025-12-11T21:55:30.000Z",
+    "startTime": "2025-12-05T08:56:00.000Z",
+    "endTime": "2025-12-05T09:20:00.000Z",
+    "errorRate": "0.0",
+    "impactedService": "delivery",
+    "affectedComponents": [
+      "delivery"
+    ],
+    "internalServices": [],
+    "externalVendors": [
+      "cloudflare",
+      "coralogix"
+    ],
+    "rootCause": "third-party-outage"
+  },
+  {
     "code": "AEM-da5ea49h",
     "name": "Outage affecting publishing in Document Authoring (DA)",
     "message": "On December 2, 2025 at 6:53 UTC, an automatic dependency update was deployed to admin.da.live that\n        caused the service to fail. Publishing content on admin.da.live was no longer possible, affecting\n        all customers attempting to publish content from da.live. The overall da.live error rate reached 22.3% during\n        the incident, with publishing requests being affected the most at 97%. The issue was detected through monitoring\n        alerts after 24 minutes at 7:17 AM UTC. After a ",
