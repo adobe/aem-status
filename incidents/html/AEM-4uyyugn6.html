@@ -2,12 +2,9 @@
 <article data-incident-start-time="2025-12-05T08:56:00Z" data-incident-end-time="2025-12-05T09:20:00Z" data-incident-error-rate="0.0" data-incident-impacted-service="delivery">
 
     <h3>Executive Summary</h3>
-    <p>
-        On December 5, 2025, at 08:56 UTC, we were alerted to a service disruption by one of our customer-specific site alerts. The observable problem was twofold: 
-        1. Selected customers utilizing Cloudflare infrastructure, like Web Application Firewall (WAF) for their delivery experienced delivery failures and 500 errors from Cloudflare.
-        2. Our internal logging and monitoring service, **Coralogix**, which relies on the same third-party provider, was also impacted, preventing the operations team from logging in.
-        The incident was isolated to the customer's chosen impacted Cloudflare services. It did not impact any of our core customer-facing services or deliver any errors from our origins upstream. Normal service resumed at 09:20 UTC following the resolution of the 3rd-party outage. Helix operations team successfully switched to our backup log monitoring solution during the incident.
-    </p>
+    <p>
+        On December 5, 2025, at 08:56 UTC, we were alerted to a service disruption by one of our customer-specific site alerts. The incident lasted 24 minutes and affected X customers (approximately Y% of customers using Cloudflare WAF integration) who experienced delivery failures with 500 errors from Cloudflare's infrastructure. Our internal logging and monitoring service, Coralogix, which relies on Cloudflare infrastructure, was also temporarily inaccessible. The incident was isolated to customer-selected Cloudflare services and did not impact our core delivery infrastructure. Normal service resumed at 09:20 UTC following Cloudflare's resolution of the outage. Our operations team successfully switched to our backup log monitoring solution, maintaining operational visibility throughout the incident.
+    </p>
 
     <h3>Root Cause</h3>
     <p>
