@@ -2,7 +2,7 @@
   {
     "code": "AEM-4uyyugn6",
     "name": "3rd party incident impacting selected customers",
-    "message": "On December 5, 2025, at 08:56 UTC, we were alerted to a service disruption by one of our customer-specific site\n        alerts. The incident lasted 24 minutes and affected a fraction of our customers who experienced delivery failures\n        with 500 errors from Cloudflare's infrastructure.  \n        The incident was isolated to customer-selected Cloudflare services and did not impact our core delivery infrastructure.\n        AEM infrastructure was not impacted by this incident and remained oper",
+    "message": "On December 5, 2025, at 08:56 UTC, we were alerted to a service disruption by one of our\n    customer-specific site alerts. The incident lasted 24 minutes and affected a fraction of our\n    customers who experienced delivery failures with 500 errors from Cloudflare's infrastructure.\n    \n    The incident was isolated to customer-selected Cloudflare services and did not impact our core\n    delivery infrastructure. AEM infrastructure was not impacted by this incident and remained\n    operational.\n",
     "impact": "none",
     "incidentUpdated": "2025-12-11T21:55:30.000Z",
     "startTime": "2025-12-05T08:56:00.000Z",
