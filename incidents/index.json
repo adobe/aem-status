@@ -16,7 +16,8 @@
       "logging"
     ],
     "externalVendors": [
-      "cloudflare"
+      "cloudflare",
+      "coralogix"
     ],
     "rootCause": "third-party-outage"
   },
