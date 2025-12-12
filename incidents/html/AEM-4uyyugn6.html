@@ -1,24 +1,33 @@
 <h1 class="none">3rd party incident impacting selected customers</h1>
 <article data-incident-start-time="2025-12-05T08:56:00Z" data-incident-end-time="2025-12-05T09:20:00Z" data-incident-error-rate="0.0" data-incident-impacted-service="delivery">
 
-    <h3>Executive Summary</h3>
     <p>
-        On December 5, 2025, at 08:56 UTC, we were alerted to a service disruption by one of our customer-specific site alerts. The incident lasted 24 minutes and affected X customers (approximately Y% of customers using Cloudflare WAF integration) who experienced delivery failures with 500 errors from Cloudflare's infrastructure. Our internal logging and monitoring service, Coralogix, which relies on Cloudflare infrastructure, was also temporarily inaccessible. The incident was isolated to customer-selected Cloudflare services and did not impact our core delivery infrastructure. Normal service resumed at 09:20 UTC following Cloudflare's resolution of the outage. Our operations team successfully switched to our backup log monitoring solution, maintaining operational visibility throughout the incident.
+        On December 5, 2025, at 08:56 UTC, we were alerted to a service disruption by one of our customer-specific site
+        alerts. The incident lasted 24 minutes and affected a minor number of ourcustomers who experienced delivery failures
+        with 500 errors from Cloudflare's infrastructure. <br> 
+        The incident was isolated to customer-selected Cloudflare services and did not impact our core delivery infrastructure.
+        AEM infrastructure was not impacted by this incident and remained operational. <br>
+        Our internal logging and monitoring service, Coralogix, which relies on Cloudflare infrastructure, was also temporarily
+        inaccessible. <br>
+        Normal service resumed at 09:20 UTC following Cloudflare's resolution of the outage. Our
+        operations team successfully switched to our backup log monitoring solution, maintaining operational visibility
+        throughout the incident.
     </p>
 
     <h3>Root Cause</h3>
-    <p>
-        The incident was caused by an outage in the **Cloudflare network**, a 3rd-party service chosen by the impacted customers. Cloudflare reported that a change made to how their Web Application Firewall parses requests caused their network to become temporarily unavailable. This was an internal change by the 3rd-party provider and not a security attack.
-    </p>
-    <p>
-        <a href="https://www.cloudflarestatus.com/incidents/lfrm31y6sw9q">Cloudflare Incident Post-Mortem</a>
+    <p>
+        The incident was caused by an outage in the <a href="https://www.cloudflarestatus.com/incidents/lfrm31y6sw9q">Cloudflare network</a>, a 3rd-party service chosen by the
+        impacted customers. Cloudflare reported that a change made to how their Web Application Firewall parses requests
+        caused their network to become temporarily unavailable. This was an internal change by the 3rd-party provider and
+        not a security attack.
+    </p>
     <p>
         <a href="https://www.cloudflarestatus.com/incidents/lfrm31y6sw9q">Cloudflare Incident Post-Mortem</a>
     </p>
 
     <h3>Detection</h3>
     <p>
-        The incident was detected at 08:56 UTC through customer-specific site alerts. Our internal monitoring did not initially detect the issue as our core delivery infrastructure remained operational. The simultaneous loss of access to Coralogix (our primary logging platform) created a secondary operational challenge that was immediately apparent to the operations team.
+        The incident was detected at 08:56 UTC through customer-specific site alerts. No other alerts were triggered. AEM delivery infrastructure remained operational. The simultaneous loss of access to Coralogix (our primary logging platform) created a secondary operational challenge that was immediately apparent to the operations team.
     </p>
 
     <h3>Resolution</h3>
