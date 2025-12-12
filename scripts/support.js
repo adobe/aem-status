@@ -24,6 +24,14 @@ const AREA_COLORS = {
   live_copy_msm: '#3f37c9',
   templates: '#4361ee',
   commerce: '#4895ef',
+  aem_core: '#b5838d',
+  development_environment: '#6d6875',
+  experimentation: '#e5989b',
+  gen_ai: '#9d4edd',
+  go_live_support: '#00b4d8',
+  onboarding: '#52b788',
+  security: '#d90429',
+  ue_extensions: '#f72585',
 };
 
 const AREA_LABELS = {
@@ -51,6 +59,14 @@ const AREA_LABELS = {
   live_copy_msm: 'Live Copy/MSM',
   templates: 'Templates',
   commerce: 'Commerce',
+  aem_core: 'AEM Core',
+  development_environment: 'Dev Environment',
+  experimentation: 'Experimentation',
+  gen_ai: 'Generative AI',
+  go_live_support: 'Go-Live Support',
+  onboarding: 'Onboarding',
+  security: 'Security',
+  ue_extensions: 'UE Extensions',
 };
 
 const ISSUE_COLORS = {
@@ -66,6 +82,7 @@ const ISSUE_COLORS = {
   migration: '#7209b7',
   documentation: '#9d9d9d',
   performance: '#118ab2',
+  go_live_support: '#00b4d8',
 };
 
 const ISSUE_LABELS = {
@@ -81,6 +98,59 @@ const ISSUE_LABELS = {
   migration: 'Migration',
   documentation: 'Documentation',
   performance: 'Performance',
+  go_live_support: 'Go-Live Support',
+};
+
+const INTEGRATION_COLORS = {
+  none: '#9d9d9d',
+  github: '#24292e',
+  gitlab: '#fc6d26',
+  sharepoint: '#0078d4',
+  google_drive: '#4285f4',
+  third_party: '#6c757d',
+  adobe_analytics: '#eb1000',
+  adobe_commerce: '#f26322',
+  adobe_target: '#eb1000',
+  aem_ams: '#eb1000',
+  aem_cloud: '#eb1000',
+  akamai: '#0096d6',
+  azure_ad: '#0089d6',
+  cloudflare: '#f38020',
+  custom_cdn: '#6c757d',
+  fastly: '#ff282d',
+};
+
+const INTEGRATION_LABELS = {
+  none: 'None',
+  github: 'GitHub',
+  gitlab: 'GitLab',
+  sharepoint: 'SharePoint',
+  google_drive: 'Google Drive',
+  third_party: 'Third Party',
+  adobe_analytics: 'Adobe Analytics',
+  adobe_commerce: 'Adobe Commerce',
+  adobe_target: 'Adobe Target',
+  aem_ams: 'AEM AMS',
+  aem_cloud: 'AEM Cloud',
+  akamai: 'Akamai',
+  azure_ad: 'Azure AD',
+  cloudflare: 'Cloudflare',
+  custom_cdn: 'Custom CDN',
+  fastly: 'Fastly',
+};
+
+const AUTHORING_COLORS = {
+  unknown: '#9d9d9d',
+  universal_editor: '#e63946',
+  document_based: '#2a9d8f',
+  hybrid: '#8338ec',
+};
+
+const AUTHORING_LABELS = {
+  unknown: 'Unknown',
+  universal_editor: 'Universal Editor',
+  document_based: 'Document-Based',
+  hybrid: 'Hybrid',
 };
 
 const REGION_COLORS = {
@@ -587,9 +657,9 @@ const renderAll = (cases) => {
   // Sort priorities by priority order, not frequency
   const priorityOrder = ['P1', 'P2', 'P3', 'P4', 'Unknown'];
   priorityData.sort((a, b) => priorityOrder.indexOf(a.key) - priorityOrder.indexOf(b.key));
-  const integrationData = aggregateBy(cases, 'integrationType')
+  const integrationData = aggregateBy(cases, 'integrationType', INTEGRATION_LABELS)
     .filter((d) => d.key !== 'none');
-  const authoringData = aggregateBy(cases, 'authoringMode')
+  const authoringData = aggregateBy(cases, 'authoringMode', AUTHORING_LABELS)
     .filter((d) => d.key !== 'unknown');
   const regionData = aggregateBy(cases, 'region');
   const tags = aggregateTags(cases);
@@ -607,8 +677,8 @@ const renderAll = (cases) => {
     P4: '#9e9e9e',
     Unknown: '#cccccc',
   });
-  renderBarChart(integrationData, 'integration-chart');
-  renderBarChart(authoringData, 'authoring-chart');
+  renderBarChart(integrationData, 'integration-chart', INTEGRATION_COLORS);
+  renderBarChart(authoringData, 'authoring-chart', AUTHORING_COLORS);
   renderPieChart(regionData, 'region-pie', REGION_COLORS, {});
   renderLegend(regionData, 'region-legend', REGION_COLORS, {});
   renderTagCloud(tags);

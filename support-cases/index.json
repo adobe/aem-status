@@ -11,10 +11,13 @@
     "dayOfWeek": 4,
     "hour": 21,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title",
+      "page_loading"
+    ]
   },
   {
     "id": 2,
@@ -45,8 +48,8 @@
     "dayOfWeek": 4,
     "hour": 5,
     "productArea": "publishing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -79,8 +82,8 @@
     "dayOfWeek": 3,
     "hour": 14,
     "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -95,13 +98,11 @@
     "month": 11,
     "dayOfWeek": 3,
     "hour": 6,
-    "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "authentication",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": [
-      "authentication"
-    ]
+    "tags": []
   },
   {
     "id": 7,
@@ -114,7 +115,7 @@
     "month": 11,
     "dayOfWeek": 3,
     "hour": 4,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "feature_enablement",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -134,8 +135,8 @@
     "dayOfWeek": 3,
     "hour": 2,
     "productArea": "forms",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -169,7 +170,7 @@
     "hour": 18,
     "productArea": "universal_editor",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "third_party",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -186,7 +187,7 @@
     "hour": 15,
     "productArea": "dynamic_media",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -201,9 +202,9 @@
     "month": 11,
     "dayOfWeek": 2,
     "hour": 10,
-    "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "gen_ai",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -220,7 +221,7 @@
     "hour": 6,
     "productArea": "blocks",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -236,8 +237,8 @@
     "dayOfWeek": 1,
     "hour": 14,
     "productArea": "publishing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -272,10 +273,12 @@
     "dayOfWeek": 0,
     "hour": 17,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 17,
@@ -290,9 +293,11 @@
     "hour": 14,
     "productArea": "universal_editor",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 18,
@@ -343,7 +348,7 @@
     "hour": 6,
     "productArea": "indexing",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "sitemap"
@@ -379,9 +384,9 @@
     "month": 11,
     "dayOfWeek": 4,
     "hour": 20,
-    "productArea": "admin_api",
+    "productArea": "git_integration",
     "issueType": "access_provisioning",
-    "integrationType": "aem_cloud",
+    "integrationType": "github",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -414,8 +419,8 @@
     "dayOfWeek": 4,
     "hour": 5,
     "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -447,7 +452,7 @@
     "month": 11,
     "dayOfWeek": 4,
     "hour": 0,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "access_provisioning",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -515,9 +520,9 @@
     "month": 11,
     "dayOfWeek": 3,
     "hour": 12,
-    "productArea": "other",
+    "productArea": "development_environment",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -566,9 +571,9 @@
     "month": 11,
     "dayOfWeek": 3,
     "hour": 9,
-    "productArea": "content_authoring",
+    "productArea": "universal_editor",
     "issueType": "feature_request",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -584,8 +589,8 @@
     "dayOfWeek": 3,
     "hour": 3,
     "productArea": "blocks",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -601,10 +606,12 @@
     "dayOfWeek": 3,
     "hour": 2,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 36,
@@ -618,8 +625,8 @@
     "dayOfWeek": 3,
     "hour": 1,
     "productArea": "blocks",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -634,7 +641,7 @@
     "month": 11,
     "dayOfWeek": 2,
     "hour": 16,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -687,7 +694,7 @@
     "hour": 10,
     "productArea": "dynamic_media",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -738,7 +745,7 @@
     "month": 11,
     "dayOfWeek": 2,
     "hour": 7,
-    "productArea": "other",
+    "productArea": "infrastructure",
     "issueType": "outage_degradation",
     "integrationType": "none",
     "authoringMode": "document_based",
@@ -759,7 +766,7 @@
     "hour": 5,
     "productArea": "universal_editor",
     "issueType": "feature_request",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -774,11 +781,13 @@
     "month": 11,
     "dayOfWeek": 2,
     "hour": 4,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 46,
@@ -827,7 +836,7 @@
     "hour": 15,
     "productArea": "site_config",
     "issueType": "documentation",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "repoless"
@@ -844,9 +853,9 @@
     "month": 11,
     "dayOfWeek": 1,
     "hour": 5,
-    "productArea": "universal_editor",
+    "productArea": "ue_extensions",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -863,7 +872,7 @@
     "hour": 13,
     "productArea": "site_config",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -933,11 +942,13 @@
     "month": 11,
     "dayOfWeek": 4,
     "hour": 7,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 55,
@@ -984,11 +995,13 @@
     "month": 11,
     "dayOfWeek": 3,
     "hour": 15,
-    "productArea": "other",
+    "productArea": "development_environment",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 58,
@@ -1001,9 +1014,9 @@
     "month": 11,
     "dayOfWeek": 3,
     "hour": 8,
-    "productArea": "cloud_manager",
+    "productArea": "onboarding",
     "issueType": "access_provisioning",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -1020,7 +1033,7 @@
     "hour": 3,
     "productArea": "git_integration",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "repoless"
@@ -1038,8 +1051,8 @@
     "dayOfWeek": 2,
     "hour": 14,
     "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
       "video_content"
@@ -1076,7 +1089,7 @@
     "dayOfWeek": 2,
     "hour": 14,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -1093,10 +1106,12 @@
     "dayOfWeek": 2,
     "hour": 11,
     "productArea": "content_authoring",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 64,
@@ -1127,8 +1142,8 @@
     "dayOfWeek": 2,
     "hour": 6,
     "productArea": "publishing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "pdf_assets"
@@ -1201,10 +1216,12 @@
     "dayOfWeek": 1,
     "hour": 16,
     "productArea": "content_authoring",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 70,
@@ -1253,11 +1270,13 @@
     "month": 11,
     "dayOfWeek": 1,
     "hour": 4,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 73,
@@ -1270,7 +1289,7 @@
     "month": 11,
     "dayOfWeek": 1,
     "hour": 2,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "hybrid",
@@ -1287,9 +1306,9 @@
     "month": 11,
     "dayOfWeek": 1,
     "hour": 1,
-    "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -1322,7 +1341,7 @@
     "dayOfWeek": 6,
     "hour": 1,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -1339,8 +1358,8 @@
     "dayOfWeek": 5,
     "hour": 12,
     "productArea": "cdn_config",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
       "cors"
@@ -1359,7 +1378,7 @@
     "hour": 9,
     "productArea": "live_copy_msm",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -1445,8 +1464,8 @@
     "dayOfWeek": 4,
     "hour": 4,
     "productArea": "publishing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -1461,7 +1480,7 @@
     "month": 11,
     "dayOfWeek": 4,
     "hour": 1,
-    "productArea": "other",
+    "productArea": "development_environment",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -1479,8 +1498,8 @@
     "dayOfWeek": 3,
     "hour": 4,
     "productArea": "live_copy_msm",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "multi_site",
@@ -1516,10 +1535,12 @@
     "dayOfWeek": 3,
     "hour": 3,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "adobe_commerce",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 88,
@@ -1551,7 +1572,7 @@
     "hour": 5,
     "productArea": "assets_dam",
     "issueType": "access_provisioning",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -1584,8 +1605,8 @@
     "dayOfWeek": 2,
     "hour": 4,
     "productArea": "dynamic_media",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "document_based",
     "tags": []
   },
@@ -1602,7 +1623,7 @@
     "hour": 23,
     "productArea": "assets_dam",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -1619,7 +1640,7 @@
     "hour": 8,
     "productArea": "forms",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -1634,11 +1655,13 @@
     "month": 10,
     "dayOfWeek": 5,
     "hour": 14,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 95,
@@ -1687,7 +1710,7 @@
     "hour": 13,
     "productArea": "content_fragments",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -1720,10 +1743,12 @@
     "dayOfWeek": 4,
     "hour": 9,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 100,
@@ -1736,9 +1761,9 @@
     "month": 10,
     "dayOfWeek": 4,
     "hour": 7,
-    "productArea": "universal_editor",
+    "productArea": "infrastructure",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "ip_allowlist"
@@ -1775,8 +1800,8 @@
     "dayOfWeek": 4,
     "hour": 2,
     "productArea": "indexing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "sitemap"
@@ -1864,8 +1889,8 @@
     "dayOfWeek": 2,
     "hour": 11,
     "productArea": "cdn_config",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -1931,9 +1956,9 @@
     "month": 10,
     "dayOfWeek": 2,
     "hour": 6,
-    "productArea": "other",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "security",
+    "issueType": "security",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -1966,10 +1991,12 @@
     "dayOfWeek": 2,
     "hour": 0,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "feature_request",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "seo"
+    ]
   },
   {
     "id": 114,
@@ -2092,10 +2119,12 @@
     "dayOfWeek": 4,
     "hour": 13,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 121,
@@ -2146,7 +2175,7 @@
     "hour": 6,
     "productArea": "universal_editor",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "early_access_feature"
@@ -2164,8 +2193,8 @@
     "dayOfWeek": 4,
     "hour": 6,
     "productArea": "dynamic_media",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "document_based",
     "tags": []
   },
@@ -2254,8 +2283,8 @@
     "month": 10,
     "dayOfWeek": 3,
     "hour": 9,
-    "productArea": "universal_editor",
-    "issueType": "bug",
+    "productArea": "templates",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
     "tags": []
@@ -2273,7 +2302,7 @@
     "hour": 5,
     "productArea": "universal_editor",
     "issueType": "access_provisioning",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -2309,7 +2338,7 @@
     "hour": 22,
     "productArea": "infrastructure",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -2344,8 +2373,8 @@
     "dayOfWeek": 1,
     "hour": 23,
     "productArea": "other",
-    "issueType": "bug",
-    "integrationType": "none",
+    "issueType": "configuration",
+    "integrationType": "third_party",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -2468,9 +2497,9 @@
     "month": 10,
     "dayOfWeek": 5,
     "hour": 17,
-    "productArea": "other",
+    "productArea": "cdn_config",
     "issueType": "integration",
-    "integrationType": "none",
+    "integrationType": "third_party",
     "authoringMode": "unknown",
     "tags": [
       "go_live_blocker"
@@ -2506,7 +2535,7 @@
     "hour": 9,
     "productArea": "universal_editor",
     "issueType": "feature_request",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -2555,7 +2584,7 @@
     "month": 10,
     "dayOfWeek": 4,
     "hour": 10,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "feature_enablement",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -2572,11 +2601,13 @@
     "month": 10,
     "dayOfWeek": 4,
     "hour": 4,
-    "productArea": "universal_editor",
+    "productArea": "development_environment",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 148,
@@ -2660,8 +2691,8 @@
     "dayOfWeek": 3,
     "hour": 10,
     "productArea": "blocks",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -2782,11 +2813,13 @@
     "month": 10,
     "dayOfWeek": 0,
     "hour": 11,
-    "productArea": "infrastructure",
+    "productArea": "aem_core",
     "issueType": "bug",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 160,
@@ -2833,9 +2866,9 @@
     "month": 10,
     "dayOfWeek": 5,
     "hour": 10,
-    "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "seo"
@@ -2852,11 +2885,13 @@
     "month": 10,
     "dayOfWeek": 5,
     "hour": 9,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 164,
@@ -2907,7 +2942,7 @@
     "hour": 12,
     "productArea": "dynamic_media",
     "issueType": "integration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -2976,9 +3011,9 @@
     "month": 10,
     "dayOfWeek": 4,
     "hour": 4,
-    "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -3079,8 +3114,8 @@
     "dayOfWeek": 2,
     "hour": 13,
     "productArea": "content_fragments",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -3096,8 +3131,8 @@
     "dayOfWeek": 2,
     "hour": 13,
     "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -3113,10 +3148,12 @@
     "dayOfWeek": 2,
     "hour": 5,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 179,
@@ -3148,7 +3185,7 @@
     "hour": 21,
     "productArea": "site_config",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
       "dns"
@@ -3183,10 +3220,12 @@
     "dayOfWeek": 1,
     "hour": 8,
     "productArea": "other",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 183,
@@ -3200,8 +3239,8 @@
     "dayOfWeek": 1,
     "hour": 8,
     "productArea": "cloud_manager",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -3237,7 +3276,7 @@
     "hour": 4,
     "productArea": "universal_editor",
     "issueType": "feature_request",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -3254,7 +3293,7 @@
     "hour": 2,
     "productArea": "forms",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -3271,7 +3310,7 @@
     "hour": 0,
     "productArea": "forms",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -3288,7 +3327,7 @@
     "hour": 12,
     "productArea": "cloud_manager",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -3429,7 +3468,7 @@
     "hour": 11,
     "productArea": "publishing",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -3500,11 +3539,12 @@
     "dayOfWeek": 1,
     "hour": 16,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
-      "performance"
+      "performance",
+      "page_loading"
     ]
   },
   {
@@ -3573,7 +3613,7 @@
     "hour": 7,
     "productArea": "universal_editor",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -3643,7 +3683,7 @@
     "hour": 12,
     "productArea": "cdn_config",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
       "seo",
@@ -3680,7 +3720,7 @@
     "hour": 12,
     "productArea": "cdn_caching",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "go_live_blocker"
@@ -3716,7 +3756,7 @@
     "hour": 9,
     "productArea": "universal_editor",
     "issueType": "access_provisioning",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "early_access_feature"
@@ -3753,8 +3793,8 @@
     "dayOfWeek": 3,
     "hour": 12,
     "productArea": "dynamic_media",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "video_content"
@@ -3773,7 +3813,7 @@
     "hour": 11,
     "productArea": "dynamic_media",
     "issueType": "integration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -3788,9 +3828,9 @@
     "month": 9,
     "dayOfWeek": 2,
     "hour": 16,
-    "productArea": "universal_editor",
+    "productArea": "performance",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -3807,7 +3847,7 @@
     "hour": 13,
     "productArea": "performance",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
       "china_delivery"
@@ -3824,9 +3864,9 @@
     "month": 9,
     "dayOfWeek": 1,
     "hour": 16,
-    "productArea": "site_config",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "development_environment",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -3842,8 +3882,8 @@
     "dayOfWeek": 1,
     "hour": 14,
     "productArea": "site_config",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -3860,7 +3900,7 @@
     "hour": 11,
     "productArea": "dynamic_media",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -3911,7 +3951,7 @@
     "hour": 10,
     "productArea": "live_copy_msm",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "i18n_localization"
@@ -3930,7 +3970,7 @@
     "hour": 10,
     "productArea": "live_copy_msm",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -3946,10 +3986,12 @@
     "dayOfWeek": 5,
     "hour": 10,
     "productArea": "publishing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 226,
@@ -3981,7 +4023,7 @@
     "hour": 15,
     "productArea": "git_integration",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "repoless"
@@ -4000,7 +4042,7 @@
     "hour": 9,
     "productArea": "universal_editor",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4017,7 +4059,7 @@
     "hour": 9,
     "productArea": "publishing",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "go_live_blocker"
@@ -4036,7 +4078,7 @@
     "hour": 9,
     "productArea": "content_authoring",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "document_based",
     "tags": []
   },
@@ -4053,7 +4095,7 @@
     "hour": 2,
     "productArea": "universal_editor",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4068,9 +4110,9 @@
     "month": 9,
     "dayOfWeek": 3,
     "hour": 22,
-    "productArea": "cloud_manager",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "onboarding",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -4104,9 +4146,9 @@
     "month": 9,
     "dayOfWeek": 2,
     "hour": 16,
-    "productArea": "assets_dam",
+    "productArea": "ue_extensions",
     "issueType": "access_provisioning",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4121,11 +4163,13 @@
     "month": 9,
     "dayOfWeek": 2,
     "hour": 14,
-    "productArea": "universal_editor",
+    "productArea": "aem_core",
     "issueType": "integration",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 236,
@@ -4138,12 +4182,13 @@
     "month": 9,
     "dayOfWeek": 2,
     "hour": 9,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "bug",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
     "tags": [
-      "i18n_localization"
+      "i18n_localization",
+      "possibly_misrouted"
     ]
   },
   {
@@ -4157,11 +4202,13 @@
     "month": 9,
     "dayOfWeek": 2,
     "hour": 9,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "feature_request",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 238,
@@ -4174,11 +4221,13 @@
     "month": 9,
     "dayOfWeek": 2,
     "hour": 9,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 239,
@@ -4193,7 +4242,7 @@
     "hour": 7,
     "productArea": "assets_dam",
     "issueType": "integration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4229,7 +4278,7 @@
     "hour": 4,
     "productArea": "universal_editor",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4245,10 +4294,12 @@
     "dayOfWeek": 1,
     "hour": 15,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "aem_ams",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 243,
@@ -4263,7 +4314,7 @@
     "hour": 10,
     "productArea": "content_fragments",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4279,8 +4330,8 @@
     "dayOfWeek": 1,
     "hour": 7,
     "productArea": "publishing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4331,9 +4382,9 @@
     "month": 9,
     "dayOfWeek": 5,
     "hour": 20,
-    "productArea": "cloud_manager",
+    "productArea": "onboarding",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -4348,9 +4399,9 @@
     "month": 9,
     "dayOfWeek": 5,
     "hour": 12,
-    "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "publishing",
+    "issueType": "feature_request",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4367,7 +4418,7 @@
     "hour": 11,
     "productArea": "assets_dam",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -4469,11 +4520,13 @@
     "month": 9,
     "dayOfWeek": 3,
     "hour": 10,
-    "productArea": "content_authoring",
+    "productArea": "onboarding",
     "issueType": "integration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 256,
@@ -4527,7 +4580,7 @@
     "hour": 9,
     "productArea": "publishing",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4595,7 +4648,7 @@
     "hour": 9,
     "productArea": "content_fragments",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4646,11 +4699,13 @@
     "month": 9,
     "dayOfWeek": 5,
     "hour": 13,
-    "productArea": "cloud_manager",
+    "productArea": "aem_core",
     "issueType": "outage_degradation",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 266,
@@ -4664,8 +4719,8 @@
     "dayOfWeek": 5,
     "hour": 10,
     "productArea": "content_fragments",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "video_content"
@@ -4737,7 +4792,9 @@
     "issueType": "access_provisioning",
     "integrationType": "adobe_analytics",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 271,
@@ -4805,7 +4862,7 @@
     "hour": 11,
     "productArea": "publishing",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4890,7 +4947,7 @@
     "hour": 4,
     "productArea": "indexing",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4907,7 +4964,7 @@
     "hour": 22,
     "productArea": "blocks",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4924,7 +4981,7 @@
     "hour": 22,
     "productArea": "blocks",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -4957,8 +5014,8 @@
     "dayOfWeek": 2,
     "hour": 17,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -5026,9 +5083,9 @@
     "month": 8,
     "dayOfWeek": 5,
     "hour": 20,
-    "productArea": "universal_editor",
+    "productArea": "ue_extensions",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -5064,7 +5121,7 @@
     "hour": 8,
     "productArea": "admin_api",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -5132,7 +5189,7 @@
     "hour": 10,
     "productArea": "assets_dam",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "document_based",
     "tags": [
       "svg_assets"
@@ -5202,7 +5259,7 @@
     "hour": 12,
     "productArea": "universal_editor",
     "issueType": "feature_request",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "early_access_feature"
@@ -5308,7 +5365,7 @@
     "hour": 3,
     "productArea": "publishing",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -5325,7 +5382,7 @@
     "hour": 0,
     "productArea": "universal_editor",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -5411,13 +5468,11 @@
     "month": 8,
     "dayOfWeek": 1,
     "hour": 5,
-    "productArea": "universal_editor",
+    "productArea": "blocks",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": [
-      "blocks"
-    ]
+    "tags": []
   },
   {
     "id": 310,
@@ -5449,7 +5504,7 @@
     "hour": 15,
     "productArea": "dynamic_media",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -5466,11 +5521,9 @@
     "hour": 4,
     "productArea": "dynamic_media",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": [
-      "blocks"
-    ]
+    "tags": []
   },
   {
     "id": 313,
@@ -5557,7 +5610,7 @@
     "hour": 10,
     "productArea": "admin_api",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -5572,8 +5625,8 @@
     "month": 8,
     "dayOfWeek": 3,
     "hour": 8,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "experimentation",
+    "issueType": "configuration",
     "integrationType": "adobe_target",
     "authoringMode": "unknown",
     "tags": [
@@ -5591,13 +5644,11 @@
     "month": 8,
     "dayOfWeek": 3,
     "hour": 7,
-    "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "content_fragments",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": [
-      "content_fragments"
-    ]
+    "tags": []
   },
   {
     "id": 320,
@@ -5646,7 +5697,7 @@
     "hour": 12,
     "productArea": "cloud_manager",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
       "ssl_certificates"
@@ -5665,7 +5716,7 @@
     "hour": 11,
     "productArea": "publishing",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -5682,7 +5733,7 @@
     "hour": 1,
     "productArea": "publishing",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -5752,9 +5803,9 @@
     "month": 8,
     "dayOfWeek": 0,
     "hour": 23,
-    "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -5788,7 +5839,7 @@
     "hour": 16,
     "productArea": "admin_api",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "document_based",
     "tags": []
   },
@@ -5872,8 +5923,8 @@
     "dayOfWeek": 4,
     "hour": 16,
     "productArea": "forms",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -5925,9 +5976,9 @@
     "month": 8,
     "dayOfWeek": 3,
     "hour": 20,
-    "productArea": "publishing",
+    "productArea": "authentication",
     "issueType": "security",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -5943,8 +5994,8 @@
     "dayOfWeek": 3,
     "hour": 17,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -5961,7 +6012,7 @@
     "hour": 10,
     "productArea": "admin_api",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -5978,7 +6029,7 @@
     "hour": 9,
     "productArea": "universal_editor",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -6012,7 +6063,7 @@
     "hour": 7,
     "productArea": "dynamic_media",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -6028,8 +6079,8 @@
     "dayOfWeek": 2,
     "hour": 16,
     "productArea": "admin_api",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -6044,11 +6095,14 @@
     "month": 8,
     "dayOfWeek": 2,
     "hour": 9,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title",
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 346,
@@ -6063,7 +6117,7 @@
     "hour": 5,
     "productArea": "assets_dam",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "pdf_assets",
@@ -6119,10 +6173,12 @@
     "dayOfWeek": 1,
     "hour": 7,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 350,
@@ -6137,9 +6193,11 @@
     "hour": 5,
     "productArea": "other",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 351,
@@ -6153,11 +6211,12 @@
     "dayOfWeek": 0,
     "hour": 5,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
-      "go_live_blocker"
+      "go_live_blocker",
+      "vague_title"
     ]
   },
   {
@@ -6189,11 +6248,12 @@
     "dayOfWeek": 5,
     "hour": 10,
     "productArea": "other",
-    "issueType": "outage_degradation",
+    "issueType": "go_live_support",
     "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
-      "go_live_blocker"
+      "go_live_blocker",
+      "vague_title"
     ]
   },
   {
@@ -6224,10 +6284,10 @@
     "month": 7,
     "dayOfWeek": 4,
     "hour": 22,
-    "productArea": "other",
+    "productArea": "gen_ai",
     "issueType": "feature_enablement",
     "integrationType": "aem_cloud",
-    "authoringMode": "unknown",
+    "authoringMode": "universal_editor",
     "tags": []
   },
   {
@@ -6296,11 +6356,13 @@
     "month": 7,
     "dayOfWeek": 4,
     "hour": 7,
-    "productArea": "other",
+    "productArea": "cdn_config",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 360,
@@ -6314,8 +6376,8 @@
     "dayOfWeek": 4,
     "hour": 7,
     "productArea": "rum",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -6368,8 +6430,8 @@
     "month": 7,
     "dayOfWeek": 3,
     "hour": 6,
-    "productArea": "universal_editor",
-    "issueType": "bug",
+    "productArea": "authentication",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -6490,8 +6552,8 @@
     "dayOfWeek": 4,
     "hour": 10,
     "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "document_based",
     "tags": []
   },
@@ -6506,8 +6568,8 @@
     "month": 7,
     "dayOfWeek": 4,
     "hour": 9,
-    "productArea": "universal_editor",
-    "issueType": "bug",
+    "productArea": "authentication",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -6574,11 +6636,14 @@
     "month": 7,
     "dayOfWeek": 3,
     "hour": 12,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
     "integrationType": "none",
-    "authoringMode": "unknown",
-    "tags": []
+    "authoringMode": "universal_editor",
+    "tags": [
+      "page_loading",
+      "vague_title"
+    ]
   },
   {
     "id": 376,
@@ -6625,11 +6690,13 @@
     "month": 7,
     "dayOfWeek": 3,
     "hour": 4,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 379,
@@ -6659,7 +6726,7 @@
     "month": 7,
     "dayOfWeek": 3,
     "hour": 2,
-    "productArea": "universal_editor",
+    "productArea": "ue_extensions",
     "issueType": "bug",
     "integrationType": "none",
     "authoringMode": "universal_editor",
@@ -6763,11 +6830,13 @@
     "month": 7,
     "dayOfWeek": 1,
     "hour": 10,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 387,
@@ -6869,8 +6938,8 @@
     "month": 7,
     "dayOfWeek": 5,
     "hour": 13,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "development_environment",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
@@ -6994,11 +7063,13 @@
     "month": 7,
     "dayOfWeek": 4,
     "hour": 10,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 400,
@@ -7045,7 +7116,7 @@
     "month": 7,
     "dayOfWeek": 3,
     "hour": 12,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -7115,8 +7186,8 @@
     "hour": 14,
     "productArea": "blocks",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
-    "authoringMode": "unknown",
+    "integrationType": "none",
+    "authoringMode": "universal_editor",
     "tags": []
   },
   {
@@ -7149,8 +7220,8 @@
     "month": 7,
     "dayOfWeek": 1,
     "hour": 7,
-    "productArea": "universal_editor",
-    "issueType": "bug",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -7166,11 +7237,14 @@
     "month": 7,
     "dayOfWeek": 1,
     "hour": 5,
-    "productArea": "universal_editor",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading",
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 410,
@@ -7235,10 +7309,12 @@
     "dayOfWeek": 4,
     "hour": 17,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 414,
@@ -7271,11 +7347,13 @@
     "month": 7,
     "dayOfWeek": 4,
     "hour": 2,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 416,
@@ -7342,11 +7420,13 @@
     "month": 7,
     "dayOfWeek": 3,
     "hour": 9,
-    "productArea": "authentication",
+    "productArea": "aem_core",
     "issueType": "access_provisioning",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 420,
@@ -7377,10 +7457,12 @@
     "dayOfWeek": 3,
     "hour": 8,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 422,
@@ -7394,10 +7476,12 @@
     "dayOfWeek": 3,
     "hour": 6,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 423,
@@ -8040,7 +8124,7 @@
     "month": 6,
     "dayOfWeek": 1,
     "hour": 6,
-    "productArea": "other",
+    "productArea": "infrastructure",
     "issueType": "security",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -8092,8 +8176,8 @@
     "dayOfWeek": 5,
     "hour": 15,
     "productArea": "publishing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -8159,7 +8243,7 @@
     "month": 6,
     "dayOfWeek": 4,
     "hour": 14,
-    "productArea": "universal_editor",
+    "productArea": "ue_extensions",
     "issueType": "bug",
     "integrationType": "adobe_commerce",
     "authoringMode": "universal_editor",
@@ -8194,8 +8278,8 @@
     "dayOfWeek": 4,
     "hour": 8,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -8229,7 +8313,7 @@
     "month": 6,
     "dayOfWeek": 2,
     "hour": 17,
-    "productArea": "other",
+    "productArea": "infrastructure",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -8280,11 +8364,13 @@
     "month": 6,
     "dayOfWeek": 2,
     "hour": 11,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 474,
@@ -8352,7 +8438,7 @@
     "hour": 9,
     "productArea": "indexing",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -8469,11 +8555,13 @@
     "month": 6,
     "dayOfWeek": 4,
     "hour": 15,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "performance",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 485,
@@ -8560,7 +8648,7 @@
     "hour": 10,
     "productArea": "content_fragments",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -8592,11 +8680,13 @@
     "month": 6,
     "dayOfWeek": 3,
     "hour": 7,
-    "productArea": "other",
+    "productArea": "publishing",
     "issueType": "feature_request",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 492,
@@ -8660,11 +8750,13 @@
     "month": 6,
     "dayOfWeek": 2,
     "hour": 1,
-    "productArea": "live_copy_msm",
+    "productArea": "ue_extensions",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "multi_site"
+    ]
   },
   {
     "id": 496,
@@ -8694,12 +8786,12 @@
     "month": 6,
     "dayOfWeek": 1,
     "hour": 14,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
     "tags": [
-      "migration"
+      "possibly_misrouted"
     ]
   },
   {
@@ -8730,7 +8822,7 @@
     "month": 6,
     "dayOfWeek": 1,
     "hour": 10,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
@@ -8768,7 +8860,7 @@
     "hour": 3,
     "productArea": "live_copy_msm",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "multi_site"
@@ -8857,7 +8949,7 @@
     "hour": 22,
     "productArea": "blocks",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -8873,8 +8965,8 @@
     "dayOfWeek": 5,
     "hour": 0,
     "productArea": "content_fragments",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "cors"
@@ -8892,7 +8984,7 @@
     "dayOfWeek": 4,
     "hour": 14,
     "productArea": "cloud_manager",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
     "tags": []
@@ -9062,8 +9154,8 @@
     "dayOfWeek": 2,
     "hour": 15,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -9099,7 +9191,7 @@
     "hour": 13,
     "productArea": "content_authoring",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "hybrid",
     "tags": []
   },
@@ -9182,11 +9274,13 @@
     "month": 6,
     "dayOfWeek": 1,
     "hour": 13,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "commerce",
+    "issueType": "configuration",
     "integrationType": "adobe_commerce",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 526,
@@ -9201,7 +9295,7 @@
     "hour": 12,
     "productArea": "publishing",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -9216,7 +9310,7 @@
     "month": 6,
     "dayOfWeek": 1,
     "hour": 10,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -9252,9 +9346,9 @@
     "month": 6,
     "dayOfWeek": 6,
     "hour": 18,
-    "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "authentication",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -9269,7 +9363,7 @@
     "month": 6,
     "dayOfWeek": 6,
     "hour": 9,
-    "productArea": "universal_editor",
+    "productArea": "onboarding",
     "issueType": "feature_enablement",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
@@ -9288,9 +9382,11 @@
     "hour": 18,
     "productArea": "universal_editor",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 532,
@@ -9305,7 +9401,7 @@
     "hour": 13,
     "productArea": "dynamic_media",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -9322,7 +9418,7 @@
     "hour": 2,
     "productArea": "rum",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -9355,8 +9451,8 @@
     "dayOfWeek": 3,
     "hour": 8,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -9373,7 +9469,7 @@
     "hour": 3,
     "productArea": "publishing",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -9422,9 +9518,9 @@
     "month": 6,
     "dayOfWeek": 2,
     "hour": 12,
-    "productArea": "universal_editor",
+    "productArea": "assets_dam",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -9475,7 +9571,7 @@
     "hour": 9,
     "productArea": "universal_editor",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -9492,7 +9588,7 @@
     "hour": 6,
     "productArea": "cdn_config",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
       "csp"
@@ -9544,8 +9640,8 @@
     "dayOfWeek": 5,
     "hour": 0,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -9562,7 +9658,7 @@
     "hour": 18,
     "productArea": "assets_dam",
     "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -9785,7 +9881,7 @@
     "month": 5,
     "dayOfWeek": 5,
     "hour": 17,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "feature_enablement",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -9853,7 +9949,7 @@
     "month": 5,
     "dayOfWeek": 4,
     "hour": 8,
-    "productArea": "other",
+    "productArea": "experimentation",
     "issueType": "integration",
     "integrationType": "adobe_target",
     "authoringMode": "unknown",
@@ -9889,11 +9985,13 @@
     "month": 5,
     "dayOfWeek": 3,
     "hour": 21,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "outage_degradation",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 567,
@@ -9906,11 +10004,13 @@
     "month": 5,
     "dayOfWeek": 3,
     "hour": 2,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "performance",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 568,
@@ -9940,9 +10040,9 @@
     "month": 5,
     "dayOfWeek": 2,
     "hour": 16,
-    "productArea": "other",
+    "productArea": "admin_api",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -10012,7 +10112,7 @@
     "hour": 21,
     "productArea": "forms",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -10045,7 +10145,7 @@
     "dayOfWeek": 1,
     "hour": 14,
     "productArea": "cloud_manager",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
     "tags": []
@@ -10114,9 +10214,9 @@
     "month": 5,
     "dayOfWeek": 0,
     "hour": 22,
-    "productArea": "universal_editor",
+    "productArea": "authentication",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "ip_allowlist"
@@ -10170,7 +10270,7 @@
     "dayOfWeek": 5,
     "hour": 23,
     "productArea": "cloud_manager",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
     "tags": []
@@ -10186,7 +10286,7 @@
     "month": 5,
     "dayOfWeek": 5,
     "hour": 14,
-    "productArea": "other",
+    "productArea": "infrastructure",
     "issueType": "access_provisioning",
     "integrationType": "none",
     "authoringMode": "universal_editor",
@@ -10203,7 +10303,7 @@
     "month": 5,
     "dayOfWeek": 5,
     "hour": 14,
-    "productArea": "other",
+    "productArea": "authentication",
     "issueType": "access_provisioning",
     "integrationType": "none",
     "authoringMode": "universal_editor",
@@ -10220,9 +10320,9 @@
     "month": 5,
     "dayOfWeek": 5,
     "hour": 12,
-    "productArea": "assets_dam",
+    "productArea": "ue_extensions",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -10237,8 +10337,8 @@
     "month": 5,
     "dayOfWeek": 5,
     "hour": 11,
-    "productArea": "universal_editor",
-    "issueType": "bug",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -10273,9 +10373,11 @@
     "hour": 6,
     "productArea": "universal_editor",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 589,
@@ -10289,8 +10391,8 @@
     "dayOfWeek": 4,
     "hour": 17,
     "productArea": "forms",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -10324,7 +10426,7 @@
     "hour": 9,
     "productArea": "assets_dam",
     "issueType": "feature_request",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -10374,7 +10476,7 @@
     "dayOfWeek": 4,
     "hour": 9,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -10391,8 +10493,8 @@
     "dayOfWeek": 4,
     "hour": 9,
     "productArea": "live_copy_msm",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -10462,7 +10564,7 @@
     "hour": 3,
     "productArea": "templates",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "hybrid",
     "tags": [
       "repoless",
@@ -10482,7 +10584,7 @@
     "hour": 10,
     "productArea": "universal_editor",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -10551,8 +10653,8 @@
     "dayOfWeek": 1,
     "hour": 14,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -10567,11 +10669,13 @@
     "month": 5,
     "dayOfWeek": 1,
     "hour": 13,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 606,
@@ -10602,10 +10706,13 @@
     "dayOfWeek": 1,
     "hour": 9,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title",
+      "page_loading"
+    ]
   },
   {
     "id": 608,
@@ -10640,7 +10747,7 @@
     "hour": 19,
     "productArea": "git_integration",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
       "repoless"
@@ -10659,7 +10766,7 @@
     "hour": 17,
     "productArea": "dynamic_media",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -10675,8 +10782,8 @@
     "dayOfWeek": 5,
     "hour": 10,
     "productArea": "publishing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -10691,11 +10798,13 @@
     "month": 5,
     "dayOfWeek": 5,
     "hour": 7,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 613,
@@ -10708,11 +10817,13 @@
     "month": 5,
     "dayOfWeek": 5,
     "hour": 7,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 614,
@@ -10726,12 +10837,10 @@
     "dayOfWeek": 5,
     "hour": 3,
     "productArea": "templates",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "adobe_commerce",
     "authoringMode": "universal_editor",
-    "tags": [
-      "commerce"
-    ]
+    "tags": []
   },
   {
     "id": 615,
@@ -10746,7 +10855,7 @@
     "hour": 19,
     "productArea": "dynamic_media",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -10762,8 +10871,8 @@
     "dayOfWeek": 4,
     "hour": 18,
     "productArea": "dynamic_media",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -10780,7 +10889,7 @@
     "hour": 11,
     "productArea": "git_integration",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
       "repoless"
@@ -10867,12 +10976,13 @@
     "month": 5,
     "dayOfWeek": 3,
     "hour": 11,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
-      "pdf_assets"
+      "pdf_assets",
+      "possibly_misrouted"
     ]
   },
   {
@@ -10904,8 +11014,8 @@
     "dayOfWeek": 2,
     "hour": 16,
     "productArea": "cloud_manager",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -10938,8 +11048,8 @@
     "dayOfWeek": 2,
     "hour": 12,
     "productArea": "content_fragments",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -10954,13 +11064,11 @@
     "month": 5,
     "dayOfWeek": 2,
     "hour": 10,
-    "productArea": "admin_api",
+    "productArea": "performance",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": [
-      "performance"
-    ]
+    "tags": []
   },
   {
     "id": 628,
@@ -11025,10 +11133,12 @@
     "dayOfWeek": 5,
     "hour": 0,
     "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 632,
@@ -11042,10 +11152,12 @@
     "dayOfWeek": 3,
     "hour": 10,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 633,
@@ -11060,7 +11172,7 @@
     "hour": 10,
     "productArea": "blocks",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -11111,7 +11223,7 @@
     "hour": 19,
     "productArea": "cloud_manager",
     "issueType": "access_provisioning",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -11228,13 +11340,14 @@
     "month": 4,
     "dayOfWeek": 4,
     "hour": 18,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
       "vpn",
-      "ip_allowlist"
+      "ip_allowlist",
+      "possibly_misrouted"
     ]
   },
   {
@@ -11316,11 +11429,13 @@
     "month": 4,
     "dayOfWeek": 3,
     "hour": 6,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 649,
@@ -11369,7 +11484,7 @@
     "hour": 9,
     "productArea": "cloud_manager",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -11420,7 +11535,7 @@
     "hour": 21,
     "productArea": "git_integration",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "repoless"
@@ -11438,10 +11553,12 @@
     "dayOfWeek": 1,
     "hour": 13,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 656,
@@ -11472,7 +11589,7 @@
     "dayOfWeek": 5,
     "hour": 13,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -11507,7 +11624,7 @@
     "hour": 12,
     "productArea": "site_config",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "repoless"
@@ -11543,7 +11660,7 @@
     "hour": 17,
     "productArea": "forms",
     "issueType": "access_provisioning",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -11558,12 +11675,12 @@
     "month": 4,
     "dayOfWeek": 3,
     "hour": 9,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "bug",
     "integrationType": "adobe_target",
     "authoringMode": "unknown",
     "tags": [
-      "experimentation"
+      "possibly_misrouted"
     ]
   },
   {
@@ -11579,7 +11696,7 @@
     "hour": 0,
     "productArea": "cloud_manager",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -11628,7 +11745,7 @@
     "month": 4,
     "dayOfWeek": 2,
     "hour": 4,
-    "productArea": "other",
+    "productArea": "infrastructure",
     "issueType": "security",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -11734,7 +11851,7 @@
     "hour": 3,
     "productArea": "git_integration",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "repoless"
@@ -11804,7 +11921,7 @@
     "hour": 3,
     "productArea": "universal_editor",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -11888,8 +12005,8 @@
     "dayOfWeek": 2,
     "hour": 5,
     "productArea": "cloud_manager",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -11906,7 +12023,7 @@
     "hour": 4,
     "productArea": "cloud_manager",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -11942,7 +12059,7 @@
     "hour": 10,
     "productArea": "universal_editor",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -11958,8 +12075,8 @@
     "dayOfWeek": 3,
     "hour": 5,
     "productArea": "publishing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -12010,7 +12127,7 @@
     "hour": 13,
     "productArea": "git_integration",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "repoless"
@@ -12079,8 +12196,8 @@
     "dayOfWeek": 2,
     "hour": 5,
     "productArea": "cdn_caching",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -12116,7 +12233,7 @@
     "hour": 16,
     "productArea": "universal_editor",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -12133,7 +12250,7 @@
     "hour": 12,
     "productArea": "universal_editor",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -12216,11 +12333,13 @@
     "month": 3,
     "dayOfWeek": 5,
     "hour": 8,
-    "productArea": "other",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "onboarding",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 701,
@@ -12233,7 +12352,7 @@
     "month": 3,
     "dayOfWeek": 5,
     "hour": 5,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -12286,7 +12405,7 @@
     "hour": 14,
     "productArea": "rum",
     "issueType": "access_provisioning",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -12301,9 +12420,9 @@
     "month": 3,
     "dayOfWeek": 4,
     "hour": 11,
-    "productArea": "other",
+    "productArea": "infrastructure",
     "issueType": "integration",
-    "integrationType": "none",
+    "integrationType": "third_party",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -12318,7 +12437,7 @@
     "month": 3,
     "dayOfWeek": 4,
     "hour": 11,
-    "productArea": "other",
+    "productArea": "infrastructure",
     "issueType": "security",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -12369,8 +12488,8 @@
     "month": 3,
     "dayOfWeek": 3,
     "hour": 8,
-    "productArea": "universal_editor",
-    "issueType": "bug",
+    "productArea": "publishing",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -12420,11 +12539,13 @@
     "month": 3,
     "dayOfWeek": 2,
     "hour": 11,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 713,
@@ -12472,7 +12593,7 @@
     "dayOfWeek": 2,
     "hour": 5,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -12522,11 +12643,13 @@
     "month": 3,
     "dayOfWeek": 1,
     "hour": 16,
-    "productArea": "content_authoring",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 719,
@@ -12683,9 +12806,9 @@
     "month": 3,
     "dayOfWeek": 5,
     "hour": 6,
-    "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "document_based",
     "tags": []
   },
@@ -12717,9 +12840,9 @@
     "month": 3,
     "dayOfWeek": 5,
     "hour": 2,
-    "productArea": "other",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "development_environment",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -12785,11 +12908,13 @@
     "month": 3,
     "dayOfWeek": 4,
     "hour": 4,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 734,
@@ -12821,12 +12946,13 @@
     "month": 3,
     "dayOfWeek": 4,
     "hour": 0,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "onboarding",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
-      "go_live_blocker"
+      "go_live_blocker",
+      "vague_title"
     ]
   },
   {
@@ -12857,7 +12983,7 @@
     "month": 3,
     "dayOfWeek": 3,
     "hour": 12,
-    "productArea": "other",
+    "productArea": "infrastructure",
     "issueType": "security",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -12925,7 +13051,7 @@
     "month": 3,
     "dayOfWeek": 2,
     "hour": 8,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "access_provisioning",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -12942,11 +13068,13 @@
     "month": 3,
     "dayOfWeek": 2,
     "hour": 7,
-    "productArea": "other",
+    "productArea": "performance",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "go_live_support"
+    ]
   },
   {
     "id": 743,
@@ -13045,10 +13173,12 @@
     "dayOfWeek": 4,
     "hour": 6,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 749,
@@ -13078,11 +13208,13 @@
     "month": 3,
     "dayOfWeek": 2,
     "hour": 18,
-    "productArea": "other",
+    "productArea": "performance",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "go_live_support"
+    ]
   },
   {
     "id": 751,
@@ -13095,8 +13227,8 @@
     "month": 3,
     "dayOfWeek": 2,
     "hour": 10,
-    "productArea": "universal_editor",
-    "issueType": "bug",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -13146,7 +13278,7 @@
     "month": 3,
     "dayOfWeek": 1,
     "hour": 15,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "access_provisioning",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -13164,8 +13296,8 @@
     "dayOfWeek": 5,
     "hour": 13,
     "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13180,11 +13312,13 @@
     "month": 3,
     "dayOfWeek": 5,
     "hour": 4,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 757,
@@ -13216,7 +13350,7 @@
     "month": 3,
     "dayOfWeek": 4,
     "hour": 3,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -13233,11 +13367,13 @@
     "month": 3,
     "dayOfWeek": 3,
     "hour": 17,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 760,
@@ -13268,8 +13404,8 @@
     "dayOfWeek": 3,
     "hour": 11,
     "productArea": "live_copy_msm",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "i18n_localization"
@@ -13322,7 +13458,7 @@
     "hour": 6,
     "productArea": "universal_editor",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13337,7 +13473,7 @@
     "month": 3,
     "dayOfWeek": 2,
     "hour": 5,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "access_provisioning",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -13373,7 +13509,7 @@
     "hour": 1,
     "productArea": "universal_editor",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "hybrid",
     "tags": []
   },
@@ -13388,7 +13524,7 @@
     "month": 3,
     "dayOfWeek": 1,
     "hour": 18,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "access_provisioning",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -13406,8 +13542,8 @@
     "dayOfWeek": 5,
     "hour": 15,
     "productArea": "content_fragments",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -13422,9 +13558,9 @@
     "month": 2,
     "dayOfWeek": 5,
     "hour": 9,
-    "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13440,8 +13576,8 @@
     "dayOfWeek": 5,
     "hour": 9,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13457,8 +13593,8 @@
     "dayOfWeek": 5,
     "hour": 9,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13490,9 +13626,9 @@
     "month": 2,
     "dayOfWeek": 4,
     "hour": 4,
-    "productArea": "universal_editor",
+    "productArea": "development_environment",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "go_live_blocker"
@@ -13511,9 +13647,11 @@
     "hour": 4,
     "productArea": "universal_editor",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 776,
@@ -13561,8 +13699,8 @@
     "dayOfWeek": 3,
     "hour": 11,
     "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13579,7 +13717,7 @@
     "hour": 5,
     "productArea": "cdn_config",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "csp"
@@ -13598,7 +13736,7 @@
     "hour": 4,
     "productArea": "universal_editor",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13614,8 +13752,8 @@
     "dayOfWeek": 3,
     "hour": 4,
     "productArea": "publishing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13630,9 +13768,9 @@
     "month": 2,
     "dayOfWeek": 3,
     "hour": 2,
-    "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13647,7 +13785,7 @@
     "month": 2,
     "dayOfWeek": 2,
     "hour": 23,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "access_provisioning",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -13683,9 +13821,9 @@
     "month": 2,
     "dayOfWeek": 2,
     "hour": 11,
-    "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13701,8 +13839,8 @@
     "dayOfWeek": 2,
     "hour": 11,
     "productArea": "publishing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "go_live_blocker"
@@ -13754,8 +13892,8 @@
     "dayOfWeek": 1,
     "hour": 3,
     "productArea": "publishing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13774,7 +13912,9 @@
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 791,
@@ -13788,12 +13928,10 @@
     "dayOfWeek": 0,
     "hour": 22,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": [
-      "authentication"
-    ]
+    "tags": []
   },
   {
     "id": 792,
@@ -13808,7 +13946,7 @@
     "hour": 9,
     "productArea": "site_config",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "dns"
@@ -13826,8 +13964,8 @@
     "dayOfWeek": 4,
     "hour": 21,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13861,7 +13999,7 @@
     "hour": 8,
     "productArea": "blocks",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "seo"
@@ -13880,7 +14018,7 @@
     "hour": 7,
     "productArea": "blocks",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13895,11 +14033,13 @@
     "month": 2,
     "dayOfWeek": 4,
     "hour": 3,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "cdn_caching",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 798,
@@ -13913,8 +14053,8 @@
     "dayOfWeek": 4,
     "hour": 0,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13950,7 +14090,7 @@
     "hour": 3,
     "productArea": "blocks",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -13984,9 +14124,9 @@
     "month": 2,
     "dayOfWeek": 1,
     "hour": 2,
-    "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "content_fragments",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14001,9 +14141,9 @@
     "month": 2,
     "dayOfWeek": 6,
     "hour": 9,
-    "productArea": "content_authoring",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "indexing",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14019,8 +14159,8 @@
     "dayOfWeek": 6,
     "hour": 9,
     "productArea": "indexing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14075,9 +14215,9 @@
     "month": 2,
     "dayOfWeek": 4,
     "hour": 20,
-    "productArea": "other",
+    "productArea": "rum",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14109,9 +14249,9 @@
     "month": 2,
     "dayOfWeek": 3,
     "hour": 12,
-    "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14126,9 +14266,9 @@
     "month": 2,
     "dayOfWeek": 3,
     "hour": 12,
-    "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "pdf_assets"
@@ -14146,8 +14286,8 @@
     "dayOfWeek": 3,
     "hour": 11,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14162,9 +14302,9 @@
     "month": 2,
     "dayOfWeek": 3,
     "hour": 11,
-    "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14180,8 +14320,8 @@
     "dayOfWeek": 3,
     "hour": 8,
     "productArea": "indexing",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14197,8 +14337,8 @@
     "dayOfWeek": 3,
     "hour": 7,
     "productArea": "blocks",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14215,7 +14355,7 @@
     "hour": 6,
     "productArea": "universal_editor",
     "issueType": "feature_request",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14232,7 +14372,7 @@
     "hour": 1,
     "productArea": "cdn_config",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14247,9 +14387,9 @@
     "month": 2,
     "dayOfWeek": 2,
     "hour": 16,
-    "productArea": "other",
+    "productArea": "rum",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14264,11 +14404,13 @@
     "month": 2,
     "dayOfWeek": 2,
     "hour": 12,
-    "productArea": "cloud_manager",
+    "productArea": "aem_core",
     "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 819,
@@ -14283,7 +14425,7 @@
     "hour": 7,
     "productArea": "blocks",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14298,11 +14440,13 @@
     "month": 2,
     "dayOfWeek": 5,
     "hour": 20,
-    "productArea": "cloud_manager",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 821,
@@ -14316,7 +14460,7 @@
     "dayOfWeek": 4,
     "hour": 9,
     "productArea": "other",
-    "issueType": "access_provisioning",
+    "issueType": "go_live_support",
     "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
@@ -14388,8 +14532,8 @@
     "dayOfWeek": 3,
     "hour": 12,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14421,7 +14565,7 @@
     "month": 2,
     "dayOfWeek": 2,
     "hour": 10,
-    "productArea": "other",
+    "productArea": "development_environment",
     "issueType": "security",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -14442,7 +14586,9 @@
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 829,
@@ -14457,10 +14603,11 @@
     "hour": 12,
     "productArea": "git_integration",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
-      "repoless"
+      "repoless",
+      "early_access_feature"
     ]
   },
   {
@@ -14512,7 +14659,7 @@
     "hour": 7,
     "productArea": "universal_editor",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14529,7 +14676,7 @@
     "hour": 7,
     "productArea": "blocks",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14545,8 +14692,8 @@
     "dayOfWeek": 1,
     "hour": 7,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14563,7 +14710,7 @@
     "hour": 7,
     "productArea": "universal_editor",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14579,8 +14726,8 @@
     "dayOfWeek": 1,
     "hour": 6,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14595,11 +14742,13 @@
     "month": 1,
     "dayOfWeek": 5,
     "hour": 10,
-    "productArea": "cloud_manager",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 838,
@@ -14612,7 +14761,7 @@
     "month": 1,
     "dayOfWeek": 5,
     "hour": 8,
-    "productArea": "other",
+    "productArea": "development_environment",
     "issueType": "security",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -14667,7 +14816,9 @@
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 842,
@@ -14681,8 +14832,8 @@
     "dayOfWeek": 3,
     "hour": 2,
     "productArea": "blocks",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14697,11 +14848,13 @@
     "month": 1,
     "dayOfWeek": 2,
     "hour": 17,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "migration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 844,
@@ -14733,9 +14886,11 @@
     "hour": 6,
     "productArea": "universal_editor",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 846,
@@ -14767,7 +14922,7 @@
     "hour": 8,
     "productArea": "content_fragments",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -14799,11 +14954,13 @@
     "month": 1,
     "dayOfWeek": 5,
     "hour": 11,
-    "productArea": "cloud_manager",
+    "productArea": "aem_core",
     "issueType": "access_provisioning",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 850,
@@ -14931,7 +15088,7 @@
     "month": 1,
     "dayOfWeek": 3,
     "hour": 9,
-    "productArea": "other",
+    "productArea": "blocks",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -14987,7 +15144,7 @@
     "dayOfWeek": 2,
     "hour": 11,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -15110,7 +15267,7 @@
     "dayOfWeek": 4,
     "hour": 6,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -15197,7 +15354,7 @@
     "dayOfWeek": 2,
     "hour": 7,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
@@ -15306,7 +15463,9 @@
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 878,
@@ -15320,10 +15479,12 @@
     "dayOfWeek": 2,
     "hour": 10,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 879,
@@ -15442,7 +15603,7 @@
     "month": 12,
     "dayOfWeek": 4,
     "hour": 12,
-    "productArea": "other",
+    "productArea": "experimentation",
     "issueType": "integration",
     "integrationType": "adobe_target",
     "authoringMode": "unknown",
@@ -15584,11 +15745,13 @@
     "month": 12,
     "dayOfWeek": 3,
     "hour": 22,
-    "productArea": "other",
+    "productArea": "gen_ai",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "early_access_feature"
+    ]
   },
   {
     "id": 894,
@@ -15728,11 +15891,13 @@
     "month": 11,
     "dayOfWeek": 3,
     "hour": 10,
-    "productArea": "cloud_manager",
+    "productArea": "aem_core",
     "issueType": "access_provisioning",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 902,
@@ -15833,8 +15998,8 @@
     "dayOfWeek": 3,
     "hour": 9,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -15866,7 +16031,7 @@
     "month": 11,
     "dayOfWeek": 5,
     "hour": 13,
-    "productArea": "cloud_manager",
+    "productArea": "onboarding",
     "issueType": "access_provisioning",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
@@ -15936,11 +16101,13 @@
     "month": 10,
     "dayOfWeek": 4,
     "hour": 9,
-    "productArea": "cloud_manager",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 914,
@@ -15953,7 +16120,7 @@
     "month": 10,
     "dayOfWeek": 3,
     "hour": 16,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "access_provisioning",
     "integrationType": "sharepoint",
     "authoringMode": "unknown",
@@ -15970,12 +16137,13 @@
     "month": 10,
     "dayOfWeek": 2,
     "hour": 17,
-    "productArea": "cloud_manager",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
     "tags": [
-      "ip_allowlist"
+      "ip_allowlist",
+      "possibly_misrouted"
     ]
   },
   {
@@ -15989,7 +16157,7 @@
     "month": 10,
     "dayOfWeek": 2,
     "hour": 10,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "access_provisioning",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -16007,8 +16175,8 @@
     "dayOfWeek": 2,
     "hour": 10,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "ssl_certificates"
@@ -16042,12 +16210,13 @@
     "month": 10,
     "dayOfWeek": 0,
     "hour": 12,
-    "productArea": "cdn_config",
+    "productArea": "aem_core",
     "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
     "tags": [
-      "dns"
+      "dns",
+      "possibly_misrouted"
     ]
   },
   {
@@ -16061,12 +16230,13 @@
     "month": 10,
     "dayOfWeek": 5,
     "hour": 15,
-    "productArea": "cloud_manager",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
     "tags": [
-      "ip_allowlist"
+      "ip_allowlist",
+      "possibly_misrouted"
     ]
   },
   {
@@ -16132,10 +16302,12 @@
     "dayOfWeek": 2,
     "hour": 17,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 925,
@@ -16224,7 +16396,9 @@
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 930,
@@ -16272,11 +16446,12 @@
     "dayOfWeek": 3,
     "hour": 16,
     "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
-      "go_live_blocker"
+      "go_live_blocker",
+      "page_loading"
     ]
   },
   {
@@ -16360,9 +16535,9 @@
     "month": 9,
     "dayOfWeek": 1,
     "hour": 11,
-    "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": [
       "video_content"
@@ -16379,11 +16554,13 @@
     "month": 9,
     "dayOfWeek": 1,
     "hour": 1,
-    "productArea": "live_copy_msm",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 939,
@@ -16430,7 +16607,7 @@
     "month": 9,
     "dayOfWeek": 1,
     "hour": 3,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "access_provisioning",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -16464,7 +16641,7 @@
     "month": 9,
     "dayOfWeek": 5,
     "hour": 4,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "feature_enablement",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -16481,9 +16658,9 @@
     "month": 9,
     "dayOfWeek": 4,
     "hour": 4,
-    "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "github",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -16516,10 +16693,12 @@
     "dayOfWeek": 1,
     "hour": 16,
     "productArea": "universal_editor",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 947,
@@ -16534,7 +16713,7 @@
     "hour": 15,
     "productArea": "universal_editor",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -16551,9 +16730,11 @@
     "hour": 12,
     "productArea": "universal_editor",
     "issueType": "performance",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 949,
@@ -16566,11 +16747,13 @@
     "month": 9,
     "dayOfWeek": 5,
     "hour": 8,
-    "productArea": "universal_editor",
+    "productArea": "development_environment",
     "issueType": "integration",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 950,
@@ -16619,12 +16802,13 @@
     "month": 9,
     "dayOfWeek": 2,
     "hour": 13,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
-      "helix5"
+      "helix5",
+      "vague_title"
     ]
   },
   {
@@ -16638,11 +16822,13 @@
     "month": 9,
     "dayOfWeek": 1,
     "hour": 2,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 954,
@@ -16708,9 +16894,9 @@
     "month": 8,
     "dayOfWeek": 4,
     "hour": 5,
-    "productArea": "universal_editor",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "authentication",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -16812,11 +16998,13 @@
     "month": 8,
     "dayOfWeek": 5,
     "hour": 14,
-    "productArea": "content_authoring",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
-    "authoringMode": "unknown",
-    "tags": []
+    "productArea": "universal_editor",
+    "issueType": "configuration",
+    "integrationType": "none",
+    "authoringMode": "universal_editor",
+    "tags": [
+      "page_loading"
+    ]
   },
   {
     "id": 964,
@@ -16863,11 +17051,13 @@
     "month": 8,
     "dayOfWeek": 2,
     "hour": 10,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 967,
@@ -16880,9 +17070,9 @@
     "month": 8,
     "dayOfWeek": 1,
     "hour": 11,
-    "productArea": "site_config",
+    "productArea": "rum",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -16897,7 +17087,7 @@
     "month": 8,
     "dayOfWeek": 5,
     "hour": 14,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "feature_enablement",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -16982,11 +17172,13 @@
     "month": 8,
     "dayOfWeek": 3,
     "hour": 10,
-    "productArea": "site_config",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 974,
@@ -16999,9 +17191,9 @@
     "month": 8,
     "dayOfWeek": 3,
     "hour": 8,
-    "productArea": "cloud_manager",
+    "productArea": "onboarding",
     "issueType": "configuration",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -17156,12 +17348,13 @@
     "month": 7,
     "dayOfWeek": 6,
     "hour": 11,
-    "productArea": "cloud_manager",
+    "productArea": "aem_core",
     "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
     "tags": [
-      "go_live_blocker"
+      "go_live_blocker",
+      "possibly_misrouted"
     ]
   },
   {
@@ -17175,11 +17368,13 @@
     "month": 7,
     "dayOfWeek": 6,
     "hour": 10,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 985,
@@ -17192,8 +17387,8 @@
     "month": 7,
     "dayOfWeek": 6,
     "hour": 7,
-    "productArea": "cdn_config",
-    "issueType": "bug",
+    "productArea": "indexing",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
     "tags": []
@@ -17228,11 +17423,13 @@
     "month": 7,
     "dayOfWeek": 2,
     "hour": 10,
-    "productArea": "cloud_manager",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 988,
@@ -17245,11 +17442,13 @@
     "month": 7,
     "dayOfWeek": 2,
     "hour": 10,
-    "productArea": "cloud_manager",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 989,
@@ -17262,11 +17461,14 @@
     "month": 7,
     "dayOfWeek": 2,
     "hour": 10,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "how_to",
-    "integrationType": "none",
+    "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title",
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 990,
@@ -17279,11 +17481,13 @@
     "month": 7,
     "dayOfWeek": 2,
     "hour": 10,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 991,
@@ -17296,11 +17500,13 @@
     "month": 7,
     "dayOfWeek": 2,
     "hour": 9,
-    "productArea": "cloud_manager",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 992,
@@ -17314,11 +17520,12 @@
     "dayOfWeek": 2,
     "hour": 9,
     "productArea": "other",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "unknown",
     "tags": [
-      "pdf_assets"
+      "pdf_assets",
+      "possibly_misrouted"
     ]
   },
   {
@@ -17332,11 +17539,13 @@
     "month": 7,
     "dayOfWeek": 2,
     "hour": 8,
-    "productArea": "authentication",
+    "productArea": "aem_core",
     "issueType": "access_provisioning",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 994,
@@ -17349,11 +17558,13 @@
     "month": 7,
     "dayOfWeek": 2,
     "hour": 8,
-    "productArea": "cloud_manager",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 995,
@@ -17366,11 +17577,13 @@
     "month": 7,
     "dayOfWeek": 2,
     "hour": 8,
-    "productArea": "indexing",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 996,
@@ -17383,11 +17596,13 @@
     "month": 7,
     "dayOfWeek": 0,
     "hour": 7,
-    "productArea": "authentication",
+    "productArea": "aem_core",
     "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 997,
@@ -17468,11 +17683,13 @@
     "month": 7,
     "dayOfWeek": 4,
     "hour": 3,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1002,
@@ -17519,11 +17736,13 @@
     "month": 7,
     "dayOfWeek": 0,
     "hour": 12,
-    "productArea": "publishing",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1005,
@@ -17572,9 +17791,9 @@
     "month": 7,
     "dayOfWeek": 3,
     "hour": 14,
-    "productArea": "cloud_manager",
+    "productArea": "onboarding",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -17590,7 +17809,7 @@
     "dayOfWeek": 2,
     "hour": 12,
     "productArea": "live_copy_msm",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
     "tags": [
@@ -17608,9 +17827,9 @@
     "month": 7,
     "dayOfWeek": 2,
     "hour": 10,
-    "productArea": "assets_dam",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
+    "productArea": "ue_extensions",
+    "issueType": "configuration",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
     "tags": []
   },
@@ -17712,7 +17931,7 @@
     "hour": 2,
     "productArea": "site_config",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "hybrid",
     "tags": [
       "multi_site"
@@ -17763,12 +17982,13 @@
     "month": 6,
     "dayOfWeek": 3,
     "hour": 15,
-    "productArea": "cdn_config",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
     "tags": [
-      "cors"
+      "cors",
+      "possibly_misrouted"
     ]
   },
   {
@@ -17816,10 +18036,10 @@
     "month": 6,
     "dayOfWeek": 3,
     "hour": 0,
-    "productArea": "other",
-    "issueType": "how_to",
+    "productArea": "go_live_support",
+    "issueType": "go_live_support",
     "integrationType": "none",
-    "authoringMode": "unknown",
+    "authoringMode": "document_based",
     "tags": []
   },
   {
@@ -17870,9 +18090,9 @@
     "dayOfWeek": 5,
     "hour": 9,
     "productArea": "content_authoring",
-    "issueType": "bug",
-    "integrationType": "aem_cloud",
-    "authoringMode": "unknown",
+    "issueType": "configuration",
+    "integrationType": "none",
+    "authoringMode": "universal_editor",
     "tags": []
   },
   {
@@ -17903,11 +18123,13 @@
     "month": 5,
     "dayOfWeek": 1,
     "hour": 17,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1027,
@@ -17937,11 +18159,13 @@
     "month": 5,
     "dayOfWeek": 5,
     "hour": 12,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1029,
@@ -17971,11 +18195,13 @@
     "month": 5,
     "dayOfWeek": 4,
     "hour": 15,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "migration",
     "integrationType": "aem_ams",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1031,
@@ -17988,11 +18214,13 @@
     "month": 5,
     "dayOfWeek": 4,
     "hour": 15,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1032,
@@ -18022,11 +18250,13 @@
     "month": 5,
     "dayOfWeek": 4,
     "hour": 14,
-    "productArea": "dynamic_media",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1034,
@@ -18039,11 +18269,13 @@
     "month": 5,
     "dayOfWeek": 4,
     "hour": 14,
-    "productArea": "authentication",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1035,
@@ -18146,11 +18378,13 @@
     "month": 5,
     "dayOfWeek": 1,
     "hour": 14,
-    "productArea": "infrastructure",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1041,
@@ -18163,11 +18397,14 @@
     "month": 5,
     "dayOfWeek": 5,
     "hour": 12,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_ams",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title",
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1042,
@@ -18214,11 +18451,13 @@
     "month": 5,
     "dayOfWeek": 5,
     "hour": 19,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1045,
@@ -18231,11 +18470,13 @@
     "month": 5,
     "dayOfWeek": 5,
     "hour": 6,
-    "productArea": "authentication",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1046,
@@ -18248,11 +18489,13 @@
     "month": 5,
     "dayOfWeek": 4,
     "hour": 13,
-    "productArea": "authentication",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1047,
@@ -18282,9 +18525,9 @@
     "month": 4,
     "dayOfWeek": 2,
     "hour": 1,
-    "productArea": "cloud_manager",
+    "productArea": "onboarding",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -18299,9 +18542,9 @@
     "month": 4,
     "dayOfWeek": 1,
     "hour": 3,
-    "productArea": "cloud_manager",
+    "productArea": "onboarding",
     "issueType": "feature_enablement",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -18333,11 +18576,13 @@
     "month": 4,
     "dayOfWeek": 5,
     "hour": 6,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1052,
@@ -18350,11 +18595,13 @@
     "month": 4,
     "dayOfWeek": 5,
     "hour": 5,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "access_provisioning",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1053,
@@ -18367,11 +18614,13 @@
     "month": 4,
     "dayOfWeek": 5,
     "hour": 1,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 1054,
@@ -18384,11 +18633,13 @@
     "month": 4,
     "dayOfWeek": 4,
     "hour": 7,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 1055,
@@ -18418,12 +18669,13 @@
     "month": 4,
     "dayOfWeek": 2,
     "hour": 17,
-    "productArea": "live_copy_msm",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
     "tags": [
-      "multi_site"
+      "multi_site",
+      "possibly_misrouted"
     ]
   },
   {
@@ -18437,11 +18689,13 @@
     "month": 4,
     "dayOfWeek": 2,
     "hour": 17,
-    "productArea": "performance",
+    "productArea": "aem_core",
     "issueType": "outage_degradation",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1058,
@@ -18454,7 +18708,7 @@
     "month": 4,
     "dayOfWeek": 2,
     "hour": 11,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -18488,11 +18742,13 @@
     "month": 4,
     "dayOfWeek": 1,
     "hour": 19,
-    "productArea": "forms",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1061,
@@ -18539,11 +18795,13 @@
     "month": 4,
     "dayOfWeek": 5,
     "hour": 7,
-    "productArea": "live_copy_msm",
+    "productArea": "aem_core",
     "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1064,
@@ -18590,11 +18848,13 @@
     "month": 4,
     "dayOfWeek": 2,
     "hour": 11,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "how_to",
-    "integrationType": "none",
+    "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1067,
@@ -18641,11 +18901,13 @@
     "month": 4,
     "dayOfWeek": 2,
     "hour": 4,
-    "productArea": "authentication",
+    "productArea": "aem_core",
     "issueType": "access_provisioning",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1070,
@@ -18709,11 +18971,13 @@
     "month": 4,
     "dayOfWeek": 1,
     "hour": 11,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1074,
@@ -18743,11 +19007,13 @@
     "month": 4,
     "dayOfWeek": 1,
     "hour": 10,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "integration",
-    "integrationType": "aem_cloud",
+    "integrationType": "third_party",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1076,
@@ -18761,7 +19027,7 @@
     "dayOfWeek": 1,
     "hour": 4,
     "productArea": "cdn_config",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
     "tags": [
@@ -18779,9 +19045,9 @@
     "month": 4,
     "dayOfWeek": 0,
     "hour": 21,
-    "productArea": "other",
+    "productArea": "gen_ai",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "unknown",
     "tags": []
   },
@@ -18830,11 +19096,13 @@
     "month": 4,
     "dayOfWeek": 4,
     "hour": 10,
-    "productArea": "infrastructure",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1081,
@@ -18847,11 +19115,13 @@
     "month": 4,
     "dayOfWeek": 4,
     "hour": 9,
-    "productArea": "authentication",
+    "productArea": "aem_core",
     "issueType": "access_provisioning",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1082,
@@ -18864,7 +19134,7 @@
     "month": 4,
     "dayOfWeek": 4,
     "hour": 1,
-    "productArea": "other",
+    "productArea": "infrastructure",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -18881,11 +19151,13 @@
     "month": 4,
     "dayOfWeek": 2,
     "hour": 8,
-    "productArea": "authentication",
+    "productArea": "aem_core",
     "issueType": "security",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1084,
@@ -18968,11 +19240,13 @@
     "month": 4,
     "dayOfWeek": 5,
     "hour": 10,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "aem_ams",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1089,
@@ -19002,10 +19276,10 @@
     "month": 4,
     "dayOfWeek": 4,
     "hour": 12,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "blocks",
+    "issueType": "configuration",
     "integrationType": "none",
-    "authoringMode": "unknown",
+    "authoringMode": "document_based",
     "tags": [
       "video_content"
     ]
@@ -19038,11 +19312,13 @@
     "month": 4,
     "dayOfWeek": 4,
     "hour": 11,
-    "productArea": "other",
-    "issueType": "bug",
-    "integrationType": "none",
+    "productArea": "aem_core",
+    "issueType": "configuration",
+    "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1093,
@@ -19055,11 +19331,13 @@
     "month": 4,
     "dayOfWeek": 4,
     "hour": 11,
-    "productArea": "performance",
+    "productArea": "aem_core",
     "issueType": "outage_degradation",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1094,
@@ -19140,7 +19418,7 @@
     "month": 3,
     "dayOfWeek": 5,
     "hour": 15,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "access_provisioning",
     "integrationType": "none",
     "authoringMode": "unknown",
@@ -19158,10 +19436,12 @@
     "dayOfWeek": 2,
     "hour": 12,
     "productArea": "other",
-    "issueType": "bug",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1100,
@@ -19174,11 +19454,13 @@
     "month": 3,
     "dayOfWeek": 5,
     "hour": 8,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1101,
@@ -19244,12 +19526,13 @@
     "month": 3,
     "dayOfWeek": 1,
     "hour": 9,
-    "productArea": "cloud_manager",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
     "tags": [
-      "go_live_blocker"
+      "go_live_blocker",
+      "possibly_misrouted"
     ]
   },
   {
@@ -19280,11 +19563,13 @@
     "month": 3,
     "dayOfWeek": 4,
     "hour": 1,
-    "productArea": "assets_dam",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1107,
@@ -19316,9 +19601,11 @@
     "hour": 10,
     "productArea": "universal_editor",
     "issueType": "how_to",
-    "integrationType": "aem_cloud",
+    "integrationType": "none",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 1109,
@@ -19348,11 +19635,13 @@
     "month": 3,
     "dayOfWeek": 5,
     "hour": 14,
-    "productArea": "content_fragments",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "universal_editor",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1111,
@@ -19365,12 +19654,13 @@
     "month": 3,
     "dayOfWeek": 5,
     "hour": 13,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
     "tags": [
-      "regression"
+      "regression",
+      "possibly_misrouted"
     ]
   },
   {
@@ -19401,8 +19691,8 @@
     "month": 2,
     "dayOfWeek": 2,
     "hour": 3,
-    "productArea": "other",
-    "issueType": "configuration",
+    "productArea": "go_live_support",
+    "issueType": "go_live_support",
     "integrationType": "none",
     "authoringMode": "document_based",
     "tags": [
@@ -19437,8 +19727,8 @@
     "month": 2,
     "dayOfWeek": 0,
     "hour": 18,
-    "productArea": "other",
-    "issueType": "how_to",
+    "productArea": "go_live_support",
+    "issueType": "go_live_support",
     "integrationType": "none",
     "authoringMode": "document_based",
     "tags": []
@@ -19454,11 +19744,13 @@
     "month": 2,
     "dayOfWeek": 4,
     "hour": 17,
-    "productArea": "cloud_manager",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1117,
@@ -19471,11 +19763,13 @@
     "month": 1,
     "dayOfWeek": 2,
     "hour": 15,
-    "productArea": "performance",
+    "productArea": "aem_core",
     "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1118,
@@ -19522,11 +19816,13 @@
     "month": 1,
     "dayOfWeek": 1,
     "hour": 7,
-    "productArea": "other",
+    "productArea": "aem_core",
     "issueType": "how_to",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1121,
@@ -19626,11 +19922,13 @@
     "month": 1,
     "dayOfWeek": 1,
     "hour": 9,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "aem_core",
+    "issueType": "configuration",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1127,
@@ -19643,11 +19941,13 @@
     "month": 1,
     "dayOfWeek": 5,
     "hour": 6,
-    "productArea": "cloud_manager",
+    "productArea": "aem_core",
     "issueType": "feature_enablement",
     "integrationType": "aem_cloud",
     "authoringMode": "unknown",
-    "tags": []
+    "tags": [
+      "possibly_misrouted"
+    ]
   },
   {
     "id": 1128,
@@ -19660,11 +19960,13 @@
     "month": 1,
     "dayOfWeek": 2,
     "hour": 7,
-    "productArea": "other",
+    "productArea": "onboarding",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "document_based",
-    "tags": []
+    "tags": [
+      "vague_title"
+    ]
   },
   {
     "id": 1129,
@@ -19711,8 +20013,8 @@
     "month": 12,
     "dayOfWeek": 3,
     "hour": 1,
-    "productArea": "other",
-    "issueType": "bug",
+    "productArea": "assets_dam",
+    "issueType": "configuration",
     "integrationType": "none",
     "authoringMode": "document_based",
     "tags": [
@@ -19832,7 +20134,7 @@
     "month": 12,
     "dayOfWeek": 5,
     "hour": 4,
-    "productArea": "other",
+    "productArea": "infrastructure",
     "issueType": "how_to",
     "integrationType": "none",
     "authoringMode": "document_based",
