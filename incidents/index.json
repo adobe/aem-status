@@ -12,10 +12,11 @@
     "affectedComponents": [
       "delivery"
     ],
-    "internalServices": [],
+    "internalServices": [
+      "logging"
+    ],
     "externalVendors": [
-      "cloudflare",
-      "coralogix"
+      "cloudflare"
     ],
     "rootCause": "third-party-outage"
   },
@@ -36,7 +37,7 @@
       "admin-api"
     ],
     "externalVendors": null,
-    "rootCause": "dependency-update"
+    "rootCause": "dependency-issue"
   },
   {
     "code": "AEM-u1y1wme4",
