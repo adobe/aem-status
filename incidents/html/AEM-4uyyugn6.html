@@ -1,69 +1,105 @@
 <h1 class="none">3rd party incident impacting selected customers</h1>
-<article data-incident-start-time="2025-12-05T08:56:00Z" data-incident-end-time="2025-12-05T09:20:00Z" data-incident-error-rate="0.0" data-incident-impacted-service="delivery">
+<article data-incident-start-time="2025-12-05T08:56:00Z" data-incident-end-time="2025-12-05T09:20:00Z"
+  data-incident-error-rate="0.0" data-incident-impacted-service="delivery">
 
-    <p>
-        On December 5, 2025, at 08:56 UTC, we were alerted to a service disruption by one of our customer-specific site
-        alerts. The incident lasted 24 minutes and affected a fraction of our customers who experienced delivery failures
-        with 500 errors from Cloudflare's infrastructure. <br> 
-        The incident was isolated to customer-selected Cloudflare services and did not impact our core delivery infrastructure.
-        AEM infrastructure was not impacted by this incident and remained operational. <br>
-        Our internally facing 3rd party operations infrastructure (logging), was also temporarily inaccessible. <br>
-        Normal service resumed at 09:20 UTC following Cloudflare's resolution of the outage. Our
-        operations team successfully switched to our backup log monitoring solution, maintaining operational visibility
-        throughout the incident.
-    </p>
+  <p>
+    On December 5, 2025, at 08:56 UTC, we were alerted to a service disruption by one of our
+    customer-specific site alerts. The incident lasted 24 minutes and affected a fraction of our
+    customers who experienced delivery failures with 500 errors from Cloudflare's infrastructure.
+    <br>
+    The incident was isolated to customer-selected Cloudflare services and did not impact our core
+    delivery infrastructure. AEM infrastructure was not impacted by this incident and remained
+    operational.
+    <br>
+    Our internally facing 3rd party operations infrastructure (logging), was also temporarily
+    inaccessible.
+    <br>
+    Normal service resumed at 09:20 UTC following Cloudflare's resolution of the outage. Our
+    operations team successfully switched to our backup log monitoring solution, maintaining
+    operational visibility throughout the incident.
+  </p>
 
-    <h3>Root Cause</h3>
-    <p>
-        The incident was caused by an outage in the <a href="https://www.cloudflarestatus.com/incidents/lfrm31y6sw9q">Cloudflare network</a>, a 3rd-party service chosen by the
-        impacted customers. Cloudflare reported that a change made to how their Web Application Firewall parses requests
-        caused their network to become temporarily unavailable. This was an internal change by the 3rd-party provider and
-        not a security attack.
-    </p>
-    <p>
-        <a href="https://www.cloudflarestatus.com/incidents/lfrm31y6sw9q">Cloudflare Incident Post-Mortem</a>
-    </p>
+  <h3>Root Cause</h3>
+  <p>
+    The incident was caused by an outage in the
+    <a href="https://www.cloudflarestatus.com/incidents/lfrm31y6sw9q">Cloudflare network</a>, a
+    3rd-party service chosen by the impacted customers. Cloudflare reported that a change made to
+    how their Web Application Firewall parses requests caused their network to become temporarily
+    unavailable. This was an internal change by the 3rd-party provider and not a security attack.
+  </p>
+  <p>
+    <a href="https://www.cloudflarestatus.com/incidents/lfrm31y6sw9q">Cloudflare Incident
+      Post-Mortem</a>
+  </p>
 
-    <h3>Detection</h3>
-    <p>
-        The incident was detected at 08:56 UTC through customer-specific site alerts. No other alerts were triggered. AEM delivery infrastructure remained operational. 
-        The simultaneous loss of access to internally facing 3rd party operations infrastructure created a secondary operational challenge that was immediately apparent 
-        to the operations team.
-    </p>
+  <h3>Detection</h3>
+  <p>
+    The incident was detected at 08:56 UTC through customer-specific site alerts. No other alerts
+    were triggered. AEM delivery infrastructure remained operational. The simultaneous loss of
+    access to internally facing 3rd party operations infrastructure created a secondary operational
+    challenge that was immediately apparent to the operations team.
+  </p>
 
-    <h3>Resolution</h3>
-    <p>
-        The underlying network issue was resolved by the 3rd-party provider (Cloudflare) implementing a fix for the faulty WAF change. Upon discovering the inaccessibility of Coralogix, the operations team successfully switched all internal log monitoring and analysis to our designated backup logging solution. This ensured continuous operational visibility despite the primary tool failure. No action is required by customers as the external service is fully functional by 09:20 UTC. No action is required by customers as the external service is fully functional by 09:20 UTC.
-    </p>
+  <h3>Resolution</h3>
+  <p>
+    The underlying network issue was resolved by the 3rd-party provider (Cloudflare) implementing a
+    fix for the faulty WAF change. Upon discovering the inaccessibility of Coralogix, the
+    operations team successfully switched all internal log monitoring and analysis to our
+    designated backup logging solution. This ensured continuous operational visibility despite the
+    primary tool failure. No action is required by customers as the external service is fully
+    functional by 09:20 UTC.
+  </p>
 
-    <h3>Action Items</h3>
-    <p>
-        The incident highlights dependencies on critical 3rd-party infrastructure for both customer delivery and internal operations.
-    </p>
-    <ul>
-       <li>Dependency Mapping Review: Explicitly review critical internal operational tools (e.g., Coralogix, monitoring) to understand the full blast radius of external outages</li>
-        <li>Document Log Monitoring Failover: Formalize the runbook for switching to the backup log monitoring solution (used successfully in this incident)</li>
-    </ul>
+  <h3>Action Items</h3>
+  <p>
+    The incident highlights dependencies on critical 3rd-party infrastructure for both customer
+    delivery and internal operations.
+  </p>
+  <ul>
+    <li>
+      Dependency Mapping Review: Explicitly review critical internal operational tools (e.g.,
+      Coralogix, monitoring) to understand the full blast radius of external outages
+    </li>
+    <li>
+      Document Log Monitoring Failover: Formalize the runbook for switching to the backup log
+      monitoring solution (used successfully in this incident)
+    </li>
+  </ul>
 
-    <time>2025-12-11T21:55:30.000Z</time>
+  <time>2025-12-11T21:55:30.000Z</time>
 </article>
 
 <ul class="updates">
-    <li>
-        <h2>Resolved</h2>
-        <p>This incident has been resolved. The 3rd-party service has restored their network availability, and both impacted customer sites and our internal Coralogix logging service are operating normally. Log analysis has been switched back to the primary Coralogix platform.</p>
-        <time>2025-12-05T09:20:00.000Z</time>
-    </li>
+  <li>
+    <h2>Resolved</h2>
+    <p>
+      This incident has been resolved. The 3rd-party service has restored their network
+      availability, and both impacted customer sites and our internal Coralogix logging service
+      are operating normally. Log analysis has been switched back to the primary Coralogix
+      platform.
+    </p>
+    <time>2025-12-05T09:20:00.000Z</time>
+  </li>
 
-    <li>
-        <h2>Monitoring</h2>
-        <p>The 3rd-party provider has implemented a fix and is currently monitoring the results. Our customer sites are showing restored service delivery, and the Coralogix service is accessible again. We are continuing to monitor incident.</p>
-        <time>2025-12-05T09:12:00.000Z</time>
-    </li>
+  <li>
+    <h2>Monitoring</h2>
+    <p>
+      The 3rd-party provider has implemented a fix and is currently monitoring the results. Our
+      customer sites are showing restored service delivery, and the Coralogix service is
+      accessible again. We are continuing to monitor the incident.
+    </p>
+    <time>2025-12-05T09:12:00.000Z</time>
+  </li>
 
-    <li>
-        <h2>Identified</h2>
-        <p>We have identified that the issue is due to a major incident with a 3rd-party network provider (Cloudflare) impacting selected customers who use their WAF service. Furthermore, our internal logging tool, Coralogix, is also inaccessible due to this outage. Our core customer-facing services are unaffected, and the Operations Team has switched to the backup log monitoring solution.</p>
-        <time>2025-12-05T08:56:00Z</time>
-    </li>
+  <li>
+    <h2>Identified</h2>
+    <p>
+      We have identified that the issue is due to a major incident with a 3rd-party network
+      provider (Cloudflare) impacting selected customers who use their WAF service. Furthermore,
+      our internal logging tool, Coralogix, is also inaccessible due to this outage. Our core
+      customer-facing services are unaffected, and the Operations Team has switched to the backup
+      log monitoring solution.
+    </p>
+    <time>2025-12-05T08:56:00Z</time>
+  </li>
 </ul>
