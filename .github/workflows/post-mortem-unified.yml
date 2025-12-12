@@ -188,9 +188,10 @@ jobs:
             - **Trigger**: Specific event or condition that initiated the failure
             - **Resolution**: Immediate mitigation and long-term fix steps
             - **Detection**: How the issue was identified (monitoring, alerts, user reports)
-            - **Timeline**: Detailed chronological account with timestamps (prefer UTC)
-            - **Action Items**: Specific, actionable tasks with owners to prevent recurrence
+            - **Timeline**: The `.updates` section at the bottom serves as the timeline (rendered with "Timeline" heading via CSS) - check that updates are present and chronological
             - **Lessons Learned**: What went well, what went wrong, where we got lucky
+
+            Note: Action items with specific owners and deadlines are NOT required for our post-mortems. Do not suggest adding them.
 
             ### 2. Blameless Culture
             - Focuses on systematic causes, not individual blame
@@ -204,10 +205,9 @@ jobs:
             - Examines why monitoring/alerting didn't catch the issue earlier
 
             ### 4. Actionability
-            - Action items are specific and measurable
-            - Each action has a clear owner
-            - Actions address both immediate fixes and long-term prevention
-            - Includes improvements to monitoring, testing, and deployment processes
+            - If action items are included, they should be realistic and address prevention
+            - Do NOT request owners, deadlines, or task tracking details - this is handled separately
+            - Focus on whether the resolution and lessons learned are actionable, not on formal action item lists
 
             ### 5. Developer-Focused SaaS Considerations
             - API/service availability metrics clearly stated
