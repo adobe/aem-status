@@ -8,7 +8,15 @@
     "startTime": "2026-02-11T00:00:00.000Z",
     "endTime": "2026-02-11T00:00:00.000Z",
     "errorRate": "0",
-    "impactedService": "publishing"
+    "impactedService": "publishing",
+    "affectedComponents": [
+      "publishing"
+    ],
+    "internalServices": [
+      "sidekick"
+    ],
+    "externalVendors": null,
+    "rootCause": "dependency-issue"
   },
   {
     "code": "AEM-4uyyugn6",
