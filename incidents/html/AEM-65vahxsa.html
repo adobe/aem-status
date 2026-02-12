@@ -1,0 +1,70 @@
+<h1 class="none"></h1>
+<article data-incident-start-time="1970-01-01T00:00:00.000Z" data-incident-end-time="1970-01-01T00:00:00.000Z" data-incident-error-rate="" data-incident-impacted-service="">
+
+    <h3>Executive Summary</h3>
+    <p>
+        On February 7, 2026 between 01:57 (UTC) and 02:34 (UTC), we observed an increase of errors on requests served from Cloudflare backends.
+        As a result the delivery service was impacted with a error rate of ~0.035%.
+        Our team detected the issue within 35 minutes through automated monitoring and initiated failover to the alternate stack within 2 minutes.
+        The delivery service was restored by 02:34 UTC.
+        Some customers experienced an increase of 413 responses after that until we switched them back to Cloudflare backends at Feburary 9, 2026 16:30 (UTC).
+    </p>
+
+    <h3>Root Cause</h3>
+    <p>
+        An underlying issue with <a href="https://www.cloudflarestatus.com/incidents/qy92kxdhg16t">Cloudflare's R2 service</a> caused the increase of errors.
+    </p>
+
+    <h3>Resolution</h3>
+    <p>
+        The issue was resolved by switching projects using Cloudflare backends to another cloud provider at 02:33 UTC.
+        After the resoluiton of the underlying issue at 04:43 UTC, we switched the affected projects back to Cloudflare backends at Feburary 9, 2026 16:30 (UTC).
+        In that time frame some customers experienced an increase of 413 responses for very large indexes.
+    </p>
+
+    <h3>Action Items</h3>
+    <ul>
+        <li>review if we can improve the storage and processing format of large indexes</li>
+    </ul>
+
+    <time>2026-02-12T11:44:49.510Z</time>
+</article>
+
+<ul class="updates">
+
+    <li>
+        <h2>Resolved</h2>
+        <p>This incident has been resolved.</p>
+        <time>2026-02-09T16:35:00.000Z</time>
+    </li>
+
+    <li>
+        <h2>Monitoring</h2>
+        <p>We switched affected projects back to Cloudflare backends.</p>
+        <time>2026-02-09T16:30:00.000Z</time>
+    </li>
+
+    <li>
+        <h2>Identified</h2>
+        <p>Some customers experienced an increase of 413 responses for very large indexes after moving them off Cloudflare backends.</p>
+        <time>2026-02-07T20:41:00.000Z</time>
+    </li>
+
+    <li>
+        <h2>Partially Resolved</h2>
+        <p>This incident has been resolved.</p>
+        <time>2026-02-07T02:34:00.000Z</time>
+    </li>
+
+    <li>
+        <h2>Monitoring</h2>
+        <p>We identified the problem and switched projects using Cloudflare backends to another cloud provider.</p>
+        <time>2026-02-07T02:34:00.000Z</time>
+    </li>
+
+    <li>
+        <h2>Identified</h2>
+        <p>We are observing an increase of errors on requests served from Cloudflare backends.</p>
+        <time>2026-02-07T02:32:00.000Z</time>
+    </li>
+</ul>
