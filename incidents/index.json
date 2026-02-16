@@ -19,6 +19,17 @@
     "rootCause": "dependency-issue"
   },
   {
+    "code": "AEM-65vahxsa",
+    "name": "Delivery service disrupted by Cloudflare R2 outage",
+    "message": "On February 7, 2026 between 01:57 (UTC) and 02:34 (UTC), delivery service requests experienced elevated error\n        rates of approximately 0.035% due to an outage in Cloudflare's R2 storage service. Our automated monitoring\n        detected the issue at 02:05 UTC (8 minutes after onset), and we initiated a manual failover to an alternate\n        cloud provider, restoring the service by 02:34 UTC (29 minutes after onset).",
+    "impact": "none",
+    "incidentUpdated": "2026-02-12T11:44:49.510Z",
+    "startTime": "2026-02-07T01:57:00.000Z",
+    "endTime": "2026-02-09T16:30:00.000Z",
+    "errorRate": "0.00035",
+    "impactedService": "delivery"
+  },
+  {
     "code": "AEM-4uyyugn6",
     "name": "3rd party incident impacting selected customers",
     "message": "On December 5, 2025, at 08:56 UTC, we were alerted to a service disruption by one of our\n    customer-specific site alerts. The incident lasted 24 minutes and affected a fraction of our\n    customers who experienced delivery failures with 500 errors from Cloudflare's infrastructure.\n    \n    The incident was isolated to customer-selected Cloudflare services and did not impact our core\n    delivery infrastructure. AEM infrastructure was not impacted by this incident and remained\n    operational.\n",
