@@ -27,7 +27,15 @@
     "startTime": "2026-02-07T01:57:00.000Z",
     "endTime": "2026-02-09T16:30:00.000Z",
     "errorRate": "0.00035",
-    "impactedService": "delivery"
+    "impactedService": "delivery",
+    "affectedComponents": [
+      "delivery"
+    ],
+    "internalServices": null,
+    "externalVendors": [
+      "cloudflare"
+    ],
+    "rootCause": "third-party-outage"
   },
   {
     "code": "AEM-4uyyugn6",
