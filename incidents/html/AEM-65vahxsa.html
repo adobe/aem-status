@@ -3,10 +3,10 @@
 
     <h3>Executive Summary</h3>
     <p>
-        On February 7, 2026 between 01:57 (UTC) and 02:34 (UTC), delivery service requests experienced elevated error
+        On February 7, 2026 between 01:57 UTC and 02:34 UTC, delivery service requests experienced elevated error
         rates of approximately 0.035% due to an outage in Cloudflare's R2 storage service. Our automated monitoring
         detected the issue at 02:05 UTC (8 minutes after onset), and we initiated a manual failover to an alternate
-        cloud provider, restoring the service by 02:34 UTC (29 minutes after onset).
+        cloud provider, restoring the service at 02:34 UTC (37 minutes after onset).
     </p>
     <p>
         However, the failover introduced a secondary issue: customers with very large content indexes encountered 
@@ -31,7 +31,7 @@
 
     <h3>Resolution</h3>
     <p>
-        <strong>Immediate Mitigation (02:33 UTC):</strong> We switched projects using Cloudflare backends to an
+        <strong>Immediate Mitigation (February 7, 02:34 UTC):</strong> We switched projects using Cloudflare backends to an
         alternate cloud provider, restoring delivery service functionality. However, this introduced a new issue where
         customers with very large indexes began experiencing 413 (Request Entity Too Large) responses due to lower
         payload limits on the alternate provider.
