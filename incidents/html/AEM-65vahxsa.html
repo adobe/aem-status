@@ -1,30 +1,54 @@
-<h1 class="none"></h1>
-<article data-incident-start-time="1970-01-01T00:00:00.000Z" data-incident-end-time="1970-01-01T00:00:00.000Z" data-incident-error-rate="" data-incident-impacted-service="">
+<h1 class="none">Delivery service disrupted by Cloudflare R2 outage</h1>
+<article data-incident-start-time="2026-02-07T01:57:00.000Z" data-incident-end-time="2026-02-09T16:30:00.000Z" data-incident-error-rate="0.00035" data-incident-impacted-service="delivery">
 
     <h3>Executive Summary</h3>
     <p>
-        On February 7, 2026 between 01:57 (UTC) and 02:34 (UTC), we observed an increase of errors on requests served from Cloudflare backends.
-        As a result the delivery service was impacted with a error rate of ~0.035%.
-        Our team detected the issue within 35 minutes through automated monitoring and initiated failover to the alternate stack within 2 minutes.
-        The delivery service was restored by 02:34 UTC.
-        Some customers experienced an increase of 413 responses after that until we switched them back to Cloudflare backends at Feburary 9, 2026 16:30 (UTC).
+        On February 7, 2026 between 01:57 (UTC) and 02:34 (UTC), delivery service requests experienced elevated error
+        rates of approximately 0.035% due to an outage in Cloudflare's R2 storage service. Our automated monitoring
+        detected the issue at 02:05 UTC (8 minutes after onset), and we initiated a manual failover to an alternate
+        cloud provider, restoring the service by 02:34 UTC (29 minutes after onset).
+    </p>
+    <p>
+        However, the failover introduced a secondary issue: customers with very large content indexes encountered 
+        413 (Request Entity Too Large) errors on the alternate provider. This continued until we migrated affected
+        projects back to Cloudflare backends on February 9, 2026 at 16:30 UTC, after confirming the underlying R2
+        issue was resolved. The total incident duration was 62 hours and 38 minutes, though the primary outage lasted
+        only 37 minutes.
     </p>
 
     <h3>Root Cause</h3>
     <p>
-        An underlying issue with <a href="https://www.cloudflarestatus.com/incidents/qy92kxdhg16t">Cloudflare's R2 service</a> caused the increase of errors.
+        The immediate cause was an <a href="https://www.cloudflarestatus.com/incidents/qy92kxdhg16t">underlying issue 
+        with Cloudflare's R2 service</a> that began at approximately 01:57 UTC on February 7, 2026.
+    </p>
+    <p>
+        However, the extended impact to customers (through February 9) revealed architectural limitations in our
+        multi-cloud strategy. Our alternate cloud provider had lower payload size limits, resulting in 
+        413 (Request Entity Too Large) errors for customers with large indexes. This indicates our failover strategy
+        did not account for provider-specific constraints, and we lacked feature parity testing across backup 
+        infrastructure.
     </p>
 
     <h3>Resolution</h3>
     <p>
-        The issue was resolved by switching projects using Cloudflare backends to another cloud provider at 02:33 UTC.
-        After the resoluiton of the underlying issue at 04:43 UTC, we switched the affected projects back to Cloudflare backends at Feburary 9, 2026 16:30 (UTC).
-        In that time frame some customers experienced an increase of 413 responses for very large indexes.
+        <strong>Immediate Mitigation (02:33 UTC):</strong> We switched projects using Cloudflare backends to an
+        alternate cloud provider, restoring delivery service functionality. However, this introduced a new issue where
+        customers with very large indexes began experiencing 413 (Request Entity Too Large) responses due to lower
+        payload limits on the alternate provider.
+    </p>
+    <p>
+        <strong>Permanent Resolution (February 9, 16:30 UTC):</strong> After Cloudflare resolved the underlying R2
+        issue at 04:43 UTC on February 7, we monitored the situation for stability. Once confirmed stable, we migrated
+        affected projects back to Cloudflare backends on February 9 at 16:30 UTC, fully resolving the 413 errors for
+        customers with large indexes.
     </p>
 
     <h3>Action Items</h3>
     <ul>
-        <li>review if we can improve the storage and processing format of large indexes</li>
+        <li>
+            Evaluate options to improve index storage and processing format to reduce payload sizes and increase
+            resilience to provider constraints
+        </li>
     </ul>
 
     <time>2026-02-12T11:44:49.510Z</time>
@@ -46,7 +70,7 @@
 
     <li>
         <h2>Identified</h2>
-        <p>Some customers experienced an increase of 413 responses for very large indexes after moving them off Cloudflare backends.</p>
+        <p>One customer experienced an increase of 413 responses for very large indexes after moving them off Cloudflare backends.</p>
         <time>2026-02-07T20:41:00.000Z</time>
     </li>
 
@@ -65,6 +89,6 @@
     <li>
         <h2>Identified</h2>
         <p>We are observing an increase of errors on requests served from Cloudflare backends.</p>
-        <time>2026-02-07T02:32:00.000Z</time>
+        <time>2026-02-07T02:05:00.000Z</time>
     </li>
 </ul>
