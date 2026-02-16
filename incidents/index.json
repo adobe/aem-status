@@ -21,7 +21,7 @@
   {
     "code": "AEM-65vahxsa",
     "name": "Delivery service disrupted by Cloudflare R2 outage",
-    "message": "On February 7, 2026 between 01:57 (UTC) and 02:34 (UTC), delivery service requests experienced elevated error\n        rates of approximately 0.035% due to an outage in Cloudflare's R2 storage service. Our automated monitoring\n        detected the issue at 02:05 UTC (8 minutes after onset), and we initiated a manual failover to an alternate\n        cloud provider, restoring the service by 02:34 UTC (29 minutes after onset).",
+    "message": "On February 7, 2026 between 01:57 UTC and 02:34 UTC, delivery service requests experienced elevated error\n        rates of approximately 0.035% due to an outage in Cloudflare's R2 storage service. Our automated monitoring\n        detected the issue at 02:05 UTC (8 minutes after onset), and we initiated a manual failover to an alternate\n        cloud provider, restoring the service at 02:34 UTC (37 minutes after onset).",
     "impact": "none",
     "incidentUpdated": "2026-02-12T11:44:49.510Z",
     "startTime": "2026-02-07T01:57:00.000Z",
