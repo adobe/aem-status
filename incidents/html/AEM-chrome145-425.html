@@ -1,11 +1,12 @@
 <h1 class="none">Chrome 145 intermittently displays "425 Too Early" errors</h1>
 <article data-incident-start-time="2026-02-11T00:00:00Z" data-incident-end-time="2026-02-25T19:30:00Z"
-  data-incident-error-rate="" data-incident-impacted-service="publishing">
+  data-incident-error-rate="0.0" data-incident-impacted-service="publishing">
 
+  <h3>Executive Summary</h3>
   <p>
-    Starting February 11, 2026, users on Google Chrome version 145 began experiencing intermittent
-    "425 Too Early" errors when accessing AEM Edge Delivery Services pages on *.aem.live and
-    *.aem.page domains. The error appeared as a blank page with "Too Early" text, requiring users
+    From February 11 to February 25, 2026 (14 days), users on Google Chrome version 145 experienced
+    intermittent "425 Too Early" errors when accessing AEM Edge Delivery Services pages on *.aem.live
+    and *.aem.page domains. The error appeared as a blank page with "Too Early" text, requiring users
     to reload to access content. This particularly affected authoring workflows, including Sidekick
     functionality and content preview.
   </p>
@@ -42,11 +43,17 @@
     days. The issue was correlated with the Chrome 145 stable release rollout beginning February 11.
     Fastly published their incident notice on February 13, 2026.
   </p>
+  <p>
+    Automated monitoring did not detect this incident. The 425 errors occurred in Fastly's TLS
+    stack before requests reached our logging infrastructure, and proactive detection would have
+    required testing with pre-release Chrome versions—impractical given the number of browsers
+    and versions in use.
+  </p>
 
   <h3>Impact</h3>
   <p>
-    The incident affected Chrome 145 users directly accessing AEM Edge Delivery Services
-    publishing infrastructure:
+    The incident lasted 14 days, from February 11 to February 25, 2026, affecting Chrome 145
+    users directly accessing AEM Edge Delivery Services publishing infrastructure:
   </p>
   <ul>
     <li>Preview pages on *.aem.page domains</li>
@@ -55,8 +62,9 @@
     <li>Sidekick extension functionality (intermittent load failures)</li>
   </ul>
   <p>
-    Production delivery through customer CDNs was unaffected, as customer CDNs do not use HTTP/3
-    for origin requests to *.aem.live. The error rate is not available as these errors occurred
+    The errors were intermittent—a page reload was sufficient to recover in most cases. Production
+    delivery through customer CDNs was unaffected, as customer CDNs do not use HTTP/3 for origin
+    requests to *.aem.live. Precise error rate metrics are unavailable as the 425 errors occurred
     in Fastly's TLS stack before reaching our logging infrastructure.
   </p>
 
@@ -78,10 +86,6 @@
   </ul>
 
   <h3>Action Items</h3>
-  <p>
-    This incident highlights the challenge of third-party browser regressions affecting CDN
-    protocol optimizations.
-  </p>
   <ul>
     <li>
       Request error visibility from Fastly: Get 425 error rates added to logging or dashboards
@@ -104,9 +108,9 @@
   <li>
     <h2>Resolved</h2>
     <p>
-      Fastly has temporarily disabled 0-RTT for shared IP customers, mitigating the issue for
-      most users. Chrome has released fixes that will be included in upcoming stable updates.
-      Users still experiencing issues should reload the page or disable QUIC in Chrome flags.
+      Fastly has disabled 0-RTT on shared IPs serving *.aem.page and *.aem.live, resolving the
+      issue. Chrome has separately released a fix (CL 7581133) that will ship in an upcoming
+      stable update, after which Fastly's configuration change can be reverted.
     </p>
     <time>2026-02-25T19:30:00.000Z</time>
   </li>
