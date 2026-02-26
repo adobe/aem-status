@@ -19,6 +19,16 @@
     "rootCause": "dependency-issue"
   },
   {
+    "code": "AEM-chrome145-425",
+    "name": "Chrome 145 intermittently displays \"425 Too Early\" errors",
+    "message": "Starting February 11, 2026, users on Google Chrome version 145 began experiencing intermittent\n    \"425 Too Early\" errors when accessing AEM Edge Delivery Services pages on *.aem.live and\n    *.aem.page domains. The error appeared as a blank page with \"Too Early\" text, requiring users\n    to reload to access content. This particularly affected authoring workflows, including Sidekick\n    functionality and content preview.",
+    "impact": "none",
+    "incidentUpdated": "2026-02-26T12:00:00.000Z",
+    "startTime": "2026-02-11T00:00:00Z",
+    "endTime": "2026-02-25T19:30:00Z",
+    "impactedService": "publishing"
+  },
+  {
     "code": "AEM-65vahxsa",
     "name": "Delivery service disrupted by Cloudflare R2 outage",
     "message": "On February 7, 2026 between 01:57 UTC and 02:34 UTC, delivery service requests experienced elevated error\n        rates of approximately 0.035% due to an outage in Cloudflare's R2 storage service. Our automated monitoring\n        detected the issue at 02:05 UTC (8 minutes after onset), and we initiated a manual failover to an alternate\n        cloud provider, restoring the service at 02:34 UTC (37 minutes after onset).",
