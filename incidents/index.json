@@ -19,6 +19,26 @@
     "rootCause": "dependency-issue"
   },
   {
+    "code": "AEM-chrome145-425",
+    "name": "Chrome 145 intermittently displays \"425 Too Early\" errors",
+    "message": "From February 11 to February 25, 2026 (14 days), users on Google Chrome version 145 experienced\n    intermittent \"425 Too Early\" errors when accessing AEM Edge Delivery Services pages on *.aem.live\n    and *.aem.page domains. The error appeared as a blank page with \"Too Early\" text, requiring users\n    to reload to access content. This particularly affected authoring workflows, including Sidekick\n    functionality and content preview.",
+    "impact": "none",
+    "incidentUpdated": "2026-02-26T12:00:00.000Z",
+    "startTime": "2026-02-11T00:00:00Z",
+    "endTime": "2026-02-25T19:30:00Z",
+    "errorRate": "0.0",
+    "impactedService": "publishing",
+    "affectedComponents": [
+      "delivery",
+      "publishing"
+    ],
+    "internalServices": [
+      "sidekick"
+    ],
+    "externalVendors": null,
+    "rootCause": "dependency-issue"
+  },
+  {
     "code": "AEM-65vahxsa",
     "name": "Delivery service disrupted by Cloudflare R2 outage",
     "message": "On February 7, 2026 between 01:57 UTC and 02:34 UTC, delivery service requests experienced elevated error\n        rates of approximately 0.035% due to an outage in Cloudflare's R2 storage service. Our automated monitoring\n        detected the issue at 02:05 UTC (8 minutes after onset), and we initiated a manual failover to an alternate\n        cloud provider, restoring the service at 02:34 UTC (37 minutes after onset).",
@@ -90,7 +110,9 @@
     "affectedComponents": [
       "publishing"
     ],
-    "internalServices": null,
+    "internalServices": [
+      "admin-api"
+    ],
     "externalVendors": null,
     "rootCause": "deployment-issue"
   },
@@ -183,7 +205,9 @@
     "endTime": "2025-10-09T17:43:54.488Z",
     "errorRate": "0.000",
     "impactedService": "publishing",
-    "affectedComponents": null,
+    "affectedComponents": [
+      "publishing"
+    ],
     "internalServices": [
       "code-sync"
     ],
@@ -255,7 +279,9 @@
     "internalServices": [
       "admin-api"
     ],
-    "externalVendors": null,
+    "externalVendors": [
+      "webpack"
+    ],
     "rootCause": "deployment-issue",
     "startTime": "2025-04-08T10:44:51.000Z",
     "endTime": "2025-04-08T11:23:17.000Z"
@@ -284,7 +310,9 @@
     "message": "Executive Summary\n\nOn March 15, 2025, between 7:00 AM and 11:21 AM UTC, approximately 90% of customers experienced issues with the delivery of RUM (Real User Monitoring) scripts due to availability problems with the unpkg.com backend. The incident was caused by unpkg.com experiencing degraded performance, combined with our system's inability to properly handle first-byte timeout errors in the backend fallback mechanism. The issue was identified and resolved by adjusting timeout configurations an",
     "impact": "none",
     "incidentUpdated": "2025-03-18T12:07:00.000Z",
-    "affectedComponents": null,
+    "affectedComponents": [
+      "delivery"
+    ],
     "internalServices": [
       "rum"
     ],
@@ -384,7 +412,9 @@
     "message": "An aemsites organisation owner updated the AEM Code Sync config and accidentally removed all repositories from the config. Github UI is not fully intuitive.\n\nAs a follow up step, a reminder email has been sent to all the owners.",
     "impact": "minor",
     "incidentUpdated": "2024-12-13T09:05:00.000Z",
-    "affectedComponents": null,
+    "affectedComponents": [
+      "publishing"
+    ],
     "internalServices": [
       "code-sync"
     ],
@@ -419,7 +449,9 @@
     "message": "On 11.09.2024 12:30 UTC we noticed that the AEM Code Sync Github application has stopped dispatching github events since 05:00 UTC. As a result, github actions that are triggered on a repository_dispatch event were not longer invoked. \n\nThe reason was a removed content-write permission of the AEM Code Sync Github application which is required to dispatch events. After restoring the permission, the notifications were dispatched again. \n\nCustomers that use repository_dispatch events in their githu",
     "impact": "minor",
     "incidentUpdated": "2024-09-11T14:08:00.000Z",
-    "affectedComponents": null,
+    "affectedComponents": [
+      "publishing"
+    ],
     "internalServices": [
       "code-sync"
     ],
@@ -456,7 +488,9 @@
     "affectedComponents": [
       "publishing"
     ],
-    "internalServices": null,
+    "internalServices": [
+      "admin-api"
+    ],
     "externalVendors": null,
     "rootCause": "deployment-issue",
     "startTime": "2024-07-17T16:02:00.000Z",
@@ -564,7 +598,9 @@
     "message": "Between 7:00 am and 12:45 pm (UTC) today, the JavaScript delivery feature of the Helix RUM Collector Service experienced an outage that resulted in slow responses and responses with status code 520 for following request types:\n\n\nhelix-rum-js: this slowed down page rendering for customers of Adobe Experience Manager as a Cloud Service that are part of the VIP program for RUM collection in AEM CS. This affected a small double digit number of customers.\nhelix-rum-enhancer: all customers of AEM CS a",
     "impact": "minor",
     "incidentUpdated": "2024-04-12T14:31:00.000Z",
-    "affectedComponents": null,
+    "affectedComponents": [
+      "delivery"
+    ],
     "internalServices": [
       "rum"
     ],
@@ -581,7 +617,9 @@
     "message": "On March 18 the system experienced a unexpected indexing load that overwhelmed the indexing queue. Due to a suboptimal configuration the system was not able to process the queue fast enough and clogged indexing processing for all customers.\n\nConsequently, index updates might have been delayed by over 1 hour.\n\nAfter identifying the problem we could reconfigure the queue to avoid similar problems in the future.",
     "impact": "minor",
     "incidentUpdated": "2024-05-27T14:58:00.000Z",
-    "affectedComponents": null,
+    "affectedComponents": [
+      "delivery"
+    ],
     "internalServices": [
       "indexing"
     ],
@@ -599,7 +637,9 @@
     "affectedComponents": [
       "publishing"
     ],
-    "internalServices": null,
+    "internalServices": [
+      "admin-api"
+    ],
     "externalVendors": null,
     "rootCause": "resource-limits",
     "startTime": "2024-03-04T01:07:00.000Z",
@@ -660,7 +700,9 @@
     "message": "We discovered that the errors were caused by an issue with a specific IO region in Fastly. The impact of the incident lasted for approximately 22 minutes, from 11:42 to 12:04 UTC. During that period we saw an increase of the media delivery error rate from 0% to 4.8%. About 50% of the errored requests were initiated by Bots. Customer impact has been negligible. We will continue to closely monitor error rates of the the infrastructure we are using and take action if necessary.",
     "impact": "minor",
     "incidentUpdated": "2023-12-15T15:11:00.000Z",
-    "affectedComponents": null,
+    "affectedComponents": [
+      "delivery"
+    ],
     "internalServices": [
       "media"
     ],
@@ -724,7 +766,9 @@
     "message": "Between 9:18 UTC and 14:36 UTC on 18-oct-2023 due to a change in the domain of our externally facing documentation website https://www.hlx.live to https://www.aem.live a small portion of www.hlx.com/tools which hosts resources used by sidekick was redirected accidentally.   \n\nOur analysis shows that 0.6% of the traffic to www.hlx.com/tools during that time window was wrongly redirected and was potentially leading to an issue where users were not able to open up the sidekick library under certain",
     "impact": "minor",
     "incidentUpdated": "2023-10-19T14:01:00.000Z",
-    "affectedComponents": null,
+    "affectedComponents": [
+      "publishing"
+    ],
     "internalServices": [
       "sidekick"
     ],
@@ -742,7 +786,9 @@
     "affectedComponents": [
       "delivery"
     ],
-    "internalServices": null,
+    "internalServices": [
+      "dns"
+    ],
     "externalVendors": null,
     "rootCause": "dns-issue",
     "startTime": "2023-09-28T15:36:00.000Z",
@@ -757,7 +803,9 @@
     "affectedComponents": [
       "delivery"
     ],
-    "internalServices": null,
+    "internalServices": [
+      "dns"
+    ],
     "externalVendors": null,
     "rootCause": "dns-issue",
     "startTime": "2023-09-26T00:00:00.000Z",
@@ -788,7 +836,9 @@
     "affectedComponents": [
       "publishing"
     ],
-    "internalServices": null,
+    "internalServices": [
+      "admin-api"
+    ],
     "externalVendors": null,
     "rootCause": "third-party-outage",
     "startTime": "2023-06-07T18:56:00.000Z",
@@ -819,7 +869,9 @@
     "message": "Between 10:01 am an 10:16 am today, a configuration change to a Serverless function caused the GitHub bot to fail to respond to notifications from GitHub. In total 31 requests were affected.\n\nIf you pushed code changes in that time period, they might not have come through. You can remedy this by pushing an additional, empty commit to the same branch.\n\nIn order to prevent similar issues to arise in the future, we will establish a review process for configuration changes to the production services",
     "impact": "minor",
     "incidentUpdated": "2023-02-09T10:28:00.000Z",
-    "affectedComponents": null,
+    "affectedComponents": [
+      "publishing"
+    ],
     "internalServices": [
       "code-sync"
     ],
@@ -887,7 +939,9 @@
     "message": "An new version of the Franklin admin service conflicted with a behavior of the Franklin github bot which lead to a delay of synchronizations of code updates. The issue was not noticed for a few hours as the function that was affected was not heavily used at the time.\nThe issue is fixed in a newly released version of the Franklin github bot, and all affected code synchronization will be synchronized.",
     "impact": "minor",
     "incidentUpdated": "2022-12-22T22:54:00.000Z",
-    "affectedComponents": null,
+    "affectedComponents": [
+      "publishing"
+    ],
     "internalServices": [
       "code-sync"
     ],
@@ -907,7 +961,9 @@
     "affectedComponents": [
       "publishing"
     ],
-    "internalServices": null,
+    "internalServices": [
+      "sidekick"
+    ],
     "externalVendors": [
       "microsoft"
     ],
@@ -937,7 +993,9 @@
     "message": "The underlying reason for the increased error rates on media delivery was a partial outage of Fastly’s Image Optimizer:\nhttps://status.fastly.com/incidents/s542qjby04vb\n\nWe have opened an issue with Fastly support, asking for an official statement about how Fastly is going to address this issue and prevent future such outages.",
     "impact": "minor",
     "incidentUpdated": "2022-06-29T15:29:00.000Z",
-    "affectedComponents": null,
+    "affectedComponents": [
+      "delivery"
+    ],
     "internalServices": [
       "media"
     ],
@@ -1006,7 +1064,9 @@
     "affectedComponents": [
       "publishing"
     ],
-    "internalServices": null,
+    "internalServices": [
+      "admin-api"
+    ],
     "externalVendors": [
       "microsoft"
     ],
