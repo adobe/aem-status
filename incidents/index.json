@@ -4,7 +4,13 @@
     "name": "Pipeline timeout errors effecting Page Delivery",
     "message": "On Wednesday, April 8, 2026 between 15:01 UTC and 15:12 UTC, we observed a brief spike in 503 errors affecting AEM\n    Delivery across multiple hosts. The errors were associated with the HTML pipeline and resulted in a small number of\n    failed requests. The overall error rate remained below 0.01%, and impact to end users was minimal.",
     "impact": "none",
-    "incidentUpdated": "2026-04-08T16:18:45.477Z"
+    "incidentUpdated": "2026-04-08T16:18:45.477Z",
+    "affectedComponents": [
+      "delivery"
+    ],
+    "internalServices": null,
+    "externalVendors": null,
+    "rootCause": "unknown"
   },
   {
     "code": "AEM-b948yxq4",
