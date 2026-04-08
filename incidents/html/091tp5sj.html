@@ -1,0 +1,40 @@
+<h1 class="none">Pipeline timeout errors effecting Page Delivery</h1>
+<article data-incident-start-time="2026-04-08T15:01:52.000Z" data-incident-end-time="2026-04-08T15:12:31.000Z"
+  data-incident-error-rate="0.00008" data-incident-impacted-service="delivery">
+
+  <h3>Executive Summary</h3>
+  <p>On Wednesday, April 8, 2026 between 15:01 UTC and 15:12 UTC, we observed a brief spike in 503 errors affecting AEM
+    Delivery across multiple hosts. The errors were associated with the HTML pipeline and resulted in a small number of
+    failed requests. The overall error rate remained below 0.01%, and impact to end users was minimal.</p>
+
+
+  <h3>Root Cause</h3>
+  <p>The incident was caused by elevated backend latency in the HTML pipeline, leading to first byte and read timeouts.
+    Requests exceeded expected response times, resulting in 503 responses being returned by the delivery layer. The
+    issue was transient and affected multiple hosts, suggesting a short-lived backend performance degradation.</p>
+
+  <h3>Resolution</h3>
+  <p>The issue resolved without manual intervention as backend latency returned to normal levels. No customer action is
+    required.</p>
+
+  <time>2026-04-08T16:18:45.477Z</time>
+</article>
+
+<ul class="updates">
+  <h2>Resolved</h2>
+  <p>This incident has been resolved. Backend response times returned to normal and errors subsided.</p>
+  <time>2026-04-08T15:47:00.000Z</time>
+  </li>
+
+  <li>
+    <h2>Monitoring</h2>
+    <p>Backend latency stabilized and error rates dropped. Systems were monitored to ensure continued recovery.</p>
+    <time>2026-04-08T15:12:31.000Z</time>
+  </li>
+
+  <li>
+    <h2>Identified</h2>
+    <p>We identified elevated backend latency in the HTML pipeline causing timeout-related 503 errors across multiple
+      hosts.</p>
+    <time>2026-04-08T15:01:52.000Z</time>
+</ul>
