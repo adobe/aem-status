@@ -4,7 +4,7 @@
 
   <h3>Executive Summary</h3>
   <p>On Wednesday, April 8, 2026 between 15:01 UTC and 15:12 UTC, we observed a brief spike in 503 errors affecting AEM
-    Delivery across multiple hosts. The errors were associated with the HTML pipeline and resulted in a small number of
+    Delivery across multiple hosts. The incident was detected via automated error-rate monitoring. The errors were associated with the HTML pipeline and resulted in a small number of
     failed requests. The overall error rate remained well below 0.01% (~0.00006852%), and impact to end users was minimal.</p>
 
 
@@ -16,11 +16,6 @@
   <h3>Resolution</h3>
   <p>The issue resolved without manual intervention as backend latency returned to normal levels. No customer action is
     required.</p>
-
-  <h3>Action Items</h3>
-  <ul>
-    <li>Add proactive backend latency monitoring with alerting to detect HTML pipeline degradation before it results in 503 errors for customers</li>
-  </ul>
 
   <time>2026-04-08T16:18:45.477Z</time>
 </article>
