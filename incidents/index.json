@@ -1,5 +1,12 @@
 [
   {
+    "code": "091tp5sj",
+    "name": "Pipeline timeout errors effecting Page Delivery",
+    "message": "On Wednesday, April 8, 2026 between 15:01 UTC and 15:12 UTC, we observed a brief spike in 503 errors affecting AEM\n    Delivery across multiple hosts. The errors were associated with the HTML pipeline and resulted in a small number of\n    failed requests. The overall error rate remained below 0.01%, and impact to end users was minimal.",
+    "impact": "none",
+    "incidentUpdated": "2026-04-08T16:18:45.477Z"
+  },
+  {
     "code": "AEM-b948yxq4",
     "name": "AEM Sidekick sign in no longer working after upgrade to Google Chrome v145.0.*",
     "message": "Around 14:30 UTC, a user whose Google Chrome had just been upgraded to the new major version 145 started noticing problems on https://tools.aem.live. When trying to sign in to a project, they would see the following alert:",
