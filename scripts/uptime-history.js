@@ -216,7 +216,6 @@ function renderYAxis(containerId) {
     const bottomPx = Math.round((tick.nines / MAX_NINES) * CHART_HEIGHT);
     label.style.position = 'absolute';
     label.style.bottom = `${bottomPx}px`;
-    label.style.transform = 'translateY(50%)';
     container.appendChild(label);
   });
 }
