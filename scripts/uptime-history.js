@@ -10,6 +10,7 @@ const START_MONTH = 5; // June 2023 (0-indexed)
 
 // Nines scale: max nines to display (100% uptime caps here)
 const MAX_NINES = 5;
+const CHART_HEIGHT = 160; // px, must match .chart-area { height: 160px }
 
 /**
  * Compute monthly uptime from raw incident data.
@@ -96,9 +97,9 @@ function uptimeToNines(uptimePct) {
 
 function barHeight(uptimePct) {
   const nines = uptimeToNines(uptimePct);
-  // Map 0..MAX_NINES → 5%..100% of container height
-  const pct = (nines / MAX_NINES) * 95 + 5;
-  return `${pct}%`;
+  // Map 0..MAX_NINES → pixels (min 2px)
+  const heightPx = Math.max(Math.round((nines / MAX_NINES) * CHART_HEIGHT), 2);
+  return `${heightPx}px`;
 }
 
 const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -111,12 +112,12 @@ function renderChart(containerId, data, service) {
 
   const slaTarget = SLA_TARGETS[service] * 100;
   const slaNines = uptimeToNines(slaTarget);
-  const slaHeight = (slaNines / MAX_NINES) * 95 + 5;
+  const slaHeightPx = Math.round((slaNines / MAX_NINES) * CHART_HEIGHT);
 
   // SLA line
   const slaLine = document.createElement('div');
   slaLine.className = 'sla-line';
-  slaLine.style.bottom = `${slaHeight}%`;
+  slaLine.style.bottom = `${slaHeightPx}px`;
   container.appendChild(slaLine);
 
   let lastYear = null;
@@ -162,10 +163,9 @@ function renderYAxis(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
   container.innerHTML = '';
-  // Nines-based ticks: [uptime%, nines value]
+  // Nines-based ticks (99.999% removed — overlaps with 100% when MAX_NINES = 5)
   const ticks = [
     { label: '100%', nines: MAX_NINES },
-    { label: '99.999%', nines: 5 },
     { label: '99.99%', nines: 4 },
     { label: '99.9%', nines: 3 },
     { label: '99%', nines: 2 },
@@ -175,10 +175,9 @@ function renderYAxis(containerId) {
     const label = document.createElement('div');
     label.className = 'y-label';
     label.textContent = tick.label;
-    // Position from bottom: nines/MAX_NINES * 95 + 5, then invert for top
-    const bottomPct = (tick.nines / MAX_NINES) * 95 + 5;
+    const bottomPx = Math.round((tick.nines / MAX_NINES) * CHART_HEIGHT);
     label.style.position = 'absolute';
-    label.style.bottom = `${bottomPct}%`;
+    label.style.bottom = `${bottomPx}px`;
     label.style.transform = 'translateY(50%)';
     container.appendChild(label);
   });
