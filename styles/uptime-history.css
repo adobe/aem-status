@@ -31,9 +31,6 @@
     top: 0;
     bottom: 0;
     width: 46px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     padding: var(--spectrum-spacing-600) 0;
     pointer-events: none;
 }

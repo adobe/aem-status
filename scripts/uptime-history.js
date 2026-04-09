@@ -8,8 +8,8 @@ const SLA_TARGETS = {
 const START_YEAR = 2023;
 const START_MONTH = 5; // June 2023 (0-indexed)
 
-// Scale range: we map uptime from SCALE_MIN..100% to 0..100% of bar height
-const SCALE_MIN = 95;
+// Nines scale: max nines to display (100% uptime caps here)
+const MAX_NINES = 5;
 
 /**
  * Compute monthly uptime from raw incident data.
@@ -79,14 +79,25 @@ function getBarColor(uptimePct) {
   if (uptimePct >= 99.99) return 'level-excellent';
   if (uptimePct >= 99.9) return 'level-good';
   if (uptimePct >= 99) return 'level-fair';
-  if (uptimePct >= 95) return 'level-poor';
+  if (uptimePct >= 90) return 'level-poor';
   return 'level-bad';
 }
 
+/**
+ * Convert uptime percentage to "nines" value.
+ * 90% = 1 nine, 99% = 2, 99.9% = 3, 99.99% = 4, 99.999% = 5, 100% = MAX_NINES
+ */
+function uptimeToNines(uptimePct) {
+  const fraction = uptimePct / 100;
+  if (fraction >= 1) return MAX_NINES;
+  if (fraction <= 0) return 0;
+  return Math.min(-Math.log10(1 - fraction), MAX_NINES);
+}
+
 function barHeight(uptimePct) {
-  // Map SCALE_MIN..100 → 5%..100% of container height
-  const clamped = Math.max(uptimePct, SCALE_MIN);
-  const pct = ((clamped - SCALE_MIN) / (100 - SCALE_MIN)) * 95 + 5;
+  const nines = uptimeToNines(uptimePct);
+  // Map 0..MAX_NINES → 5%..100% of container height
+  const pct = (nines / MAX_NINES) * 95 + 5;
   return `${pct}%`;
 }
 
@@ -99,7 +110,8 @@ function renderChart(containerId, data, service) {
   container.innerHTML = '';
 
   const slaTarget = SLA_TARGETS[service] * 100;
-  const slaHeight = ((Math.max(slaTarget, SCALE_MIN) - SCALE_MIN) / (100 - SCALE_MIN)) * 95 + 5;
+  const slaNines = uptimeToNines(slaTarget);
+  const slaHeight = (slaNines / MAX_NINES) * 95 + 5;
 
   // SLA line
   const slaLine = document.createElement('div');
@@ -150,11 +162,24 @@ function renderYAxis(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
   container.innerHTML = '';
-  const ticks = [100, 99, 98, 97, 96, 95];
-  ticks.forEach((val) => {
+  // Nines-based ticks: [uptime%, nines value]
+  const ticks = [
+    { label: '100%', nines: MAX_NINES },
+    { label: '99.999%', nines: 5 },
+    { label: '99.99%', nines: 4 },
+    { label: '99.9%', nines: 3 },
+    { label: '99%', nines: 2 },
+    { label: '90%', nines: 1 },
+  ];
+  ticks.forEach((tick) => {
     const label = document.createElement('div');
     label.className = 'y-label';
-    label.textContent = `${val}%`;
+    label.textContent = tick.label;
+    // Position from bottom: nines/MAX_NINES * 95 + 5, then invert for top
+    const bottomPct = (tick.nines / MAX_NINES) * 95 + 5;
+    label.style.position = 'absolute';
+    label.style.bottom = `${bottomPct}%`;
+    label.style.transform = 'translateY(50%)';
     container.appendChild(label);
   });
 }
@@ -252,6 +277,13 @@ async function init() {
   // Update copyright year
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Auto-scroll charts to show most recent months (after layout settles)
+  setTimeout(() => {
+    document.querySelectorAll('.chart-container').forEach((el) => {
+      el.scrollLeft = el.scrollWidth;
+    });
+  }, 100);
 
   document.body.classList.add('ready');
 }
