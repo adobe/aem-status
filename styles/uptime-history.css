@@ -80,11 +80,11 @@
 }
 
 /* Bar colors */
-.bar-col.level-excellent { background: #10b981; }
-.bar-col.level-good      { background: #22c55e; }
-.bar-col.level-fair      { background: #f59e0b; }
-.bar-col.level-poor      { background: #f97316; }
-.bar-col.level-bad       { background: #ef4444; }
+.bar-col.level-exceeds    { background: #059669; }  /* dark green — emerald-600 */
+.bar-col.level-meets      { background: #34d399; }  /* light green — emerald-400 */
+.bar-col.level-misses     { background: #fb923c; }  /* light orange — orange-400 */
+.bar-col.level-misses-bad { background: #ea580c; }  /* dark orange — orange-600 */
+.bar-col.level-critical   { background: #dc2626; }  /* red — red-600 */
 
 /* X-axis labels */
 .x-label {
