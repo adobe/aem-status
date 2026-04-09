@@ -47,8 +47,47 @@ function monthKey(date) {
 export function computeMonthlyUptime(incidents) {
   const services = ['delivery', 'publishing'];
 
-  // --- 1. Parse & filter valid incidents ---
-  const parsed = incidents
+  // --- 1. Enrich incidents with missing fields, then parse & filter ---
+  const impactRates = { critical: 1.0, major: 0.5, minor: 0.1, none: 0.01 };
+
+  const enriched = incidents
+    .map((incident) => {
+      const entry = { ...incident };
+
+      // Skip maintenance
+      if (incident.impact === 'maintenance') return null;
+
+      // Infer impactedService from name if missing
+      if (!entry.impactedService) {
+        const name = (incident.name || '').toLowerCase();
+        const isPublishing = /publish|authoring|code sync|sidekick|admin/.test(name);
+        const isDelivery = /delivery|page delivery|error rate|rum|image/.test(name);
+        if (isPublishing && !isDelivery) entry.impactedService = 'publishing';
+        else if (isDelivery && !isPublishing) entry.impactedService = 'delivery';
+        else entry.impactedService = 'both';
+      }
+
+      // Infer errorRate from impact if missing or 0
+      if (!entry.errorRate || parseFloat(entry.errorRate) === 0) {
+        entry.errorRate = String(impactRates[incident.impact] || 0.01);
+      }
+
+      return entry;
+    })
+    .filter(Boolean);
+
+  // Expand "both" entries into two entries (one per service)
+  const expanded = [];
+  enriched.forEach((inc) => {
+    if (inc.impactedService === 'both') {
+      expanded.push({ ...inc, impactedService: 'delivery' });
+      expanded.push({ ...inc, impactedService: 'publishing' });
+    } else {
+      expanded.push(inc);
+    }
+  });
+
+  const parsed = expanded
     .map((incident) => ({
       startTime: parseIncidentTimestamp(incident.startTime),
       endTime: parseIncidentTimestamp(incident.endTime),

@@ -9,8 +9,8 @@ const START_YEAR = 2023;
 const START_MONTH = 5; // June 2023 (0-indexed)
 
 // Nines scale: max nines to display (100% uptime caps here)
-const MAX_NINES = 5;
-const CHART_HEIGHT = 160; // px, must match .chart-area { height: 160px }
+const MAX_NINES = 7;
+const CHART_HEIGHT = 250; // px, must match .chart-area { height: 250px }
 
 /**
  * Compute monthly uptime from raw incident data.
@@ -30,8 +30,47 @@ function computeMonthlyUptime(incidents) {
     if (y >= now.getFullYear()) break;
   }
 
-  // Parse incidents once
-  const parsed = incidents
+  // Enrich incidents with missing fields, then parse & filter
+  const impactRates = { critical: 1.0, major: 0.5, minor: 0.1, none: 0.01 };
+
+  const enriched = incidents
+    .map((inc) => {
+      const entry = { ...inc };
+
+      // Skip maintenance
+      if (inc.impact === 'maintenance') return null;
+
+      // Infer impactedService from name if missing
+      if (!entry.impactedService) {
+        const name = (inc.name || '').toLowerCase();
+        const isPublishing = /publish|authoring|code sync|sidekick|admin/.test(name);
+        const isDelivery = /delivery|page delivery|error rate|rum|image/.test(name);
+        if (isPublishing && !isDelivery) entry.impactedService = 'publishing';
+        else if (isDelivery && !isPublishing) entry.impactedService = 'delivery';
+        else entry.impactedService = 'both';
+      }
+
+      // Infer errorRate from impact if missing or 0
+      if (!entry.errorRate || parseFloat(entry.errorRate) === 0) {
+        entry.errorRate = String(impactRates[inc.impact] || 0.01);
+      }
+
+      return entry;
+    })
+    .filter(Boolean);
+
+  // Expand "both" entries into two entries (one per service)
+  const expanded = [];
+  enriched.forEach((inc) => {
+    if (inc.impactedService === 'both') {
+      expanded.push({ ...inc, impactedService: 'delivery' });
+      expanded.push({ ...inc, impactedService: 'publishing' });
+    } else {
+      expanded.push(inc);
+    }
+  });
+
+  const parsed = expanded
     .map((inc) => ({
       startTime: parseIncidentTimestamp(inc.startTime),
       endTime: parseIncidentTimestamp(inc.endTime),
@@ -98,7 +137,7 @@ function uptimeToNines(uptimePct) {
 function barHeight(uptimePct) {
   const nines = uptimeToNines(uptimePct);
   // Map 0..MAX_NINES → pixels (min 2px)
-  const heightPx = Math.max(Math.round((nines / MAX_NINES) * CHART_HEIGHT), 2);
+  const heightPx = Math.min(Math.max(Math.round((nines / MAX_NINES) * CHART_HEIGHT), 2), CHART_HEIGHT);
   return `${heightPx}px`;
 }
 
@@ -138,19 +177,16 @@ function renderChart(containerId, data, service) {
     bar.dataset.downtime = svcData.downtimeMins;
     group.appendChild(bar);
 
-    // X-axis label: show month abbr, emphasize January / first month
+    // X-axis label: show month abbr; show abbreviated year for Jan / first month
     const label = document.createElement('div');
+    label.className = 'x-label';
     if (entry.month === 0 || (entry.year === START_YEAR && entry.month === START_MONTH)) {
-      label.className = 'x-label year-label';
-      label.textContent = `${entry.year}`;
+      label.textContent = `'${String(entry.year).slice(2)}`;
       lastYear = entry.year;
     } else if (entry.year !== lastYear && entry.month !== 0) {
-      // Show year on first visible bar of a new year
-      label.className = 'x-label year-label';
-      label.textContent = `${entry.year}`;
+      label.textContent = `'${String(entry.year).slice(2)}`;
       lastYear = entry.year;
     } else {
-      label.className = 'x-label';
       label.textContent = MONTH_NAMES[entry.month];
     }
     group.appendChild(label);
@@ -163,9 +199,11 @@ function renderYAxis(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
   container.innerHTML = '';
-  // Nines-based ticks (99.999% removed — overlaps with 100% when MAX_NINES = 5)
+  // Nines-based ticks
   const ticks = [
     { label: '100%', nines: MAX_NINES },
+    { label: '99.9999%', nines: 6 },
+    { label: '99.999%', nines: 5 },
     { label: '99.99%', nines: 4 },
     { label: '99.9%', nines: 3 },
     { label: '99%', nines: 2 },
