@@ -146,6 +146,19 @@ function renderChart(containerId, data, service) {
 }
 
 
+function renderYAxis(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+  const ticks = [100, 99, 98, 97, 96, 95];
+  ticks.forEach((val) => {
+    const label = document.createElement('div');
+    label.className = 'y-label';
+    label.textContent = `${val}%`;
+    container.appendChild(label);
+  });
+}
+
 function initTooltip() {
   const tooltip = document.getElementById('tooltip');
   if (!tooltip) return;
@@ -185,6 +198,28 @@ function initTooltip() {
   });
 }
 
+/**
+ * Normalize data from historical-uptime.js into chart format.
+ * historical-uptime.js returns: { month: 1-12, year, delivery: 0.9999, publishing: 1.0, incidents: [...] }
+ * Chart expects: { month: 0-11, year, delivery: { uptime: 99.99, incidentCount: N, downtimeMins: N } }
+ */
+function normalizeExternalData(rawData) {
+  return rawData.map((entry) => {
+    const normalized = { year: entry.year, month: entry.month - 1 };
+    Object.keys(SLA_TARGETS).forEach((svc) => {
+      const uptimeFraction = entry[svc];
+      const incidentsForService = (entry.incidents || []).filter((i) => i.impactedService === svc);
+      const totalDowntime = incidentsForService.reduce((sum, i) => sum + (i.downtimeMins || 0), 0);
+      normalized[svc] = {
+        uptime: (typeof uptimeFraction === 'number' ? uptimeFraction : 1) * 100,
+        incidentCount: incidentsForService.length,
+        downtimeMins: Math.round(totalDowntime * 100) / 100,
+      };
+    });
+    return normalized;
+  });
+}
+
 async function init() {
   let data;
 
@@ -193,9 +228,11 @@ async function init() {
     const mod = await import('./historical-uptime.js');
     if (mod.computeMonthlyUptime) {
       const incidents = await (await fetch('/incidents/index.json')).json();
-      data = mod.computeMonthlyUptime(incidents);
+      const rawData = mod.computeMonthlyUptime(incidents);
+      data = normalizeExternalData(rawData);
     } else if (mod.getMonthlyUptime) {
-      data = await mod.getMonthlyUptime();
+      const rawData = await mod.getMonthlyUptime();
+      data = normalizeExternalData(rawData);
     }
   } catch {
     // Module not available yet — fall back to inline computation
