@@ -36,6 +36,38 @@ function monthKey(date) {
 }
 
 /**
+ * Compute median errorRate for each impact level from incidents that have errorRate data.
+ * Returns an object like { none: 0.001, minor: 0.00927, major: 0.0833, critical: 0.1666 }
+ */
+function computeMedianErrorRates(incidents) {
+  const byImpact = {};
+  incidents.forEach((inc) => {
+    const rate = parseFloat(inc.errorRate);
+    if (rate > 0 && inc.impact) {
+      if (!byImpact[inc.impact]) byImpact[inc.impact] = [];
+      byImpact[inc.impact].push(rate);
+    }
+  });
+
+  const medians = {};
+  Object.entries(byImpact).forEach(([impact, rates]) => {
+    rates.sort((a, b) => a - b);
+    const mid = Math.floor(rates.length / 2);
+    medians[impact] = rates.length % 2 === 0
+      ? (rates[mid - 1] + rates[mid]) / 2
+      : rates[mid];
+  });
+
+  // For impact levels with no data, use fallbacks based on available data
+  if (!medians.critical) medians.critical = (medians.major || 0.0833) * 2;
+  if (!medians.major) medians.major = 0.0833;
+  if (!medians.minor) medians.minor = 0.01;
+  if (!medians.none) medians.none = 0.001;
+
+  return medians;
+}
+
+/**
  * Compute monthly uptime from an array of incidents.
  *
  * @param {Array} incidents - Raw incident objects from incidents/index.json
@@ -48,7 +80,7 @@ export function computeMonthlyUptime(incidents) {
   const services = ['delivery', 'publishing'];
 
   // --- 1. Enrich incidents with missing fields, then parse & filter ---
-  const impactRates = { critical: 1.0, major: 0.5, minor: 0.1, none: 0.01 };
+  const impactRates = computeMedianErrorRates(incidents);
 
   const enriched = incidents
     .map((incident) => {

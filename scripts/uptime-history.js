@@ -13,6 +13,38 @@ const MAX_NINES = 7;
 const CHART_HEIGHT = 250; // px, must match .chart-area { height: 250px }
 
 /**
+ * Compute median errorRate for each impact level from incidents that have errorRate data.
+ * Returns an object like { none: 0.001, minor: 0.00927, major: 0.0833, critical: 0.1666 }
+ */
+function computeMedianErrorRates(incidents) {
+  const byImpact = {};
+  incidents.forEach((inc) => {
+    const rate = parseFloat(inc.errorRate);
+    if (rate > 0 && inc.impact) {
+      if (!byImpact[inc.impact]) byImpact[inc.impact] = [];
+      byImpact[inc.impact].push(rate);
+    }
+  });
+
+  const medians = {};
+  Object.entries(byImpact).forEach(([impact, rates]) => {
+    rates.sort((a, b) => a - b);
+    const mid = Math.floor(rates.length / 2);
+    medians[impact] = rates.length % 2 === 0
+      ? (rates[mid - 1] + rates[mid]) / 2
+      : rates[mid];
+  });
+
+  // For impact levels with no data, use fallbacks based on available data
+  if (!medians.critical) medians.critical = (medians.major || 0.0833) * 2;
+  if (!medians.major) medians.major = 0.0833;
+  if (!medians.minor) medians.minor = 0.01;
+  if (!medians.none) medians.none = 0.001;
+
+  return medians;
+}
+
+/**
  * Compute monthly uptime from raw incident data.
  * This is a fallback if scripts/historical-uptime.js is not yet available.
  */
@@ -31,7 +63,7 @@ function computeMonthlyUptime(incidents) {
   }
 
   // Enrich incidents with missing fields, then parse & filter
-  const impactRates = { critical: 1.0, major: 0.5, minor: 0.1, none: 0.01 };
+  const impactRates = computeMedianErrorRates(incidents);
 
   const enriched = incidents
     .map((inc) => {
@@ -115,12 +147,15 @@ function computeMonthlyUptime(incidents) {
   });
 }
 
-function getBarColor(uptimePct) {
-  if (uptimePct >= 99.99) return 'level-excellent';
-  if (uptimePct >= 99.9) return 'level-good';
-  if (uptimePct >= 99) return 'level-fair';
-  if (uptimePct >= 90) return 'level-poor';
-  return 'level-bad';
+function getBarColor(uptimePct, slaTargetFraction) {
+  const nines = uptimeToNines(uptimePct);
+  const slaTargetNines = uptimeToNines(slaTargetFraction * 100);
+
+  if (nines >= slaTargetNines + 1) return 'level-exceeds';
+  if (nines >= slaTargetNines) return 'level-meets';
+  if (nines >= slaTargetNines - 1) return 'level-misses';
+  if (nines >= slaTargetNines - 2) return 'level-misses-bad';
+  return 'level-critical';
 }
 
 /**
@@ -167,7 +202,7 @@ function renderChart(containerId, data, service) {
     group.className = 'bar-group';
 
     const bar = document.createElement('div');
-    bar.className = `bar-col ${getBarColor(uptime)}`;
+    bar.className = `bar-col ${getBarColor(uptime, SLA_TARGETS[service])}`;
     bar.style.height = barHeight(uptime);
     bar.dataset.month = entry.month;
     bar.dataset.year = entry.year;
