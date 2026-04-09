@@ -25,14 +25,13 @@
     overflow: hidden;
 }
 
-/* Y-axis */
+/* Y-axis — must match .chart-area height exactly so label positions align */
 .chart-y-axis {
     position: absolute;
     left: 0;
-    top: 0;
-    bottom: 0;
+    top: var(--spectrum-spacing-600);
     width: 46px;
-    padding: var(--spectrum-spacing-600) 0;
+    height: 250px;
     pointer-events: none;
 }
 
@@ -42,6 +41,7 @@
     text-align: right;
     padding-right: var(--spectrum-spacing-100);
     line-height: 1;
+    transform: translateY(50%);
 }
 
 /* SLA target line */
