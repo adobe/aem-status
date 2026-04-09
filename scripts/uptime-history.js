@@ -1,4 +1,4 @@
-import { parseIncidentTimestamp } from './slo-calculator.js';
+import { computeMonthlyUptime } from './historical-uptime.js';
 
 const SLA_TARGETS = {
   delivery: 0.9999,
@@ -11,141 +11,6 @@ const START_MONTH = 5; // June 2023 (0-indexed)
 // Nines scale: max nines to display (100% uptime caps here)
 const MAX_NINES = 7;
 const CHART_HEIGHT = 250; // px, must match .chart-area { height: 250px }
-
-/**
- * Compute median errorRate for each impact level from incidents that have errorRate data.
- * Returns an object like { none: 0.001, minor: 0.00927, major: 0.0833, critical: 0.1666 }
- */
-function computeMedianErrorRates(incidents) {
-  const byImpact = {};
-  incidents.forEach((inc) => {
-    const rate = parseFloat(inc.errorRate);
-    if (rate > 0 && inc.impact) {
-      if (!byImpact[inc.impact]) byImpact[inc.impact] = [];
-      byImpact[inc.impact].push(rate);
-    }
-  });
-
-  const medians = {};
-  Object.entries(byImpact).forEach(([impact, rates]) => {
-    rates.sort((a, b) => a - b);
-    const mid = Math.floor(rates.length / 2);
-    medians[impact] = rates.length % 2 === 0
-      ? (rates[mid - 1] + rates[mid]) / 2
-      : rates[mid];
-  });
-
-  // For impact levels with no data, use fallbacks based on available data
-  if (!medians.critical) medians.critical = (medians.major || 0.0833) * 2;
-  if (!medians.major) medians.major = 0.0833;
-  if (!medians.minor) medians.minor = 0.01;
-  if (!medians.none) medians.none = 0.001;
-
-  return medians;
-}
-
-/**
- * Compute monthly uptime from raw incident data.
- * This is a fallback if scripts/historical-uptime.js is not yet available.
- */
-function computeMonthlyUptime(incidents) {
-  const now = new Date();
-  const months = [];
-
-  // Build list of months from June 2023 to now
-  for (let y = START_YEAR; ; y++) {
-    const startM = y === START_YEAR ? START_MONTH : 0;
-    for (let m = startM; m < 12; m++) {
-      if (y > now.getFullYear() || (y === now.getFullYear() && m > now.getMonth())) break;
-      months.push({ year: y, month: m });
-    }
-    if (y >= now.getFullYear()) break;
-  }
-
-  // Enrich incidents with missing fields, then parse & filter
-  const impactRates = computeMedianErrorRates(incidents);
-
-  const enriched = incidents
-    .map((inc) => {
-      const entry = { ...inc };
-
-      // Skip maintenance
-      if (inc.impact === 'maintenance') return null;
-
-      // Infer impactedService from name if missing
-      if (!entry.impactedService) {
-        const name = (inc.name || '').toLowerCase();
-        const isPublishing = /publish|authoring|code sync|sidekick|admin/.test(name);
-        const isDelivery = /delivery|page delivery|error rate|rum|image/.test(name);
-        if (isPublishing && !isDelivery) entry.impactedService = 'publishing';
-        else if (isDelivery && !isPublishing) entry.impactedService = 'delivery';
-        else entry.impactedService = 'both';
-      }
-
-      // Infer errorRate from impact if missing or 0
-      if (!entry.errorRate || parseFloat(entry.errorRate) === 0) {
-        entry.errorRate = String(impactRates[inc.impact] || 0.01);
-      }
-
-      return entry;
-    })
-    .filter(Boolean);
-
-  // Expand "both" entries into two entries (one per service)
-  const expanded = [];
-  enriched.forEach((inc) => {
-    if (inc.impactedService === 'both') {
-      expanded.push({ ...inc, impactedService: 'delivery' });
-      expanded.push({ ...inc, impactedService: 'publishing' });
-    } else {
-      expanded.push(inc);
-    }
-  });
-
-  const parsed = expanded
-    .map((inc) => ({
-      startTime: parseIncidentTimestamp(inc.startTime),
-      endTime: parseIncidentTimestamp(inc.endTime),
-      impactedService: inc.impactedService,
-      errorRate: parseFloat(inc.errorRate) || 0,
-    }))
-    .filter((i) => i.startTime && i.endTime && i.impactedService && i.errorRate);
-
-  return months.map(({ year, month }) => {
-    const monthStart = new Date(year, month, 1);
-    const monthEnd = new Date(year, month + 1, 1);
-    const totalMins = (monthEnd - monthStart) / 60000;
-
-    const services = {};
-    Object.keys(SLA_TARGETS).forEach((svc) => {
-      services[svc] = { downtimeMins: 0, incidentCount: 0, incidents: [] };
-    });
-
-    parsed.forEach((inc) => {
-      if (!services[inc.impactedService]) return;
-      // Check if incident overlaps this month
-      if (inc.endTime <= monthStart || inc.startTime >= monthEnd) return;
-      const overlapStart = Math.max(inc.startTime.getTime(), monthStart.getTime());
-      const overlapEnd = Math.min(inc.endTime.getTime(), monthEnd.getTime());
-      const overlapMins = (overlapEnd - overlapStart) / 60000;
-      const downtimeMins = overlapMins * inc.errorRate;
-      services[inc.impactedService].downtimeMins += downtimeMins;
-      services[inc.impactedService].incidentCount += 1;
-      services[inc.impactedService].incidents.push(inc);
-    });
-
-    const entry = { year, month };
-    Object.entries(services).forEach(([svc, data]) => {
-      const uptime = (totalMins - data.downtimeMins) / totalMins;
-      entry[svc] = {
-        uptime: Math.min(uptime, 1) * 100,
-        incidentCount: data.incidentCount,
-        downtimeMins: Math.round(data.downtimeMins * 100) / 100,
-      };
-    });
-    return entry;
-  });
-}
 
 function getBarColor(uptimePct, slaTargetFraction) {
   const nines = uptimeToNines(uptimePct);
@@ -317,27 +182,9 @@ function normalizeExternalData(rawData) {
 }
 
 async function init() {
-  let data;
-
-  // Try to use the historical-uptime module if available
-  try {
-    const mod = await import('./historical-uptime.js');
-    if (mod.computeMonthlyUptime) {
-      const incidents = await (await fetch('/incidents/index.json')).json();
-      const rawData = mod.computeMonthlyUptime(incidents);
-      data = normalizeExternalData(rawData);
-    } else if (mod.getMonthlyUptime) {
-      const rawData = await mod.getMonthlyUptime();
-      data = normalizeExternalData(rawData);
-    }
-  } catch {
-    // Module not available yet — fall back to inline computation
-  }
-
-  if (!data) {
-    const incidents = await (await fetch('/incidents/index.json')).json();
-    data = computeMonthlyUptime(incidents);
-  }
+  const incidents = await (await fetch('/incidents/index.json')).json();
+  const rawData = computeMonthlyUptime(incidents);
+  const data = normalizeExternalData(rawData);
 
   renderYAxis('delivery-y-axis');
   renderYAxis('publishing-y-axis');

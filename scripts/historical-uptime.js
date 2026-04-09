@@ -19,9 +19,7 @@ const SERVICE_START_MONTH = 5; // 0-indexed (June)
  * @returns {number}
  */
 function minutesInMonth(year, month) {
-  // Day 0 of next month = last day of this month
-  const days = new Date(year, month + 1, 0).getDate();
-  return days * 24 * 60;
+  return (Date.UTC(year, month + 1, 1) - Date.UTC(year, month, 1)) / 60000;
 }
 
 /**
@@ -30,8 +28,8 @@ function minutesInMonth(year, month) {
  * @returns {string} e.g. "2024-03"
  */
 function monthKey(date) {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const y = date.getUTCFullYear();
+  const m = String(date.getUTCMonth() + 1).padStart(2, '0');
   return `${y}-${m}`;
 }
 
@@ -132,29 +130,7 @@ export function computeMonthlyUptime(incidents) {
       startTime, endTime, impactedService, errorRate,
     }) => startTime && endTime && impactedService && errorRate > 0);
 
-  // --- 2. Build downtime map keyed by "YYYY-MM" + service ---
-  // downtimeMap["2024-03"]["delivery"] = total downtime minutes
-  const downtimeMap = {};
-  const incidentMap = {};
-
-  parsed.forEach(({
-    startTime, endTime, impactedService, errorRate, code, name,
-  }) => {
-    const key = monthKey(startTime);
-    const durationMins = (endTime.getTime() - startTime.getTime()) / 60000;
-    const downtimeMins = durationMins * errorRate;
-
-    if (!downtimeMap[key]) {
-      downtimeMap[key] = {};
-      services.forEach((s) => { downtimeMap[key][s] = 0; });
-    }
-    downtimeMap[key][impactedService] = (downtimeMap[key][impactedService] || 0) + downtimeMins;
-
-    if (!incidentMap[key]) incidentMap[key] = [];
-    incidentMap[key].push({ code, name, impactedService, errorRate, durationMins, downtimeMins });
-  });
-
-  // --- 3. Build full month list from service start to now ---
+  // --- 2. Build full month list from service start to now, clamping incidents ---
   const now = new Date();
   const results = [];
 
@@ -164,15 +140,37 @@ export function computeMonthlyUptime(incidents) {
   while (year < now.getFullYear() || (year === now.getFullYear() && month <= now.getMonth())) {
     const key = `${year}-${String(month + 1).padStart(2, '0')}`;
     const totalMins = minutesInMonth(year, month);
+    const monthStart = new Date(Date.UTC(year, month, 1));
+    const monthEnd = new Date(Date.UTC(year, month + 1, 1));
     const entry = { month: month + 1, year, key };
 
-    services.forEach((service) => {
-      const downtime = (downtimeMap[key] && downtimeMap[key][service]) || 0;
-      const uptimeMins = totalMins - downtime;
-      entry[service] = uptimeMins / totalMins;
+    const downtimeByService = {};
+    const monthIncidents = [];
+    services.forEach((s) => { downtimeByService[s] = 0; });
+
+    parsed.forEach(({
+      startTime, endTime, impactedService, errorRate, code, name,
+    }) => {
+      // Check if incident overlaps this month
+      if (endTime <= monthStart || startTime >= monthEnd) return;
+      const overlapStart = Math.max(startTime.getTime(), monthStart.getTime());
+      const overlapEnd = Math.min(endTime.getTime(), monthEnd.getTime());
+      if (overlapEnd <= overlapStart) return;
+      const overlapMins = (overlapEnd - overlapStart) / 60000;
+      const downtimeMins = overlapMins * errorRate;
+      downtimeByService[impactedService] = (downtimeByService[impactedService] || 0) + downtimeMins;
+      monthIncidents.push({
+        code, name, impactedService, errorRate, durationMins: overlapMins, downtimeMins,
+      });
     });
 
-    entry.incidents = incidentMap[key] || [];
+    services.forEach((service) => {
+      const downtime = downtimeByService[service] || 0;
+      const uptimeMins = totalMins - downtime;
+      entry[service] = Math.min(uptimeMins / totalMins, 1);
+    });
+
+    entry.incidents = monthIncidents;
     results.push(entry);
 
     // advance
