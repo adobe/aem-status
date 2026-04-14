@@ -167,15 +167,14 @@ function updateIncidentsIndex() {
   const indexPath = path.join(incidentsDir, 'index.json');
 
   // Read existing index to preserve timestamps and classifications
-  let existingIndex = [];
   const existingIncidentsMap = new Map();
   try {
-    existingIndex = JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
+    const existingIndex = JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
     // Build map of existing incidents for lookup
     existingIndex.forEach((incident) => {
       existingIncidentsMap.set(incident.code, incident);
     });
-  } catch (e) {
+  } catch {
     // No existing index.json found or could not parse, creating new one
   }
 
@@ -273,7 +272,7 @@ function updateIncidentsIndex() {
 if (fileURLToPath(import.meta.url) === process.argv[1]) {
   try {
     updateIncidentsIndex();
-  } catch (error) {
+  } catch {
     // Error updating incidents index
     process.exit(1);
   }

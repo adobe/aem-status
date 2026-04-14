@@ -293,7 +293,6 @@ const renderHeatmap = (grid, rates) => {
 
     // Calculate totals for each hour
     let grandTotal = 0;
-    let grandTotalRate = 0;
     for (let hour = 0; hour < 24; hour++) {
         let hourTotal = 0;
         let hourTotalRate = 0;
@@ -302,7 +301,6 @@ const renderHeatmap = (grid, rates) => {
             hourTotalRate += rates[day][hour];
         }
         grandTotal += hourTotal;
-        grandTotalRate += hourTotalRate;
 
         const hourTotalCell = document.createElement('div');
         hourTotalCell.className = 'heatmap-cell summary';
@@ -344,7 +342,7 @@ const renderHeatmap = (grid, rates) => {
     grandTotalCell.style.fontWeight = '800';
     grandTotalCell.style.backgroundColor = 'var(--spectrum-gray-200)';
 
-    grandTotalCell.addEventListener('mouseenter', (e) => {
+    grandTotalCell.addEventListener('mouseenter', () => {
         const tooltip = document.getElementById('tooltip');
         tooltip.innerHTML = `
             <strong>Grand Total</strong><br>
@@ -438,7 +436,7 @@ const renderStats = (grid, rates, incidents, weeksCount) => {
 // Initialize
 const init = async () => {
     const incidents = await getIncidents();
-    const { grid, rates, totalHours, weeksCount } = calculateHeatmapData(incidents);
+    const { grid, rates, weeksCount } = calculateHeatmapData(incidents);
     renderHeatmap(grid, rates);
     renderStats(grid, rates, incidents, weeksCount);
 
