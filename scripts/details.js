@@ -121,7 +121,7 @@ const init = async () => {
         time.textContent = new Date(time.textContent).toLocaleString();
       });
     }
-  } catch (e) {
+  } catch {
     container.innerHTML = '<div class="error">Incident not found. It may have been removed or the incident id is incorrect.</div>';
   }
 

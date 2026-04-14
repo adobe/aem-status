@@ -345,5 +345,4 @@ const initIncidents = async () => {
 
 if (window.location.pathname === '/' || window.location.pathname === '/index.html') initIncidents();
 
-// eslint-disable-next-line import/prefer-default-export
 export { fetchCurrentIncident };

@@ -221,7 +221,6 @@ describe('update-incidents-index', () => {
       const tempScriptPath = path.join(tempDir, scriptName);
       fs.writeFileSync(tempScriptPath, modifiedScript);
 
-      // eslint-disable-next-line import/no-dynamic-require
       const { default: updateFunc } = await import(`file://${tempScriptPath}?t=${Date.now()}`);
       updateFunc();
     }
