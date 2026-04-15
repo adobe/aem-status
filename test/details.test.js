@@ -73,16 +73,16 @@ describe('Details Script Tests', () => {
   describe('Fetch operations', () => {
     it('should construct correct URL for incident', () => {
       const incident = 'abc123';
-      const expectedUrl = `/incidents/html/${incident}.html`;
+      const expectedUrl = `/incidents/md/${incident}.md`;
 
-      assert.equal(expectedUrl, '/incidents/html/abc123.html');
+      assert.equal(expectedUrl, '/incidents/md/abc123.md');
     });
 
     it('should handle fetch errors gracefully', async () => {
       global.fetch = mock.fn(() => Promise.reject(new Error('Network error')));
 
       try {
-        await fetch('/incidents/html/test.html');
+        await fetch('/incidents/md/test.md');
         assert.fail('Should have thrown an error');
       } catch (error) {
         assert.equal(error.message, 'Network error');

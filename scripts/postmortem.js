@@ -1,29 +1,49 @@
 import { fetchCurrentIncident } from './scripts.js';
+import {
+  parseFrontmatter,
+  serializeFrontmatter,
+  splitPostmortemBody,
+  joinPostmortemBody,
+  buildUpdatesMarkdown,
+  extractPostmortemTitle,
+} from './simple-markdown.js';
 
 const download = (string, filename, type) => {
   const a = document.createElement('a');
-  a.href = `data: ${type};charset=utf-8, ${string}`;
+  a.href = `data:${type};charset=utf-8,${encodeURIComponent(string)}`;
   a.download = filename;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
 };
 
+const htmlCommentToPlain = (html) => {
+  const d = document.createElement('div');
+  d.innerHTML = html;
+  return d.innerText || d.textContent || '';
+};
+
 const savePostmortem = async () => {
-  download(encodeURIComponent(document.getElementById('incidentText').value), `${document.getElementById('incidentid').textContent}.html`, 'text/html');
+  download(
+    document.getElementById('incidentText').value,
+    `${document.getElementById('incidentid').textContent}.md`,
+    'text/markdown',
+  );
 };
 
 const updatePostmortem = async () => {
   const postmortemSelect = document.getElementById('postmortemSelect');
   const incidentTextArea = document.getElementById('incidentText');
+
   if (postmortemSelect.value !== window.postmortemType) {
+    const resp = await fetch(`/incidents/md/incident-template-${postmortemSelect.value}.md`);
     window.postmortemType = postmortemSelect.value;
-    const resp = await fetch(`/incidents/incident-template-${window.postmortemType}.html`);
-    const template = await resp.text();
-    incidentTextArea.value = template;
+    incidentTextArea.value = await resp.text();
   }
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(incidentTextArea.value, 'text/html');
+
+  let { frontmatter, body } = parseFrontmatter(incidentTextArea.value);
+  const { articleMd, updatesMd: templateUpdates } = splitPostmortemBody(body);
+
   const incidentName = document.getElementById('incidentName').value;
   const incidentStartTime = document.getElementById('incidentStartTime');
   const incidentEndTime = document.getElementById('incidentEndTime');
@@ -32,23 +52,23 @@ const updatePostmortem = async () => {
   const incidentImpactedService = document.getElementById('incidentImpactedService');
   const saveButton = document.getElementById('saveButton');
 
-  const updates = doc.querySelector('.updates');
-  let updatesHTML = '';
+  const titleOneLine = incidentName.replace(/\r?\n/g, ' ').replace(/[ \t]+/g, ' ').trim();
+
+  let articlePart = articleMd;
+  if (titleOneLine) {
+    const currentTitle = extractPostmortemTitle(articlePart);
+    if (currentTitle) {
+      articlePart = articlePart.replace(/^#\s+[^\n]+/m, `# ${titleOneLine}`);
+    } else {
+      articlePart = `# ${titleOneLine}\n\n${articlePart}`;
+    }
+  }
+
   let firstUpdate;
   let lastUpdate;
   if (window.currentIncident.length > 0) {
     lastUpdate = window.currentIncident[window.currentIncident.length - 1];
     [firstUpdate] = window.currentIncident;
-    window.currentIncident.forEach((update) => {
-      updatesHTML += `
-      <li>
-        <h2>${update.status}</h2>
-        <p>${update.comment}</p>
-        <time>${update.timestamp}</time>
-      </li>
-      `;
-    });
-    updates.innerHTML = updatesHTML;
   }
 
   const startTimestamp = incidentStartTime.value
@@ -58,11 +78,12 @@ const updatePostmortem = async () => {
   const errorRate = incidentErrorRate.value || '';
   const impactedService = incidentImpactedService.value || '';
 
-  const article = doc.querySelector('article');
-  article.setAttribute('data-incident-start-time', startTimestamp);
-  article.setAttribute('data-incident-end-time', endTimestamp);
-  article.setAttribute('data-incident-error-rate', errorRate);
-  article.setAttribute('data-incident-impacted-service', impactedService);
+  frontmatter.impact = incidentImpact.value;
+  frontmatter['start-time'] = startTimestamp;
+  frontmatter['end-time'] = endTimestamp;
+  frontmatter['error-rate'] = errorRate;
+  frontmatter['impacted-service'] = impactedService;
+  frontmatter['postmortem-completed'] = new Date().toISOString();
 
   if (!incidentStartTime.value) {
     incidentStartTime.value = startTimestamp;
@@ -79,6 +100,7 @@ const updatePostmortem = async () => {
   } else {
     incidentImpact.value = 'none';
   }
+  frontmatter.impact = incidentImpact.value;
 
   document.querySelectorAll('input, select').forEach((input) => {
     if (!input.value) {
@@ -90,11 +112,16 @@ const updatePostmortem = async () => {
 
   saveButton.disabled = document.querySelectorAll('input.field-empty, select.field-empty').length > 0;
 
-  doc.querySelector('h1').textContent = incidentName;
-  doc.querySelector('h1').className = incidentImpact.value;
-  doc.querySelector('article time').textContent = new Date().toISOString();
+  const updatesMarkdown = window.currentIncident.length > 0
+    ? buildUpdatesMarkdown(window.currentIncident.map((u) => ({
+      status: u.status,
+      comment: htmlCommentToPlain(u.comment),
+      timestamp: u.timestamp,
+    })))
+    : templateUpdates;
 
-  incidentTextArea.value = doc.body.innerHTML;
+  const newBody = joinPostmortemBody(articlePart, updatesMarkdown);
+  incidentTextArea.value = serializeFrontmatter(frontmatter) + newBody;
 };
 
 const initPostmortem = async () => {
@@ -108,7 +135,9 @@ const initPostmortem = async () => {
   document.getElementById('incidentid').textContent = incidentId;
 
   const incidentName = document.getElementById('incidentName');
-  if (window.currentIncident.length > 0) incidentName.value = window.currentIncident[0].comment;
+  if (window.currentIncident.length > 0) {
+    incidentName.value = htmlCommentToPlain(window.currentIncident[0].comment);
+  }
   incidentName.addEventListener('input', updatePostmortem);
 
   const incidentImpact = document.getElementById('incidentImpact');
@@ -129,6 +158,8 @@ const initPostmortem = async () => {
   const incidentImpactedService = document.getElementById('incidentImpactedService');
   incidentImpactedService.addEventListener('change', updatePostmortem);
 
+  // Leave window.postmortemType unset until the first fetch in updatePostmortem,
+  // so it differs from the select value and the template is loaded.
   updatePostmortem();
 
   const saveButton = document.getElementById('saveButton');
