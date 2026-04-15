@@ -265,7 +265,7 @@ postmortem-completed: 2025-01-01T12:00:00.000Z
 Initial postmortem content.
 `;
 
-      fs.writeFileSync(path.join(mdDir, 'AEM-test123.md'), initialMd);
+      fs.writeFileSync(path.join(mdDir, 'AEM-test123.markdown'), initialMd);
 
       // Run the script for the first time
       await createAndRunScript('update-script-1.js');
@@ -293,7 +293,7 @@ postmortem-completed: 2025-01-01T12:00:00.000Z
 Updated postmortem content with corrected times.
 `;
 
-      fs.writeFileSync(path.join(mdDir, 'AEM-test123.md'), updatedMd);
+      fs.writeFileSync(path.join(mdDir, 'AEM-test123.markdown'), updatedMd);
 
       // Re-run the script
       await createAndRunScript('update-script-2.js');
@@ -325,7 +325,7 @@ postmortem-completed: 2025-02-15T10:00:00.000Z
 AWS outage affected publishing service.
 `;
 
-      fs.writeFileSync(path.join(mdDir, 'AEM-aws123.md'), md);
+      fs.writeFileSync(path.join(mdDir, 'AEM-aws123.markdown'), md);
 
       // Run the script
       await createAndRunScript();

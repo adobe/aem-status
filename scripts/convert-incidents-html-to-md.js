@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * One-time (or repeat) conversion: incidents/html/*.html -> incidents/md/*.md
+ * One-time (or repeat) conversion: incidents/html/*.html -> incidents/md/*.markdown
  */
 import fs from 'fs';
 import path from 'path';
@@ -187,7 +187,7 @@ function convertFile(htmlPath, name) {
     md = convertPostmortem(document);
   }
 
-  const outPath = path.join(mdDir, `${name}.md`);
+  const outPath = path.join(mdDir, `${name}.markdown`);
   fs.writeFileSync(outPath, md, 'utf-8');
 }
 
@@ -199,7 +199,7 @@ function main() {
   files.forEach((f) => {
     const base = f.replace(/\.html$/, '');
     convertFile(path.join(htmlDir, f), base);
-    process.stdout.write(`converted ${f} -> md/${base}.md\n`);
+    process.stdout.write(`converted ${f} -> md/${base}.markdown\n`);
   });
 
   const incidentsRoot = path.join(root, 'incidents');
@@ -207,7 +207,7 @@ function main() {
     const p = path.join(incidentsRoot, `${name}.html`);
     if (fs.existsSync(p)) {
       convertFile(p, name);
-      process.stdout.write(`converted ${name}.html -> md/${name}.md\n`);
+      process.stdout.write(`converted ${name}.html -> md/${name}.markdown\n`);
     }
   }
 }

@@ -127,7 +127,7 @@ const init = async () => {
   document.title = `Incident ${incident}`;
   heading.textContent = `Incident ${incident}`;
 
-  const url = `/incidents/md/${incident}.md`;
+  const url = `/incidents/md/${incident}.markdown`;
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error('Not found');

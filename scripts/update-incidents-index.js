@@ -158,10 +158,10 @@ function updateIncidentsIndex() {
   }
 
   const mdFiles = fs.readdirSync(mdDir)
-    .filter((f) => f.endsWith('.md') && !f.startsWith('incident-template-'))
+    .filter((f) => f.endsWith('.markdown') && !f.startsWith('incident-template-'))
     .map((f) => ({
       filename: f,
-      code: f.replace('.md', ''),
+      code: f.replace('.markdown', ''),
       path: path.join(mdDir, f),
     }));
 

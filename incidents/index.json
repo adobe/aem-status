@@ -1,5 +1,16 @@
 [
   {
+    "code": "AEM-nbj44fb7",
+    "name": "Increased 5xx errors on Delivery (content pipeline and media)",
+    "message": "On April 15, 2026 at approximately **12:15 UTC**, monitoring showed a sharp spike in **5xx** responses on the Delivery service. Over the incident window we observed on the order of **403** HTTP 5xx errors, dominated by **502 Bad Gateway** (352) and **503 Service Unavailable** (41). The most common failure signature was **`Worker: x-error: failed to load … from content`** (341), with a secondary cluster tied to **`[media] R2: Service Unavailable`** (37). Traffic was concentrated on host **`main--",
+    "impact": "minor",
+    "incidentUpdated": "2026-04-15T19:00:00.000Z",
+    "startTime": "2026-04-15T12:15:00.000Z",
+    "endTime": "2026-04-15T12:23:00.000Z",
+    "errorRate": "0.000852",
+    "impactedService": "delivery"
+  },
+  {
     "code": "091tp5sj",
     "name": "Pipeline timeout errors affecting Page Delivery",
     "message": "On Wednesday, April 8, 2026 between 15:01 UTC and 15:12 UTC, we observed a brief spike in 503 errors affecting AEM Delivery across multiple hosts. The incident was detected via automated error-rate monitoring. The errors were associated with the HTML pipeline and resulted in a small number of failed requests. The overall error rate remained well below 0.01% (~0.0068%), and impact to end users was minimal.",
