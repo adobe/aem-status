@@ -54,7 +54,21 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add incidents/index.json
           git commit -m "chore: update incidents index [skip ci]"
-          git push origin main
+          # Pull with rebase to handle concurrent pushes, then push with retry
+          push_succeeded=false
+          for i in 1 2 3; do
+            if git pull --rebase origin main && git push origin main; then
+              push_succeeded=true
+              break
+            fi
+            echo "Push attempt $i failed, aborting any in-progress rebase and retrying..."
+            git rebase --abort 2>/dev/null || true
+            sleep 2
+          done
+          if [ "$push_succeeded" = false ]; then
+            echo "Failed to push after 3 attempts"
+            exit 1
+          fi
       
       - name: Build And Deploy
         uses: Azure/static-web-apps-deploy@v1
