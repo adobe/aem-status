@@ -3,7 +3,7 @@
     "code": "AEM-cfiad-0423",
     "name": "Elevated 5xx errors on delivery due to Cloudflare IAD connectivity issues",
     "message": "On April 23, 2026 between 03:24 and 04:03 UTC, AEM delivery experienced elevated 5xx errors\n        driven by a Cloudflare network connectivity incident in the Ashburn, Virginia (IAD) region.\n        A total of 3.46K requests returned 5xx status codes, dominated by HTTP 503 responses and\n        first byte timeout errors in the HTML pipeline path. The overall delivery error\n        rate during the window was 0.123%.",
-    "impact": "minor",
+    "impact": "none",
     "incidentUpdated": "2026-04-23T05:00:00.000Z",
     "startTime": "2026-04-23T03:24:00.000Z",
     "endTime": "2026-04-23T04:03:00.000Z",
