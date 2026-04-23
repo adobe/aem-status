@@ -1,0 +1,32 @@
+---
+kind: legacy
+title: Increased error rate from Cloudflare backends
+impact: none
+---
+
+## Postmortem
+
+*Posted Sep 11, 2024 - 13:53 UTC*
+
+We observed an elevated error rate of approximately 0.2% affecting .page domains. The root cause was traced to latency issues with one of our third-party service providers.
+
+**Root Cause:**
+
+The issue was caused by latency problems from one of our service providers, which affected the performance of our systems handling .page domains.
+
+**Mitigation:**
+
+Upon identifying the issue, we quickly migrated the affected sites to an alternative provider. This action immediately reduced the error rate.
+
+## Resolved
+
+*Posted Jun 19, 2024 - 18:02 UTC*
+
+This incident has been resolved.
+
+## Monitoring
+
+*Posted Jun 19, 2024 - 15:38 UTC*
+
+We have observed an elevated error rate of approximately 0.2% over the past 2 hours on .page domains. This issue is attributed to latency problems with one of our service providers.To mitigate the impact, we have migrated affected sites to an alternative provider and are actively monitoring the situation to ensure stability.For detailed information, please refer to the Cloudflare incident (https://www.cloudflarestatus.com/incidents/cgmgffywmv4g).
+

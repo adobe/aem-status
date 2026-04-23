@@ -1,0 +1,24 @@
+---
+kind: legacy
+title: Publishing Issues Observed
+impact: minor
+---
+
+## Postmortem
+
+*Posted Apr 22, 2022 - 13:10 UTC*
+
+From 12:00 UTC to 12:20 UTC we had experienced an outage that affected all preview operations and lead to an increased error rate of 4% for our production .live origins that feed the CDNs of our customers.
+
+## Resolved
+
+*Posted Apr 22, 2022 - 12:30 UTC*
+
+This incident has been resolved.
+
+## Investigating
+
+*Posted Apr 22, 2022 - 12:03 UTC*
+
+We are observing issues that are affecting site publishing for Project Helix customers. Page delivery is not affected, but updates to your sites may be delayed or prevented. The issue is under active investigation.
+

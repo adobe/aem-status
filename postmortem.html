@@ -53,6 +53,19 @@
             padding: 12px 20px;
         }
 
+        .utc-datetime-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .field-hint {
+            font-size: 0.85rem;
+            color: var(--spectrum-gray-700, #464646);
+        }
+
         @media (min-width: 900px) {
             .field-wrapper {
                 flex-flow: row nowrap;
@@ -94,16 +107,22 @@
                         <input type="text" id="incidentName" placeholder="XYZ Outage affecting Page Delivery">
                     </div>
                     <div class="field-wrapper">
-                        <label for="incidentStartTime">Start Time (UTC)</label>
-                        <input type="text" id="incidentStartTime" placeholder="YYYY-MM-DDTHH:mm:ss.sssZ">
+                        <label for="incidentStartTime">Start time (UTC)</label>
+                        <div class="utc-datetime-field">
+                            <input type="datetime-local" id="incidentStartTime" step="1">
+                            <span class="field-hint" id="incidentStartTimeHint" aria-live="polite"></span>
+                        </div>
                     </div>
                     <div class="field-wrapper">
-                        <label for="incidentEndTime">End Time (UTC)</label>
-                        <input type="text" id="incidentEndTime" placeholder="YYYY-MM-DDTHH:mm:ss.sssZ">
+                        <label for="incidentEndTime">End time (UTC)</label>
+                        <div class="utc-datetime-field">
+                            <input type="datetime-local" id="incidentEndTime" step="1">
+                            <span class="field-hint" id="incidentEndTimeHint" aria-live="polite"></span>
+                        </div>
                     </div>
                     <div class="field-wrapper">
-                        <label for="incidentErrorRate">Error Rate</label>
-                        <input type="number" id="incidentErrorRate" placeholder="e.g. 0.013 for 1.3%">
+                        <label for="incidentErrorRate">Error rate (%)</label>
+                        <input type="number" id="incidentErrorRate" min="0" max="100" step="any" placeholder="e.g. 1.3 for 1.3%">
                     </div>
                     <div class="field-wrapper">
                         <label for="incidentImpact">Impact</label>
@@ -122,11 +141,11 @@
                             <option value="publishing">Authoring and Publishing</option>
                         </select>
                     </div>
+                    <button id="saveButton">Save & Edit Postmorten</button>
                     <div class="field-wrapper">
                         <label for="incidentText">Postmortem</label>
-                        <textarea id="incidentText"></textarea>
+                        <textarea disabled id="incidentText"></textarea>
                     </div>
-                    <button id="saveButton">Save Postmorten</button>
                     </div>
                 </fieldset>
             </div>

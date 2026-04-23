@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize]
     paths:
-      - "incidents/html/*.html"
+      - "incidents/md/*.markdown"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
@@ -31,16 +31,16 @@ jobs:
           git fetch origin ${{ github.base_ref }}
           CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
 
-          # Check for incident files outside incidents/html/ (excluding templates)
-          MISPLACED=$(echo "$CHANGED_FILES" | grep -E '^incidents/[^/]+\.html$' | grep -v 'template' || true)
+          # Check for incident files outside incidents/md/ (excluding templates)
+          MISPLACED=$(echo "$CHANGED_FILES" | grep -E '^incidents/[^/]+\.markdown$' | grep -v 'template' || true)
 
           if [ -n "$MISPLACED" ]; then
-            echo "❌ Error: Incident files must be placed in incidents/html/ directory"
+            echo "❌ Error: Incident files must be placed in incidents/md/ directory"
             echo ""
             echo "Misplaced files found:"
             echo "$MISPLACED"
             echo ""
-            echo "Please move these files to incidents/html/"
+            echo "Please move these files to incidents/md/"
             exit 1
           fi
 
@@ -224,8 +224,8 @@ jobs:
             Impact to the team is secondary, and only interesting in so far as it touches the lessons
             learned and improvements made to ensure this kind of incident does not repeat.
 
-            Use @incidents/incident-template-long.html as a reference for a post-mortem for a high-impact incident.
-            Use @incidents/incident-template-short.html as a reference for a post-mortem for a low-impact incident.
+            Use @incidents/md/incident-template-long.markdown as a reference for a post-mortem for a high-impact incident.
+            Use @incidents/md/incident-template-short.markdown as a reference for a post-mortem for a low-impact incident.
 
             Please provide thorough feedback with inline comments on areas that need improvement,
             missing information, or where the analysis could be deeper.

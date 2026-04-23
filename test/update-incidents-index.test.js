@@ -208,18 +208,20 @@ describe('update-incidents-index', () => {
   describe('startTime and endTime updates', () => {
     let tempDir;
     let incidentsDir;
-    let htmlDir;
+    let mdDir;
     let indexPath;
 
     // Helper function to create and run the update script
     async function createAndRunScript(scriptName = 'update-script.js') {
       const scriptDir = path.join(path.dirname(testDir), 'scripts');
       const scriptContent = fs.readFileSync(path.join(scriptDir, 'update-incidents-index.js'), 'utf-8');
+      const smContent = fs.readFileSync(path.join(scriptDir, 'simple-markdown.js'), 'utf-8');
       const modifiedScript = scriptContent
         .replace("path.join(dirname, '..', 'incidents')", `'${incidentsDir}'`);
 
       const tempScriptPath = path.join(tempDir, scriptName);
       fs.writeFileSync(tempScriptPath, modifiedScript);
+      fs.writeFileSync(path.join(tempDir, 'simple-markdown.js'), smContent);
 
       const { default: updateFunc } = await import(`file://${tempScriptPath}?t=${Date.now()}`);
       updateFunc();
@@ -234,11 +236,11 @@ describe('update-incidents-index', () => {
       // Create temporary directory structure
       tempDir = fs.mkdtempSync(path.join(testDir, 'test-incidents-'));
       incidentsDir = path.join(tempDir, 'incidents');
-      htmlDir = path.join(incidentsDir, 'html');
+      mdDir = path.join(incidentsDir, 'md');
       indexPath = path.join(incidentsDir, 'index.json');
 
       fs.mkdirSync(incidentsDir, { recursive: true });
-      fs.mkdirSync(htmlDir, { recursive: true });
+      fs.mkdirSync(mdDir, { recursive: true });
     });
 
     afterEach(() => {
@@ -248,15 +250,22 @@ describe('update-incidents-index', () => {
     });
 
     it('should update startTime and endTime when changed in article metadata', async () => {
-      // Create an incident HTML file with initial startTime and endTime
-      const initialHTML = `<h1 class="minor">Test Incident</h1>
-<article data-incident-start-time="2025-01-01T10:00:00.000Z" data-incident-end-time="2025-01-01T11:00:00.000Z">
-    <h2>Postmortem</h2>
-    <p>Initial postmortem content.</p>
-    <time>2025-01-01T12:00:00.000Z</time>
-</article>`;
+      const initialMd = `---
+kind: postmortem
+impact: minor
+start-time: 2025-01-01T10:00:00.000Z
+end-time: 2025-01-01T11:00:00.000Z
+postmortem-completed: 2025-01-01T12:00:00.000Z
+---
 
-      fs.writeFileSync(path.join(htmlDir, 'AEM-test123.html'), initialHTML);
+# Test Incident
+
+### Executive Summary
+
+Initial postmortem content.
+`;
+
+      fs.writeFileSync(path.join(mdDir, 'AEM-test123.markdown'), initialMd);
 
       // Run the script for the first time
       await createAndRunScript('update-script-1.js');
@@ -269,15 +278,22 @@ describe('update-incidents-index', () => {
       assert.equal(index1[0].startTime, '2025-01-01T10:00:00.000Z', 'Should have correct initial startTime');
       assert.equal(index1[0].endTime, '2025-01-01T11:00:00.000Z', 'Should have correct initial endTime');
 
-      // Now update the HTML file with new startTime and endTime
-      const updatedHTML = `<h1 class="minor">Test Incident</h1>
-<article data-incident-start-time="2025-01-01T09:30:00.000Z" data-incident-end-time="2025-01-01T11:30:00.000Z">
-    <h2>Postmortem</h2>
-    <p>Updated postmortem content with corrected times.</p>
-    <time>2025-01-01T12:00:00.000Z</time>
-</article>`;
+      const updatedMd = `---
+kind: postmortem
+impact: minor
+start-time: 2025-01-01T09:30:00.000Z
+end-time: 2025-01-01T11:30:00.000Z
+postmortem-completed: 2025-01-01T12:00:00.000Z
+---
 
-      fs.writeFileSync(path.join(htmlDir, 'AEM-test123.html'), updatedHTML);
+# Test Incident
+
+### Executive Summary
+
+Updated postmortem content with corrected times.
+`;
+
+      fs.writeFileSync(path.join(mdDir, 'AEM-test123.markdown'), updatedMd);
 
       // Re-run the script
       await createAndRunScript('update-script-2.js');
@@ -292,15 +308,24 @@ describe('update-incidents-index', () => {
     });
 
     it('should extract startTime and endTime from article data attributes', async () => {
-      // Create an incident HTML file with data attributes
-      const html = `<h1 class="major">AWS Outage</h1>
-<article data-incident-start-time="2025-02-15T08:00:00.000Z" data-incident-end-time="2025-02-15T09:00:00.000Z" data-incident-error-rate="0.05" data-incident-impacted-service="publishing">
-    <h2>Postmortem</h2>
-    <p>AWS outage affected publishing service.</p>
-    <time>2025-02-15T10:00:00.000Z</time>
-</article>`;
+      const md = `---
+kind: postmortem
+impact: major
+start-time: 2025-02-15T08:00:00.000Z
+end-time: 2025-02-15T09:00:00.000Z
+error-rate: 0.05
+impacted-service: publishing
+postmortem-completed: 2025-02-15T10:00:00.000Z
+---
 
-      fs.writeFileSync(path.join(htmlDir, 'AEM-aws123.html'), html);
+# AWS Outage
+
+### Executive Summary
+
+AWS outage affected publishing service.
+`;
+
+      fs.writeFileSync(path.join(mdDir, 'AEM-aws123.markdown'), md);
 
       // Run the script
       await createAndRunScript();

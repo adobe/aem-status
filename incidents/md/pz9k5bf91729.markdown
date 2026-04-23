@@ -1,0 +1,28 @@
+---
+kind: legacy
+title: GitHub Synchronization Issues Observed
+impact: minor
+---
+
+## Postmortem
+
+*Posted Feb 09, 2023 - 10:28 UTC*
+
+Between 10:01 am an 10:16 am today, a configuration change to a Serverless function caused the GitHub bot to fail to respond to notifications from GitHub. In total 31 requests were affected.
+
+If you pushed code changes in that time period, they might not have come through. You can remedy this by pushing an additional, empty commit to the same branch.
+
+In order to prevent similar issues to arise in the future, we will establish a review process for configuration changes to the production services.
+
+## Resolved
+
+*Posted Feb 09, 2023 - 10:18 UTC*
+
+This incident has been resolved.
+
+## Investigating
+
+*Posted Feb 09, 2023 - 10:11 UTC*
+
+We are observing issues that are affecting site publishing for Project Helix customers. Page delivery is not affected, but updates to your sites may be delayed or prevented. The issue is under active investigation.
+
