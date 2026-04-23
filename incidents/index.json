@@ -1,8 +1,27 @@
 [
   {
+    "code": "AEM-cfiad-0423",
+    "name": "Elevated 5xx errors on delivery due to Cloudflare IAD connectivity issues",
+    "message": "On April 23, 2026 between 03:24 and 04:03 UTC, AEM delivery experienced elevated 5xx errors\n        driven by a Cloudflare network connectivity incident in the Ashburn, Virginia (IAD) region.\n        A total of 3.46K requests returned 5xx status codes, dominated by HTTP 503 responses and\n        first byte timeout errors in the HTML pipeline path. The overall delivery error\n        rate during the window was 0.123%.",
+    "impact": "none",
+    "incidentUpdated": "2026-04-23T05:00:00.000Z",
+    "startTime": "2026-04-23T03:24:00.000Z",
+    "endTime": "2026-04-23T04:03:00.000Z",
+    "errorRate": "0.00123",
+    "impactedService": "delivery",
+    "affectedComponents": [
+      "delivery"
+    ],
+    "internalServices": null,
+    "externalVendors": [
+      "cloudflare"
+    ],
+    "rootCause": "third-party-outage"
+  },
+  {
     "code": "AEM-nbj44fb7",
     "name": "Increased 5xx errors on Delivery (content pipeline and media)",
-    "message": "On April 15, 2026 at approximately **12:15 UTC**, monitoring showed a sharp spike in **5xx** responses on the Delivery service. Over the incident window we observed on the order of **403** HTTP 5xx errors, dominated by **502 Bad Gateway** (352) and **503 Service Unavailable** (41). The most common failure signature was **`Worker: x-error: failed to load … from content`** (341), with a secondary cluster tied to **`[media] R2: Service Unavailable`** (37). Traffic was concentrated on host **`main--",
+    "message": "On April 15, 2026 at approximately **12:15 UTC**, monitoring showed a sharp spike in **5xx** responses on the Delivery service. Over the incident window we observed on the order of **403** HTTP 5xx errors, dominated by **502 Bad Gateway** (352) and **503 Service Unavailable** (41). The most common failure signature was **`Worker: x-error: failed to load \u2026 from content`** (341), with a secondary cluster tied to **`[media] R2: Service Unavailable`** (37). Traffic was concentrated on host **`main--",
     "impact": "minor",
     "incidentUpdated": "2026-04-15T19:00:00.000Z",
     "startTime": "2026-04-15T12:15:00.000Z",
@@ -564,7 +583,7 @@
   {
     "code": "vgljj64vswn1",
     "name": "Page Delivery Issues Observed",
-    "message": "Between 17:05 and 17:25 UTC an update to our v5 config service has lead to a small fraction of projects sending 5xx responses. The overall error rate hasn’t exceeded a meaningful threshold, and the newly deployed change was reverted. We will make sure that these edge case errors are caught by the test harness in the future.",
+    "message": "Between 17:05 and 17:25 UTC an update to our v5 config service has lead to a small fraction of projects sending 5xx responses. The overall error rate hasn\u2019t exceeded a meaningful threshold, and the newly deployed change was reverted. We will make sure that these edge case errors are caught by the test harness in the future.",
     "impact": "none",
     "incidentUpdated": "2024-05-13T23:39:00.000Z",
     "affectedComponents": [
@@ -639,7 +658,7 @@
   {
     "code": "qjsydytlcl2m",
     "name": "Slack Bot is unable to upload images or videos",
-    "message": "On December 8, 2023 at around 09:40 UTC, we started getting error reports from users trying to upload files via Slack bot. After a brief investigation, we identified a change in Slack’s API as the root cause. Since it had been our goal for a while to deprecate the Slack bot’s upload skill in favor of uploads via Microsoft SharePoint or Google Drive using AEM Sidekick, we decided against fixing the issue and instead replaced the upload skill with instructions on how to upload files going forward.",
+    "message": "On December 8, 2023 at around 09:40 UTC, we started getting error reports from users trying to upload files via Slack bot. After a brief investigation, we identified a change in Slack\u2019s API as the root cause. Since it had been our goal for a while to deprecate the Slack bot\u2019s upload skill in favor of uploads via Microsoft SharePoint or Google Drive using AEM Sidekick, we decided against fixing the issue and instead replaced the upload skill with instructions on how to upload files going forward.",
     "impact": "minor",
     "incidentUpdated": "2024-02-02T17:38:00.000Z",
     "affectedComponents": [
@@ -699,7 +718,7 @@
   {
     "code": "t8s3g7nppjtr",
     "name": "Cloudflare Workers Issue",
-    "message": "As the issue only affected a small number of internal customers that were assigned to the (secondary) Cloudflare stack, the slightly elevated error rate did not raise an alert, so no mitigating actions were taken. As a consequence, we’ve lowered the alert thresholds, so that we can switch between primary and secondary stacks faster.",
+    "message": "As the issue only affected a small number of internal customers that were assigned to the (secondary) Cloudflare stack, the slightly elevated error rate did not raise an alert, so no mitigating actions were taken. As a consequence, we\u2019ve lowered the alert thresholds, so that we can switch between primary and secondary stacks faster.",
     "impact": "minor",
     "incidentUpdated": "2023-12-13T16:12:00.000Z",
     "affectedComponents": [
@@ -928,7 +947,7 @@
   {
     "code": "0my60637t0n1",
     "name": "Increased error rate on media delivery",
-    "message": "The underlying reason for the increased error rates on media delivery was a partial outage of Fastly’s Image Optimizer: [https://status.fastly.com/incidents/s542qjby04vb](https://status.fastly.com/incidents/s542qjby04vb) We have opened an issue with Fastly support, asking for an official statement about how Fastly is going to address this issue and prevent future such outages.",
+    "message": "The underlying reason for the increased error rates on media delivery was a partial outage of Fastly\u2019s Image Optimizer: [https://status.fastly.com/incidents/s542qjby04vb](https://status.fastly.com/incidents/s542qjby04vb) We have opened an issue with Fastly support, asking for an official statement about how Fastly is going to address this issue and prevent future such outages.",
     "impact": "minor",
     "incidentUpdated": "2022-06-29T21:29:00.000Z",
     "affectedComponents": [
