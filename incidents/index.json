@@ -8,7 +8,15 @@
     "startTime": "2026-04-23T03:24:00.000Z",
     "endTime": "2026-04-23T04:03:00.000Z",
     "errorRate": "0.00123",
-    "impactedService": "delivery"
+    "impactedService": "delivery",
+    "affectedComponents": [
+      "delivery"
+    ],
+    "internalServices": null,
+    "externalVendors": [
+      "cloudflare"
+    ],
+    "rootCause": "third-party-outage"
   },
   {
     "code": "091tp5sj",
