@@ -8,75 +8,293 @@
     <script src="/scripts/postmortem.js" type="module"></script>
     <script defer type="text/javascript" src="https://ot.aem.live/.rum/@adobe/helix-rum-js@^2/dist/rum-standalone.js"></script>
     <style>
-        .back-link { display: inline-block; margin: 12px 0 0; color: white; text-decoration: none; }
-        .back-link:hover { text-decoration: underline; }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spectrum-spacing-200);
+            margin-top: var(--spectrum-spacing-400);
+            padding: var(--spectrum-spacing-200) 0;
+            color: rgb(255 255 255 / 92%);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: var(--spectrum-font-size-normal);
+            transition: color 0.15s ease, transform 0.15s ease;
+        }
+
+        .back-link:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         .iframe-wrap { width: 100%; }
-        .error { padding: 18px 20px; color: #991b1b; background: #fef2f2; border-radius: 8px; }
-        .incident {
+
+        .error {
+            padding: var(--spectrum-spacing-500) var(--spectrum-spacing-500);
+            color: var(--spectrum-red-900);
+            background: linear-gradient(135deg, #fff5f5 0%, #fef2f2 100%);
+            border-radius: var(--spectrum-border-radius-400);
+            border: 1px solid rgb(227 72 80 / 25%);
+            box-shadow: var(--spectrum-shadow-100);
+        }
+
+        /* Postmortem type control */
+        .section-head {
+            gap: var(--spectrum-spacing-400);
+        }
+
+        .section-head label[for="postmortemSelect"] {
+            font-size: var(--spectrum-font-size-small);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--spectrum-gray-500);
+            margin: 0;
+        }
+
+        .postmortem-type {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            padding: 16px 20px;
+            align-items: flex-start;
+            gap: var(--spectrum-spacing-200);
+            flex: 1;
+            min-width: 0;
+        }
+
+        #postmortemSelect {
+            appearance: none;
+            width: 100%;
+            max-width: 320px;
+            font-family: var(--spectrum-font-family);
+            font-size: var(--spectrum-font-size-normal);
+            font-weight: 600;
+            color: var(--spectrum-gray-800);
+            background-color: #fff;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23636363' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+            border: 1px solid var(--spectrum-gray-200);
+            border-radius: var(--spectrum-border-radius-400);
+            padding: 12px 42px 12px 16px;
+            box-shadow: var(--spectrum-shadow-100);
+            cursor: pointer;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        #postmortemSelect:hover:not(:disabled) {
+            border-color: var(--spectrum-gray-300);
+        }
+
+        #postmortemSelect:focus {
+            outline: none;
+        }
+
+        #postmortemSelect:focus-visible {
+            border-color: var(--spectrum-blue-600);
+            box-shadow: 0 0 0 3px rgb(55 142 240 / 22%);
+        }
+
+        #incident-container fieldset {
+            border: none;
+            margin: 0;
+            padding: 0;
+            min-width: 0;
+        }
+
+        #incident-container fieldset:disabled {
+            opacity: 1;
+        }
+
+        .incident {
+            --pm-control-radius: var(--spectrum-border-radius-400);
+            --pm-control-border: 1px solid var(--spectrum-gray-200);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spectrum-spacing-500);
+            padding: var(--spectrum-spacing-600) var(--spectrum-spacing-500) var(--spectrum-spacing-700);
+        }
+
+        .incident-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: var(--spectrum-spacing-300);
+            padding-bottom: var(--spectrum-spacing-300);
+            margin-bottom: var(--spectrum-spacing-100);
+            border-bottom: 1px solid var(--spectrum-gray-100);
+        }
+
+        .incident-id-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--spectrum-gray-500);
+        }
+
+        .incident-id-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--spectrum-gray-800);
+            background: linear-gradient(180deg, var(--spectrum-gray-50) 0%, #fff 100%);
+            border: 1px solid var(--spectrum-gray-200);
+            border-radius: 999px;
+            box-shadow: var(--spectrum-shadow-100);
         }
 
         .incident label {
-            font-weight: 600;
-            min-width: 150px;
+            font-size: var(--spectrum-font-size-small);
+            font-weight: 700;
+            color: var(--spectrum-gray-700);
+            letter-spacing: 0.01em;
         }
 
-        .incident input {
-            flex: 1;
-            font-family: var(--spectrum-font-family);
-        }
-
+        .incident input,
+        .incident select,
         .incident textarea {
             flex: 1;
-            min-height: 200px;
+            min-width: 0;
+            font-family: var(--spectrum-font-family);
+            font-size: var(--spectrum-font-size-normal);
+            line-height: 1.45;
+            color: var(--spectrum-gray-900);
+            background-color: #fff;
+            border: var(--pm-control-border);
+            border-radius: var(--pm-control-radius);
+            padding: 12px 14px;
+            box-shadow: inset 0 1px 2px rgb(0 0 0 / 3%);
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
 
         .incident select {
-            flex: 1;
-            font-family: var(--spectrum-font-family);
+            appearance: none;
+            padding-right: 40px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234e4e4e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 14px;
+            cursor: pointer;
+        }
+
+        .incident select:disabled {
+            cursor: not-allowed;
+        }
+
+        .incident input::placeholder,
+        .incident textarea::placeholder {
+            color: var(--spectrum-gray-400);
+        }
+
+        .incident input:hover:not(:disabled):not(:focus),
+        .incident select:hover:not(:disabled):not(:focus),
+        .incident textarea:hover:not(:disabled):not(:focus) {
+            border-color: var(--spectrum-gray-300);
+        }
+
+        .incident input:focus,
+        .incident select:focus,
+        .incident textarea:focus {
+            outline: none;
+            border-color: var(--spectrum-blue-600);
+            box-shadow: inset 0 1px 2px rgb(0 0 0 / 3%), 0 0 0 3px rgb(55 142 240 / 18%);
+        }
+
+        .incident input:disabled,
+        .incident select:disabled,
+        .incident textarea:disabled {
+            background-color: var(--spectrum-gray-50);
+            color: var(--spectrum-gray-600);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .incident textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        .field-pair {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spectrum-spacing-500);
         }
 
         .field-wrapper {
             display: flex;
-            flex-flow: column;
-            gap: 8px;
+            flex-direction: column;
+            align-items: stretch;
+            gap: var(--spectrum-spacing-200);
         }
 
         .field-empty:not([disabled]) {
-            border: solid 2px var(--spectrum-blue-600);
+            border-width: 2px;
+            border-color: var(--spectrum-blue-600);
+            box-shadow: 0 0 0 1px rgb(55 142 240 / 15%);
         }
 
-        button {
-            padding: 12px 20px;
+        .form-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: var(--spectrum-spacing-300);
+            padding-top: var(--spectrum-spacing-200);
         }
 
         .utc-datetime-field {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
             flex: 1;
             min-width: 0;
         }
 
         .field-hint {
-            font-size: 0.85rem;
-            color: var(--spectrum-gray-700, #464646);
+            font-size: var(--spectrum-font-size-small);
+            color: var(--spectrum-gray-600);
+            line-height: 1.4;
         }
 
         @media (min-width: 900px) {
-            .field-wrapper {
-                flex-flow: row nowrap;
+            .postmortem-type {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            #postmortemSelect {
+                width: auto;
+                min-width: 240px;
+            }
+
+            .field-pair {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--spectrum-spacing-600);
+                align-items: start;
+            }
+
+            .field-pair .field-wrapper {
+                min-width: 0;
             }
 
             .incident textarea {
                 min-height: 300px;
-            }
-
-            button {
-                margin-left: 158px;
             }
         }
     </style>
@@ -93,45 +311,56 @@
     <main class="container">
         <section class="section" aria-labelledby="incidentHeading">
             <div class="section-head">
-                <select id="postmortemSelect">
-                    <option value="short">Short Post-mortem</option>
-                    <option value="long">Long Post-mortem</option>
-                </select>
+                <div class="postmortem-type">
+                    <label for="postmortemSelect">Template</label>
+                    <select id="postmortemSelect" aria-describedby="postmortemSelectHint">
+                        <option value="short">Short Post-mortem</option>
+                        <option value="long">Long Post-mortem</option>
+                    </select>
+                </div>
+                <span id="postmortemSelectHint" class="visually-hidden">Choose short or long post-mortem body</span>
             </div>
             <div id="incident-container">
                 <fieldset disabled>
                     <div class="incident">
-                    <span id="incidentid">AEM-123456</span>
+                    <div class="incident-meta">
+                        <span class="incident-id-label">Incident ID</span>
+                        <span id="incidentid" class="incident-id-chip">AEM-123456</span>
+                    </div>
                     <div class="field-wrapper">
                         <label for="incidentName">Title</label>
                         <input type="text" id="incidentName" placeholder="XYZ Outage affecting Page Delivery">
                     </div>
-                    <div class="field-wrapper">
-                        <label for="incidentStartTime">Start time (UTC)</label>
-                        <div class="utc-datetime-field">
-                            <input type="datetime-local" id="incidentStartTime" step="1">
-                            <span class="field-hint" id="incidentStartTimeHint" aria-live="polite"></span>
+                    <div class="field-pair">
+                        <div class="field-wrapper">
+                            <label for="incidentStartTime">Start time (UTC)</label>
+                            <div class="utc-datetime-field">
+                                <input type="datetime-local" id="incidentStartTime" step="1">
+                                <span class="field-hint" id="incidentStartTimeHint" aria-live="polite"></span>
+                            </div>
+                        </div>
+                        <div class="field-wrapper">
+                            <label for="incidentEndTime">End time (UTC)</label>
+                            <div class="utc-datetime-field">
+                                <input type="datetime-local" id="incidentEndTime" step="1">
+                                <span class="field-hint" id="incidentEndTimeHint" aria-live="polite"></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="field-wrapper">
-                        <label for="incidentEndTime">End time (UTC)</label>
-                        <div class="utc-datetime-field">
-                            <input type="datetime-local" id="incidentEndTime" step="1">
-                            <span class="field-hint" id="incidentEndTimeHint" aria-live="polite"></span>
+                    <div class="field-pair">
+                        <div class="field-wrapper">
+                            <label for="incidentErrorRate">Error rate (%)</label>
+                            <input type="number" id="incidentErrorRate" min="0" max="100" step="any" placeholder="e.g. 1.3 for 1.3%">
                         </div>
-                    </div>
-                    <div class="field-wrapper">
-                        <label for="incidentErrorRate">Error rate (%)</label>
-                        <input type="number" id="incidentErrorRate" min="0" max="100" step="any" placeholder="e.g. 1.3 for 1.3%">
-                    </div>
-                    <div class="field-wrapper">
-                        <label for="incidentImpact">Impact</label>
-                        <select id="incidentImpact" disabled>
-                            <option value="none">None (less than 0.5% error rate)</option>
-                            <option value="minor">Minor (0.5% - 5% error rate)</option>
-                            <option value="major">Major (5% - 10% error rate)</option>
-                            <option value="critical">Critical (more than 10% error rate)</option>
-                        </select>
+                        <div class="field-wrapper">
+                            <label for="incidentImpact">Impact</label>
+                            <select id="incidentImpact" disabled>
+                                <option value="none">None (less than 0.5% error rate)</option>
+                                <option value="minor">Minor (0.5% - 5% error rate)</option>
+                                <option value="major">Major (5% - 10% error rate)</option>
+                                <option value="critical">Critical (more than 10% error rate)</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="field-wrapper">
                         <label for="incidentImpactedService">Impacted Service</label>
@@ -141,7 +370,9 @@
                             <option value="publishing">Authoring and Publishing</option>
                         </select>
                     </div>
-                    <button id="saveButton">Save Postmortem</button>
+                    <div class="form-actions">
+                        <button type="button" class="button button-large" id="saveButton">Save Postmortem</button>
+                    </div>
                     <div class="field-wrapper">
                         <label for="incidentText">Postmortem</label>
                         <textarea disabled id="incidentText"></textarea>

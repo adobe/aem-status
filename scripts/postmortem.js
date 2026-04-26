@@ -51,12 +51,23 @@ function normalizeErrorRatePercent(p) {
   return parseFloat(p.toFixed(8));
 }
 
+/**
+ * ISO 8601 UTC instant with whole-second precision only (no fractional seconds).
+ * @param {Date|string|number} value
+ * @returns {string} Empty string if not a valid instant.
+ */
+function toIso8601UtcSeconds(value) {
+  const d = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(d.getTime())) return '';
+  return d.toISOString().replace(/\.\d{3}Z$/, 'Z');
+}
+
 /** Interpret datetime-local value as UTC wall time → ISO string. */
 function datetimeLocalUtcToIso(value) {
   if (!value) return '';
   const v = value.length === 16 ? `${value}:00` : value;
   const d = new Date(`${v}Z`);
-  return Number.isNaN(d.getTime()) ? '' : d.toISOString();
+  return Number.isNaN(d.getTime()) ? '' : toIso8601UtcSeconds(d);
 }
 
 /** ISO string → value for datetime-local (UTC components, no timezone in control). */
@@ -152,12 +163,12 @@ const updatePostmortem = async () => {
     }
   }
 
-  const defaultTimeIso = new Date().toISOString();
+  const defaultTimeIso = toIso8601UtcSeconds(new Date());
 
   let startTimestamp = datetimeLocalUtcToIso(incidentStartTime.value);
   if (!startTimestamp) {
-    if (isUsableIso(frontmatter['start-time'])) startTimestamp = new Date(frontmatter['start-time']).toISOString();
-    else if (firstUpdate?.timestamp) startTimestamp = new Date(firstUpdate.timestamp).toISOString();
+    if (isUsableIso(frontmatter['start-time'])) startTimestamp = toIso8601UtcSeconds(frontmatter['start-time']);
+    else if (firstUpdate?.timestamp) startTimestamp = toIso8601UtcSeconds(firstUpdate.timestamp);
     else startTimestamp = defaultTimeIso;
   }
   if (!incidentStartTime.value) {
@@ -166,8 +177,8 @@ const updatePostmortem = async () => {
 
   let endTimestamp = datetimeLocalUtcToIso(incidentEndTime.value);
   if (!endTimestamp) {
-    if (isUsableIso(frontmatter['end-time'])) endTimestamp = new Date(frontmatter['end-time']).toISOString();
-    else if (lastUpdate?.timestamp) endTimestamp = new Date(lastUpdate.timestamp).toISOString();
+    if (isUsableIso(frontmatter['end-time'])) endTimestamp = toIso8601UtcSeconds(frontmatter['end-time']);
+    else if (lastUpdate?.timestamp) endTimestamp = toIso8601UtcSeconds(lastUpdate.timestamp);
     else endTimestamp = defaultTimeIso;
   }
   if (!incidentEndTime.value) {
@@ -188,7 +199,7 @@ const updatePostmortem = async () => {
   frontmatter['end-time'] = endTimestamp;
   frontmatter['error-rate'] = errorRateDecimal === '' ? '' : String(errorRateDecimal);
   frontmatter['impacted-service'] = impactedService;
-  frontmatter['postmortem-completed'] = new Date().toISOString();
+  frontmatter['postmortem-completed'] = toIso8601UtcSeconds(new Date());
 
   const er = typeof errorRateDecimal === 'number' && !Number.isNaN(errorRateDecimal) ? errorRateDecimal : 0;
   if (er >= 0.1) {
@@ -220,7 +231,7 @@ const updatePostmortem = async () => {
     ? buildUpdatesMarkdown(window.currentIncident.map((u) => ({
       status: u.status,
       comment: htmlCommentToPlain(u.comment),
-      timestamp: u.timestamp,
+      timestamp: toIso8601UtcSeconds(u.timestamp) || u.timestamp,
     })))
     : templateUpdates;
 
