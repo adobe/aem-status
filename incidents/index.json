@@ -13,7 +13,10 @@
       "publishing"
     ],
     "internalServices": null,
-    "externalVendors": null,
+    "externalVendors": [
+      "aws",
+      "fastly"
+    ],
     "rootCause": "network-issue"
   },
   {
