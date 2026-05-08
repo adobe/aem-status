@@ -1,5 +1,25 @@
 [
   {
+    "code": "AEM-t58nxd8r",
+    "name": "Intermittent network errors affecting publishing globally",
+    "message": "On May 7, 2026 at 23:45 UTC, customers globally began experiencing intermittent error messages while authoring and publishing content, both of which rely on the publishing back-end. The issue persisted for approximately 6 hours, resolving at 05:30 UTC on May 8, 2026. Approximately 0.34% of requests were affected during the incident window, impacting around a dozen customers across multiple regions including the United States, Australia, India, Japan, Ireland, the United Kingdom, and Singapore, a",
+    "impact": "none",
+    "incidentUpdated": "2026-05-08T08:24:39.000Z",
+    "startTime": "2026-05-07T23:45:00Z",
+    "endTime": "2026-05-08T05:30:00Z",
+    "errorRate": "0.0034",
+    "impactedService": "publishing",
+    "affectedComponents": [
+      "publishing"
+    ],
+    "internalServices": null,
+    "externalVendors": [
+      "aws",
+      "fastly"
+    ],
+    "rootCause": "network-issue"
+  },
+  {
     "code": "AEM-cfiad-0423",
     "name": "Elevated 5xx errors on delivery due to Cloudflare IAD connectivity issues",
     "message": "On April 23, 2026 between 03:24 and 04:03 UTC, AEM delivery experienced elevated 5xx errors driven by a Cloudflare network connectivity incident in the Ashburn, Virginia (IAD) region. A total of 3.46K requests returned 5xx status codes, dominated by HTTP 503 responses and `first byte timeout` errors in the HTML pipeline path. The overall delivery error rate during the window was 0.123%.",
