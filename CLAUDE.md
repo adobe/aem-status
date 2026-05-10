@@ -72,5 +72,10 @@ When the PR is opened, the bot classifies the incident in `incidents/index.json`
 ## Git workflow
 
 - Branch name: the incident ID in all lower case (e.g. `aem-t58nxd8r`)
-- Commit prefix: `feat: <incident-summary>`
-- PR description: `Postmortem for #<incident-id>`
+- Commit message / PR summary: `feat: <incident-summary>`
+- PR description:
+```
+Postmortem for #<incident-id>
+
+URL: https://<branch-name>--aem-status--adobe.aem.page/details.html?incident=<incident-id>
+```
