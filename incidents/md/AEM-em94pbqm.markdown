@@ -41,4 +41,4 @@ Monitoring alert fired. Team observed elevated `first byte timeout` errors and t
 ### Identified
 2026-05-11T05:29:00Z
 
-Elevated origin latency detected on Cloudflare Workers. No corresponding incident on the Cloudflare status page.
+Elevated origin latency detected on Cloudflare Workers via [monitoring alert / dashboard observation]. No corresponding incident on the Cloudflare status page.
