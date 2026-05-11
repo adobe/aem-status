@@ -1,7 +1,7 @@
 [
   {
     "code": "AEM-em94pbqm",
-    "name": "Increased error rate due to increased origin latency",
+    "name": "Increased error rate due to Cloudflare origin latency",
     "message": "On May 11, 2026, starting at 05:29 UTC, elevated origin latency was observed on Cloudflare Workers serving AEM delivery traffic. The increased latency caused `first byte timeout` errors between 05:56 and 06:32 UTC, resulting in an error rate of 0.029%. The issue was detected via monitoring alert. No customers reported impact. Both error rate and origin latency recovered on their own — error rate by 06:32 UTC and origin latency fully by 07:10 UTC.",
     "impact": "none",
     "incidentUpdated": "2026-05-11T10:22:17.000Z",
