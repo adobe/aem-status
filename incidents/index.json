@@ -8,7 +8,15 @@
     "startTime": "2026-05-11T05:56:00Z",
     "endTime": "2026-05-11T06:32:00Z",
     "errorRate": "0.00029",
-    "impactedService": "delivery"
+    "impactedService": "delivery",
+    "affectedComponents": [
+      "delivery"
+    ],
+    "internalServices": null,
+    "externalVendors": [
+      "cloudflare"
+    ],
+    "rootCause": "network-issue"
   },
   {
     "code": "AEM-t58nxd8r",
