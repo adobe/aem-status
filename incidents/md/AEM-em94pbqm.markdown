@@ -16,7 +16,7 @@ On May 11, 2026, starting at 05:29 UTC, elevated origin latency was observed on 
 
 ### Root Cause
 
-Cloudflare Workers experienced elevated origin latency for approximately 100 minutes (05:29–07:10 UTC). No incident was posted on the Cloudflare status page and the root cause remains unknown. The latency spike caused `first byte timeout` errors on the AEM delivery stack for 36 minutes until traffic normalized.
+Origin requests to Cloudflare Workers experienced elevated latency for approximately 100 minutes (05:29–07:10 UTC). No incident was posted on the Cloudflare status page and the root cause remains unknown. The latency spike caused `first byte timeout` errors on the AEM delivery stack for 36 minutes until traffic normalized.
 
 ### Resolution
 
