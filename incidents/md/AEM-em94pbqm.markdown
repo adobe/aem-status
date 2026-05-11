@@ -8,7 +8,7 @@ impacted-service: delivery
 postmortem-completed: 2026-05-11T10:22:17Z
 ---
 
-# Increased error rate due to increased origin latency
+# Increased error rate due to Cloudflare origin latency
 
 ### Executive Summary
 
