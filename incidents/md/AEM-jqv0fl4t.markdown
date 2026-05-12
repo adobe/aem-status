@@ -20,12 +20,12 @@ A regression was introduced in a deployment of the EDS Admin Service that broke 
 
 ### Resolution
 
-The offending deployment was identified and reverted. Normal branch sync behavior resumed immediately after the rollback. We attempted to re-sync all 320 affected branches; however, some may not have been recovered due to sanitized branch names in the logs making it difficult to identify every affected branch with certainty. Customers who notice branches still not syncing should re-trigger sync manually.
+The offending deployment was identified and reverted. Normal branch sync behavior resumed immediately after the rollback. We attempted to re-sync all 320 affected branches; however, due to sanitized branch names in the logs, we cannot confirm with certainty that every branch was re-synced. If you created a new branch between 13:30 and 21:45 UTC on May 11, 2026 and it was not syncing correctly, please re-trigger the sync manually via the AEM Admin API or recreate the branch.
 
 ### Action Items
 
 - Improve automated tests for new branch sync scenarios to the CI/CD pipeline to catch regressions before deployment
-- Consider implement monitoring and alerting for elevated branch sync failure rates to enable faster detection
+- Consider implementing monitoring and alerting for elevated branch sync failure rates to enable faster detection
 
 ## Updates
 
