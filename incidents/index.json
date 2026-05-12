@@ -1,5 +1,16 @@
 [
   {
+    "code": "AEM-jqv0fl4t",
+    "name": "Regression affecting Code Sync of new Branches",
+    "message": "On May 11, 2026 at 13:30 UTC, customers began reporting that newly created branches were not being synced correctly by AEM Code Sync. The issue persisted for approximately 8 hours 15 minutes. Publishing operations were unaffected and the publishing error rate remained at 0. Development workflows were affected: 100% of new branch sync operations failed during the incident window, resulting in 320 failed branch syncs across roughly 50 customers.",
+    "impact": "none",
+    "incidentUpdated": "2026-05-12T12:00:00.000Z",
+    "startTime": "2026-05-11T13:30:00Z",
+    "endTime": "2026-05-11T21:45:00Z",
+    "errorRate": "0",
+    "impactedService": "publishing"
+  },
+  {
     "code": "AEM-em94pbqm",
     "name": "Increased error rate due to Cloudflare origin latency",
     "message": "On May 11, 2026, starting at 05:29 UTC, elevated origin latency was observed on Cloudflare Workers serving AEM delivery traffic. The increased latency caused `first byte timeout` errors between 05:56 and 06:32 UTC, resulting in an error rate of 0.029%. The issue was detected via monitoring alert. No customers reported impact. Both error rate and origin latency recovered on their own — error rate by 06:32 UTC and origin latency fully by 07:10 UTC.",
