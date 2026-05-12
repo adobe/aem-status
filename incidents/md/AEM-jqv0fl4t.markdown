@@ -12,7 +12,7 @@ postmortem-completed: 2026-05-12T12:00:00Z
 
 ### Executive Summary
 
-On May 11, 2026 at 13:30 UTC, customers began reporting that newly created branches were not being synced correctly by AEM Code Sync. The issue persisted for approximately 8 hours 15 minutes. Publishing operations were unaffected and the publishing error rate remained at 0. Development workflows were affected: 100% of new branch sync operations failed during the incident window, resulting in 320 failed branch syncs across roughly 50 customers.
+On May 11, 2026, a deployment of the EDS Admin Service at 13:30 UTC introduced a regression that silently broke new branch sync in AEM Code Sync. The failure went undetected for approximately 4 hours and 45 minutes until the first customer report arrived at 18:15 UTC, after which the issue was resolved within 90 minutes. Publishing operations were unaffected and the publishing error rate remained at 0. Development workflows were affected: 100% of new branch sync operations failed during the incident window, resulting in 320 failed branch syncs across roughly 50 customers.
 
 ### Root Cause
 
