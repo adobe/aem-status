@@ -8,7 +8,13 @@
     "startTime": "2026-05-11T13:30:00Z",
     "endTime": "2026-05-11T21:45:00Z",
     "errorRate": "0",
-    "impactedService": "publishing"
+    "impactedService": "publishing",
+    "affectedComponents": null,
+    "internalServices": [
+      "code-sync"
+    ],
+    "externalVendors": null,
+    "rootCause": "deployment-issue"
   },
   {
     "code": "AEM-em94pbqm",
