@@ -12,11 +12,11 @@ postmortem-completed: 2026-05-12T12:00:00Z
 
 ### Executive Summary
 
-On May 11, 2026, a deployment of the EDS Admin Service at 13:30 UTC introduced a regression that silently broke new branch sync in AEM Code Sync. The failure went undetected for approximately 4 hours and 45 minutes until the first customer report arrived at 18:15 UTC, after which the issue was resolved within 90 minutes. Publishing operations were unaffected and the publishing error rate remained at 0. Development workflows were affected: 100% of new branch sync operations failed during the incident window, resulting in 320 failed branch syncs across roughly 50 customers.
+On May 11, 2026, a deployment of the AEM Admin Service at 13:30 UTC introduced a regression that silently broke new branch sync in AEM Code Sync. The failure went undetected for approximately 4 hours and 45 minutes until the first customer report arrived at 18:15 UTC, after which the issue was resolved within 90 minutes. Publishing operations were unaffected and the publishing error rate remained at 0. Development workflows were affected: 100% of new branch sync operations failed during the incident window, resulting in 320 failed branch syncs across roughly 50 customers.
 
 ### Root Cause
 
-A regression was introduced in a deployment of the EDS Admin Service that broke the handling of new branch creation in Code Sync. The defect caused new branches to fail silently during the sync process without producing HTTP-level errors.
+A regression was introduced in a deployment of the AEM Admin Service that broke the handling of new branch creation in Code Sync. The defect caused new branches to fail silently during the sync process without producing HTTP-level errors.
 
 ### Resolution
 
@@ -32,7 +32,7 @@ The offending deployment was identified and reverted. Normal branch sync behavio
 ### Resolved
 2026-05-11T21:45:00Z
 
-The offending EDS Admin Service deployment has been reverted and Code Sync is operating normally. We attempted to re-sync all affected branches; customers who still experience issues should re-trigger sync manually.
+The offending AEM Admin Service deployment has been reverted and Code Sync is operating normally. We attempted to re-sync all affected branches; customers who still experience issues should re-trigger sync manually.
 
 ### Monitoring
 2026-05-11T21:40:00Z
@@ -42,9 +42,9 @@ Rollback of the offending deployment initiated. Monitoring for recovery.
 ### Identified
 2026-05-11T21:30:00Z
 
-Root cause identified as a regression in the EDS Admin Service deployment from 13:30 UTC. Rollback planned.
+Root cause identified as a regression in the AEM Admin Service deployment from 13:30 UTC. Rollback planned.
 
 ### Investigating
 2026-05-11T21:25:00Z
 
-Investigation started following customer reports. First customer report received at 18:15 UTC. The EDS Admin Service had been deployed at 13:30 UTC.
+Investigation started following customer reports. First customer report received at 18:15 UTC. The AEM Admin Service had been deployed at 13:30 UTC.
