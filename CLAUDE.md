@@ -2,8 +2,8 @@
 
 ## Session start
 
-- Look for a recently added file in `incidents/md`. File names follow the format `AEM-<incident-id>.markdown`.
-- If none was added recently, look for a recent `~/Downloads/AEM-*.markdown` and move it to `incidents/md`.
+- Run `git status` and check for untracked files matching `incidents/md/AEM-*.markdown`. That file is the one to work with.
+- If none found, check `~/Downloads/AEM-*.markdown` for a file that doesn't exist in `incidents/md/` and was downloaded today. If there are multiple matches, pick the one modified within the last 30 minutes. Move it to `incidents/md/` and use it.
 - If a file was found, auto-start the process of writing the post mortem.
 - If no file was found, ask the user if they want to start writing a fresh postmortem or do something else.
 - If the user wishes to start a postmortem from scratch:
