@@ -698,7 +698,7 @@ footer a:any-link:hover {
 }
 
 #current-incident.ok .section-head h2::after {
-  content: ' (No Significant Impact, Error rate < 0.1%)';
+  content: ' (No Significant Impact, Error rate < 0.5%)';
 }
 
 #current-incident .status-update {
