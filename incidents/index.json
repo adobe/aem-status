@@ -1,5 +1,16 @@
 [
   {
+    "code": "AEM-dmd91n4c",
+    "name": "SharePoint authoring auth regression affecting status and preview",
+    "message": "On June 9, 2026, starting at 13:37 UTC, a subset of customers using SharePoint-based authoring began experiencing failures on `status` and `preview` operations, which effectively blocked publishing for those affected. Authors saw HTTP 404 responses rather than actionable auth errors. The incident persisted for approximately 16 hours and 39 minutes, ending at 06:16 UTC on June 10, 2026. The root cause was a code regression committed roughly 90 days earlier that silently corrupted authorization co",
+    "impact": "minor",
+    "incidentUpdated": "2026-06-10T17:31:00.000Z",
+    "startTime": "2026-06-09T13:37:00Z",
+    "endTime": "2026-06-10T06:16:00Z",
+    "errorRate": "0.0204375",
+    "impactedService": "publishing"
+  },
+  {
     "code": "AEM-jqv0fl4t",
     "name": "Regression affecting Code Sync of new Branches",
     "message": "On May 11, 2026, a deployment of the AEM Admin Service at 13:30 UTC introduced a regression that silently broke new branch sync in AEM Code Sync. The failure went undetected for approximately 4 hours and 45 minutes until the first customer report arrived at 18:15 UTC, after which the issue was resolved within 90 minutes. Publishing operations were unaffected and the publishing error rate remained at 0. Development workflows were affected: 100% of new branch sync operations failed during the inci",
