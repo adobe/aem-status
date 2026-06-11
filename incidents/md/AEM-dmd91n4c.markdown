@@ -12,19 +12,19 @@ postmortem-completed: 2026-06-10T17:31:00Z
 
 ### Executive Summary
 
-On June 9, 2026, starting at 13:37 UTC, a subset of customers using SharePoint-based authoring began experiencing failures on `status` and `preview` operations, which effectively blocked publishing for those affected. Authors saw HTTP 404 responses rather than actionable auth errors. The incident persisted for approximately 16 hours and 39 minutes, ending at 06:16 UTC on June 10, 2026. The root cause was a code regression committed roughly 90 days earlier that silently corrupted authorization configurations; the defect only became active once those configurations reached their expiry window. Other publishing capabilities, including develop workflows, remained available throughout. Approximately 2.04% of requests failed during the incident window. Detection relied on customer reports rather than automated monitoring, and only a small subset of affected customers reported the issue.
+On June 9, 2026, starting at 13:37 UTC, a subset of customers using SharePoint-based authoring began experiencing failures on `status` and `preview` operations, which effectively blocked publishing for those affected. Authors saw HTTP 404 responses rather than actionable auth errors. The incident persisted for approximately 17 hours and 10 minutes, ending at 06:47 UTC on June 10, 2026. The root cause was a code regression committed roughly 90 days earlier that silently corrupted authorization configurations; the defect only became active once those configurations reached their expiry window. Other publishing capabilities, including develop workflows, remained available throughout. Approximately 2.04% of requests failed during the incident window. Detection relied on customer reports rather than automated monitoring, and only a small subset of affected customers reported the issue.
 
 ### Incident Timeline
 
-- **2026-06-09T13:37:00Z** — The latent authorization regression began affecting SharePoint-based authoring customers as expired configurations triggered auth failures on `status` and `preview` operations.
-- **2026-06-09T22:10:00Z** — First customer report received (15:10 PDT). Authors described 404 errors when attempting to publish; investigation began.
-- **2026-06-10T06:14:00Z** — Root cause identified (23:14 PDT on June 9). The team confirmed a code regression that had corrupted authorization configurations in a way that only surfaced 90 days after the original commit.
-- **2026-06-10T06:16:00Z** — Fix deployed across all affected customers. `status` and `preview` operations restored; publishing workflows confirmed working.
+- **June 9, 2026, 13:37 UTC** — The latent authorization regression began affecting SharePoint-based authoring customers as expired configurations triggered auth failures on `status` and `preview` operations.
+- **June 9, 2026, 22:10 UTC** — First customer report received (15:10 PDT). Authors described 404 errors when attempting to publish; investigation began.
+- **June 10, 2026, 5:45 UTC** — Root cause identified (23:14 PDT on June 9). The team confirmed a code regression that had corrupted authorization configurations in a way that only surfaced 90 days after the original commit.
+- **June 10, 2026, 6:47 UTC** — Fix deployed across all affected customers. `status` and `preview` operations restored; publishing workflows confirmed working.
 
 ### Impact Analysis
 
 - **Affected customers:** A small subset of SharePoint-based authoring customers. Only a fraction of those affected reported the issue.
-- **Duration:** 16 hours and 39 minutes (13:37 UTC June 9 through 06:16 UTC June 10).
+- **Duration:** 17 hours and 10 minutes (13:37 UTC June 9 through 06:47 UTC June 10).
 - **Affected operations:** `status` and `preview` only. Publishing was effectively blocked for affected customers because these operations are required to complete a publish workflow.
 - **Unaffected operations:** Develop and other publishing service capabilities continued to work normally throughout the incident.
 - **Error rate:** 2.1% of requests failed during the incident window.
@@ -45,7 +45,7 @@ The incident was triggered when authorization configurations — corrupted by th
 
 **Immediate Mitigation:** Once the root cause was identified at 06:14 UTC on June 10, the team prepared and deployed a fix to restore valid authorization configurations for affected customers.
 
-**Permanent Resolution:** At 06:16 UTC on June 10, the fix was rolled out across all customers experiencing the issue. Authorization configurations were corrected, and `status` and `preview` operations resumed normal function. Publishing workflows were verified end-to-end for affected customers.
+**Permanent Resolution:** At 06:47 UTC on June 10, the fix was rolled out across all customers experiencing the issue. Authorization configurations were corrected, and `status` and `preview` operations resumed normal function. Publishing workflows were verified end-to-end for affected customers.
 
 ### Detection
 
@@ -81,22 +81,23 @@ We have identified the following action items to prevent similar incidents and i
 
 #### Technical Improvements
 
-1. Update error handling for `status` and `preview` operations to return explicit authorization error responses instead of HTTP 404, clearly identifying auth failures to authors and support teams.
+1. When loading access keys from the cache, remove stale entries automatically to prevent this kind of auth failure.
+2. Update error handling for `status` and `preview` operations to return explicit authorization error responses instead of HTTP 404, clearly identifying auth failures to authors and support teams.
 
 
 ## Updates
 
 ### Resolved
-2026-06-10T06:16:00.000Z
+2026-06-10T06:47:00.000Z
 
 This incident has been resolved. A fix has been deployed to all affected customers. SharePoint-based `status` and `preview` operations are functioning normally, and publishing workflows have been verified.
 
 ### Identified
-2026-06-10T06:14:00.000Z
+June 10, 2026, 5:45 UTC
 
 We have identified the root cause as a code regression that corrupted SharePoint authorization configurations. The defect was latent and only activated as configurations reached their 90-day expiry. A fix is being prepared for rollout to all affected customers.
 
 ### Investigating
-2026-06-09T22:10:00.000Z
+June 9, 2026, 22:10 UTC
 
 We are investigating customer reports of HTTP 404 errors affecting SharePoint-based authoring. Authors are unable to complete `status` and `preview` operations, which is blocking publishing for affected customers. Other publishing capabilities, including develop, remain available.
