@@ -27,7 +27,7 @@ On June 9, 2026, starting at 13:37 UTC, a subset of customers using SharePoint-b
 - **Duration:** 16 hours and 39 minutes (13:37 UTC June 9 through 06:16 UTC June 10).
 - **Affected operations:** `status` and `preview` only. Publishing was effectively blocked for affected customers because these operations are required to complete a publish workflow.
 - **Unaffected operations:** Develop and other publishing service capabilities continued to work normally throughout the incident.
-- **Error rate:** 2.04% of requests failed during the incident window.
+- **Error rate:** 2.1% of requests failed during the incident window.
 - **Customer experience:** Authors received HTTP 404 responses instead of clear authorization errors, making the issue difficult to diagnose without engineering investigation.
 
 ### Root Cause Analysis
