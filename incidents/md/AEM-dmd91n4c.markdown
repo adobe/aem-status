@@ -18,7 +18,7 @@ On June 9, 2026, starting at 13:37 UTC, a subset of customers using SharePoint-b
 
 - **June 9, 2026, 13:37 UTC** — The latent authorization regression began affecting SharePoint-based authoring customers as expired configurations triggered auth failures on `status` and `preview` operations.
 - **June 9, 2026, 22:10 UTC** — First customer report received (15:10 PDT). Authors described 404 errors when attempting to publish; investigation began.
-- **June 10, 2026, 5:45 UTC** — Root cause identified (23:14 PDT on June 9). The team confirmed a code regression that had corrupted authorization configurations in a way that only surfaced 90 days after the original commit.
+- **June 10, 2026, 5:45 UTC** — Root cause identified (22:45 PDT on June 9). The team confirmed a code regression that had corrupted authorization configurations in a way that only surfaced 90 days after the original commit.
 - **June 10, 2026, 6:47 UTC** — Fix deployed across all affected customers. `status` and `preview` operations restored; publishing workflows confirmed working.
 
 ### Impact Analysis
@@ -43,7 +43,7 @@ The incident was triggered when authorization configurations — corrupted by th
 
 ### Resolution
 
-**Immediate Mitigation:** Once the root cause was identified at 06:14 UTC on June 10, the team prepared and deployed a fix to restore valid authorization configurations for affected customers.
+**Immediate Mitigation:** Once the root cause was identified at 05:47 UTC on June 10, the team prepared and deployed a fix to restore valid authorization configurations for affected customers.
 
 **Permanent Resolution:** At 06:47 UTC on June 10, the fix was rolled out across all customers experiencing the issue. Authorization configurations were corrected, and `status` and `preview` operations resumed normal function. Publishing workflows were verified end-to-end for affected customers.
 
@@ -51,8 +51,8 @@ The incident was triggered when authorization configurations — corrupted by th
 
 - **Detection method:** Customer-reported. No automated monitoring alert fired.
 - **Time to detection:** Approximately 8 hours and 33 minutes from incident start (13:37 UTC) to first customer report (22:10 UTC).
-- **Time to identification:** Approximately 16 hours and 37 minutes from incident start to root cause identification (06:14 UTC on June 10).
-- **Time to resolution:** Approximately 2 minutes from root cause identification to fix deployment (06:16 UTC on June 10).
+- **Time to identification:** Approximately 16 hours and 8 minutes from incident start to root cause identification (05:45 UTC on June 10).
+- **Time to resolution:** Approximately 31 minutes from root cause identification to fix deployment (06:16 UTC on June 10).
 - **Why detection was delayed:** Auth failures on SharePoint integrations are a common operational occurrence caused by outdated customer credentials, so no alert threshold existed for this failure mode. The 404 response surface further obscured the auth nature of the failure, and the 90-day lag between the regression commit and its first manifestation made historical code analysis the only viable investigation path.
 
 ### What Went Well
