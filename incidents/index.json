@@ -1,12 +1,12 @@
 [
   {
     "code": "AEM-dmd91n4c",
-    "name": "SharePoint authoring auth regression affecting status and preview",
+    "name": "Partial SharePoint authoring outage affecting status and preview",
     "message": "On June 9, 2026, starting at 13:37 UTC, a subset of customers using SharePoint-based authoring began experiencing failures on `status` and `preview` operations, which effectively blocked publishing for those affected. Authors saw HTTP 404 responses rather than actionable auth errors. The incident persisted for approximately 17 hours and 10 minutes, ending at 06:47 UTC on June 10, 2026. The root cause was a code regression committed roughly 90 days earlier that silently corrupted authorization co",
     "impact": "minor",
     "incidentUpdated": "2026-06-10T17:31:00.000Z",
     "startTime": "2026-06-09T13:37:00Z",
-    "endTime": "2026-06-10T06:47:00Z",
+    "endTime": "2026-06-10T06:16:00Z",
     "errorRate": "0.0204375",
     "impactedService": "publishing",
     "affectedComponents": [
