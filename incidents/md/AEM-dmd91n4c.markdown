@@ -83,10 +83,6 @@ We have identified the following action items to prevent similar incidents and i
 
 1. Update error handling for `status` and `preview` operations to return explicit authorization error responses instead of HTTP 404, clearly identifying auth failures to authors and support teams.
 
-#### Documentation and Process
-
-1. Update the operations runbook with diagnostic steps specific to SharePoint authorization failures, including how to distinguish credential expiry from platform-side configuration corruption.
-2. Conduct operations team training on SharePoint auth failure modes, escalation paths, and the 90-day configuration lifecycle.
 
 ## Updates
 
