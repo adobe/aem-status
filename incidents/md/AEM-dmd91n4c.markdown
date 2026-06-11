@@ -79,10 +79,6 @@ The incident was triggered when authorization configurations — corrupted by th
 
 We have identified the following action items to prevent similar incidents and improve our response capabilities:
 
-#### Monitoring and Alerting Improvements
-
-1. Implement monitoring that automatically triggers an incident when correlated SharePoint authorization failures occur across multiple customers, distinguishing systemic regressions from individual credential expiry.
-
 #### Technical Improvements
 
 1. Update error handling for `status` and `preview` operations to return explicit authorization error responses instead of HTTP 404, clearly identifying auth failures to authors and support teams.
