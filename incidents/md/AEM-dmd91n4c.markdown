@@ -8,7 +8,7 @@ impacted-service: publishing
 postmortem-completed: 2026-06-10T17:31:00Z
 ---
 
-# SharePoint authoring auth regression affecting status and preview
+# Partial SharePoint authoring outage affecting status and preview
 
 ### Executive Summary
 
