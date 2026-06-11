@@ -86,7 +86,6 @@ We have identified the following action items to prevent similar incidents and i
 #### Technical Improvements
 
 1. Update error handling for `status` and `preview` operations to return explicit authorization error responses instead of HTTP 404, clearly identifying auth failures to authors and support teams.
-2. Improve the testing setup for SharePoint authorization configuration writes, including scenarios that simulate configuration expiry and re-authorization flows.
 
 #### Documentation and Process
 
