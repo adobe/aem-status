@@ -8,7 +8,15 @@
     "startTime": "2026-08-17T07:15:16Z",
     "endTime": "2026-08-17T07:42:04Z",
     "errorRate": "0.0038",
-    "impactedService": "publishing"
+    "impactedService": "publishing",
+    "affectedComponents": [
+      "publishing"
+    ],
+    "internalServices": null,
+    "externalVendors": [
+      "cloudflare"
+    ],
+    "rootCause": "third-party-outage"
   },
   {
     "code": "AEM-dmd91n4c",
