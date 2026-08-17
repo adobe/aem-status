@@ -38,7 +38,7 @@ Our error monitoring shows errors on the da.live collaboration service have subs
 ### Monitoring
 2026-08-17T07:36:01Z
 
-Increased errors in the collaboration service identified as related to a Cloudflare Durable Objects incident: https://www.cloudflarestatus.com/incidents/w1d9976ls02m. We are monitoring recovery.
+Increased errors in the collaboration service identified as related to a Cloudflare Durable Objects incident. We are monitoring recovery.
 
 ### Investigating
 2026-08-17T07:15:16Z
