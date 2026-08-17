@@ -8,11 +8,11 @@ impacted-service: publishing
 postmortem-completed: 2026-08-17T08:20:56Z
 ---
 
-# Issues with da.live editing observed
+# Issues with Document Authoring (DA) editing observed
 
 ### Executive Summary
 
-On August 17, 2026 at 07:15 UTC, we observed intermittent HTTP 500 errors on the da.live collaborative editing service (`collab.da.live`, served by the `da-collab` Cloudflare Worker). Authors working in da.live experienced sporadic failures when their editing sessions synced document state. The errors were concentrated in Indian datacenters (Chennai, Delhi, Mumbai, Bangalore) and affected around a dozen customers. The incident was detected by an automated alert on the collaboration service's error rate. In total, 220 requests returned HTTP 500 across the incident window, an error rate of 0.382%. Error metrics recovered and the incident resolved at 07:42 UTC, for a total duration of approximately 27 minutes. The root cause was an upstream Cloudflare Durable Objects incident that degraded the backing store used by the collaboration service.
+On August 17, 2026 at 07:15 UTC, we observed intermittent HTTP 500 errors on the Document Authoring (DA) collaborative editing service (`collab.da.live`). Authors working in DA experienced sporadic failures when their editing sessions synced document state. The errors were concentrated in Indian datacenters (Chennai, Delhi, Mumbai, Bangalore) and affected around a dozen customers. The incident was detected by an automated alert on the collaboration service's error rate. In total, 220 requests returned HTTP 500 across the incident window, an error rate of 0.382%. Error metrics recovered and the incident resolved at 07:42 UTC, for a total duration of approximately 27 minutes. The root cause was an upstream Cloudflare Durable Objects incident that degraded the backing store used by the collaboration service.
 
 ### Root Cause
 
