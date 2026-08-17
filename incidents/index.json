@@ -2,7 +2,7 @@
   {
     "code": "AEM-4572dkh2",
     "name": "Issues with da.live editing observed",
-    "message": "On August 17, 2026 at 07:15 UTC, we observed intermittent HTTP 500 errors on the da.live collaborative editing service (`collab.da.live`, served by the `da-collab` Cloudflare Worker). Authors working in da.live experienced sporadic failures when their editing sessions synced document state. The errors were concentrated in Asia-Pacific datacenters (Chennai, Delhi, Mumbai, Bangalore) and a smaller share in Chicago (ORD), and affected a subset of customers across multiple organizations. The inciden",
+    "message": "On August 17, 2026 at 07:15 UTC, we observed intermittent HTTP 500 errors on the da.live collaborative editing service (`collab.da.live`, served by the `da-collab` Cloudflare Worker). Authors working in da.live experienced sporadic failures when their editing sessions synced document state. The errors were concentrated in Indian datacenters (Chennai, Delhi, Mumbai, Bangalore) and affected a subset of customers across multiple organizations. The incident was detected by an automated alert on the ",
     "impact": "none",
     "incidentUpdated": "2026-08-17T08:20:56.000Z",
     "startTime": "2026-08-17T07:15:16Z",
