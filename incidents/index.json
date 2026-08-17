@@ -1,5 +1,16 @@
 [
   {
+    "code": "AEM-4572dkh2",
+    "name": "Issues with da.live editing observed",
+    "message": "On August 17, 2026 at 07:15 UTC, we observed intermittent HTTP 500 errors on the da.live collaborative editing service (`collab.da.live`, served by the `da-collab` Cloudflare Worker). Authors working in da.live experienced sporadic failures when their editing sessions synced document state. The errors were concentrated in Asia-Pacific datacenters (Chennai, Delhi, Mumbai, Bangalore) and a smaller share in Chicago (ORD), and affected a subset of customers across multiple organizations. The inciden",
+    "impact": "none",
+    "incidentUpdated": "2026-08-17T08:20:56.000Z",
+    "startTime": "2026-08-17T07:15:16Z",
+    "endTime": "2026-08-17T07:42:04Z",
+    "errorRate": "0.0038",
+    "impactedService": "publishing"
+  },
+  {
     "code": "AEM-dmd91n4c",
     "name": "Partial SharePoint authoring outage affecting status and preview",
     "message": "On June 9, 2026, starting at 13:37 UTC, a subset of customers using SharePoint-based authoring began experiencing failures on `status` and `preview` operations, which effectively blocked publishing for those affected. Authors saw HTTP 404 responses rather than actionable auth errors. The incident persisted for approximately 17 hours and 10 minutes, ending at 06:47 UTC on June 10, 2026. The root cause was a code regression committed roughly 90 days earlier that silently corrupted authorization co",
