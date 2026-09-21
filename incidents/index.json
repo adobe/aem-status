@@ -1,5 +1,24 @@
 [
   {
+    "code": "AEM-rtyv1fod",
+    "name": "IMS Auth Outage Impacting Content Publishing",
+    "message": "On September 18, 2026 at 10:03 UTC, an issue affecting Adobe's Identity Management Service (IMS) began causing sign-in and authentication failures for a subset of Adobe Experience Cloud customers globally, across the Americas, APAC, and EMEA. For AEM Edge Delivery Services this surfaced on the publishing path (the Edge Delivery Services Author Tier / admin API): publish and preview requests that needed to obtain or refresh an IMS-backed authentication token were rejected while IMS was degraded. ",
+    "impact": "minor",
+    "incidentUpdated": "2026-09-21T11:11:10.000Z",
+    "startTime": "2026-09-18T10:03:00.000Z",
+    "endTime": "2026-09-18T11:42:00.000Z",
+    "errorRate": "0.0000",
+    "impactedService": "publishing",
+    "affectedComponents": [
+      "publishing"
+    ],
+    "internalServices": [
+      "admin-api"
+    ],
+    "externalVendors": null,
+    "rootCause": "credential-issue"
+  },
+  {
     "code": "AEM-4572dkh2",
     "name": "Issues with Document Authoring (DA) editing observed",
     "message": "On August 17, 2026 at 07:15 UTC, we observed intermittent HTTP 500 errors on the Document Authoring (DA) collaborative editing service (`collab.da.live`). Authors working in DA experienced sporadic failures when their editing sessions synced document state. The errors were concentrated in Indian datacenters (Chennai, Delhi, Mumbai, Bangalore) and affected around a dozen customers. The incident was detected by an automated alert on the collaboration service's error rate. In total, 220 requests re",
