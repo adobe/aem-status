@@ -50,3 +50,8 @@ A fix has been released that restores aggregation of all configured metadata sou
 2026-09-21T10:11:33Z
 
 We have identified the root cause. A change deployed on September 19 caused metadata sheets beyond the first to be ignored when resolving site configuration. We are preparing a fix.
+
+### Investigating
+2026-09-21T09:13:00Z
+
+We are investigating customer reports of metadata properties missing from delivered pages. Pages are being delivered normally and no errors are occurring, but some metadata may be incomplete. Our team is working to identify the cause.
