@@ -33,6 +33,7 @@ All remediation was carried out by Adobe. No customer action was required at any
 ### Action Items
 
 - Add test coverage asserting that all configured metadata sheets are aggregated into the delivered metadata, with a fixture that actually serves a second sheet.
+- Improve internal tooling for large-scale, ad-hoc cache management, so that purging across all cache levels and stacks after an incident is faster.
 
 ## Updates
 
