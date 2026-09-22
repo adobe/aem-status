@@ -28,9 +28,7 @@ No action was required on the AEM side. Adobe engineering identified and correct
 
 ### Action Items
 
-- Evaluate whether AEM can consume Adobe IMS health/status signals (e.g. status.adobe.com) so IMS-driven authentication degradations are detected before customer impact.
-- Add monitoring on IMS-backed authentication failure rates on the publishing/admin API path, so IMS-origin token failures are surfaced independently of the overall publish error rate.
-- Confirm the measured error rate for the incident window from Klickhaus/Coralogix and finalise the impact classification (currently provisional: minor).
+- Provide an alternative login method so affected users can authenticate through a different identity provider (IdP) when IMS is disrupted.
 
 ## Updates
 
