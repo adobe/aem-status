@@ -16,7 +16,7 @@
       "admin-api"
     ],
     "externalVendors": null,
-    "rootCause": "credential-issue"
+    "rootCause": "dependency-issue"
   },
   {
     "code": "AEM-4572dkh2",
