@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { JSDOM } from 'jsdom';
+import { validateDetectionMetadata } from '../scripts/update-incidents-index.js';
 
 const testDir = path.dirname(fileURLToPath(import.meta.url));
 
@@ -114,6 +115,76 @@ describe('update-incidents-index', () => {
         if (previousTimezone === undefined) delete process.env.TZ;
         else process.env.TZ = previousTimezone;
       }
+    });
+  });
+
+  describe('detection metadata validation', () => {
+    it('accepts monitoring and retrospective customer detection timestamps', () => {
+      assert.doesNotThrow(() => validateDetectionMetadata({
+        'start-time': '2026-05-07T23:45:00Z',
+        'detection-time': '2026-05-07T23:50:00Z',
+        'detection-source': 'monitoring',
+      }, 'AEM-monitoring'));
+
+      assert.doesNotThrow(() => validateDetectionMetadata({
+        'start-time': '2026-05-07T23:45:00Z',
+        'detection-time': '2026-05-08T08:05:00Z',
+        'detection-source': 'customer',
+        'end-time': '2026-05-08T05:30:00Z',
+      }, 'AEM-customer'));
+    });
+
+    it('allows incidents without detection metadata', () => {
+      assert.doesNotThrow(() => validateDetectionMetadata({
+        'start-time': '2026-05-07T23:45:00Z',
+      }, 'AEM-undetected'));
+    });
+
+    it('requires detection time and source together', () => {
+      assert.throws(
+        () => validateDetectionMetadata({
+          'start-time': '2026-05-07T23:45:00Z',
+          'detection-time': '2026-05-07T23:50:00Z',
+        }, 'AEM-missing-source'),
+        /detection-time and detection-source must be provided together/,
+      );
+      assert.throws(
+        () => validateDetectionMetadata({
+          'start-time': '2026-05-07T23:45:00Z',
+          'detection-source': 'monitoring',
+        }, 'AEM-missing-time'),
+        /detection-time and detection-source must be provided together/,
+      );
+    });
+
+    it('rejects unsupported detection sources', () => {
+      assert.throws(
+        () => validateDetectionMetadata({
+          'start-time': '2026-05-07T23:45:00Z',
+          'detection-time': '2026-05-07T23:50:00Z',
+          'detection-source': 'internal-report',
+        }, 'AEM-invalid-source'),
+        /detection-source must be "monitoring" or "customer"/,
+      );
+    });
+
+    it('rejects invalid or chronologically impossible timestamps', () => {
+      assert.throws(
+        () => validateDetectionMetadata({
+          'start-time': '2026-05-07T23:45:00Z',
+          'detection-time': '2026-02-30T23:50:00Z',
+          'detection-source': 'monitoring',
+        }, 'AEM-invalid-time'),
+        /detection-time must be a valid ISO 8601 timestamp/,
+      );
+      assert.throws(
+        () => validateDetectionMetadata({
+          'start-time': '2026-05-07T23:45:00Z',
+          'detection-time': '2026-05-07T23:40:00Z',
+          'detection-source': 'monitoring',
+        }, 'AEM-before-start'),
+        /detection-time cannot be before start-time/,
+      );
     });
   });
 
@@ -360,6 +431,33 @@ AWS outage affected publishing service.
       assert.equal(index[0].endTime, '2025-02-15T09:00:00.000Z', 'Should extract endTime from data attribute');
       assert.equal(index[0].errorRate, '0.05', 'Should extract errorRate from data attribute');
       assert.equal(index[0].impactedService, 'publishing', 'Should extract impactedService from data attribute');
+    });
+
+    it('should fail index generation for invalid detection metadata', async () => {
+      const md = `---
+kind: postmortem
+impact: minor
+start-time: 2025-02-15T08:00:00.000Z
+detection-time: 2025-02-15T08:05:00.000Z
+detection-source: manual
+end-time: 2025-02-15T09:00:00.000Z
+postmortem-completed: 2025-02-15T10:00:00.000Z
+---
+
+# Invalid Detection Source
+
+### Executive Summary
+
+This fixture should be rejected.
+`;
+
+      fs.writeFileSync(path.join(mdDir, 'AEM-invalid.markdown'), md);
+
+      await assert.rejects(
+        () => createAndRunScript(),
+        /AEM-invalid: detection-source must be "monitoring" or "customer"/,
+      );
+      assert.equal(fs.existsSync(indexPath), false, 'Should not write an index for invalid metadata');
     });
   });
 });
