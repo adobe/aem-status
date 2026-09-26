@@ -2,6 +2,8 @@
 kind: postmortem
 impact: major
 start-time: "2025-10-20T06:54:00.000Z"
+detection-time: "2025-10-20T06:54:00.000Z"
+detection-source: monitoring
 end-time: "2025-10-20T08:44:00.000Z"
 error-rate: 0.0833
 impacted-service: publishing
@@ -65,4 +67,3 @@ The original service configuration is being restored, we continue to monitor the
 2025-10-20T12:14:50.057Z
 
 Normal operations have been restored.
-

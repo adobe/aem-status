@@ -2,6 +2,8 @@
 kind: postmortem
 impact: minor
 start-time: 2026-09-19T03:32:22Z
+detection-time: 2026-09-21T09:13:00Z
+detection-source: customer
 end-time: 2026-09-21T14:30:00Z
 error-rate: 0.0000
 impacted-service: delivery

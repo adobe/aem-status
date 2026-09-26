@@ -2,6 +2,8 @@
 kind: postmortem
 impact: none
 start-time: "2025-12-02T06:53:00.000Z"
+detection-time: "2025-12-02T07:17:00.000Z"
+detection-source: monitoring
 end-time: "2025-12-02T07:24:00.000Z"
 error-rate: 0.0022
 impacted-service: publishing
@@ -46,4 +48,3 @@ At 7:23 AM UTC, we rolled back admin.da.live to the previous version which fixed
 2025-12-02T07:24:00.000Z
 
 At 7:24 AM UTC, the issue was resolved and admin.da.live was functional again.
-

@@ -2,6 +2,8 @@
 kind: postmortem
 impact: minor
 start-time: 2026-06-09T13:37:00Z
+detection-time: 2026-06-09T22:10:00Z
+detection-source: customer
 end-time: 2026-06-10T06:16:00Z
 error-rate: 0.0204375
 impacted-service: publishing

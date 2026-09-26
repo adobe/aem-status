@@ -27,7 +27,7 @@ function parseTimestamp(timestampStr) {
   };
 }
 
-function humanPostedToIso(posted) {
+export function humanPostedToIso(posted) {
   if (!posted) return null;
   const timestampText = posted.replace(/^(Posted\s*)+/i, '').trim();
   const dateMatch = timestampText.match(
@@ -43,7 +43,7 @@ function humanPostedToIso(posted) {
       const hour = parseInt(parts[4], 10);
       const minute = parseInt(parts[5], 10);
 
-      const date = new Date(year, month, day, hour, minute);
+      const date = new Date(Date.UTC(year, month, day, hour, minute));
       return date.toISOString();
     }
   }
@@ -123,7 +123,14 @@ function parseIncidentMarkdown(filePath, incidentCode) {
     };
 
     if (incidentCode.startsWith('AEM-')) {
-      const dataKeys = ['start-time', 'end-time', 'error-rate', 'impacted-service'];
+      const dataKeys = [
+        'start-time',
+        'detection-time',
+        'detection-source',
+        'end-time',
+        'error-rate',
+        'impacted-service',
+      ];
 
       dataKeys.forEach((key) => {
         const value = frontmatter[key];

@@ -2,6 +2,8 @@
 kind: postmortem
 impact: none
 start-time: "[ISO 8601 timestamp - e.g., 2024-09-11T05:00:00.000Z]"
+detection-time: "[ISO 8601 timestamp when the incident was detected - e.g., 2024-09-11T05:10:00.000Z]"
+detection-source: "[monitoring|customer]"
 end-time: "[ISO 8601 timestamp - e.g., 2024-09-11T12:30:00.000Z]"
 error-rate: [Error rate as decimal - e.g., 0.001]
 impacted-service: [delivery|publishing]
@@ -52,4 +54,3 @@ Example: The missing permission was restored, and event dispatching resumed imme
 [ISO 8601 timestamp - e.g., 2024-09-11T07:00:00.000Z]
 
 [Description of the problem and that root cause was found - e.g., "We have identified the root cause and are working on a solution."]
-

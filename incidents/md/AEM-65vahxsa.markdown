@@ -2,6 +2,8 @@
 kind: postmortem
 impact: none
 start-time: "2026-02-07T01:57:00.000Z"
+detection-time: "2026-02-07T02:05:00.000Z"
+detection-source: monitoring
 end-time: "2026-02-09T16:30:00.000Z"
 error-rate: 0.00035
 impacted-service: delivery
@@ -63,4 +65,3 @@ We identified the problem and switched projects using Cloudflare backends to ano
 2026-02-07T02:05:00.000Z
 
 We are observing an increase of errors on requests served from Cloudflare backends.
-

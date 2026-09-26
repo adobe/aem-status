@@ -98,6 +98,23 @@ describe('update-incidents-index', () => {
         assert.ok(monthIndex >= 0, `Should have valid month index for "${monthMatch[1]}"`);
       });
     });
+
+    it('should preserve UTC legacy timestamps regardless of local timezone', async () => {
+      const previousTimezone = process.env.TZ;
+      process.env.TZ = 'Asia/Kolkata';
+
+      try {
+        const scriptDir = path.join(path.dirname(testDir), 'scripts');
+        const module = await import(`file://${path.join(scriptDir, 'update-incidents-index.js')}?t=${Date.now()}`);
+        assert.equal(
+          module.humanPostedToIso('Posted Jun 12, 2025 - 20:52 UTC'),
+          '2025-06-12T20:52:00.000Z',
+        );
+      } finally {
+        if (previousTimezone === undefined) delete process.env.TZ;
+        else process.env.TZ = previousTimezone;
+      }
+    });
   });
 
   describe('impact level detection', () => {
@@ -205,7 +222,7 @@ describe('update-incidents-index', () => {
     });
   });
 
-  describe('startTime and endTime updates', () => {
+  describe('incident timestamp updates', () => {
     let tempDir;
     let incidentsDir;
     let mdDir;
@@ -312,6 +329,8 @@ Updated postmortem content with corrected times.
 kind: postmortem
 impact: major
 start-time: 2025-02-15T08:00:00.000Z
+detection-time: 2025-02-15T08:05:00.000Z
+detection-source: monitoring
 end-time: 2025-02-15T09:00:00.000Z
 error-rate: 0.05
 impacted-service: publishing
@@ -336,6 +355,8 @@ AWS outage affected publishing service.
       assert.equal(index.length, 1, 'Should have one incident');
       assert.equal(index[0].code, 'AEM-aws123');
       assert.equal(index[0].startTime, '2025-02-15T08:00:00.000Z', 'Should extract startTime from data attribute');
+      assert.equal(index[0].detectionTime, '2025-02-15T08:05:00.000Z', 'Should extract detectionTime from frontmatter');
+      assert.equal(index[0].detectionSource, 'monitoring', 'Should extract detectionSource from frontmatter');
       assert.equal(index[0].endTime, '2025-02-15T09:00:00.000Z', 'Should extract endTime from data attribute');
       assert.equal(index[0].errorRate, '0.05', 'Should extract errorRate from data attribute');
       assert.equal(index[0].impactedService, 'publishing', 'Should extract impactedService from data attribute');

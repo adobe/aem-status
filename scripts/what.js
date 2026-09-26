@@ -122,10 +122,108 @@ const buildDependencyMatrix = (incidents) => {
   };
 };
 
+const MINUTE_IN_MS = 60 * 1000;
+const MINIMUM_OUTLIER_SAMPLE_SIZE = 4;
+
+const parseTimestamp = (value) => {
+  if (!value) return null;
+  const timestamp = new Date(value);
+  return Number.isNaN(timestamp.getTime()) ? null : timestamp;
+};
+
+export const extractDetectionMinutes = (incident) => {
+  const start = parseTimestamp(incident.startTime);
+  const detection = parseTimestamp(incident.detectionTime);
+  if (!start || !detection || detection < start) return null;
+  return (detection - start) / MINUTE_IN_MS;
+};
+
+const average = (values) => {
+  if (values.length === 0) return null;
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+};
+
+const quantile = (sortedValues, percentile) => {
+  const position = (sortedValues.length - 1) * percentile;
+  const lowerIndex = Math.floor(position);
+  const remainder = position - lowerIndex;
+  const lower = sortedValues[lowerIndex];
+  const upper = sortedValues[lowerIndex + 1];
+  return upper === undefined ? lower : lower + (remainder * (upper - lower));
+};
+
+export const summarizeDurations = (values) => {
+  if (values.length === 0) {
+    return {
+      minutes: null, count: 0, excludedCount: 0, totalCount: 0,
+    };
+  }
+
+  let included = [...values];
+  if (values.length >= MINIMUM_OUTLIER_SAMPLE_SIZE) {
+    const sorted = [...values].sort((a, b) => a - b);
+    const firstQuartile = quantile(sorted, 0.25);
+    const thirdQuartile = quantile(sorted, 0.75);
+    const interquartileRange = thirdQuartile - firstQuartile;
+    const lowerFence = firstQuartile - (1.5 * interquartileRange);
+    const upperFence = thirdQuartile + (1.5 * interquartileRange);
+    included = values.filter((value) => value >= lowerFence && value <= upperFence);
+  }
+
+  return {
+    minutes: average(included),
+    count: included.length,
+    excludedCount: values.length - included.length,
+    totalCount: values.length,
+  };
+};
+
+export const formatDuration = (minutes) => {
+  if (!Number.isFinite(minutes) || minutes < 0) return 'N/A';
+  const roundedMinutes = Math.round(minutes);
+  const days = Math.floor(roundedMinutes / (24 * 60));
+  const hours = Math.floor((roundedMinutes % (24 * 60)) / 60);
+  const remainingMinutes = roundedMinutes % 60;
+  const parts = [];
+  if (days > 0) parts.push(`${days}d`);
+  if (hours > 0) parts.push(`${hours}h`);
+  if (remainingMinutes > 0 || parts.length === 0) parts.push(`${remainingMinutes}m`);
+  return parts.join(' ');
+};
+
+export const calculateMeanTimes = (incidents) => {
+  const resolutionMinutes = [];
+  const monitoringDetectionMinutes = [];
+  const customerDetectionMinutes = [];
+
+  incidents.forEach((incident) => {
+    const start = parseTimestamp(incident.startTime);
+    const end = parseTimestamp(incident.endTime);
+    if (start && end && end >= start) {
+      resolutionMinutes.push((end - start) / MINUTE_IN_MS);
+    }
+
+    const detection = extractDetectionMinutes(incident);
+    if (detection !== null && incident.detectionSource === 'monitoring') {
+      monitoringDetectionMinutes.push(detection);
+    }
+    if (detection !== null && incident.detectionSource === 'customer') {
+      customerDetectionMinutes.push(detection);
+    }
+  });
+
+  return {
+    mttr: summarizeDurations(resolutionMinutes),
+    monitoringMttd: summarizeDurations(monitoringDetectionMinutes),
+    customerDetectionLatency: summarizeDurations(customerDetectionMinutes),
+  };
+};
+
 // Calculate key metrics
-const calculateMetrics = (incidents, services, vendors) => {
+export const calculateMetrics = (incidents, services, vendors) => {
   const topVendor = vendors.length > 0 ? vendors[0] : null;
   const topService = services.length > 0 ? services[0] : null;
+  const meanTimes = calculateMeanTimes(incidents);
 
   let mixedCount = 0;
   incidents.forEach((incident) => {
@@ -136,19 +234,29 @@ const calculateMetrics = (incidents, services, vendors) => {
     }
   });
 
-  const mixedPercent = ((mixedCount / incidents.length) * 100).toFixed(1);
+  const mixedPercent = incidents.length > 0
+    ? ((mixedCount / incidents.length) * 100).toFixed(1)
+    : '0.0';
 
   return {
     total: incidents.length,
     topVendor,
     topService,
     mixedPercent,
+    ...meanTimes,
   };
 };
 
 // Render key metrics
-const renderMetrics = (metrics) => {
+export const renderMetrics = (metrics) => {
   const container = document.getElementById('key-metrics');
+  const meanTimeLabel = (name, abbreviation, metric) => {
+    const excluded = metric.excludedCount > 0
+      ? ` · ${metric.excludedCount} outlier${metric.excludedCount === 1 ? '' : 's'} excluded`
+      : '';
+    const title = abbreviation ? `${name} (${abbreviation})` : name;
+    return `${title} · n = ${metric.count}${excluded}`;
+  };
   const cards = [
     { value: metrics.total, label: 'Total Incidents Analyzed' },
     {
@@ -160,6 +268,18 @@ const renderMetrics = (metrics) => {
       label: metrics.topService ? `Top Service (${metrics.topService.count} incidents)` : 'Top Service',
     },
     { value: `${metrics.mixedPercent}%`, label: 'Mixed Internal/External Causes' },
+    {
+      value: formatDuration(metrics.mttr.minutes),
+      label: meanTimeLabel('Mean Time to Resolution', 'MTTR', metrics.mttr),
+    },
+    {
+      value: formatDuration(metrics.monitoringMttd.minutes),
+      label: meanTimeLabel('Monitoring Mean Time to Detection', 'MTTD', metrics.monitoringMttd),
+    },
+    {
+      value: formatDuration(metrics.customerDetectionLatency.minutes),
+      label: meanTimeLabel('Mean Customer Detection Latency', null, metrics.customerDetectionLatency),
+    },
   ];
 
   cards.forEach((card) => {
@@ -575,4 +695,6 @@ const init = async () => {
   document.body.classList.add('ready');
 };
 
-init();
+if (typeof document !== 'undefined') {
+  init();
+}
