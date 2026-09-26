@@ -27,7 +27,82 @@ function parseTimestamp(timestampStr) {
   };
 }
 
-function humanPostedToIso(posted) {
+function parseIsoTimestamp(timestamp) {
+  if (typeof timestamp !== 'string') return null;
+
+  const match = timestamp.match(
+    /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(Z|[+-]\d{2}:\d{2})$/,
+  );
+  if (!match) return null;
+
+  const [
+    , yearText, monthText, dayText, hourText, minuteText, secondText, timezone,
+  ] = match;
+  const year = Number(yearText);
+  const month = Number(monthText);
+  const day = Number(dayText);
+  const hour = Number(hourText);
+  const minute = Number(minuteText);
+  const second = Number(secondText);
+  const daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate();
+
+  if (
+    month < 1 || month > 12
+    || day < 1 || day > daysInMonth
+    || hour > 23 || minute > 59 || second > 59
+  ) {
+    return null;
+  }
+
+  if (timezone !== 'Z') {
+    const [offsetHour, offsetMinute] = timezone.slice(1).split(':').map(Number);
+    if (offsetHour > 23 || offsetMinute > 59) return null;
+  }
+
+  const date = new Date(timestamp);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+export function validateDetectionMetadata(frontmatter, incidentCode) {
+  const detectionTime = frontmatter['detection-time'];
+  const detectionSource = frontmatter['detection-source'];
+  const hasDetectionTime = detectionTime !== undefined && detectionTime !== null && detectionTime !== '';
+  const hasDetectionSource = detectionSource !== undefined
+    && detectionSource !== null
+    && detectionSource !== '';
+
+  if (!hasDetectionTime && !hasDetectionSource) return;
+
+  if (!hasDetectionTime || !hasDetectionSource) {
+    throw new Error(
+      `${incidentCode}: detection-time and detection-source must be provided together`,
+    );
+  }
+
+  if (!['monitoring', 'customer'].includes(detectionSource)) {
+    throw new Error(
+      `${incidentCode}: detection-source must be "monitoring" or "customer"`,
+    );
+  }
+
+  const startTime = parseIsoTimestamp(frontmatter['start-time']);
+  if (!startTime) {
+    throw new Error(
+      `${incidentCode}: a valid ISO 8601 start-time is required when detection metadata is present`,
+    );
+  }
+
+  const parsedDetectionTime = parseIsoTimestamp(detectionTime);
+  if (!parsedDetectionTime) {
+    throw new Error(`${incidentCode}: detection-time must be a valid ISO 8601 timestamp`);
+  }
+
+  if (parsedDetectionTime < startTime) {
+    throw new Error(`${incidentCode}: detection-time cannot be before start-time`);
+  }
+}
+
+export function humanPostedToIso(posted) {
   if (!posted) return null;
   const timestampText = posted.replace(/^(Posted\s*)+/i, '').trim();
   const dateMatch = timestampText.match(
@@ -43,7 +118,7 @@ function humanPostedToIso(posted) {
       const hour = parseInt(parts[4], 10);
       const minute = parseInt(parts[5], 10);
 
-      const date = new Date(year, month, day, hour, minute);
+      const date = new Date(Date.UTC(year, month, day, hour, minute));
       return date.toISOString();
     }
   }
@@ -123,7 +198,16 @@ function parseIncidentMarkdown(filePath, incidentCode) {
     };
 
     if (incidentCode.startsWith('AEM-')) {
-      const dataKeys = ['start-time', 'end-time', 'error-rate', 'impacted-service'];
+      validateDetectionMetadata(frontmatter, incidentCode);
+
+      const dataKeys = [
+        'start-time',
+        'detection-time',
+        'detection-source',
+        'end-time',
+        'error-rate',
+        'impacted-service',
+      ];
 
       dataKeys.forEach((key) => {
         const value = frontmatter[key];
@@ -230,7 +314,8 @@ function updateIncidentsIndex() {
 if (fileURLToPath(import.meta.url) === process.argv[1]) {
   try {
     updateIncidentsIndex();
-  } catch {
+  } catch (error) {
+    console.error(error.message);
     process.exit(1);
   }
 }

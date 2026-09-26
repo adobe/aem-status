@@ -2,6 +2,8 @@
 kind: postmortem
 impact: none
 start-time: "2026-02-11T14:30:00.000Z"
+detection-time: "2026-02-11T14:30:00.000Z"
+detection-source: customer
 end-time: "2026-02-11T15:54:00.000Z"
 error-rate: 0
 impacted-service: publishing
@@ -71,4 +73,3 @@ We have identified the problem and released a fix to the Chrome Web Store (curre
 2026-02-11T14:30:00.000Z
 
 We are observing users having sign in issues with the AEM Sidekick extension
-

@@ -2,6 +2,8 @@
 kind: postmortem
 impact: none
 start-time: 2026-05-11T05:56:00Z
+detection-time: 2026-05-11T05:56:00Z
+detection-source: monitoring
 end-time: 2026-05-11T06:32:00Z
 error-rate: 0.00029
 impacted-service: delivery

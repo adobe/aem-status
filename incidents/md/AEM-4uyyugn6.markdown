@@ -2,6 +2,8 @@
 kind: postmortem
 impact: none
 start-time: "2025-12-05T08:56:00Z"
+detection-time: "2025-12-05T08:56:00Z"
+detection-source: monitoring
 end-time: "2025-12-05T09:20:00Z"
 error-rate: 0.0
 impacted-service: delivery
@@ -58,4 +60,3 @@ We have identified that the issue is due to a major incident with a 3rd-party ne
       our internal logging tool, Coralogix, is also inaccessible due to this outage. Our core
       customer-facing services are unaffected, and the Operations Team has switched to the backup
       log monitoring solution.
-

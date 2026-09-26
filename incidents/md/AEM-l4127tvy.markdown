@@ -2,6 +2,8 @@
 kind: postmortem
 impact: none
 start-time: "2025-09-09T18:25:03.343Z"
+detection-time: "2025-09-09T18:35:00.000Z"
+detection-source: monitoring
 end-time: "2025-09-09T19:26:17.694Z"
 error-rate: 0.001
 impacted-service: delivery
@@ -32,4 +34,3 @@ Error rate seems to have normalized again
 2025-09-09T19:26:17.694Z
 
 Issue Resolved
-

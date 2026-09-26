@@ -2,6 +2,8 @@
 kind: postmortem
 impact: none
 start-time: "2026-04-23T03:24:00.000Z"
+detection-time: "2026-04-23T03:30:00.000Z"
+detection-source: monitoring
 end-time: "2026-04-23T04:03:00.000Z"
 error-rate: 0.00123
 impacted-service: delivery
@@ -53,4 +55,3 @@ Elevated 5xx errors on AEM delivery have been correlated with a Cloudflare netwo
 
 We are observing a spike in 5xx errors on AEM delivery, primarily affecting HTML pipeline
             requests with first byte timeouts. Our team is investigating.
-

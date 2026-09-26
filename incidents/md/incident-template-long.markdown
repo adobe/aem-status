@@ -2,6 +2,8 @@
 kind: postmortem
 impact: minor
 start-time: "[ISO 8601 timestamp - e.g., 2024-01-15T14:30:00.000Z]"
+detection-time: "[ISO 8601 timestamp when the incident was detected - e.g., 2024-01-15T14:40:00.000Z]"
+detection-source: "[monitoring|customer]"
 end-time: "[ISO 8601 timestamp - e.g., 2024-01-15T16:45:00.000Z]"
 error-rate: [Error rate as decimal - e.g., 0.05 for 5%]
 impacted-service: [delivery|publishing]
@@ -150,4 +152,3 @@ We have identified the following action items to prevent similar incidents and i
 [ISO 8601 timestamp - e.g., 2024-01-15T14:35:00.000Z]
 
 [Initial incident report - e.g., "We are investigating reports of publishing delays affecting some customers. Our team is actively working to identify the cause."]
-
